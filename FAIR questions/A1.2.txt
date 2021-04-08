@@ -1,0 +1,3 @@
+A1.2 evaluation questions (22 credits) 
+Q1. Does the protocols used to resolve ontology identifiers support authentication and authorization? 4 pts
+Q2. Is the ontology accessible in an ontology repository or library that supports authentication and authorization (such as NCBO BioPortal, AgroPortal)?  (3 points per ontology repository up to 18 credits) 18 credits

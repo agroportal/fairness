@@ -1,0 +1,5 @@
+A1 evaluation questions (43 credits)
+Q1.Does the ontology URI and other identifiers, if exist, resolve to the ontology? (3 points per a resolvable identifier up to 6 credits) 6 credits
+Q2. Does the ontology URI (if metadata is included in the ontology file) or the external metadata URI resolve to the metadata record? 7 pts
+Q3. Are ontology and its metadata supporting content negotiation? (6 points per format up to 24 credits) 24 credits
+Q4.Is an ontology and its metadata accessible through another standard protocol such as SPARQL? 6 pts

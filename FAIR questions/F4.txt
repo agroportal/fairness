@@ -1,0 +1,5 @@
+F4 evaluation questions (43 credits)
+Q1. Is the ontology registered in multiple ontology libraries? (1 point per ontology library up to 7 credits) 7 credits
+Q2. Is the ontology registered in multiple open ontology repositories? (1 point per ontology repository up to 9 credits) 	9 pts
+Q3. Is an ontology registered in the "de facto" reference libraries or repositories ? (1 point per a “de facto” reference library up to 4 credits) 	4 pts
+Q4. Are the ontology libraries or repositories properly indexed by Web search engines? 4 pts

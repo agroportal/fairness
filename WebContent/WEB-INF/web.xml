@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app 
+  xmlns="http://java.sun.com/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+  version="3.0">
+	
+	<servlet>
+		<servlet-name>FairServlet</servlet-name>
+		<servlet-class>fr.lirmm.fairness.assessment.FairServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FairServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 
+	<servlet>
+        <servlet-name>fairServletJersey</servlet-name>
+        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>com.sun.jersey.config.property.packages</param-name>
+            <param-value>fr.lirmm.fairness.assessment.rest</param-value>
+        </init-param>
+    </servlet>
+	
+	<servlet-mapping>
+		<servlet-name>fairServletJersey</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	 -->
+</web-app>

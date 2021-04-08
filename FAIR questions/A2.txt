@@ -1,0 +1,5 @@
+A2 evaluation questions (20 credits)
+Q1. Are "most" ontology versions accessible? 7 pts
+Q2. Are the metadata of each version available? 4 pts 
+Q3. Are ontology metadata accessible even if no more versions of the ontology are available? 4 pts
+Q4. Is the ontology accessible in an ontology repository or library that supports metadata archiving? 2 pts

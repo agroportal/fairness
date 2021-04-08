@@ -1,0 +1,4 @@
+F3 evaluation questions (21 credits)
+Q1. Are the ontology metadata included and maintained in the ontology file? 21 pts
+Q2. If not, are the ontology metadata described in an external file? 11 pts
+Q3. Does that external file explicitly link to the ontology and vice-versa? 10 pts

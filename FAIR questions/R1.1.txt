@@ -1,0 +1,5 @@
+R1.1 evaluation questions (37 credits)
+Q1. Is the ontology license clearly specified (i.e., with a persistent, unique identifier)? 8 pts
+Q2. If yes, is the license description accessible and resolvable by a machine? 7 pts
+Q3. Are the ontology access rights clearly specified/declared? 7 pts
+Q4. Are the permissions, usage guidelines and copyright holder clearly documented? 15 pts

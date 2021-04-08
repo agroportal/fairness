@@ -1,0 +1,11 @@
+F1 Evaluation questions (41 credits)
+Q1. Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)? 3 pts 
+Q2. If yes, is this identifier a resolvable/dereferenceable URI? 6 pts 	
+Q3. Does an ontology provide an additional “external” identifier i.e., a guarantee globally unique and persistent identifier assigned by an accredited body? 6 pts 
+Q4. If yes, is this external identifier a DOI? 	 5 pts 
+Q5. Are the ontology metadata included in the ontology file –and consequently share the same identifiers? 	 6 pts 	
+Q6. If not, is the metadata record clearly identified by its own GUPRI? 6 pts
+Q7. Does an ontology provide a version specific URI? 	 4 pts 	
+Q8. If yes, is this URI resolvable/dereferenceable? 5 pts
+
+

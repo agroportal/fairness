@@ -1,0 +1,6 @@
+I3 evaluation questions (32 credits)
+Q1. Non-automatically assessable qualified references. 10 pts 
+Q2. Does an ontology provide cross-references to external resources? 9 pts 
+Q3. If yes, are those cross-references well represented and to unambiguous entities? 3 pts 
+Q4. Does an ontology provide information about projects using or organization endorsing? 6 credits (3 points per property up to 6 credits)
+Q5. Is an ontology using GUPRIs to encode some metadata values? 5 pts 
