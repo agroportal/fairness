@@ -155,7 +155,7 @@ public class Ontology {
 		contact=this.restApi.getSubmissionJsonObject("contact");	
 		source = this.restApi.getSubmissionJsonObject("source");
 		wasGeneratedBy = this.restApi.getSubmissionJsonObject("wasGeneratedBy");
-		WasInvalidatedBy = this.restApi.getSubmissionJsonObject("wasGeneratedBy");
+		WasInvalidatedBy = this.restApi.getSubmissionJsonObject("WasInvalidatedBy");
 		accrualMethod = this.restApi.getSubmissionJsonObject("accrualMethod");
 		accrualPeriodicity = this.restApi.getSubmissionJsonObject("accrualPeriodicity");
 		accrualPolicy = this.restApi.getSubmissionJsonObject("accrualPolicy");
