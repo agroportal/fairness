@@ -27,7 +27,6 @@ public abstract class AbstractPrincipleCriterion implements Evaluable, Serializa
 	protected ResultSet resultSet = null; 
 	protected Integer maxQuestionsPoints= 0;
     protected Integer normalizedTotalScore = null;
-    
 	
 	public AbstractPrincipleCriterion() {
 		super();
@@ -41,7 +40,7 @@ public abstract class AbstractPrincipleCriterion implements Evaluable, Serializa
 		System.out.println("> Evaluating '" + this.getClass().getSimpleName() + "' of ontology '" + ontology.getAcronym() + "' on repository '" + ontology.getPortalInstance().getName() + "' (" + ontology.getPortalInstance().getUrl() + "?apikey=" + ontology.getPortalInstance().getApikey() + ").");
 		this.resultSet = new ResultSet(this);
 		this.doEvaluation(ontology);
-		this.normalizeTotalScore();
+		this.getNormalizeTotalScore();
 	}
 	
 	protected abstract void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException;
@@ -63,7 +62,7 @@ public abstract class AbstractPrincipleCriterion implements Evaluable, Serializa
 		return this.resultSet;
 	}
 
-	public void normalizeTotalScore() {
+	public void getNormalizeTotalScore() {
 		Integer ns= 0;
 			ns= (this.resultSet.getTotalScore()*100)/this.maxQuestionsPoints;
 			normalizedTotalScore= ns;

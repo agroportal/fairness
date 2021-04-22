@@ -22,7 +22,6 @@ public class FairJsonConverter extends AbstractJsonConverter<Fair> {
 			AbstractPrincipleJsonConverter converter = new AbstractPrincipleJsonConverter(p);
 			jsonObject.add(p.toString(), gson.toJsonTree(converter.toJson()));
 		}
-		
 		var ontologyJsonObject = new JsonObject();
 		ontologyJsonObject.add(Fair.getInstance().getOntology().getAcronym(), jsonObject);
 		

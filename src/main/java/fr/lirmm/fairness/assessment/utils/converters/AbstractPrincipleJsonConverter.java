@@ -19,6 +19,7 @@ public class AbstractPrincipleJsonConverter extends AbstractJsonConverter<Abstra
 			jsonObject.add(c.toString(), gson.toJsonTree(converter.toJson()));
 		}
 		jsonObject.add("totalScore", gson.toJsonTree(this.item.getTotalScore()));
+		jsonObject.add("normalizedTotalScore", gson.toJsonTree(this.item.getNormalizedToTPrincipleScore()));
 		return jsonObject;
 	}
 }

@@ -37,7 +37,6 @@ public class Fair {
 	private static Fair instance = null;
 	private AbstractPrinciple[] principles = null;
 	private Ontology ontology = null;
-	
 	public static Fair getInstance() {
 		if(instance == null) {
 			instance = new Fair();
@@ -114,7 +113,7 @@ public class Fair {
 			String portalInstanceName = null;
 			List<String> ontologyAcronyms = null;
 			PortalInstance portalInstance = null;
-
+			Integer fairnessScore=0; 
 			optValue = call.getOptionValue("r");
 
 			if (optValue != null) {
@@ -132,10 +131,12 @@ public class Fair {
 					}
 				} 		
 				  try { 
+					  
+					  // Writing in Excel file
 					  if (ontologyAcronyms != null) {
 						  System.out.println(ontologyAcronyms);
 							Fair.getInstance().evaluate(portalInstance.getAllOntologies(ontologyAcronyms));	
-							FileInputStream file = new FileInputStream("APFAIRnessResults.xlsx");
+							FileInputStream file = new FileInputStream("Results/APFAIRnessResults.xlsx");
 							XSSFWorkbook workbook = new XSSFWorkbook(file);
 							XSSFSheet sheet = workbook.getSheetAt(0);
 							XSSFCell cell;
@@ -144,7 +145,6 @@ public class Fair {
 							
 						for (Ontology onto : portalInstance.getAllOntologies(ontologyAcronyms))	
 						{  
-							Fair.getInstance().evaluate(onto);
 							colNum=2;
 							row = sheet.createRow(rowNum);
 							cell = row.createCell(0);
@@ -154,19 +154,22 @@ public class Fair {
 							
 							for(AbstractPrinciple ab : Fair.getInstance().getPrinciples()) {							
 								cell = row.createCell(colNum);
-								cell.setCellValue(ab.getNormalizedToTPrincipleScore()); // To change-> normalized value
+								cell.setCellValue(ab.getNormalizedToTPrincipleScore()); 
 								colNum++;
 								for (AbstractPrincipleCriterion c : ab.getPrincipleCriteria())
 								{   
 									cell = row.createCell(colNum);
 									cell.setCellValue(c.getNormalizedTotalScore());
-									
+																	
 									colNum++;
 								}
+								fairnessScore+=ab.getNormalizedToTPrincipleScore();
 						}
+							cell=row.createCell(colNum);
+							cell.setCellValue(fairnessScore/4);
 							rowNum++;
 					   }
-						FileOutputStream fileOut = new FileOutputStream("APFAIRnessResults.xlsx");
+						FileOutputStream fileOut = new FileOutputStream("Results/APFAIRnessResults.xlsx");
 						workbook.write(fileOut);  
 				        fileOut.close();
 				        workbook.close();
