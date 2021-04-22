@@ -1,5 +1,0 @@
-R1 evaluation questions (32 credits) 
-Q1. Does the ontology provide metadata information about how classes are defined? 8 pts
-Q2. Does the ontology provide metadata information about its hierarchy? 8 pts
-Q3. How much of the ontology classes (or concepts) are defined using a property restriction (e.g. defining a class using OWL “quantifier”, “cardinality” or “has value” restrictions ) or an equivalent class (e.g. an OWL named class with a necessary and sufficient condition) ? 8 pts
-Q4. How much of the ontology objects provide provenance information with annotation properties (e.g. author, date)? 8 pts 

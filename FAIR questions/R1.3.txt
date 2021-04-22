@@ -1,5 +1,0 @@
-R1.3 evaluation questions (36 credits)
-Q1. Is the ontology recognized by one or several groups* (or organizations) which attest it meets standard practices and guidelines relevant for a specific community ? 30 pts
-Q2. Is the ontology openly and freely available?  6 pts
-(*) In the case of AgroPortal, an ontology can be assigned to a “group”. Groups associate ontologies from the same project or organization.
- Currently, AgroPortal considers 8 main groups in the agriculture domain : OBO foundry initiative, WHEAT, CROP ontology project, and INRAE. 
