@@ -1,9 +1,0 @@
-I2 evaluation questions (31 credits)
-Q1. - Does the ontology import other FAIR vocabularies? 5 pts
-Q2. - Does the ontology reuse URIs from other vocabularies? 4 pts
-Q3. - If yes, does it include the minimum information for those URIs (cf. MERIOT)? 3 pts
-Q4. -Is an ontology aligned to other vocabularies? 5 pts
-Q5. - If yes, are those alignments well represented and to unambiguous entities? 3 pts
-Q6. - If yes, are those alignments curated? 4 pts
-Q7. - Does an ontology provide metadata information about relation to or influence of other vocabularies? 3 credits (1 point per metadata property up to 3 credits)
-Q8. - Does the ontology reuse standards metadata vocabularies to describe its metadata? 5 pts

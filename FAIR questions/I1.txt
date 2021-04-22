@@ -1,7 +1,0 @@
-I1 evaluation questions (44 credits)
-Q1. What is the representation language used for ontology and ontology metadata? 20 pts (if the ontology is in an OWL format else follow our representation format scoring scale*)
-Q2. Is the representation language used a W3C Recommendations? 10 pts
-Q3. Is the syntax of the ontology informed? 5 pts
-Q4. Is the formality level of the ontology asserted by the author? 5 pts
-Q5. Is the availability of other formats informed? 4 pts
-(*) Scoring scale of each representation format: (OWL, 20 pts)- (SKOS, 18 pts)- (RDFS, 16 pts)- (OBO, 14 pts)- (XML, 12 pts)- (CSV, 11 pts)- (PDF, 5 pts)- (TXT, 5 pts).

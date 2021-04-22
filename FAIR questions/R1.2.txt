@@ -1,7 +1,0 @@
-R1.2 evaluation questions (38 credits)
-Q1. Does an ontology metadata inform on its general provenance (e.g., source, creator, validator)? 10 pts 
-Q2. Are the accrual methods and policies documented? 10 pts 
-Q3. Is the ontology clearly versioned? 5 pts
-Q4. Are the methodology and tools used to build the ontology documented? 5 pts
-Q5. Is the ontology rationale documented? 5 pts
-Q6. Does an ontology inform on its funding organization? 3 pts
