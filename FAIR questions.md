@@ -1,5 +1,7 @@
 # FAIR questions
+
 ## FINDABLE (113 credits)
+
 ### F1. (Meta)data are assigned a globally unique and persistent identifier.  (41credits)
 - Q1. Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)? 3 credits
 - Q2. If yes, is this identifier a resolvable/dereferenceable URI? 6 credits 	
@@ -49,7 +51,8 @@
 - Q3. Are ontology metadata accessible even if no more versions of the ontology are available? 4 credits
 - Q4. Is the ontology accessible in an ontology repository or library that supports metadata archiving? 2 credits
 
-## Interoperable (109 credits)
+## INTEROPERABLE(109 credits)
+
 ### I1. (Meta)data use a formal, accessible, shared, and broadly applicable language for knowledge representation. (44 credits)
 - Q1. What is the representation language used for ontology and ontology metadata? 20 credits (if the ontology is in an OWL format else follow our representation format scoring scale*)
 - Q2. Is the representation language used a W3C Recommendations? 10 credits
