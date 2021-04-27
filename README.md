@@ -10,11 +10,6 @@ The list ot the FAIR questions used by the tool to assess FAIRness is here : htt
 
 The obtained results over AgroPortal semantic resources are prsented here : https://github.com/agroportal/fairness/tree/master/Results
  
-## contacts 
-
-=======
-<technical description>
-
 ## FAIR questions
 The list of the FAIR questions used by the tool to assess FAIRness is here : https://github.com/agroportal/fairness/blob/master/FAIR%20questions.md
 
