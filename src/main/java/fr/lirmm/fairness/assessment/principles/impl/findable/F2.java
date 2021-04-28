@@ -49,7 +49,7 @@ public class F2 extends AbstractPrincipleCriterion {
 		else if ((metadataFlags[importanceLevel]== "OPTIONAL") || (metadataFlags[importanceLevel]== "NO_MAPPING"))
 		{points=1;}	
 		
-		while((i<metadata.length)&&  (score<credits-points))
+		while((i<metadata.length)&&  (score<=credits-points))
 		{ 
 			if (OntologyRestApi.isValidMetadatumValue(metadata[i])) {
 				score += points; 
@@ -65,7 +65,6 @@ public class F2 extends AbstractPrincipleCriterion {
 		return new String[][] {
 			new String[] {
 				ontology.getName(),
-				ontology.getGroup(),
 				ontology.getAlternative(),
 				ontology.getHiddenLabel(),
 				ontology.getId(),
