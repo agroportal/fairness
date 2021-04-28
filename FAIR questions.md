@@ -51,7 +51,7 @@
 - Q3. Are ontology metadata accessible even if no more versions of the ontology are available? 4 credits
 - Q4. Is the ontology accessible in an ontology repository or library that supports metadata archiving? 2 credits
 
-## INTEROPERABLE(109 credits)
+## INTEROPERABLE (109 credits)
 
 ### I1. (Meta)data use a formal, accessible, shared, and broadly applicable language for knowledge representation. (44 credits)
 - Q1. What is the representation language used for ontology and ontology metadata? 20 credits (if the ontology is in an OWL format else follow our representation format scoring scale*)
