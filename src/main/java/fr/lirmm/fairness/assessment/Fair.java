@@ -132,13 +132,12 @@ public class Fair {
 				} 		
 				  try { 
 					  
-					  // Writing in Excel file
+					  // Writing Normalized results in Excel file
 					  if (ontologyAcronyms != null) {
-						  System.out.println(ontologyAcronyms);
 							Fair.getInstance().evaluate(portalInstance.getAllOntologies(ontologyAcronyms));	
-							FileInputStream file = new FileInputStream("Results/APFAIRnessResults.xlsx");
-							XSSFWorkbook workbook = new XSSFWorkbook(file);
-							XSSFSheet sheet = workbook.getSheetAt(0);
+							FileInputStream APFile = new FileInputStream("Results/APFAIRnessResults.xlsx");
+							XSSFWorkbook APWorkbook = new XSSFWorkbook(APFile);
+							XSSFSheet sheet = APWorkbook.getSheetAt(0);
 							XSSFCell cell;
 							XSSFRow row; 						
 							int rowNum=1, colNum;
@@ -169,11 +168,46 @@ public class Fair {
 							cell.setCellValue(fairnessScore/4);
 							rowNum++;
 					   }
-						FileOutputStream fileOut = new FileOutputStream("Results/APFAIRnessResults.xlsx");
-						workbook.write(fileOut);  
-				        fileOut.close();
-				        workbook.close();
+						FileOutputStream APFileOut = new FileOutputStream("Results/APFAIRnessResults.xlsx");
+						APWorkbook.write(APFileOut);  
+				        APFileOut.close();
+				        APWorkbook.close();
 					  } 
+					  
+					  if (ontologyAcronyms != null)
+					  { 
+						Fair.getInstance().evaluate(portalInstance.getAllOntologies(ontologyAcronyms));	
+						FileInputStream QFile = new FileInputStream("Results/QResults.xlsx");
+						XSSFWorkbook QWorkbook = new XSSFWorkbook(QFile);
+						XSSFSheet sheet = QWorkbook.getSheetAt(0);
+						XSSFCell cell;
+						XSSFRow row; 						
+						int rowNum=1, colNum;
+						for (Ontology onto : portalInstance.getAllOntologies(ontologyAcronyms))	
+						{  
+							colNum=2;
+							row = sheet.createRow(rowNum);
+							cell = row.createCell(0);
+							cell.setCellValue(onto.getAcronym());
+							cell = row.createCell(1);
+							cell.setCellValue(onto.getUri());
+							
+							for(AbstractPrinciple ab : Fair.getInstance().getPrinciples()) {							
+                                
+								for (AbstractPrincipleCriterion c : ab.getPrincipleCriteria())
+								{   
+									cell = row.createCell(colNum);
+									cell.setCellValue(c.getResultSet().getScores().toString());															
+									colNum++;
+								}				
+						}
+							rowNum++;
+					   }
+						FileOutputStream QFileOut = new FileOutputStream("Results/QResults.xlsx");
+						QWorkbook.write(QFileOut);  
+				        QFileOut.close();
+				        QWorkbook.close();
+					  } 					  
 					 }
 				  catch (FileNotFoundException e) {
 					        e.printStackTrace();

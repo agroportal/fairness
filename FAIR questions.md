@@ -13,7 +13,7 @@
 - Q8. If yes, is this URI resolvable/dereferenceable? 5 credits
 
 ### F2. Data are described with rich metadata. (27 credits)  
-- Q1 Is an ontology described with additional “MIRO must” metadata properties? (4 points per property up to 16 credits) 16 credits 
+- Q1. Is an ontology described with additional “MIRO must” metadata properties? (4 points per property up to 16 credits) 16 credits 
 - Q2. Is an ontology described with additional “MIRO should” metadata properties? (2 points per property up to 5 credits) 5 credits 
 - Q3. Is an ontology described with additional “MIRO optional” metadata properties? (1 point per property up to 3 credits) 3 credits 
 - Q4. Is an ontology described with another metadata property with no explicit corresponding MIRO requirement? 	(1 pt per property up to 3 credits) 3 credits

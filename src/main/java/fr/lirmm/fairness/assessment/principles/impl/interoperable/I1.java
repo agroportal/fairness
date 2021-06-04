@@ -99,7 +99,7 @@ public class I1 extends AbstractPrincipleCriterion {
 			}
 
 			// Q5: Is the availability of other formats informed?
-			if ((!hasFormat.isEmpty()) || (!isFormatOf.isEmpty())) {
+			if (((!hasFormat.isEmpty())&&(!hasFormat.contains("null"))) || ((!isFormatOf.isEmpty())&& (!isFormatOf.contains("null")))) {
 				this.addResult(4, this.questionsPoints.get(4),
 						"The availability of other ontology formats is informed");
 			} else {
