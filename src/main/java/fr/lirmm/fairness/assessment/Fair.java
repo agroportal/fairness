@@ -37,6 +37,7 @@ public class Fair {
 	private static Fair instance = null;
 	private AbstractPrinciple[] principles = null;
 	private Ontology ontology = null;
+	private Integer totalScore = 0;
 	public static Fair getInstance() {
 		if(instance == null) {
 			instance = new Fair();
@@ -66,8 +67,10 @@ public class Fair {
 	
 	public void evaluate(Ontology ontology) {
 		this.ontology = ontology;
+		this.totalScore = 0;
 		for(AbstractPrinciple principle : this.principles) {
 			principle.evaluate(ontology);
+			this.totalScore+= principle.getTotalScore();
 		}
 	}
 
@@ -79,11 +82,6 @@ public class Fair {
 		return ontology;
 	}
 
-	
-	public static void writeExcelResults() {
-		
-	
- }
 
 	
 	public static void main(String[] args) {
@@ -219,6 +217,14 @@ public class Fair {
              catch (Exception ex) {
 			ex.printStackTrace();
 		     }
-		}}
+		}
+
+	public Integer getTotalScore() {
+		return totalScore;
+	}
+	public Integer getNormalizedTotalScore() {
+		return totalScore / this.getPrinciples().length;
+	}
+}
 	
 
