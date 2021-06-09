@@ -13,9 +13,10 @@ public class ResultSetJsonConverter extends AbstractJsonConverter<ResultSet> {
 	@Override
 	public JsonObject toJson() {
 		var jsonObject = new JsonObject();
+
 		jsonObject.add("explanations", gson.toJsonTree(this.item.getExplanations()).getAsJsonArray());
 		jsonObject.add("scores", gson.toJsonTree(this.item.getScores()).getAsJsonArray());
-		jsonObject.add("totalScore", gson.toJsonTree(this.item.getTotalScore()));
+		jsonObject.add("score", gson.toJsonTree(this.item.getTotalScore()));
 		return jsonObject;
 	}
 }

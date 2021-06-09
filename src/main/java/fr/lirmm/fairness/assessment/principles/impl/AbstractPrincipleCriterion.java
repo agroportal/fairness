@@ -67,10 +67,15 @@ public abstract class AbstractPrincipleCriterion implements Evaluable, Serializa
 			ns= (this.resultSet.getTotalScore()*100)/this.maxQuestionsPoints;
 			normalizedTotalScore= ns;
 	}
-	
+
 	public Integer getNormalizedTotalScore()
 	{
 	    return normalizedTotalScore; 
+	}
+
+	public Integer getTotalScore()
+	{
+		return this.getResultSet().getTotalScore();
 	}
 	
 	private void fillQuestionsPoints() {

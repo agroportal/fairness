@@ -53,11 +53,11 @@ public class A1 extends AbstractPrincipleCriterion {
 					   if (((idhttpstatusCode == 200) || (idhttpstatusCode == 302)))
 					   {
 						   score+=points; 
-						   this.addResult(0, score, "Resolvable ontlogy URI and identifier");
+						   this.addResult(0, score, "Resolvable ontology URI and identifier");
 					   }
 					   if (score<this.questionsPoints.get(0))
 						{
-						   this.addResult(0, score, "Resolvable ontlogy URI or identifier but not both");
+						   this.addResult(0, score, "Resolvable ontology URI or identifier but not both");
 						}
 					} else {
 						this.addResult(0, 0, "HTTP error=" + urluriConnection.getResponseMessage());

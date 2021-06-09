@@ -18,8 +18,8 @@ public class AbstractPrincipleJsonConverter extends AbstractJsonConverter<Abstra
 			AbstractPrincipleCriterionJsonConverter converter = new AbstractPrincipleCriterionJsonConverter(c);
 			jsonObject.add(c.toString(), gson.toJsonTree(converter.toJson()));
 		}
-		jsonObject.add("totalScore", gson.toJsonTree(this.item.getTotalScore()));
-		jsonObject.add("normalizedTotalScore", gson.toJsonTree(this.item.getNormalizedToTPrincipleScore()));
+		jsonObject.add("score", gson.toJsonTree(this.item.getTotalScore()));
+		jsonObject.add("normalizedScore", gson.toJsonTree(this.item.getNormalizedToTPrincipleScore()));
 		return jsonObject;
 	}
 }

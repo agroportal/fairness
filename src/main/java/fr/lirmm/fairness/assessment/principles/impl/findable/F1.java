@@ -43,7 +43,7 @@ public class F1 extends AbstractPrincipleCriterion {
 				if ((httpstatusCode == 200) || (httpstatusCode == 302)) // Ok or Found (for redirected adresses
 																		// "purl")
 				{
-					this.addResult(1, this.questionsPoints.get(1), "Resolvable ontlogy URI");
+					this.addResult(1, this.questionsPoints.get(1), "Resolvable ontology URI");
 				} else {
 					this.addResult(1, 0, "HTTP error=" + urluriConnection.getResponseMessage());
 				}

@@ -29,8 +29,8 @@ public abstract class AbstractPrinciple extends AbstractScoredEntity implements 
 
 		Iterator<AbstractPrincipleCriterion> iterator = this.principleCriteria.iterator();
 		this.resultSets = new ArrayList<ResultSet>(this.principleCriteria.size());
+		normalizedPrincipleScore=0;
 		while(iterator.hasNext()) {
-			normalizedPrincipleScore=0;
 			try {
 				System.out.println("\n");
 				AbstractPrincipleCriterion criterion = iterator.next();
@@ -85,8 +85,9 @@ public abstract class AbstractPrinciple extends AbstractScoredEntity implements 
 		
 		return (normalizedPrincipleScore); 
 	}
-	
 
+
+	@Override
 	public List<Integer> getScores() {
 		List<Integer> scores = new ArrayList<Integer>();
 		for(ResultSet resultSet : this.resultSets) {

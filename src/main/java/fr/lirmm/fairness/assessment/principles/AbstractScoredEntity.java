@@ -16,12 +16,13 @@ public abstract class AbstractScoredEntity {
 	
 	public final Integer getAverageScore(List <Integer> score)
 	{
-		Integer r =0; 
-		
-		for (Integer i=0; i<score.size(); i++) {
-			r += score.get(i);
+		Integer r =0;
+
+		for (Integer integer : score) {
+			r += integer;
 		}
 		return r;
 		
 	}
+
 }

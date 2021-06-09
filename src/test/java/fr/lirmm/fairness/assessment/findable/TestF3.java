@@ -1,4 +1,4 @@
-package fr.lirmm.fairness.assessment.principles.findable;
+package fr.lirmm.fairness.assessment.findable;
 
 import fr.lirmm.fairness.assessment.principles.AbstractTestPrincipleCriterion;
 import fr.lirmm.fairness.assessment.principles.impl.findable.F3;

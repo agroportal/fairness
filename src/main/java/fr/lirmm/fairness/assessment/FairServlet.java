@@ -2,9 +2,7 @@ package fr.lirmm.fairness.assessment;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,25 +29,26 @@ public class FairServlet extends HttpServlet {
 			if (portalInstance == null) {
 				resp.sendError(HttpServletResponse.SC_NOT_FOUND, String.format("Portal instance '%s' unknown", pPortalInstanceName));
 			} else {
-				String pOntologyAcronym = req.getParameter("ontology");
+				String pOntologies = req.getParameter("ontologies");
 				List<String> allOntologyAcronyms = portalInstance.getAllOntologiesAcronyms();
 				List<String> ontologyAcronymsToEvaluate = new ArrayList<String>();
-				if (pOntologyAcronym != null && pOntologyAcronym.equals("all")) {
+				if (pOntologies != null && pOntologies.equals("all")) {
 					if(portalInstance.isEnableAllOntologies()) {
 						ontologyAcronymsToEvaluate.addAll(allOntologyAcronyms);
 					}
 					else {
 						resp.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, String.format("Processing all ontologies is not allowed for instance '%s'", pPortalInstanceName));
 					}
-				} else {
-					if(!allOntologyAcronyms.contains(pOntologyAcronym)) {
-						resp.sendError(HttpServletResponse.SC_NOT_FOUND, String.format("Ontology '%s' not found", pOntologyAcronym));
+				} else if(pOntologies != null) {
+					Collection<String> ontologies = Arrays.asList(pOntologies.split(","));
+					if(!allOntologyAcronyms.containsAll(ontologies)) {
+						resp.sendError(HttpServletResponse.SC_NOT_FOUND, String.format("Ontology '%s' not found", pOntologies));
 					}
 					else {
-						ontologyAcronymsToEvaluate.add(pOntologyAcronym);
+						ontologyAcronymsToEvaluate.addAll(ontologies);
 					}
 				}
-				
+
 				Iterator<String> it = ontologyAcronymsToEvaluate.iterator();
 				List<JsonObject> jsonObjects = new ArrayList<JsonObject>(ontologyAcronymsToEvaluate.size());
 				while(it.hasNext()) {

@@ -14,7 +14,8 @@ public class AbstractPrincipleCriterionJsonConverter extends AbstractJsonConvert
 	public JsonObject toJson() {
 		var jsonObject = new JsonObject();
 		ResultSetJsonConverter converter = new ResultSetJsonConverter(this.item.getResultSet());
-		jsonObject.add("resultSet", gson.toJsonTree(converter.toJson()));
+		jsonObject.add("results", gson.toJsonTree(converter.toJson()));
+		jsonObject.add("score", gson.toJsonTree(this.item.getTotalScore()));
 		jsonObject.add("normalizedScore", gson.toJsonTree(this.item.getNormalizedTotalScore()));
 		return jsonObject;
 	}
