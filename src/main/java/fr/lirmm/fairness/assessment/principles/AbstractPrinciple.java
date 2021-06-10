@@ -12,43 +12,43 @@ import org.reflections.Reflections;
 import fr.lirmm.fairness.assessment.model.Ontology;
 import fr.lirmm.fairness.assessment.principles.impl.AbstractPrincipleCriterion;
 
-public abstract class AbstractPrinciple extends AbstractScoredEntity implements Evaluable, Serializable {
+public abstract class AbstractPrinciple extends AbstractScoredEntity implements Evaluable,Serializable {
 	
 	private static final long serialVersionUID = -4625119538425966086L;
 	
 	private List<AbstractPrincipleCriterion> principleCriteria = null;
-	private List<ResultSet> resultSets = null;
-	private Integer normalizedPrincipleScore= 0;
+
 	protected AbstractPrinciple() {
 		super();
 		this.fillPrincipleCriteria();
 	}
-	
+
+
 	@Override
 	public final void evaluate(Ontology ontology) {
 
 		Iterator<AbstractPrincipleCriterion> iterator = this.principleCriteria.iterator();
-		this.resultSets = new ArrayList<ResultSet>(this.principleCriteria.size());
-		normalizedPrincipleScore=0;
+
+		this.scores = new ArrayList<>(this.principleCriteria.size());
+		this.weights = new ArrayList<>(this.principleCriteria.size());
 		while(iterator.hasNext()) {
 			try {
 				System.out.println("\n");
 				AbstractPrincipleCriterion criterion = iterator.next();
 				criterion.evaluate(ontology);
-				this.resultSets.add(criterion.getResultSet());
-				normalizedPrincipleScore+=criterion.getNormalizedTotalScore();
-				System.out.println("> " + criterion.getClass().getSimpleName() + " points : " + criterion.getResultSet().getScores());
-				System.out.println("> Total score for " + criterion.getClass().getSimpleName() + " : " + criterion.getResultSet().getTotalScore());
+				this.scores.add(criterion.getTotalScore());
+				this.weights.add(criterion.getTotalScoreWeight());
+				System.out.println("> " + criterion.getClass().getSimpleName() + " points : " + criterion.getScores());
+				System.out.println("> Total score for " + criterion.getClass().getSimpleName() + " : " + criterion.getTotalScore());
 				System.out.println("> Explanations : " + criterion.getResultSet().getExplanations());
-				System.out.println("> Normalized total score for " + criterion.getClass().getSimpleName() + " : " + criterion.getNormalizedTotalScore());				
+				System.out.println("> Normalized total score for " + criterion.getClass().getSimpleName() + " : " + criterion.getNormalizedTotalScore());
 			}
 			catch(Exception iae) {
 				iae.printStackTrace();
-			}	
+			}
 		}
 	}
-	      
-	
+
 	@SuppressWarnings("unchecked")
 	private List<Class<? extends AbstractPrincipleCriterion>> getPrincipleCriteriaClasses() {
 		Reflections reflections = new Reflections(this.getClass().getName().toLowerCase());
@@ -81,31 +81,17 @@ public abstract class AbstractPrinciple extends AbstractScoredEntity implements 
 		}
 	}
 
-	public Integer getNormalizedToTPrincipleScore() {
-		
-		return (normalizedPrincipleScore); 
-	}
-
-
-	@Override
-	public List<Integer> getScores() {
-		List<Integer> scores = new ArrayList<Integer>();
-		for(ResultSet resultSet : this.resultSets) {
-			scores.addAll(resultSet.getScores());
-		}
-		return scores;
-	}
 
 	public List<AbstractPrincipleCriterion> getPrincipleCriteria() {
 		return principleCriteria;
 	}
 
-	public List<ResultSet> getResultSets() {
-		return resultSets;
-	}
+
 
 	@Override
 	public String toString() {
 		return this.getClass().getSimpleName();
 	}
+
+
 }

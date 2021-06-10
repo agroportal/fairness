@@ -52,7 +52,7 @@ public abstract class AbstractTestPrincipleCriterion<T extends AbstractPrinciple
 		try {
 			principleCriterion.evaluate(this.ontology);
 
-			assertEquals(principleCriterion.getResultSet().getTotalScore().intValue(), this.expectedScore);
+			assertEquals(principleCriterion.getTotalScore().intValue(), this.expectedScore);
 			assertEquals(principleCriterion.getResultSet().getScores().size(), this.expectedScores.length);
 			assertEquals(principleCriterion.getResultSet().getExplanations().size(), this.expectedExplanations.length);
 

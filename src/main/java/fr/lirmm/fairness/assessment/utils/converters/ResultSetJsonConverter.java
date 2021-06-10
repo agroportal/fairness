@@ -16,7 +16,6 @@ public class ResultSetJsonConverter extends AbstractJsonConverter<ResultSet> {
 
 		jsonObject.add("explanations", gson.toJsonTree(this.item.getExplanations()).getAsJsonArray());
 		jsonObject.add("scores", gson.toJsonTree(this.item.getScores()).getAsJsonArray());
-		jsonObject.add("score", gson.toJsonTree(this.item.getTotalScore()));
 		return jsonObject;
 	}
 }

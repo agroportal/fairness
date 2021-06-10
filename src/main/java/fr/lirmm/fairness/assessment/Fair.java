@@ -1,9 +1,6 @@
 package fr.lirmm.fairness.assessment;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Properties;
-import java.util.Iterator;
+import java.util.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
 
+import fr.lirmm.fairness.assessment.principles.AbstractScoredEntity;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -32,12 +30,11 @@ import fr.lirmm.fairness.assessment.principles.impl.Findable;
 import fr.lirmm.fairness.assessment.principles.impl.Interoperable;
 import fr.lirmm.fairness.assessment.principles.impl.Reusable;
 
-public class Fair {
+public class Fair extends AbstractScoredEntity {
 	
 	private static Fair instance = null;
 	private AbstractPrinciple[] principles = null;
 	private Ontology ontology = null;
-	private Integer totalScore = 0;
 	public static Fair getInstance() {
 		if(instance == null) {
 			instance = new Fair();
@@ -67,10 +64,12 @@ public class Fair {
 	
 	public void evaluate(Ontology ontology) {
 		this.ontology = ontology;
-		this.totalScore = 0;
+		this.scores = new ArrayList<>(this.principles.length);
+		this.weights = new ArrayList<>(this.principles.length);
 		for(AbstractPrinciple principle : this.principles) {
 			principle.evaluate(ontology);
-			this.totalScore+= principle.getTotalScore();
+			this.scores.add(principle.getTotalScore());
+			this.weights.add(principle.getTotalScoreWeight());
 		}
 	}
 
@@ -151,7 +150,7 @@ public class Fair {
 							
 							for(AbstractPrinciple ab : Fair.getInstance().getPrinciples()) {							
 								cell = row.createCell(colNum);
-								cell.setCellValue(ab.getNormalizedToTPrincipleScore()); 
+								cell.setCellValue(ab.getNormalizedTotalScore());
 								colNum++;
 								for (AbstractPrincipleCriterion c : ab.getPrincipleCriteria())
 								{   
@@ -160,7 +159,7 @@ public class Fair {
 																	
 									colNum++;
 								}
-								fairnessScore+=ab.getNormalizedToTPrincipleScore();
+								fairnessScore+=ab.getNormalizedTotalScore();
 						}
 							cell=row.createCell(colNum);
 							cell.setCellValue(fairnessScore/4);
@@ -219,12 +218,6 @@ public class Fair {
 		     }
 		}
 
-	public Integer getTotalScore() {
-		return totalScore;
-	}
-	public Integer getNormalizedTotalScore() {
-		return totalScore / this.getPrinciples().length;
-	}
 }
 	
 

@@ -12,7 +12,7 @@ import java.util.TreeMap;
 
 import fr.lirmm.fairness.assessment.Configuration;
 
-public class ResultSet extends AbstractScoredEntity implements Serializable {
+public class ResultSet  implements Serializable {
 	
 	private static final long serialVersionUID = 2746658890779865382L;
 	protected Evaluable item = null;
@@ -30,11 +30,13 @@ public class ResultSet extends AbstractScoredEntity implements Serializable {
 		return item;
 	}
 
-	@Override
+
 	public List<Integer> getScores() {
 		return this.scores;
 	}
-	
+
+
+
 	public List<String> getExplanations() {
 		return explanations;
 	}

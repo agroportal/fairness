@@ -12,6 +12,7 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.TreeMap;
 
+import fr.lirmm.fairness.assessment.principles.AbstractScoredEntity;
 import org.json.JSONException;
 
 import fr.lirmm.fairness.assessment.Configuration;
@@ -19,19 +20,18 @@ import fr.lirmm.fairness.assessment.model.Ontology;
 import fr.lirmm.fairness.assessment.principles.Evaluable;
 import fr.lirmm.fairness.assessment.principles.ResultSet;
 
-public abstract class AbstractPrincipleCriterion implements Evaluable, Serializable {
+public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity implements Evaluable, Serializable {
 	
 	private static final long serialVersionUID = -5519124612489307590L;
 
 	protected List<Integer> questionsPoints = null;
 	protected ResultSet resultSet = null; 
-	protected Integer maxQuestionsPoints= 0;
-    protected Integer normalizedTotalScore = null;
+
+
 	
 	public AbstractPrincipleCriterion() {
 		super();
 		this.fillQuestionsPoints();
-		this.fillMaxQuestionsPoints();
 	}
 
 	@Override
@@ -40,7 +40,9 @@ public abstract class AbstractPrincipleCriterion implements Evaluable, Serializa
 		System.out.println("> Evaluating '" + this.getClass().getSimpleName() + "' of ontology '" + ontology.getAcronym() + "' on repository '" + ontology.getPortalInstance().getName() + "' (" + ontology.getPortalInstance().getUrl() + "?apikey=" + ontology.getPortalInstance().getApikey() + ").");
 		this.resultSet = new ResultSet(this);
 		this.doEvaluation(ontology);
-		this.getNormalizeTotalScore();
+		this.scores = this.resultSet.getScores();
+		this.weights = this.questionsPoints;
+
 	}
 	
 	protected abstract void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException;
@@ -48,7 +50,9 @@ public abstract class AbstractPrincipleCriterion implements Evaluable, Serializa
 	protected void addExplanation(int index, String explanation) {
 		this.resultSet.getExplanations().add(index, explanation);
 	}
-	
+
+
+
 	protected void addScore(int index, Integer score) {
 		this.resultSet.getScores().add(index, score);
 	}
@@ -62,22 +66,8 @@ public abstract class AbstractPrincipleCriterion implements Evaluable, Serializa
 		return this.resultSet;
 	}
 
-	public void getNormalizeTotalScore() {
-		Integer ns= 0;
-			ns= (this.resultSet.getTotalScore()*100)/this.maxQuestionsPoints;
-			normalizedTotalScore= ns;
-	}
 
-	public Integer getNormalizedTotalScore()
-	{
-	    return normalizedTotalScore; 
-	}
 
-	public Integer getTotalScore()
-	{
-		return this.getResultSet().getTotalScore();
-	}
-	
 	private void fillQuestionsPoints() {
 		this.questionsPoints = new ArrayList<Integer>();
 		try {
@@ -103,32 +93,7 @@ public abstract class AbstractPrincipleCriterion implements Evaluable, Serializa
 			ex.printStackTrace();
 		}
 	}
-	
-	private void fillMaxQuestionsPoints() {
-		this.maxQuestionsPoints = 0;
-		try {
-			Properties properties = Configuration.getInstance().getProperties();
-			Set<Object> keys = properties.keySet();
-			Map<Object, String> propertiesMap = new TreeMap<Object, String>();
-			for(Object key : keys) {
-				if(key.toString().startsWith(this.getClass().getSimpleName().concat("Max"))) {
-					String propertyValue = properties.getProperty(key.toString());
-					propertiesMap.put(key, propertyValue.replace(" ", ""));
-				}
-			}
-			Object[] keysArray = propertiesMap.keySet().toArray();
-			Arrays.sort(keysArray);
-			for(Object key : keysArray) {
-				this.maxQuestionsPoints = Integer.parseInt(propertiesMap.get(key));
-			}
-		}
-		catch(IOException ioe) {
-			ioe.printStackTrace();
-		}
-		catch(Exception ex) {
-			ex.printStackTrace();
-		}
-	}
+
 	
 	@Override
 	public String toString() {
