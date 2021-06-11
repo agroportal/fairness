@@ -17,7 +17,7 @@ public class ResultSetJsonConverter extends AbstractJsonConverter<List<Result>> 
 	@Override
 	public JsonObject toJson() {
 
-		JsonArray jsonObject = new JsonArray();
+		JsonObject jsonObject = new JsonObject();
 		for (Result result: this.item) {
 			JsonObject object = new JsonObject();
 			AbstractCriterionQuestion question = result.getQuestion();
@@ -28,7 +28,8 @@ public class ResultSetJsonConverter extends AbstractJsonConverter<List<Result>> 
 			if(!result.getExplication().trim().isBlank()){
 				object.add("explication" , gson.toJsonTree(result.getExplication()));
 			}
-			jsonObject.add(object);
+			if(question != null)
+				jsonObject.add(question.getLabel() , object);
 		}
 
 		JsonObject out = new JsonObject();

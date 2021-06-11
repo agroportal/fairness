@@ -1,318 +1,320 @@
 {
   "F": {
-    "F1":[
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 3
+    "F1": {
+      "F1Q1": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 3
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 6
+      "F1Q2": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 6
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 6
+      "F1Q3": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 6
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 5
+      "F1Q4": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 5
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 6
+      "F1Q5": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 6
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 6
+      "F1Q6": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 6
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 4
+      "F1Q7": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 4
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 5
+      "F1Q8": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 5
       }
-    ],
-    "F2": [
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 16
+    },
+    "F2": {
+      "F2Q1": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 16
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 5
+      "F2Q2": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 5
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 3
+      "F2Q3": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 3
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 3
+      "F2Q4": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 3
       }
-    ],
-    "F3": [
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 21
+    },
+    "F3": {
+      "F3Q1": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 21
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 11
+      "F3Q2": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 11
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 10
+      "F3Q3": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 10
       }
-    ],
-    "F4": [
-      {
+    },
+    "F4": {
+      "F4Q1":{
         "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
         "points" : 7
       },
-      {
+      "F4Q2":{
         "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
         "points" : 9
       },
-      {
+      "F4Q3":{
         "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
         "points" : 4
       },
-      {
+      "F4Q4":{
         "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
         "points" : 4
       }
-    ]
+    }
   },
   "A": {
-    "A1": [
-      {
+    "A1": {
+      "A1Q1": {
         "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
         "points": 6
       },
-      {
+      "A1Q2": {
         "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
         "points": 7
       },
-      {
+      "A1Q3": {
         "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
         "points": 24
       },
-      {
+      "A1Q4": {
         "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
         "points": 6
       }
-    ],
-    "A11": [
-      {
+    },
+    "A11": {
+      "A11Q1": {
         "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
         "points": 20
       },
-      {
+      "A11Q2": {
         "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
         "points": 8
       }
-    ],
-    "A12": [
-      {
+    },
+    "A12": {
+      "A12Q1": {
         "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
         "points": 4
       },
-      {
+      "A12Q2": {
         "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
         "points": 18
       }
-    ],
-    "A2": [
-      {
+    },
+    "A2": {
+      "A2Q1": {
         "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
         "points": 7
       },
-      {
-        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
-        "points": 4
-      }, {
+      "A2Q2": {
         "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
         "points": 4
       },
-      {
+      "A2Q3": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 4
+      },
+      "A2Q4": {
         "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
         "points": 2
-      }, {
+      },
+      "A2Q5": {
         "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
         "points": 3
       }
-    ]
+    }
   },
   "I": {
-    "I1": [
-      {
+    "I1": {
+      "I1Q1": {
         "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
         "points": 20
       },
-      {
+      "I1Q2": {
         "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
         "points": 10
       },
-      {
+      "I1Q3": {
         "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
         "points": 5
       },
-      {
+      "I1Q4": {
         "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
         "points": 5
       },
-      {
+      "I1Q5": {
         "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
         "points": 4
       }
-    ],
-    "I2":[
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 5
-      },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 4
-      },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 3
-      },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 5
-      },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 3
-      },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 4
-      },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 3
-      },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 5
-      }
-    ],
-    "I3": [
-      {
+    },
+    "I2": {
+      "I2Q1": {
         "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
-        "points": 10
+        "points": 5
       },
-      {
+      "I2Q2": {
         "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
-        "points": 9
+        "points": 4
       },
-      {
+      "I2Q3": {
         "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
         "points": 3
       },
-      {
+      "I2Q4": {
         "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
-        "points": 6
+        "points": 5
       },
-      {
+      "I2Q5": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 3
+      },
+      "I2Q6": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 4
+      },
+      "I2Q7": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 3
+      },
+      "I2Q8": {
         "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
         "points": 5
       }
-    ]
+    },
+    "I3": {
+      "I3Q1": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 10
+      },
+      "I3Q2": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 9
+      },
+      "I3Q3": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 3
+      },
+      "I3Q4": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 6
+      },
+      "I3Q5": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 5
+      }
+    }
   },
   "R": {
-    "R1": [
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 8
+    "R1": {
+      "R1Q1": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 8
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 8
+      "R1Q2": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 8
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 8
+      "R1Q3": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 8
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 8
+      "R1Q4": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 8
       }
-    ],
-    "R11": [
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 8
+    },
+    "R11": {
+      "R11Q1": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 8
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 7
+      "R11Q2": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 7
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 7
+      "R11Q3": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 7
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 15
+      "R11Q4": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 15
       }
-    ],
-    "R12": [
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 10
+    },
+    "R12": {
+      "R12Q1": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 10
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 10
+      "R12Q2": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 10
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 5
+      "R12Q3": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 5
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 5
+      "R12Q4": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 5
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 5
+      "R12Q5": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 5
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 3
+      "R12Q6": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 3
       }
-    ],
-    "R13": [
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 5
+    },
+    "R13": {
+      "R13Q1": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 5
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 5
+      "R13Q2": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 5
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 8
+      "R13Q3": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 8
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 7
+      "R13Q4": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 7
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 5
+      "R13Q5": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 5
       },
-      {
-        "question" : "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?" ,
-        "points" : 6
+      "R13Q6": {
+        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+        "points": 6
       }
-    ]
+    }
   }
 }

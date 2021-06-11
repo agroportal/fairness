@@ -59,12 +59,12 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 			Map<? , ?> criteria = (Map<?, ?>) fairConfigs.values().stream()
 					.filter(principal -> ((Map<?,?>)principal).containsKey(this.getClass().getSimpleName()))
 					.findFirst().get();
-			List<Map<?,?>> questionList = (List<Map<?,?>>) criteria.get(this.getClass().getSimpleName());
+			Map<String,Map<?,?>> questionList = (Map<String,Map<?,?>>) criteria.get(this.getClass().getSimpleName());
 
 			this.questions = new ArrayList<>();
 
-			for (Map<?,?> q: questionList) {
-				this.questions.add(new AbstractCriterionQuestion(q.get("question").toString() , Double.parseDouble(q.get("points").toString())));
+			for (Map.Entry<String,Map<?,?>> q: questionList.entrySet()) {
+				this.questions.add(new AbstractCriterionQuestion(q.getKey(), q.getValue().get("question").toString() , Double.parseDouble(q.getValue().get("points").toString())));
 			}
 		} catch(Exception ioe) {
 			ioe.printStackTrace();
