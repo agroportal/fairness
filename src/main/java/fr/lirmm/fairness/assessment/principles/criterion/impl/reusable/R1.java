@@ -22,7 +22,7 @@ public class R1 extends AbstractPrincipleCriterion {
 		try {
 			String[][] allMetadata = allMetadataToEvaluate(ontology);
 			for (int i = 0; i < 4; i++) { // 4 questions
-				int points= 0, score=0;
+				double points= 0, score=0;
 				if (allMetadata[i].length > 0) {
 					int nbinfo = 0;
 					for (String s : allMetadata[i]) {
@@ -37,7 +37,7 @@ public class R1 extends AbstractPrincipleCriterion {
 							String.format("Ontology provides %d information about its %s", nbinfo, metadataFlags[i]));
 				}
                    else {
-					this.addResult(i, 0, "Ontology does not provide information about all R1 required metadata");
+					this.addResult(i, 0.0, "Ontology does not provide information about all R1 required metadata");
                    }
 			}
 		} catch (Exception e) {

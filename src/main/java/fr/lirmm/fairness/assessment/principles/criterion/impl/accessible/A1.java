@@ -1,12 +1,12 @@
 package fr.lirmm.fairness.assessment.principles.criterion.impl.accessible;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
-import java.net.URL;
-import java.net.UnknownHostException;
+import java.net.*;
 
+import fr.lirmm.fairness.assessment.utils.Result;
+import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
+import fr.lirmm.fairness.assessment.principles.criterion.question.Tester;
+import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.json.JSONException;
 
@@ -21,57 +21,74 @@ public class A1 extends AbstractPrincipleCriterion {
 	protected void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException {
 		
 		try {
-			String uri = ontology.getUri();
-			String id = ontology.getId();
+
 			String endPoint = ontology.getEndPoint();
 			String xmlresource = ontology.getXmlMetadata();
 			String jsonresource = ontology.getJsonMetadata();
 			String htmlresource = ontology.getHtmlMetadata();
 			String textresource = ontology.getTextMetadata();
 			int nbFormats=0; 
-			int points=0, score=0;
-            
-			//Q1: Does the ontology URI and other identifiers, if exist, resolve to the ontology?
-			try {
-				String[] CustomURISchemes = { "http", "https" };
-				UrlValidator customURIValidator = new UrlValidator(CustomURISchemes);
-				points= this.questionsPoints.get(0)/2; 
-				if ((customURIValidator.isValid(uri)) && (customURIValidator.isValid(id))) {
-					URL urluri = new URL(uri);
-					URL urlid = new URL(id);
-					HttpURLConnection urluriConnection = (HttpURLConnection) urluri.openConnection();
-					HttpURLConnection urlidConnection = (HttpURLConnection) urlid.openConnection();
-					HttpURLConnection.setFollowRedirects(false);
-					urluriConnection.setRequestMethod("HEAD");
-					urluriConnection.setConnectTimeout(1000); // 1 second
-					urlidConnection.setRequestMethod("HEAD");
-					urlidConnection.setConnectTimeout(1000); // 1 second
-					int urihttpstatusCode = urluriConnection.getResponseCode();
-					int idhttpstatusCode = urlidConnection.getResponseCode();
-					if (((urihttpstatusCode == 200) || (urihttpstatusCode == 302)))
-					{   score+=points;				
-					   if (((idhttpstatusCode == 200) || (idhttpstatusCode == 302)))
-					   {
-						   score+=points; 
-						   this.addResult(0, score, "Resolvable ontology URI and identifier");
-					   }
-					   if (score<this.questionsPoints.get(0))
-						{
-						   this.addResult(0, score, "Resolvable ontology URI or identifier but not both");
-						}
-					} else {
-						this.addResult(0, 0, "HTTP error=" + urluriConnection.getResponseMessage());
-					}
-					urluriConnection.disconnect();
-				}
+			double points=0, score=0;
 
-				else {
-					this.addResult(0, 0, "Invalid ontology URI/GUID");
+
+
+			//Q1: Does the ontology URI and other identifiers, if exist, resolve to the ontology?
+			Result r = Tester.doEvaluation(ontology, this.questions.get(0), new Testable() {
+				@Override
+				public Result doTest(Ontology ontology, AbstractCriterionQuestion question) {
+					String uri = ontology.getUri();
+					String id = ontology.getId();
+					Result result = new Result();
+					double score;
+
+					try {
+						String[] CustomURISchemes = { "http", "https" };
+						UrlValidator customURIValidator = new UrlValidator(CustomURISchemes);
+
+						if ((customURIValidator.isValid(uri)) && (customURIValidator.isValid(id))) {
+							URL urluri = new URL(uri);
+							URL urlid = new URL(id);
+							HttpURLConnection urluriConnection = (HttpURLConnection) urluri.openConnection();
+							HttpURLConnection urlidConnection = (HttpURLConnection) urlid.openConnection();
+							HttpURLConnection.setFollowRedirects(false);
+							urluriConnection.setRequestMethod("HEAD");
+							urluriConnection.setConnectTimeout(1000); // 1 second
+							urlidConnection.setRequestMethod("HEAD");
+							urlidConnection.setConnectTimeout(1000); // 1 second
+							int urihttpstatusCode = urluriConnection.getResponseCode();
+							int idhttpstatusCode = urlidConnection.getResponseCode();
+							if (((urihttpstatusCode == 200) || (urihttpstatusCode == 302)))
+							{
+								score = 0.5;
+								if (((idhttpstatusCode == 200) || (idhttpstatusCode == 302)))
+								{
+									score = 1;
+									result.setResult(score * question.getPoints(), "Resolvable ontology URI and identifier" , question);
+								}
+
+								if (score < 1)
+								{
+									result.setResult(score * question.getPoints() ,"Resolvable ontology URI or identifier but not both" , question);
+								}
+
+							} else {
+								result.setResult( 0, "HTTP error=" + urluriConnection.getResponseMessage() , question);
+							}
+							urluriConnection.disconnect();
+						}
+						else {
+							result.setResult(0, "Invalid ontology URI/GUID" , question);
+						}
+
+					} catch (UnknownHostException | SocketTimeoutException | MalformedURLException e) {
+						result.setResult(0, "UnknownHostException HTTP error" , question);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					return result;
 				}
-				
-			     } catch (UnknownHostException | SocketTimeoutException e) {
-				   this.addResult(0, 0, "UnknownHostException HTTP error");
-			     }
+			});
+			this.addResult(0 ,  r.getScore() , r.getExplication());
 
 			//Q2: Does a metadata URI/GUID (if metadata described externally) resolve to
 			// the metadata record?
@@ -81,7 +98,7 @@ public class A1 extends AbstractPrincipleCriterion {
 			
 			if ((xmlresource.isEmpty()) && (jsonresource.isEmpty()) && (htmlresource.isEmpty())
 					&& (textresource.isEmpty())) {
-				this.addResult(2, 0, "Ontology and ontology metadata are not accessible with content-negociation");
+				this.addResult(2, 0.0, "Ontology and ontology metadata are not accessible with content-negociation");
 			} 
 			else {
 				nbFormats= 4;
@@ -108,7 +125,7 @@ public class A1 extends AbstractPrincipleCriterion {
 				this.addResult(3, this.questionsPoints.get(3),"Ontology is accessible through a SPARQL endpoint");
 			} else {
 				
-				this.addResult(3, 0, "Ontology is not accessible through another standard protocol (SPARQL endpoint)");
+				this.addResult(3, 0.0, "Ontology is not accessible through another standard protocol (SPARQL endpoint)");
 			}
 
 		} catch (java.net.SocketTimeoutException e) {

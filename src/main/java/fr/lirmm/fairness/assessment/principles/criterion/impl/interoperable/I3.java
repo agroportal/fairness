@@ -17,8 +17,8 @@ public class I3 extends AbstractPrincipleCriterion {
 	protected void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException {
 
 		try {
-			int points = this.questionsPoints.get(3)/2; 
-			int score=0; 
+			double points = this.questionsPoints.get(3)/2;
+			double score=0;
 			
 			// Q1: Non assessable evaluation of qualified references?
 			this.addResult(0, 0,

@@ -48,7 +48,7 @@ public class R13 extends AbstractPrincipleCriterion {
 					}
 					else 
 					{
-					   this.addResult(1, 0, "Ontology is not included in the OBO foundry group");
+					   this.addResult(1, 0.0, "Ontology is not included in the OBO foundry group");
 					}
 				}
 			}	
@@ -61,7 +61,7 @@ public class R13 extends AbstractPrincipleCriterion {
 				}
 				else
 				{
-			      this.addResult(5, 0, "Ontology is not openly and freely available");	
+			      this.addResult(5, 0, "Ontology is not openly and freely available");
 				}
 		}
 			catch (Exception e) {

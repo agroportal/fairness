@@ -31,7 +31,7 @@ public class R12 extends AbstractPrincipleCriterion {
 			for (int i = 0; i < allMetadata.length; i++) {
 				if (allMetadata[i].length > 0) {
 				int nbinfo = 0;
-				int points= 0, score=0;
+				double points= 0, score=0;
 				for (String s : allMetadata[i]) {
 					points= this.questionsPoints.get(i)/allMetadata[i].length;
 					if (OntologyRestApi.isValidMetadatumValue(s)) {

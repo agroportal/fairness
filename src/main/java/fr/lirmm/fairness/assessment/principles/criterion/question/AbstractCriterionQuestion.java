@@ -1,10 +1,12 @@
-package fr.lirmm.fairness.assessment.principles.criterion.Question;
+package fr.lirmm.fairness.assessment.principles.criterion.question;
+
+import java.util.function.Function;
 
 public class AbstractCriterionQuestion {
     private String question;
-    private Integer points;
+    private Double points;
 
-    public AbstractCriterionQuestion(String text, Integer maxScore) {
+    public AbstractCriterionQuestion(String text, Double maxScore) {
         this.question = text;
         this.points = maxScore;
     }
@@ -13,7 +15,10 @@ public class AbstractCriterionQuestion {
         return question;
     }
 
-    public Integer getPoints() {
+    public Double getPoints() {
         return points;
     }
+
+
+
 }

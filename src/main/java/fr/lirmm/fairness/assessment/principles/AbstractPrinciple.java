@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.reflections.Reflections;
 
@@ -41,7 +42,7 @@ public abstract class AbstractPrinciple extends AbstractScoredEntity implements 
 				this.weights.add(criterion.getTotalScoreWeight());
 				System.out.println("> " + criterion.getClass().getSimpleName() + " points : " + criterion.getScores());
 				System.out.println("> Total score for " + criterion.getClass().getSimpleName() + " : " + criterion.getTotalScore());
-				System.out.println("> Explanations : " + criterion.getResultSet().getExplanations());
+				System.out.println("> Explanations : " + criterion.getResults().stream().map(x->x.getExplication()).collect(Collectors.toList()));
 				System.out.println("> Normalized total score for " + criterion.getClass().getSimpleName() + " : " + criterion.getNormalizedTotalScore());
 			}
 			catch(Exception iae) {
@@ -52,7 +53,7 @@ public abstract class AbstractPrinciple extends AbstractScoredEntity implements 
 
 	@SuppressWarnings("unchecked")
 	private List<Class<? extends AbstractPrincipleCriterion>> getPrincipleCriteriaClasses() {
-		Reflections reflections = new Reflections("fr.lirmm.fairness.assessment.principles.criterion.impl");
+		Reflections reflections = new Reflections("fr.lirmm.fairness.assessment.principles.criterion");
 		Object[] reflectedPrincipleCriteriaClasses = reflections.getSubTypesOf(AbstractPrincipleCriterion.class).toArray();
 		Arrays.sort(reflectedPrincipleCriteriaClasses, new Comparator<Object>() {
 			@Override
@@ -73,6 +74,7 @@ public abstract class AbstractPrinciple extends AbstractScoredEntity implements 
 		Iterator<Class<? extends AbstractPrincipleCriterion>> iterator = principleCriteriaClasses.iterator();
 		while(iterator.hasNext()) {
 			Class<? extends AbstractPrincipleCriterion> subCriteriaClassesClass = iterator.next();
+
 			try {
 				this.principleCriteria.add(subCriteriaClassesClass.getDeclaredConstructor().newInstance());
 			}

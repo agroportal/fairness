@@ -57,7 +57,7 @@ public class FairServlet extends HttpServlet {
 				Gson gson = new GsonBuilder().create();
 				JsonObject output = new JsonObject();
 				List<JsonObject> jsonObjects = new ArrayList<JsonObject>(ontologyAcronymsToEvaluate.size());
-				Integer combinedScore = 0;
+				Double combinedScore = 0.0;
 				while(it.hasNext()) {
 					Fair.getInstance().evaluate(new Ontology(it.next(), portalInstance));
 					jsonObjects.add(new FairJsonConverter(Fair.getInstance()).toJson());

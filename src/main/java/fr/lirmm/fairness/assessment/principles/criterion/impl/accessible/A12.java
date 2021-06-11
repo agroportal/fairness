@@ -20,9 +20,9 @@ public class A12 extends AbstractPrincipleCriterion {
 		try {
 
 			List<String> includedInDataCatalog = ontology.getIncludedInDataCatalog();
-			int score = 0; // AgroPortal ontologies are automatically registered in
+			double score = 0; // AgroPortal ontologies are automatically registered in
 			// FAIRsharing and Agrisemantics Map of Data Standards.
-			int points=0; 
+			double points=0;
 			int nbRepo=0;
 
 			// Q1: Does the protocol used to resolve URI and GUID support authentication and

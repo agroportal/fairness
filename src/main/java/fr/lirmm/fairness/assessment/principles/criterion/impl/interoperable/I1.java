@@ -29,38 +29,38 @@ public class I1 extends AbstractPrincipleCriterion {
 			// Q2: Is the representation language used a W3C Recommendation?
 			switch (ontoLang) {
 			case "OWL":
-				this.addResult(0, 20, "Ontology and ontology metadata are in OWL");
+				this.addResult(0, 20.0, "Ontology and ontology metadata are in OWL");
 				this.addResult(1, this.questionsPoints.get(1),
 						"Ontology and ontology metadata are represented in a W3C language");
 				break;
 
 			case "OBO":
 
-				this.addResult(0, 14, "Ontology and ontology metadata are in OBO");
+				this.addResult(0, 14.0, "Ontology and ontology metadata are in OBO");
 				this.addResult(1, this.questionsPoints.get(1),
 						"Ontology and ontology metadata are represented in a W3C language");
 				break;
 
 			case "RDFS":
-				this.addResult(0, 16, "Ontology and ontology metadata are in RDFS");
+				this.addResult(0, 16.0, "Ontology and ontology metadata are in RDFS");
 				this.addResult(1, this.questionsPoints.get(1),
 						"Ontology and ontology metadata are represented in a W3C language");
 				break;
 
 			case "SKOS":
-				this.addResult(0, 18, "Ontology and ontology metadata are in SKOS");
+				this.addResult(0, 18.0, "Ontology and ontology metadata are in SKOS");
 				this.addResult(1, this.questionsPoints.get(1),
 						"Ontology and ontology metadata are represented in a W3C language");
 				break;
 
 			case "CSV":
-				this.addResult(0, 11, "Ontology and ontology metadata are in CSV");
+				this.addResult(0, 11.0, "Ontology and ontology metadata are in CSV");
 				this.addResult(1, this.questionsPoints.get(1),
 						"Ontology and ontology metadata are not in a W3C language");
 				break;
 
 			case "XML":
-				this.addResult(0, 12, "Ontology and ontology metadata are in XML");
+				this.addResult(0, 12.0, "Ontology and ontology metadata are in XML");
 				this.addResult(1, this.questionsPoints.get(1),
 						"Ontology and ontology metadata are represented in a W3C language");
 				break;

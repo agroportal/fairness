@@ -1,30 +1,12 @@
 package fr.lirmm.fairness.assessment;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
-import java.util.stream.Collectors;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import fr.lirmm.fairness.assessment.principles.AbstractScoredEntity;
-import fr.lirmm.fairness.assessment.principles.criterion.Question.AbstractCriterionQuestion;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
-import fr.lirmm.fairness.assessment.model.PortalInstance;
 import fr.lirmm.fairness.assessment.principles.AbstractPrinciple;
-import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriterion;
+import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
 import fr.lirmm.fairness.assessment.principles.impl.Accessible;
 import fr.lirmm.fairness.assessment.principles.impl.Findable;
 import fr.lirmm.fairness.assessment.principles.impl.Interoperable;
@@ -84,6 +66,7 @@ public class Fair extends AbstractScoredEntity {
 
 	
 	public static void main(String[] args) {
+		AbstractCriterionQuestion question = new AbstractCriterionQuestion("test", 1.0);
 		/*Gson gson = new Gson();
 
 		// create a reader

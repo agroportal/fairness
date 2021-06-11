@@ -5,40 +5,42 @@ import java.util.List;
 
 public abstract class AbstractScoredEntity {
 
-	protected List<Integer> scores = null;
-	protected List<Integer> weights = null;
-	protected ResultSet resultSet = null;
+	protected List<Double> scores = null;
+	protected List<Double> weights = null;
 
-	public  List<Integer> getScores(){
+
+	public  List<Double> getScores(){
 		return scores;
 	}
 
-	public  List<Integer> getScoresWeights(){
+	public  List<Double> getScoresWeights(){
 		return weights;
 	}
 
-	public final Integer getTotalScoreWeight() {
-		int w = 0;
-		for (int s : this.getScoresWeights()) {
+	public final Double getTotalScoreWeight() {
+		double w = 0;
+		for (double s : this.getScoresWeights()) {
 			w += s;
 		}
 		return w;
 	}
 
-	public final Integer getTotalScore() {
-		Integer score = 0;
-		for (Integer s : this.getScores()) {
+
+
+	public final Double getTotalScore() {
+		Double score = 0.0;
+		for (Double s : this.getScores()) {
 			score += s;
 		}
 		return score;
 	}
 	
-	public final Integer getAverageScore() {
-		return (int)(((double) this.getTotalScore()  / this.getTotalScoreWeight()) * 100);
+	public final Double getAverageScore() {
+		return (((double) this.getTotalScore()  / this.getTotalScoreWeight()) * 100);
 	}
 
 	public  Integer getNormalizedTotalScore(){
-		return this.getAverageScore();
+		return  this.getAverageScore().intValue();
 	}
 
 }

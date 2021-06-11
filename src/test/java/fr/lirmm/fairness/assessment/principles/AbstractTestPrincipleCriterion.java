@@ -2,6 +2,7 @@ package fr.lirmm.fairness.assessment.principles;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -53,12 +54,12 @@ public abstract class AbstractTestPrincipleCriterion<T extends AbstractPrinciple
 			principleCriterion.evaluate(this.ontology);
 
 			assertEquals(principleCriterion.getTotalScore().intValue(), this.expectedScore);
-			assertEquals(principleCriterion.getResultSet().getScores().size(), this.expectedScores.length);
-			assertEquals(principleCriterion.getResultSet().getExplanations().size(), this.expectedExplanations.length);
+			assertEquals(principleCriterion.getScores().size(), this.expectedScores.length);
+			assertEquals(principleCriterion.getResults().stream().map(x-> x.getExplication()).count(), this.expectedExplanations.length);
 
-			Assert.assertArrayEquals(principleCriterion.getResultSet().getScores().toArray(new Integer[] {}), this.expectedScores);
+			Assert.assertArrayEquals(principleCriterion.getScores().toArray(new Integer[] {}), this.expectedScores);
 
-			Assert.assertArrayEquals(principleCriterion.getResultSet().getExplanations().toArray(new String[] {}),
+			Assert.assertArrayEquals(principleCriterion.getResults().stream().map(x->x.getExplication()).collect(Collectors.toList()).toArray(new String[] {}),
 					this.expectedExplanations);
 		} catch (Exception ex) {
 			ex.printStackTrace();

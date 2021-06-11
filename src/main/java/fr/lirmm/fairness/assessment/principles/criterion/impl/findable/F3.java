@@ -16,11 +16,11 @@ public class F3 extends AbstractPrincipleCriterion {
 	@Override
 	protected void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException {
         // Q1: Are the ontology metadata included and maintained in the ontology file?
-		this.addResult(0, 0, "Ontology metadata are not included in the ontology file");
+		this.addResult(0, 0.0, "Ontology metadata are not included in the ontology file");
 		// Q2: If not, are the ontology metadata described in an external file?
-		this.addResult(1, 0, "Ontology metadata are not included in an external file");
+		this.addResult(1, 0.0, "Ontology metadata are not included in an external file");
 		//Q3: Does that external file explicitly link to the ontology and vice-versa? 
-		this.addResult(1, 0, "No explicit link from metadata to the ontology");
+		this.addResult(2, 0.0, "No explicit link from metadata to the ontology");
 	}
 	
 }

@@ -1,18 +1,19 @@
 package fr.lirmm.fairness.assessment;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import com.google.gson.Gson;
+
+import java.io.*;
+import java.util.*;
 
 public class Configuration {
-	
-	private static Configuration instance = null;
+
+	public static final String FAIR_CONFIG_FILE_PATH = "config/common/questions.config.json";
 	private final static String defaultPropFileName = "config.properties";
-	private Map<String, Properties> propertiesMap = new HashMap<String, Properties>();
-	
+
+	private static Configuration instance = null;
+	private Map<String, Properties> portalsCongigsMap = new HashMap<String, Properties>();
+	private Map<?, ?> FairConfigMap = new HashMap<>();
+
 	private Configuration() {
 		super();
 	}
@@ -30,7 +31,7 @@ public class Configuration {
  
 	public Properties getProperties(String configScope) throws IOException {
 		
-		Properties properties = this.propertiesMap.get(configScope);
+		Properties properties = this.portalsCongigsMap.get(configScope);
 		
 		if(properties == null) {
 		
@@ -43,7 +44,7 @@ public class Configuration {
 				
 				if (inputStream != null) {
 					properties.load(inputStream);
-					this.propertiesMap.put(configScope, properties);
+					this.portalsCongigsMap.put(configScope, properties);
 				} else {
 					throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
 				}
@@ -58,5 +59,25 @@ public class Configuration {
 		}
 		
 		return properties;
+	}
+
+	public Map<?, ?> getFairConfigs() throws IOException {
+		if(this.FairConfigMap.isEmpty()){
+			// create Gson instance
+			Gson gson = new Gson();
+			// create a reader
+			InputStream inputStream = getClass().getClassLoader().getResourceAsStream(FAIR_CONFIG_FILE_PATH);
+
+			if (inputStream != null) {
+				Reader reader = new InputStreamReader(inputStream);
+				// convert JSON file to map
+				this.FairConfigMap = gson.fromJson(reader, Map.class);
+				reader.close();
+			} else {
+				throw new FileNotFoundException("property file '" + FAIR_CONFIG_FILE_PATH + "' not found in the classpath");
+			}
+		}
+		return this.FairConfigMap;
+
 	}
 }

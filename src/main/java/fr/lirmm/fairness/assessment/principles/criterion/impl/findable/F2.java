@@ -27,7 +27,7 @@ public class F2 extends AbstractPrincipleCriterion {
 		try { 
 			String[][] allMetadata = this.allMetadataToEvaluate(ontology);
 			for(int i = 0 ; i < allMetadata.length; i ++) {
-				int score = this.evaluatecheckMetadata(allMetadata[i], i); 
+				double score = this.evaluatecheckMetadata(allMetadata[i], i);
 				this.addResult(i, score, String.format("%d %s properties provided", nbValidProp, metadataFlags[i]));
 			}
 		}
@@ -38,7 +38,7 @@ public class F2 extends AbstractPrincipleCriterion {
 	
 	private int evaluatecheckMetadata(String[] metadata, int importanceLevel) {
 		nbValidProp=0; 
-		int credits = this.questionsPoints.get(importanceLevel); 
+		double credits = this.questionsPoints.get(importanceLevel);
 		int score = 0;
 		int points= 0; 	
 		int i=0; 

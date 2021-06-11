@@ -24,7 +24,7 @@ public class A2 extends AbstractPrincipleCriterion {
 			// Q1: Are "most" ontology versions accessible? (ad-hoc solution see Annex6)
 			if ((acronym.contains("OBOE"))
 					|| (acronym.contains("PR") || (acronym.contains("BCO")) || (acronym.contains("STY")))) {
-				this.addResult(0, 0, "Most ontology versions are accessible");
+				this.addResult(0, 0.0, "Most ontology versions are accessible");
 			} else {
 				this.addResult(0, this.questionsPoints.get(0), "Most ontology versions are accessible");
 			}
@@ -42,7 +42,7 @@ public class A2 extends AbstractPrincipleCriterion {
 				this.addResult(3, questionsPoints.get(3), "The status of the ontology is clearly informed");
 			}
 			else {
-				this.addResult(3, 0, "The status of the ontology is not clearly informed");
+				this.addResult(3, 0.0, "The status of the ontology is not clearly informed");
 			}
 		}
 		catch (Exception e) {

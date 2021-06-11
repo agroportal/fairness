@@ -19,7 +19,7 @@ public class F4 extends AbstractPrincipleCriterion {
 
 		try {
 			int i; 
-			int score = 0, points=0; 
+			double score = 0, points=0;
 			// Q1: Is the ontology registered in multiple ontology libraries?
 			// By default, AgroPortal ontologies are automatically registered in FAIRsharing and Agrisemantics Map of Data Standards.
 			score= 2; 

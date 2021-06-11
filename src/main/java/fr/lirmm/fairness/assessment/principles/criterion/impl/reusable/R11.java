@@ -35,7 +35,7 @@ public class R11 extends AbstractPrincipleCriterion {
 			}
 			else 
 			{
-				this.addResult(0, 0, "Ontology license is not clearly specified"); 
+				this.addResult(0, 0.0, "Ontology license is not clearly specified");
 			}
 
 			// Q2: If yes, is the license description accessible and resolvable by a
@@ -51,11 +51,11 @@ public class R11 extends AbstractPrincipleCriterion {
 				if ((httpstatusCode == 200) || (httpstatusCode == 302)) {
 					this.addResult(1, this.questionsPoints.get(1), "License is accessible and resolvable");
 				} else {
-					this.addResult(1, 0, String.format("License is not resolvable HTTP error=%s",
+					this.addResult(1, 0.0, String.format("License is not resolvable HTTP error=%s",
 							urluriConnection.getResponseMessage()));
 				}
 			} else {
-				this.addResult(1, 0, "License is not resolvable");
+				this.addResult(1, 0.0, "License is not resolvable");
 			}
              
 			//Q3: Are the ontology access rights clearly specified/declared?
@@ -63,7 +63,7 @@ public class R11 extends AbstractPrincipleCriterion {
 			if (accessRightsSpecified) {
 				this.addResult(2, this.questionsPoints.get(2), "Access rights are clearly defined");
 			} else {
-				this.addResult(2, 0, "Access rights are not clearly defined");
+				this.addResult(2, 0.0, "Access rights are not clearly defined");
 			}
 			
 			// Q4: Are the permissions, usage guidelines and copyright holder clearly documented?
