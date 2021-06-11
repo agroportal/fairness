@@ -50,37 +50,39 @@ public class FairServlet extends HttpServlet {
 					Collection<String> ontologies = Arrays.asList(pOntologies.split(","));
 					if(allOntologyAcronyms.containsAll(ontologies)) {
 						ontologyAcronymsToEvaluate.addAll(ontologies);
-						Iterator<String> it = ontologyAcronymsToEvaluate.iterator();
-						Gson gson = new GsonBuilder().create();
-						JsonObject output = new JsonObject();
-						JsonObject jsonObjects = new JsonObject();
-						CombinedFair combinedFair =  new CombinedFair(ontologies.size());
-
-
-						while(it.hasNext()) {
-							Fair.getInstance().evaluate(new Ontology(it.next(), portalInstance));
-							JsonObject tmp = new FairJsonConverter(Fair.getInstance()).toJson();
-							tmp.entrySet().forEach(x -> jsonObjects.add(x.getKey() , x.getValue()));
-							if(computeCombinedScore)
-								combinedFair.addFairToCombine(Fair.getInstance());
-						}
-
-						output.add("ontologies" , gson.toJsonTree(jsonObjects));
-						if(computeCombinedScore){
-							output.add("combinedScores" , gson.toJsonTree((new CombinedFairJsonConverter(combinedFair)).toJson()));
-						}
-						output.add("request" , gson.toJsonTree(req.getRequestURL().append('?').append(req.getQueryString())));
-						PrintWriter out = resp.getWriter();
-						resp.setContentType("application/json");
-						resp.setCharacterEncoding("UTF-8");
-						out.print(output);
-						out.flush();
 					}
 					else {
 						resp.sendError(HttpServletResponse.SC_NOT_FOUND, String.format("Ontology '%s' not found", pOntologies));
 					}
 				}
 
+				if(ontologyAcronymsToEvaluate.size()>0){
+					Iterator<String> it = ontologyAcronymsToEvaluate.iterator();
+					Gson gson = new GsonBuilder().create();
+					JsonObject output = new JsonObject();
+					JsonObject jsonObjects = new JsonObject();
+					CombinedFair combinedFair =  new CombinedFair(ontologyAcronymsToEvaluate.size());
+
+
+					while(it.hasNext()) {
+						Fair.getInstance().evaluate(new Ontology(it.next(), portalInstance));
+						JsonObject tmp = new FairJsonConverter(Fair.getInstance()).toJson();
+						tmp.entrySet().forEach(x -> jsonObjects.add(x.getKey() , x.getValue()));
+						if(computeCombinedScore)
+							combinedFair.addFairToCombine(Fair.getInstance());
+					}
+
+					output.add("ontologies" , gson.toJsonTree(jsonObjects));
+					if(computeCombinedScore){
+						output.add("combinedScores" , gson.toJsonTree((new CombinedFairJsonConverter(combinedFair)).toJson()));
+					}
+					output.add("request" , gson.toJsonTree(req.getRequestURL().append('?').append(req.getQueryString())));
+					PrintWriter out = resp.getWriter();
+					resp.setContentType("application/json");
+					resp.setCharacterEncoding("UTF-8");
+					out.print(output);
+					out.flush();
+				}
 
 			}
 		} catch (Exception e) {
