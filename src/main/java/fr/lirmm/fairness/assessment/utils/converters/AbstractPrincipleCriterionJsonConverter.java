@@ -2,7 +2,7 @@ package fr.lirmm.fairness.assessment.utils.converters;
 
 import com.google.gson.JsonObject;
 
-import fr.lirmm.fairness.assessment.principles.impl.AbstractPrincipleCriterion;
+import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriterion;
 
 public class AbstractPrincipleCriterionJsonConverter extends AbstractJsonConverter<AbstractPrincipleCriterion> {
 

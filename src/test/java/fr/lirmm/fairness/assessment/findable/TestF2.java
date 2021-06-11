@@ -1,7 +1,7 @@
 package fr.lirmm.fairness.assessment.findable;
 
 import fr.lirmm.fairness.assessment.principles.AbstractTestPrincipleCriterion;
-import fr.lirmm.fairness.assessment.principles.impl.findable.F2;
+import fr.lirmm.fairness.assessment.principles.criterion.impl.findable.F2;
 
 public class TestF2 extends AbstractTestPrincipleCriterion<F2> {
 	

@@ -10,7 +10,8 @@ import java.util.List;
 import org.reflections.Reflections;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
-import fr.lirmm.fairness.assessment.principles.impl.AbstractPrincipleCriterion;
+import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriterion;
+import org.reflections.scanners.SubTypesScanner;
 
 public abstract class AbstractPrinciple extends AbstractScoredEntity implements Evaluable,Serializable {
 	
@@ -51,7 +52,7 @@ public abstract class AbstractPrinciple extends AbstractScoredEntity implements 
 
 	@SuppressWarnings("unchecked")
 	private List<Class<? extends AbstractPrincipleCriterion>> getPrincipleCriteriaClasses() {
-		Reflections reflections = new Reflections(this.getClass().getName().toLowerCase());
+		Reflections reflections = new Reflections("fr.lirmm.fairness.assessment.principles.criterion.impl");
 		Object[] reflectedPrincipleCriteriaClasses = reflections.getSubTypesOf(AbstractPrincipleCriterion.class).toArray();
 		Arrays.sort(reflectedPrincipleCriteriaClasses, new Comparator<Object>() {
 			@Override

@@ -1,7 +1,7 @@
 package fr.lirmm.fairness.assessment.accessible;
 
 import fr.lirmm.fairness.assessment.principles.AbstractTestPrincipleCriterion;
-import fr.lirmm.fairness.assessment.principles.impl.accessible.A11;
+import fr.lirmm.fairness.assessment.principles.criterion.impl.accessible.A11;
 
 public class TestA11 extends AbstractTestPrincipleCriterion<A11> {
 	

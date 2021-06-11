@@ -1,4 +1,4 @@
-package fr.lirmm.fairness.assessment.principles.impl.interoperable;
+package fr.lirmm.fairness.assessment.principles.criterion.impl.interoperable;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -8,7 +8,7 @@ import java.util.List;
 import org.json.JSONException;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
-import fr.lirmm.fairness.assessment.principles.impl.AbstractPrincipleCriterion;
+import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriterion;
 //import fr.lirmm.fairness.assessment.utils.OntologyRestApi;
 
 public class I2 extends AbstractPrincipleCriterion {

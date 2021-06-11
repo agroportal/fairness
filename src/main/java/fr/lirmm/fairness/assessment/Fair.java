@@ -1,14 +1,15 @@
 package fr.lirmm.fairness.assessment;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileNotFoundException;
-
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import fr.lirmm.fairness.assessment.principles.AbstractScoredEntity;
+import fr.lirmm.fairness.assessment.principles.criterion.Question.AbstractCriterionQuestion;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -23,8 +24,7 @@ import org.apache.commons.cli.Options;
 import fr.lirmm.fairness.assessment.model.Ontology;
 import fr.lirmm.fairness.assessment.model.PortalInstance;
 import fr.lirmm.fairness.assessment.principles.AbstractPrinciple;
-import fr.lirmm.fairness.assessment.principles.ResultSet;
-import fr.lirmm.fairness.assessment.principles.impl.AbstractPrincipleCriterion;
+import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriterion;
 import fr.lirmm.fairness.assessment.principles.impl.Accessible;
 import fr.lirmm.fairness.assessment.principles.impl.Findable;
 import fr.lirmm.fairness.assessment.principles.impl.Interoperable;
@@ -84,7 +84,31 @@ public class Fair extends AbstractScoredEntity {
 
 	
 	public static void main(String[] args) {
-		
+		/*Gson gson = new Gson();
+
+		// create a reader
+		Reader reader = null;
+		try {
+			/reader = Files.newBufferedReader(Paths.get("src/AgroPortalFAIRnessConfig/questions.config.json"));
+			Map<?, ?> map = gson.fromJson(reader, Map.class);
+			Map<? , ?> criteria = (Map<?, ?>) map.values().stream().filter(principal -> ((Map<?,?>)principal).containsKey("F3"))
+					.findFirst().get();
+			List<Map<?,?>> questionList = (List<Map<?,?>>) criteria.get("F3");
+
+			List<AbstractCriterionQuestion> questions = new ArrayList<AbstractCriterionQuestion>();
+			for (Map<?,?> q: questionList) {
+				questions.add(new AbstractCriterionQuestion(q.get("question").toString() , (int) Double.parseDouble(q.get("points").toString())));
+			}
+			System.out.println(questions.stream().map(AbstractCriterionQuestion::getPoints).collect(Collectors.toList()));
+			//System.out.println(gson.fromJson(map.get("F").toString(), Map.class));
+			// close reader
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		*/
+		// convert JSON file to map
+		/*
 		final Options options = new Options();
 			
 		Option portalInstanceNameOpt = new Option("r", "repository-name", true,
@@ -216,7 +240,9 @@ public class Fair extends AbstractScoredEntity {
              catch (Exception ex) {
 			ex.printStackTrace();
 		     }
+		 */
 		}
+
 
 }
 	

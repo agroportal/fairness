@@ -7,6 +7,7 @@ public abstract class AbstractScoredEntity {
 
 	protected List<Integer> scores = null;
 	protected List<Integer> weights = null;
+	protected ResultSet resultSet = null;
 
 	public  List<Integer> getScores(){
 		return scores;

@@ -1,18 +1,18 @@
-package fr.lirmm.fairness.assessment.principles.impl;
+package fr.lirmm.fairness.assessment.principles.criterion;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
-import java.util.TreeMap;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
 
+import com.google.gson.Gson;
 import fr.lirmm.fairness.assessment.principles.AbstractScoredEntity;
+import fr.lirmm.fairness.assessment.principles.criterion.Question.AbstractCriterionQuestion;
 import org.json.JSONException;
 
 import fr.lirmm.fairness.assessment.Configuration;
@@ -25,7 +25,7 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 	private static final long serialVersionUID = -5519124612489307590L;
 
 	protected List<Integer> questionsPoints = null;
-	protected ResultSet resultSet = null; 
+	protected List<AbstractCriterionQuestion> questions = null;
 
 
 	
@@ -41,7 +41,6 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 		this.resultSet = new ResultSet(this);
 		this.doEvaluation(ontology);
 		this.scores = this.resultSet.getScores();
-		this.weights = this.questionsPoints;
 
 	}
 	
@@ -50,8 +49,6 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 	protected void addExplanation(int index, String explanation) {
 		this.resultSet.getExplanations().add(index, explanation);
 	}
-
-
 
 	protected void addScore(int index, Integer score) {
 		this.resultSet.getScores().add(index, score);
@@ -69,32 +66,37 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 
 
 	private void fillQuestionsPoints() {
-		this.questionsPoints = new ArrayList<Integer>();
 		try {
-			Properties properties = Configuration.getInstance().getProperties();
-			Set<Object> keys = properties.keySet();
-			Map<Object, String> propertiesMap = new TreeMap<Object, String>();
-			for(Object key : keys) {
-				if(key.toString().startsWith(this.getClass().getSimpleName().concat("Q"))) {
-					String propertyValue = properties.getProperty(key.toString());
-					propertiesMap.put(key, propertyValue.replace(" ", ""));
-				}
+
+			// create Gson instance
+			Gson gson = new Gson();
+
+			// create a reader
+
+			String propFileName = "config/common/questions.config.json";
+			Reader reader = new InputStreamReader(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(propFileName)));
+			// convert JSON file to map
+			Map<?, ?> map = gson.fromJson(reader, Map.class);
+			Map<? , ?> criteria = (Map<?, ?>) map.values().stream().filter(principal -> ((Map<?,?>)principal).containsKey(this.getClass().getSimpleName()))
+					.findFirst().get();
+			List<Map<?,?>> questionList = (List<Map<?,?>>) criteria.get(this.getClass().getSimpleName());
+
+			this.questions = new ArrayList<AbstractCriterionQuestion>();
+			this.questionsPoints = new ArrayList<>();
+			for (Map<?,?> q: questionList) {
+				this.questions.add(new AbstractCriterionQuestion(q.get("question").toString() , (int) Double.parseDouble(q.get("points").toString())));
+				this.questionsPoints.add((int) Double.parseDouble(q.get("points").toString()));
 			}
-			Object[] keysArray = propertiesMap.keySet().toArray();
-			Arrays.sort(keysArray);
-			for(Object key : keysArray) {
-				this.questionsPoints.add(Integer.parseInt(propertiesMap.get(key)));
-			}
-		}
-		catch(IOException ioe) {
+
+			reader.close();
+			this.weights = this.questionsPoints;
+		} catch(Exception ioe) {
 			ioe.printStackTrace();
-		}
-		catch(Exception ex) {
-			ex.printStackTrace();
 		}
 	}
 
-	
+
+
 	@Override
 	public String toString() {
 		return this.getClass().getSimpleName();

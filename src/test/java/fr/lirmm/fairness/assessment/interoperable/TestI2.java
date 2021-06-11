@@ -1,7 +1,7 @@
 package fr.lirmm.fairness.assessment.interoperable;
 
 import fr.lirmm.fairness.assessment.principles.AbstractTestPrincipleCriterion;
-import fr.lirmm.fairness.assessment.principles.impl.interoperable.I2;
+import fr.lirmm.fairness.assessment.principles.criterion.impl.interoperable.I2;
 
 public class TestI2 extends AbstractTestPrincipleCriterion<I2> {
 	

@@ -9,7 +9,7 @@ import org.junit.Test;
 import fr.lirmm.fairness.assessment.Configuration;
 import fr.lirmm.fairness.assessment.model.Ontology;
 import fr.lirmm.fairness.assessment.model.PortalInstance;
-import fr.lirmm.fairness.assessment.principles.impl.AbstractPrincipleCriterion;
+import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriterion;
 import junit.framework.TestCase;
 
 public abstract class AbstractTestPrincipleCriterion<T extends AbstractPrincipleCriterion> extends TestCase {

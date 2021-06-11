@@ -1,4 +1,4 @@
-package fr.lirmm.fairness.assessment.principles.impl.accessible;
+package fr.lirmm.fairness.assessment.principles.criterion.impl.accessible;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -11,7 +11,7 @@ import org.apache.commons.validator.routines.UrlValidator;
 import org.json.JSONException;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
-import fr.lirmm.fairness.assessment.principles.impl.AbstractPrincipleCriterion;
+import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriterion;
 
 public class A1 extends AbstractPrincipleCriterion {
 

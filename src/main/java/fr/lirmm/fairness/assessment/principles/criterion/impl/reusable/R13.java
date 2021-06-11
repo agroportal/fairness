@@ -1,4 +1,4 @@
-package fr.lirmm.fairness.assessment.principles.impl.reusable;
+package fr.lirmm.fairness.assessment.principles.criterion.impl.reusable;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -7,7 +7,7 @@ import java.net.SocketTimeoutException;
 import org.json.JSONException;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
-import fr.lirmm.fairness.assessment.principles.impl.AbstractPrincipleCriterion;
+import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriterion;
 
 public class R13 extends AbstractPrincipleCriterion {
 	

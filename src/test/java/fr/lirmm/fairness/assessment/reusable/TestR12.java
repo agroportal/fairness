@@ -1,7 +1,7 @@
 package fr.lirmm.fairness.assessment.reusable;
 
 import fr.lirmm.fairness.assessment.principles.AbstractTestPrincipleCriterion;
-import fr.lirmm.fairness.assessment.principles.impl.reusable.R12;
+import fr.lirmm.fairness.assessment.principles.criterion.impl.reusable.R12;
 
 public class TestR12 extends AbstractTestPrincipleCriterion<R12> {
 	
