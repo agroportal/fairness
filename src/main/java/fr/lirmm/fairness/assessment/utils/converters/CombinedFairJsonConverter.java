@@ -20,7 +20,7 @@ public class CombinedFairJsonConverter extends  AbstractJsonConverter<CombinedFa
         }
         ontologyJsonObject.add("score", gson.toJsonTree(this.item.getFair().getTotalScore()));
         ontologyJsonObject.add("normalizedScore", gson.toJsonTree(this.item.getFair().getNormalizedTotalScore()));
-        ontologyJsonObject.add("MaxScorePoints", gson.toJsonTree(this.item.getFair().getTotalScoreWeight()));
+        ontologyJsonObject.add("maxCredits", gson.toJsonTree(this.item.getFair().getTotalScoreWeight()));
         return ontologyJsonObject;
     }
 

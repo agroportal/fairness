@@ -20,7 +20,7 @@ public class AbstractPrincipleJsonConverter extends AbstractJsonConverter<Abstra
 		}
 		jsonObject.add("score", gson.toJsonTree(this.item.getTotalScore()));
 		jsonObject.add("normalizedScore", gson.toJsonTree(this.item.getNormalizedTotalScore()));
-		jsonObject.add("MaxScorePoints", gson.toJsonTree(this.item.getTotalScoreWeight()));
+		jsonObject.add("maxCredits", gson.toJsonTree(this.item.getTotalScoreWeight()));
 		return jsonObject;
 	}
 }

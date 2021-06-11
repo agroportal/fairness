@@ -24,7 +24,7 @@ public class FairJsonConverter extends AbstractJsonConverter<Fair> {
 		}
 		ontologyJsonObject.add("score", gson.toJsonTree(Fair.getInstance().getTotalScore()));
 		ontologyJsonObject.add("normalizedScore", gson.toJsonTree(Fair.getInstance().getNormalizedTotalScore()));
-		ontologyJsonObject.add("MaxScorePoints", gson.toJsonTree(Fair.getInstance().getTotalScoreWeight()));
+		ontologyJsonObject.add("maxCredits", gson.toJsonTree(Fair.getInstance().getTotalScoreWeight()));
 
 		JsonObject out = new JsonObject();
 		out.add(Fair.getInstance().getOntology().getAcronym() , ontologyJsonObject);
