@@ -3,6 +3,7 @@ package fr.lirmm.fairness.assessment.utils.converters;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
 import fr.lirmm.fairness.assessment.utils.Result;
 
 import java.util.List;
@@ -19,9 +20,14 @@ public class ResultSetJsonConverter extends AbstractJsonConverter<List<Result>> 
 		JsonArray jsonObject = new JsonArray();
 		for (Result result: this.item) {
 			JsonObject object = new JsonObject();
-			object.add("question" , gson.toJsonTree(result.getQuestion().getQuestion()));
+			AbstractCriterionQuestion question = result.getQuestion();
+			if(question != null){
+				object.add("question" , gson.toJsonTree(result.getQuestion().getQuestion()));
+			}
 			object.add("score" , gson.toJsonTree(result.getScore()));
-			object.add("explication" , gson.toJsonTree(result.getExplication()));
+			if(!result.getExplication().trim().isBlank()){
+				object.add("explication" , gson.toJsonTree(result.getExplication()));
+			}
 			jsonObject.add(object);
 		}
 

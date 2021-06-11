@@ -6,16 +6,8 @@ public class Accessible extends AbstractPrinciple {
 	
 	private static final long serialVersionUID = 863641754657723377L;
 
-	protected static Accessible instance = null;
 	
-	public static Accessible getInstance() {
-		if(instance == null) {
-			instance = new Accessible();
-		}
-		return instance;
-	}
-	
-	private Accessible() {
+	public Accessible() {
 		super();
 	}
 }

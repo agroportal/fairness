@@ -24,13 +24,7 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 
 	protected List<Result> results = new ArrayList<>();
 
-	protected void addResult(int index, double score, String explanation) {
-		this.results.add(index,new Result(score , explanation , questions.get(index)));
-	}
 
-	public List<Result> getResults() {
-		return results;
-	}
 	
 	public AbstractPrincipleCriterion() {
 		super();
@@ -39,18 +33,24 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 	}
 
 	@Override
-	public final void evaluate(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException {
-
+	public final void evaluate(Ontology ontology) throws JSONException, IOException {
+		this.results = new ArrayList<>();
 		System.out.println("> Evaluating '" + this.getClass().getSimpleName() + "' of ontology '" + ontology.getAcronym() + "' on repository '" + ontology.getPortalInstance().getName() + "' (" + ontology.getPortalInstance().getUrl() + "?apikey=" + ontology.getPortalInstance().getApikey() + ").");
 		this.doEvaluation(ontology);
-		this.scores = this.results.stream().map(x-> x.getScore()).collect(Collectors.toList());
+		this.scores = this.results.stream().map(x -> x.getScore()).collect(Collectors.toList());
 		this.weights = this.questionsPoints;
 	}
 	
 	protected abstract void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException;
-	
 
 
+	protected void addResult(int index, double score, String explanation) {
+		this.results.add(index,new Result(score , explanation , questions.get(index)));
+	}
+
+	public List<Result> getResults() {
+		return results;
+	}
 
 
 	private void fillQuestions() {

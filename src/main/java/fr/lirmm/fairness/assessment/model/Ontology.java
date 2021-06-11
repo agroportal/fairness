@@ -174,7 +174,8 @@ public class Ontology {
 		projects= this.restApi.getOntologyLinksyJsonObject("projects");
 		endorsedBy= this.restApi.getJsonMetadataArrayObject("endorsedBy");
 	}
-	
+
+	//TODO test content negotiation
 	private String getMetadata(String format) throws IOException {
 		final String url = String.join("/", new String[] { this.portalInstance.getUrl(), "ontologies", this.acronym,
 				"latest_submission?display=all" });

@@ -11,10 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
 import fr.lirmm.fairness.assessment.model.PortalInstance;
+import fr.lirmm.fairness.assessment.principles.AbstractPrinciple;
+import fr.lirmm.fairness.assessment.utils.converters.CombinedFairJsonConverter;
 import fr.lirmm.fairness.assessment.utils.converters.FairJsonConverter;
 import org.json.JSONObject;
 
@@ -45,37 +48,43 @@ public class FairServlet extends HttpServlet {
 					}
 				} else if(pOntologies != null) {
 					Collection<String> ontologies = Arrays.asList(pOntologies.split(","));
-					if(!allOntologyAcronyms.containsAll(ontologies)) {
-						resp.sendError(HttpServletResponse.SC_NOT_FOUND, String.format("Ontology '%s' not found", pOntologies));
+					if(allOntologyAcronyms.containsAll(ontologies)) {
+						ontologyAcronymsToEvaluate.addAll(ontologies);
+						Iterator<String> it = ontologyAcronymsToEvaluate.iterator();
+						Gson gson = new GsonBuilder().create();
+						JsonObject output = new JsonObject();
+						JsonObject jsonObjects = new JsonObject();
+						CombinedFair combinedFair =  new CombinedFair(ontologies.size());
+
+
+						while(it.hasNext()) {
+							Fair.getInstance().evaluate(new Ontology(it.next(), portalInstance));
+							JsonObject tmp = new FairJsonConverter(Fair.getInstance()).toJson();
+							tmp.entrySet().forEach(x -> jsonObjects.add(x.getKey() , x.getValue()));
+							if(computeCombinedScore)
+								combinedFair.addFairToCombine(Fair.getInstance());
+						}
+
+						output.add("ontologies" , gson.toJsonTree(jsonObjects));
+						if(computeCombinedScore){
+							output.add("combinedScores" , gson.toJsonTree((new CombinedFairJsonConverter(combinedFair)).toJson()));
+						}
+						output.add("request" , gson.toJsonTree(req.getRequestURL().append('?').append(req.getQueryString())));
+						PrintWriter out = resp.getWriter();
+						resp.setContentType("application/json");
+						resp.setCharacterEncoding("UTF-8");
+						out.print(output);
+						out.flush();
 					}
 					else {
-						ontologyAcronymsToEvaluate.addAll(ontologies);
+						resp.sendError(HttpServletResponse.SC_NOT_FOUND, String.format("Ontology '%s' not found", pOntologies));
 					}
 				}
 
-				Iterator<String> it = ontologyAcronymsToEvaluate.iterator();
-				Gson gson = new GsonBuilder().create();
-				JsonObject output = new JsonObject();
-				List<JsonObject> jsonObjects = new ArrayList<JsonObject>(ontologyAcronymsToEvaluate.size());
-				Double combinedScore = 0.0;
-				while(it.hasNext()) {
-					Fair.getInstance().evaluate(new Ontology(it.next(), portalInstance));
-					jsonObjects.add(new FairJsonConverter(Fair.getInstance()).toJson());
-					combinedScore += Fair.getInstance().getTotalScore();
-				}
 
-				output.add("ontologies" , gson.toJsonTree(jsonObjects));
-				if(computeCombinedScore){
-					output.add("score" , gson.toJsonTree(combinedScore/ontologyAcronymsToEvaluate.size()));
-				}
-				output.add("request" , gson.toJsonTree(req.getRequestURL().append('?').append(req.getQueryString())));
-				PrintWriter out = resp.getWriter();
-				resp.setContentType("application/json");
-				resp.setCharacterEncoding("UTF-8");
-				out.print(output);
-				out.flush();
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
 		}
 	}

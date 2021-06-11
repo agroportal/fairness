@@ -6,13 +6,14 @@ import fr.lirmm.fairness.assessment.principles.AbstractScoredEntity;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
 import fr.lirmm.fairness.assessment.principles.AbstractPrinciple;
+import fr.lirmm.fairness.assessment.principles.Evaluable;
 import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
 import fr.lirmm.fairness.assessment.principles.impl.Accessible;
 import fr.lirmm.fairness.assessment.principles.impl.Findable;
 import fr.lirmm.fairness.assessment.principles.impl.Interoperable;
 import fr.lirmm.fairness.assessment.principles.impl.Reusable;
 
-public class Fair extends AbstractScoredEntity {
+public class Fair extends AbstractScoredEntity implements Evaluable {
 	
 	private static Fair instance = null;
 	private AbstractPrinciple[] principles = null;
@@ -24,13 +25,13 @@ public class Fair extends AbstractScoredEntity {
 		return instance;
 	}
 	
-	private Fair() {
+	public Fair() {
 		super();
 		this.principles = new AbstractPrinciple[] {
-			Findable.getInstance(),
-			Accessible.getInstance(),
-			Interoperable.getInstance(),
-			Reusable.getInstance()
+			new Findable(),
+			new Accessible(),
+			new Interoperable(),
+			new Reusable()
 		};
 	}
 	
@@ -43,7 +44,8 @@ public class Fair extends AbstractScoredEntity {
 			this.evaluate(ontology);
 		}
 	}
-	
+
+	@Override
 	public void evaluate(Ontology ontology) {
 		this.ontology = ontology;
 		this.scores = new ArrayList<>(this.principles.length);

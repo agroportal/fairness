@@ -6,16 +6,8 @@ public class Findable extends AbstractPrinciple {
 	
 	private static final long serialVersionUID = -1217770245751321797L;
 
-	protected static Findable instance = null;
 	
-	public static Findable getInstance() {
-		if(instance == null) {
-			instance = new Findable();
-		}
-		return instance;
-	}
-	
-	private Findable() {
+	public Findable() {
 		super();
 	}
 }

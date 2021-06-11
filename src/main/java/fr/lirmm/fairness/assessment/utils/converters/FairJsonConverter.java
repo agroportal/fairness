@@ -17,17 +17,17 @@ public class FairJsonConverter extends AbstractJsonConverter<Fair> {
 
 	@Override
 	public JsonObject toJson() {
-		var jsonObject = new JsonObject();
+		JsonObject ontologyJsonObject = new JsonObject();
 		for (AbstractPrinciple p : Fair.getInstance().getPrinciples()) {
 			AbstractPrincipleJsonConverter converter = new AbstractPrincipleJsonConverter(p);
-			jsonObject.add(p.toString(), gson.toJsonTree(converter.toJson()));
+			ontologyJsonObject.add(p.toString(), gson.toJsonTree(converter.toJson()));
 		}
-		var ontologyJsonObject = new JsonObject();
-		ontologyJsonObject.add(Fair.getInstance().getOntology().getAcronym(), jsonObject);
 		ontologyJsonObject.add("score", gson.toJsonTree(Fair.getInstance().getTotalScore()));
 		ontologyJsonObject.add("normalizedScore", gson.toJsonTree(Fair.getInstance().getNormalizedTotalScore()));
 		ontologyJsonObject.add("MaxScorePoints", gson.toJsonTree(Fair.getInstance().getTotalScoreWeight()));
 
-		return ontologyJsonObject;
+		JsonObject out = new JsonObject();
+		out.add(Fair.getInstance().getOntology().getAcronym() , ontologyJsonObject);
+		return out;
 	}
 }

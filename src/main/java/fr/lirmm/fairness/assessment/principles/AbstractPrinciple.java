@@ -12,7 +12,7 @@ import org.reflections.Reflections;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
 import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriterion;
-import org.reflections.scanners.SubTypesScanner;
+
 
 public abstract class AbstractPrinciple extends AbstractScoredEntity implements Evaluable,Serializable {
 	
@@ -70,7 +70,7 @@ public abstract class AbstractPrinciple extends AbstractScoredEntity implements 
 	
 	private void fillPrincipleCriteria() {
 		List<Class<? extends AbstractPrincipleCriterion>> principleCriteriaClasses = this.getPrincipleCriteriaClasses();
-		System.out.println("get nb Criteria classes of " + this.getClass().getSimpleName() + " = " + principleCriteriaClasses.size());
+
 		this.principleCriteria = new ArrayList<AbstractPrincipleCriterion>(principleCriteriaClasses.size());
 		Iterator<Class<? extends AbstractPrincipleCriterion>> iterator = principleCriteriaClasses.iterator();
 		while(iterator.hasNext()) {

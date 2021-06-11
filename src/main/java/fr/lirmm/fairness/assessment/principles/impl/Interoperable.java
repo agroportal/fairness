@@ -15,7 +15,7 @@ public class Interoperable extends AbstractPrinciple {
 		return instance;
 	}
 	
-	private Interoperable() {
+	public Interoperable() {
 		super();
 	}
 }

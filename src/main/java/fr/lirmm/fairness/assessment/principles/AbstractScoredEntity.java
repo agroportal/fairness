@@ -1,12 +1,14 @@
 package fr.lirmm.fairness.assessment.principles;
 
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 public abstract class AbstractScoredEntity {
 
-	protected List<Double> scores = null;
-	protected List<Double> weights = null;
+	protected List<Double> scores = new ArrayList<>();
+	protected List<Double> weights = new ArrayList<>();
 
 
 	public  List<Double> getScores(){
@@ -18,21 +20,17 @@ public abstract class AbstractScoredEntity {
 	}
 
 	public final Double getTotalScoreWeight() {
-		double w = 0;
-		for (double s : this.getScoresWeights()) {
-			w += s;
-		}
-		return w;
+		return round(this.getScoresWeights().stream().reduce(Double::sum).get());
 	}
 
 
+	private double round(double score){
+		return Math.round(score * 100.0) / 100.0;
+	}
+
 
 	public final Double getTotalScore() {
-		Double score = 0.0;
-		for (Double s : this.getScores()) {
-			score += s;
-		}
-		return score;
+		return round(getScores().stream().reduce(Double::sum).get());
 	}
 	
 	public final Double getAverageScore() {

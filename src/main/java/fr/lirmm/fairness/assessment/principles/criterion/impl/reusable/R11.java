@@ -40,7 +40,6 @@ public class R11 extends AbstractPrincipleCriterion {
 
 			// Q2: If yes, is the license description accessible and resolvable by a
 			// machine?
-			
 			if (licenseIsSpecified && ((license.contains("http")) || (license.contains("https")))) {
 				URL urluri = new URL(license);
 				HttpURLConnection urluriConnection = (HttpURLConnection) urluri.openConnection();
