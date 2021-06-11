@@ -19,7 +19,7 @@ public abstract class AbstractScoredEntity {
 		return weights;
 	}
 
-	public final Double getTotalScoreWeight() {
+	public  Double getTotalScoreWeight() {
 		return round(this.getScoresWeights().stream().reduce(Double::sum).get());
 	}
 

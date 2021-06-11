@@ -11,6 +11,7 @@ import fr.lirmm.fairness.assessment.Configuration;
 import fr.lirmm.fairness.assessment.utils.Result;
 import fr.lirmm.fairness.assessment.principles.AbstractScoredEntity;
 import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
+import org.apache.commons.validator.routines.DoubleValidator;
 import org.json.JSONException;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
@@ -21,7 +22,7 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 	private static final long serialVersionUID = -5519124612489307590L;
 	protected List<AbstractCriterionQuestion> questions = null;
 	protected List<Double> questionsPoints = null; //TODO remove after ending refactoring
-
+	private Double maxCredits = 0.0;
 	protected List<Result> results = new ArrayList<>();
 
 
@@ -40,7 +41,12 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 		this.scores = this.results.stream().map(x -> x.getScore()).collect(Collectors.toList());
 		this.weights = this.questionsPoints;
 	}
-	
+
+	@Override
+	public Double getTotalScoreWeight() {
+		return this.maxCredits;
+	}
+
 	protected abstract void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException;
 
 
@@ -59,11 +65,12 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 			Map<? , ?> criteria = (Map<?, ?>) fairConfigs.values().stream()
 					.filter(principal -> ((Map<?,?>)principal).containsKey(this.getClass().getSimpleName()))
 					.findFirst().get();
-			Map<String,Map<?,?>> questionList = (Map<String,Map<?,?>>) criteria.get(this.getClass().getSimpleName());
-
+			Map<String,?> questionList = (Map<String,?>) criteria.get(this.getClass().getSimpleName());
+			this.maxCredits = Double.parseDouble(questionList.get("maxCredits").toString());
+			System.out.println("get max credits of " + getClass().getSimpleName() + " = " + this.maxCredits);
 			this.questions = new ArrayList<>();
 
-			for (Map.Entry<String,Map<?,?>> q: questionList.entrySet()) {
+			for (Map.Entry<String,Map<?,?>> q: ((Map<String, Map<?,?>>)questionList.get("questions")).entrySet()) {
 				this.questions.add(new AbstractCriterionQuestion(q.getKey(), q.getValue().get("question").toString() , Double.parseDouble(q.getValue().get("points").toString())));
 			}
 		} catch(Exception ioe) {
