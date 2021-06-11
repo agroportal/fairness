@@ -20,7 +20,7 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 	
 	private static final long serialVersionUID = -5519124612489307590L;
 	protected List<AbstractCriterionQuestion> questions = null;
-	protected List<Double> questionsPoints = null;
+	protected List<Double> questionsPoints = null; //TODO remove after ending refactoring
 
 	protected List<Result> results = new ArrayList<>();
 

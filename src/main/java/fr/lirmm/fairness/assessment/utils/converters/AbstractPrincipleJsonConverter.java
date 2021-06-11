@@ -14,6 +14,7 @@ public class AbstractPrincipleJsonConverter extends AbstractJsonConverter<Abstra
 	@Override
 	public JsonObject toJson() {
 		var jsonObject = new JsonObject();
+		System.out.println("nb criteria of " + this.item.getClass().getSimpleName() + " = " + this.item.getPrincipleCriteria().size());
 		for (AbstractPrincipleCriterion c : this.item.getPrincipleCriteria()) {
 			AbstractPrincipleCriterionJsonConverter converter = new AbstractPrincipleCriterionJsonConverter(c);
 			jsonObject.add(c.toString(), gson.toJsonTree(converter.toJson()));

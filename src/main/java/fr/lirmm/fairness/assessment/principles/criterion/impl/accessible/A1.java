@@ -19,17 +19,6 @@ public class A1 extends AbstractPrincipleCriterion {
 
 	@Override
 	protected void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException {
-		
-		try {
-
-			String endPoint = ontology.getEndPoint();
-			String xmlresource = ontology.getXmlMetadata();
-			String jsonresource = ontology.getJsonMetadata();
-			String htmlresource = ontology.getHtmlMetadata();
-			String textresource = ontology.getTextMetadata();
-			int nbFormats=0; 
-			double points=0, score=0;
-
 
 
 			//Q1: Does the ontology URI and other identifiers, if exist, resolve to the ontology?
@@ -92,45 +81,61 @@ public class A1 extends AbstractPrincipleCriterion {
 
 			//Q2: Does a metadata URI/GUID (if metadata described externally) resolve to
 			// the metadata record?
-			this.addResult(1, this.questionsPoints.get(1), "URI/GUID metadata resolve to the metadata record"); //we test on AgroPortal metadata -> max points.
+
+			this.addResult(1, this.questions.get(1).getPoints(), "URI/GUID metadata resolve to the metadata record"); //we test on AgroPortal metadata -> max points.
 
 			//Q3: Are ontology and its metadata supporting content negociation?
-			
-			if ((xmlresource.isEmpty()) && (jsonresource.isEmpty()) && (htmlresource.isEmpty())
-					&& (textresource.isEmpty())) {
-				this.addResult(2, 0.0, "Ontology and ontology metadata are not accessible with content-negociation");
-			} 
-			else {
-				nbFormats= 4;
-				points = (this.questionsPoints.get(2))/nbFormats;
-                score=0;
-				if (!xmlresource.isEmpty()){
-					score += points;
+			r = Tester.doEvaluation(ontology, this.questions.get(2), new Testable() {
+				@Override
+				public Result doTest(Ontology ontology, AbstractCriterionQuestion question) {
+					try {
+						String xmlresource = ontology.getXmlMetadata();
+						String jsonresource = ontology.getJsonMetadata();
+						String htmlresource = ontology.getHtmlMetadata();
+						String textresource = ontology.getTextMetadata();
+
+						if ((xmlresource.isEmpty()) && (jsonresource.isEmpty()) && (htmlresource.isEmpty())
+								&& (textresource.isEmpty())) {
+							return new Result(0.0,"Ontology and ontology metadata are not accessible with content-negociation", question);
+						}else {
+							int nbFormats= 4;
+							double points = (question.getPoints())/nbFormats;
+							double score=0;
+							if (!xmlresource.isEmpty()){
+								score += points;
+							}
+							if (!jsonresource.isEmpty()) {
+								score += points;
+							}
+							if (!htmlresource.isEmpty()) {
+								score += points;
+							}
+							if (!textresource.isEmpty()) {
+								score += points;
+							}
+							return  new Result( score, "Ontology and its metadata are accessible in different formats" , question);
+						}
+					} catch (IOException e) {
+						return new Result(0.0,"Ontology and ontology metadata are not accessible with content-negociation", question);
+					}
 				}
-				if (!jsonresource.isEmpty()) {
-					score += points;
-				}
-				if (!htmlresource.isEmpty()) {
-					score += points;
-				}
-				if (!textresource.isEmpty()) {
-					score += points;	
-				} 		
-				this.addResult(2, score, "Ontology and its metadata are accessible in different formats");
-			}
+			});
+			this.addResult(2 , r.getScore() , r.getExplication());
 
 			// Q4: Is an ontology accessible through another standard protocol such as
 			// SPARQL?
-			if (endPoint!= null && !endPoint.isEmpty()) {
-				this.addResult(3, this.questionsPoints.get(3),"Ontology is accessible through a SPARQL endpoint");
-			} else {
-				
-				this.addResult(3, 0.0, "Ontology is not accessible through another standard protocol (SPARQL endpoint)");
-			}
-
-		} catch (java.net.SocketTimeoutException e) {
-			e.printStackTrace();
-		}
+			r = Tester.doEvaluation(ontology, this.questions.get(3), new Testable() {
+				@Override
+				public Result doTest(Ontology ontology, AbstractCriterionQuestion question) {
+					String endPoint = ontology.getEndPoint();
+					if (endPoint!= null && !endPoint.isEmpty()) {
+						return  new Result(question.getPoints(),"Ontology is accessible through a SPARQL endpoint" ,question);
+					} else {
+						return  new Result(0, "Ontology is not accessible through another standard protocol (SPARQL endpoint)" , question);
+					}
+				}
+			});
+			this.addResult(3, r.getScore() , r.getExplication());
 	}
 	
 }

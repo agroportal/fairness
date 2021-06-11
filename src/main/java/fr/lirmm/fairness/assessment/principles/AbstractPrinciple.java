@@ -51,9 +51,9 @@ public abstract class AbstractPrinciple extends AbstractScoredEntity implements 
 		}
 	}
 
-	@SuppressWarnings("unchecked")
+
 	private List<Class<? extends AbstractPrincipleCriterion>> getPrincipleCriteriaClasses() {
-		Reflections reflections = new Reflections("fr.lirmm.fairness.assessment.principles.criterion");
+		Reflections reflections = new Reflections("fr.lirmm.fairness.assessment.principles.criterion.impl." + this.getClass().getSimpleName().toLowerCase());
 		Object[] reflectedPrincipleCriteriaClasses = reflections.getSubTypesOf(AbstractPrincipleCriterion.class).toArray();
 		Arrays.sort(reflectedPrincipleCriteriaClasses, new Comparator<Object>() {
 			@Override
@@ -70,6 +70,7 @@ public abstract class AbstractPrinciple extends AbstractScoredEntity implements 
 	
 	private void fillPrincipleCriteria() {
 		List<Class<? extends AbstractPrincipleCriterion>> principleCriteriaClasses = this.getPrincipleCriteriaClasses();
+		System.out.println("get nb Criteria classes of " + this.getClass().getSimpleName() + " = " + principleCriteriaClasses.size());
 		this.principleCriteria = new ArrayList<AbstractPrincipleCriterion>(principleCriteriaClasses.size());
 		Iterator<Class<? extends AbstractPrincipleCriterion>> iterator = principleCriteriaClasses.iterator();
 		while(iterator.hasNext()) {
