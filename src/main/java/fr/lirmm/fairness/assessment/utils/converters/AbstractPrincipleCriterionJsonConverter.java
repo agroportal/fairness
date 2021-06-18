@@ -18,6 +18,7 @@ public class AbstractPrincipleCriterionJsonConverter extends AbstractJsonConvert
 		jsonObject.add("score", gson.toJsonTree(this.item.getTotalScore()));
 		jsonObject.add("normalizedScore", gson.toJsonTree(this.item.getNormalizedTotalScore()));
 		jsonObject.add("maxCredits", gson.toJsonTree(this.item.getTotalScoreWeight()));
+		jsonObject.add("portalMaxCredits", gson.toJsonTree(this.item.getPortalMaxCredits()));
 		return jsonObject;
 	}
 }

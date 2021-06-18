@@ -2,6 +2,7 @@
   "F": {
     "F1": {
       "maxCredits": 41,
+      "portalMaxCredits": 35,
       "questions": {
       "F1Q1": {
         "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
@@ -39,6 +40,7 @@
     },
     "F2": {
       "maxCredits": 27,
+      "portalMaxCredits": 27,
       "questions" : {
           "F2Q1": {
             "question": "Is an ontology described with additional “MIRO must” metadata properties? (4 points per property up to 16 credits)",
@@ -60,6 +62,7 @@
     },
     "F3": {
       "maxCredits": 21,
+      "portalMaxCredits": 0,
       "questions": {
           "F3Q1": {
             "question": "Are the ontology metadata included and maintained in the ontology file?",
@@ -77,6 +80,7 @@
     },
     "F4": {
       "maxCredits": 24,
+      "portalMaxCredits": 24,
       "questions": {
         "F4Q1":{
           "question" : "Is the ontology registered in multiple ontology libraries? (1 point per ontology library)" ,
@@ -100,6 +104,7 @@
   "A": {
     "A1": {
       "maxCredits":43,
+      "portalMaxCredits": 43,
       "questions": {
         "A1Q1": {
           "question": "Does the ontology URI and other identifiers, if exist, resolve to the ontology? (3 points per a resolvable identifier up to 6 credits)",
@@ -121,6 +126,7 @@
     },
     "A11": {
       "maxCredits":28,
+      "portalMaxCredits": 28,
       "questions": {
         "A11Q1": {
           "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
@@ -134,6 +140,7 @@
     },
     "A12": {
       "maxCredits": 22,
+      "portalMaxCredits": 22,
       "questions": {
         "A12Q1": {
           "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
@@ -147,6 +154,7 @@
     },
     "A2": {
       "maxCredits": 20,
+      "portalMaxCredits": 20,
       "questions": {
         "A2Q1": {
           "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
@@ -174,6 +182,7 @@
   "I": {
     "I1": {
       "maxCredits": 44,
+      "portalMaxCredits": 44,
       "questions": {
         "I1Q1": {
           "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
@@ -200,6 +209,7 @@
     },
     "I2": {
       "maxCredits": 32,
+      "portalMaxCredits": 22,
       "questions": {
         "I2Q1": {
           "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
@@ -238,6 +248,7 @@
     },
     "I3": {
       "maxCredits": 33,
+      "portalMaxCredits": 11,
       "questions": {
         "I3Q1": {
           "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
@@ -265,6 +276,7 @@
   "R": {
     "R1": {
       "maxCredits": 32,
+      "portalMaxCredits": 32,
       "questions": {
         "R1Q1": {
           "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
@@ -286,6 +298,7 @@
     },
     "R11": {
       "maxCredits": 37,
+      "portalMaxCredits": 37,
       "questions": {
         "R11Q1": {
           "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
@@ -307,6 +320,7 @@
       },
     "R12": {
       "maxCredits": 38,
+      "portalMaxCredits": 38,
       "questions": {
         "R12Q1": {
           "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
@@ -336,6 +350,7 @@
     },
     "R13": {
       "maxCredits": 36,
+      "portalMaxCredits": 36,
       "questions": {
         "R13Q1": {
           "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",

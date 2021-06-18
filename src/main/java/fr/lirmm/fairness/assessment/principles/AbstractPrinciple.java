@@ -86,6 +86,11 @@ public abstract class AbstractPrinciple extends AbstractScoredEntity implements 
 	}
 
 
+	public Double getTotalPortalMaxCredits() {
+		return this.getPrincipleCriteria().stream().map(AbstractPrincipleCriterion::getPortalMaxCredits).reduce(Double::sum).get();
+	}
+
+
 	public List<AbstractPrincipleCriterion> getPrincipleCriteria() {
 		return principleCriteria;
 	}

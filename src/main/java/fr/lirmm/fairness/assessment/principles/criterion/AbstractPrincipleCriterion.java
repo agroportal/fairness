@@ -23,6 +23,7 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 	protected List<AbstractCriterionQuestion> questions = null;
 	protected List<Double> questionsPoints = null; //TODO remove after ending refactoring
 	private Double maxCredits = 0.0;
+	private Double portalMaxCredits = 0.0;
 	protected List<Result> results = new ArrayList<>();
 
 
@@ -47,6 +48,10 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 		return this.maxCredits;
 	}
 
+	public Double getPortalMaxCredits() {
+		return portalMaxCredits;
+	}
+
 	protected abstract void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException;
 
 
@@ -65,12 +70,12 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 			Map<? , ?> criteria = (Map<?, ?>) fairConfigs.values().stream()
 					.filter(principal -> ((Map<?,?>)principal).containsKey(this.getClass().getSimpleName()))
 					.findFirst().get();
-			Map<String,?> questionList = (Map<String,?>) criteria.get(this.getClass().getSimpleName());
-			this.maxCredits = Double.parseDouble(questionList.get("maxCredits").toString());
-			System.out.println("get max credits of " + getClass().getSimpleName() + " = " + this.maxCredits);
+			Map<String,?> criterionList = (Map<String,?>) criteria.get(this.getClass().getSimpleName());
+			this.maxCredits = Double.parseDouble(criterionList.get("maxCredits").toString());
+			this.portalMaxCredits = Double.parseDouble(criterionList.get("portalMaxCredits").toString());
 			this.questions = new ArrayList<>();
 
-			for (Map.Entry<String,Map<?,?>> q: ((Map<String, Map<?,?>>)questionList.get("questions")).entrySet()) {
+			for (Map.Entry<String,Map<?,?>> q: ((Map<String, Map<?,?>>)criterionList.get("questions")).entrySet()) {
 				this.questions.add(new AbstractCriterionQuestion(q.getKey(), q.getValue().get("question").toString() , Double.parseDouble(q.getValue().get("points").toString())));
 			}
 		} catch(Exception ioe) {

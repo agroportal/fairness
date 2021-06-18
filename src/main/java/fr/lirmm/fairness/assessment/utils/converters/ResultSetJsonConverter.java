@@ -22,14 +22,16 @@ public class ResultSetJsonConverter extends AbstractJsonConverter<List<Result>> 
 			JsonObject object = new JsonObject();
 			AbstractCriterionQuestion question = result.getQuestion();
 			if(question != null){
-				object.add("question" , gson.toJsonTree(result.getQuestion().getQuestion()));
+				object.add("question" , gson.toJsonTree(question.getQuestion()));
 			}
 			object.add("score" , gson.toJsonTree(result.getScore()));
 			if(!result.getExplication().trim().isBlank()){
 				object.add("explication" , gson.toJsonTree(result.getExplication()));
 			}
-			if(question != null)
+			if(question != null) {
+				object.add("maxCredits" , gson.toJsonTree(question.getPoints()));
 				jsonObject.add(question.getLabel() , object);
+			}
 		}
 
 		JsonObject out = new JsonObject();
