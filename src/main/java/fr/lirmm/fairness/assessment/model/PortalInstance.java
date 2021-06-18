@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import org.json.JSONException;
 
-import com.fasterxml.jackson.databind.JsonNode;
+
 
 import fr.lirmm.fairness.assessment.Configuration;
 import fr.lirmm.fairness.assessment.utils.OntologyRestApi;
