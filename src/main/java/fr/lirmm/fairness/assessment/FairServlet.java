@@ -21,6 +21,9 @@ import fr.lirmm.fairness.assessment.utils.converters.CombinedFairJsonConverter;
 import fr.lirmm.fairness.assessment.utils.converters.FairJsonConverter;
 import org.json.JSONObject;
 
+/**
+ * 
+ */
 public class FairServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -2749023988723161904L;
