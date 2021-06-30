@@ -14,3 +14,4 @@ The obtained results over AgroPortal semantic resources are prsented here : http
 
 Emna Amdouni, University of Montpellier (emna.amdouni@lirmm.fr)
 Clement Jonquet, University of Montpellier (jonquet@lirmm.fr)
+Syphax Bouazzouni , University of Montpellier (syphax.bouazzouni@lirmm.fr) & [ESI](https://www.esi.dz/) (gs_bouazzouni@esi.dz)
