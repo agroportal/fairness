@@ -1,7 +1,6 @@
 package fr.lirmm.fairness.assessment.utils;
 
 import com.google.gson.*;
-import fr.lirmm.fairness.assessment.CombinedFair;
 import fr.lirmm.fairness.assessment.Configuration;
 import fr.lirmm.fairness.assessment.Fair;
 import fr.lirmm.fairness.assessment.model.Ontology;
@@ -10,22 +9,21 @@ import fr.lirmm.fairness.assessment.utils.converters.FairJsonConverter;
 import org.json.JSONException;
 
 import java.io.*;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
 public class ResultCache {
 
-    private boolean saved = false;
     public   static String FILE_SAVE_NAME = "save.json";
 
-    private void store(String json, String fileName) {
+    private void store(String json, String fileName) throws IOException {
         FileWriter file = null;
         try {
+
+            this.createDirIfNotExist(fileName);
             file = new FileWriter(fileName);
             file.write(json);
-        } catch (IOException e) {
-            e.printStackTrace();
+
         } finally {
             try {
                 file.flush();
@@ -36,8 +34,15 @@ public class ResultCache {
         }
     }
 
-    private String get(String fileName) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(fileName));
+    private boolean createDirIfNotExist(String filePath){
+        String dirPath = filePath.substring(0, filePath.lastIndexOf(File.separator));
+        File file = new File(dirPath);
+
+        return file.mkdir();
+    }
+
+    private String get(String filePath) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(filePath));
         try {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
@@ -78,7 +83,6 @@ public class ResultCache {
             output.add("ontologies", gson.toJsonTree(jsonObjects));
 
             resultCache.store(output.toString() , FILE_SAVE_NAME);
-            this.saved = true;
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }

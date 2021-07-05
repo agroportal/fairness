@@ -24,7 +24,7 @@ public class ResultSetJsonConverter extends AbstractJsonConverter<List<Result>> 
 			if(question != null){
 				object.add("question" , gson.toJsonTree(question.getQuestion()));
 			}
-			object.add("score" , gson.toJsonTree(result.getScore()));
+			object.add("score" , gson.toJsonTree(Math.round(result.getScore()*100.0)/100.0));
 			if(!result.getExplication().trim().isBlank()){
 				object.add("explication" , gson.toJsonTree(result.getExplication()));
 			}

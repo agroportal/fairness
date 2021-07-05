@@ -27,16 +27,20 @@ public class F1 extends AbstractPrincipleCriterion {
 		String uri = ontology.getUri();
 		String ontologyVersionIri = ontology.getVersionIri();
 
+
 		// Q1- Does an ontology have a local identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?
 		String[] CustomURISchemes = { "http", "https" };
 		UrlValidator customURIValidator = new UrlValidator(CustomURISchemes);
 		if (customURIValidator.isValid(uri)) {
 			this.addResult(0, this.questionsPoints.get(0), "Valid ontology URI");
+
 			// Q2: If yes, is this identifier a resolvable/dereferenceable URI?
 			URL urluri = new URL(uri);
 			HttpURLConnection urluriConnection = (HttpURLConnection) urluri.openConnection();
 			HttpURLConnection.setFollowRedirects(false);
 			urluriConnection.setRequestMethod("HEAD");
+			urluriConnection.setConnectTimeout(1000); // 1 second
+
 			int httpstatusCode = 0;
 			try {
 				httpstatusCode = urluriConnection.getResponseCode();
@@ -59,6 +63,7 @@ public class F1 extends AbstractPrincipleCriterion {
 			this.addResult(0, 0, "Invalid ontology URI");
 			this.addResult(1, 0, "No ontology URI");
 		}
+
 
 		// Q3 : Does an ontology provide an additional external identifier i.e., a guarantee globally unique and persistent identifier assigned by an accredited body?
 		String[] customIDSchemes = { "http", "https" };
@@ -121,6 +126,7 @@ public class F1 extends AbstractPrincipleCriterion {
 			UrlValidator customVersionIriValidator = new UrlValidator(CustomVersionIriSchemes);
 			if (customVersionIriValidator.isValid(ontologyVersionIri)) {
 				this.addResult(6, this.questionsPoints.get(6), "Valid URI version");
+
 
 				// Q8: If yes, is this version URI resolvable/dereferenceable?
 				URL urlVersionIri = new URL(ontologyVersionIri);
