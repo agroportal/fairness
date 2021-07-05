@@ -23,17 +23,11 @@ import fr.lirmm.fairness.assessment.utils.converters.FairJsonConverter;
 import org.json.JSONException;
 
 public class Fair extends AbstractScoredEntity implements Evaluable {
-	
-	private static Fair instance = null;
+
 	private AbstractPrinciple[] principles = null;
 	private Ontology ontology = null;
 	private long executionTime = 0L;
-	public static Fair getInstance() {
-		if(instance == null) {
-			instance = new Fair();
-		}
-		return instance;
-	}
+
 	
 	public Fair() {
 		super();
@@ -45,15 +39,7 @@ public class Fair extends AbstractScoredEntity implements Evaluable {
 		};
 	}
 	
-	public void evaluate(Ontology[] ontologies) {
-		this.evaluate(Arrays.asList(ontologies));
-	}
-	
-	public void evaluate(List<Ontology> ontologies) {
-		for(Ontology ontology : ontologies) {
-			this.evaluate(ontology);
-		}
-	}
+
 
 	@Override
 	public void evaluate(Ontology ontology) {

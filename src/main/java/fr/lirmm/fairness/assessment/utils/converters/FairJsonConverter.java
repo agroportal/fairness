@@ -7,9 +7,7 @@ import fr.lirmm.fairness.assessment.principles.AbstractPrinciple;
 
 public class FairJsonConverter extends AbstractJsonConverter<Fair> {
 
-	public FairJsonConverter() {
-		this(Fair.getInstance());
-	}
+
 
 	public FairJsonConverter(Fair fair) {
 		super(fair);
@@ -18,17 +16,17 @@ public class FairJsonConverter extends AbstractJsonConverter<Fair> {
 	@Override
 	public JsonObject toJson() {
 		JsonObject ontologyJsonObject = new JsonObject();
-		for (AbstractPrinciple p : Fair.getInstance().getPrinciples()) {
+		for (AbstractPrinciple p : this.item.getPrinciples()) {
 			AbstractPrincipleJsonConverter converter = new AbstractPrincipleJsonConverter(p);
 			ontologyJsonObject.add(p.toString(), gson.toJsonTree(converter.toJson()));
 		}
-		ontologyJsonObject.add("score", gson.toJsonTree(Fair.getInstance().getTotalScore()));
-		ontologyJsonObject.add("normalizedScore", gson.toJsonTree(Fair.getInstance().getNormalizedTotalScore()));
-		ontologyJsonObject.add("maxCredits", gson.toJsonTree(Fair.getInstance().getTotalScoreWeight()));
-		ontologyJsonObject.add("executionTime", gson.toJsonTree(Fair.getInstance().getExecutionTime()));
+		ontologyJsonObject.add("score", gson.toJsonTree(this.item.getTotalScore()));
+		ontologyJsonObject.add("normalizedScore", gson.toJsonTree(this.item.getNormalizedTotalScore()));
+		ontologyJsonObject.add("maxCredits", gson.toJsonTree(this.item.getTotalScoreWeight()));
+		ontologyJsonObject.add("executionTime", gson.toJsonTree(this.item.getExecutionTime()));
 
 		JsonObject out = new JsonObject();
-		out.add(Fair.getInstance().getOntology().getAcronym() , ontologyJsonObject);
+		out.add(this.item.getOntology().getAcronym() , ontologyJsonObject);
 		return out;
 	}
 }

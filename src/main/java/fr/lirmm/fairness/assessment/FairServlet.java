@@ -50,57 +50,62 @@ public class FairServlet extends HttpServlet {
                 return;
 
 
-            String force = req.getParameter("force");
-            if(force != null && !force.trim().isEmpty()){
-                System.out.println("flush data");;
-                resultCache.flush(pPortalInstanceName);
+            String force = req.getParameter("sync");
+            boolean cacheIsEnabled =  portalInstance.isCacheEnabled();
+            List<String> allOntologyAcronyms = portalInstance.getAllOntologiesAcronyms();
+
+            if(!cacheIsEnabled && force != null && !force.trim().isEmpty()) {
+            }else if(cacheIsEnabled){
+
             }
 
-            List<String> allOntologyAcronyms = portalInstance.getAllOntologiesAcronyms();
-            List<String> ontologyAcronymsToEvaluate = new ArrayList<String>();
-            JsonObject ontologies = null;
-            JsonObject allResponse = resultCache.read(pPortalInstanceName);
-            Gson gson = new GsonBuilder().create();
-
+            List<String> ontologyAcronymsToEvaluate = new ArrayList<>();
             if (pOntologies != null && pOntologies.equals("all")) {
-                if (portalInstance.isEnableAllOntologies()) {
-                    ontologyAcronymsToEvaluate.addAll(allOntologyAcronyms);
-                    ontologies = allResponse.get("ontologies").getAsJsonObject();
-                } else {
-                    this.respond(
-                            ErrorJsonConverter.toStringJson(String.format("Processing all ontologies is not allowed for instance '%s'", pPortalInstanceName)), resp);
-                }
-            } else if (pOntologies != null) {
-                Collection<String> ontologies_acronyms = Arrays.asList(pOntologies.split(","));
-                if (allOntologyAcronyms.containsAll(ontologies_acronyms)) {
-                    ontologyAcronymsToEvaluate.addAll(ontologies_acronyms);
-                } else {
+                ontologyAcronymsToEvaluate.addAll(allOntologyAcronyms);
+            }else if (pOntologies !=null){
+                ontologyAcronymsToEvaluate = testAcronyms(allOntologyAcronyms);
+                if(ontologyAcronymsToEvaluate !=null) {
+
+                }else {
                     this.respond(
                             ErrorJsonConverter.toStringJson(String.format("Ontologies '%s' not found", pOntologies)), resp);
                 }
+            }
 
-
+            JsonObject ontologies = null;
+            if(this.notUseCache(cacheIsEnabled ,force)){
                 if (ontologyAcronymsToEvaluate.size() > 0) {
                     Iterator<String> it = ontologyAcronymsToEvaluate.iterator();
                     ontologies = new JsonObject();
                     while (it.hasNext()) {
+                        Fair fair = new Fair();
                         String acronym = it.next();
-                        ontologies.add(acronym , allResponse.get("ontologies").getAsJsonObject().get(acronym));
+                        fair.evaluate(new Ontology(acronym , portalInstance));
+                        ontologies.add(acronym ,new FairJsonConverter(fair).toJson().get(acronym));
                     }
                 }
-
+            }else {
+                JsonObject allResponse = resultCache.read(pPortalInstanceName);
+                if(ontologyAcronymsToEvaluate.size() == allOntologyAcronyms.size()){
+                    ontologies = allResponse.getAsJsonObject("ontologies");
+                }else if (ontologyAcronymsToEvaluate.size() > 0) {
+                    Iterator<String> it = ontologyAcronymsToEvaluate.iterator();
+                    ontologies = new JsonObject();
+                    while (it.hasNext()) {
+                        String acronym = it.next();
+                        ontologies.add(acronym , allResponse.getAsJsonObject("ontologies").get(acronym));
+                    }
+                }
             }
+
+
             JsonObject response = new JsonObject();
+            Gson gson = new GsonBuilder().create();
+
             if (ontologies != null) {
                 response.add("ontologies" , ontologies);
                 if (computeCombinedScore) {
-                    CombinedFair combinedFair = null;
-
-                    combinedFair = new CombinedFair(ontologies.size());
-                    for (String s : ontologies.keySet()) {
-                        combinedFair.addFairToCombine(ontologies.get(s).getAsJsonObject());
-                    }
-                    response.add("combinedScores", gson.toJsonTree((new CombinedFairJsonConverter(combinedFair)).toJson()));
+                    response.add("combinedScores", this.getCombinedScore(ontologies));
                 }
             }
 
@@ -122,6 +127,14 @@ public class FairServlet extends HttpServlet {
         out.flush();
     }
 
+    private JsonElement getCombinedScore(JsonObject ontologies){
+        CombinedFair combinedFair = new CombinedFair(ontologies.size());
+        Gson gson = new GsonBuilder().create();
+        for (String s : ontologies.keySet()) {
+            combinedFair.addFairToCombine(ontologies.get(s).getAsJsonObject());
+        }
+        return gson.toJsonTree((new CombinedFairJsonConverter(combinedFair)).toJson());
+    }
     private boolean validateParams(HttpServletRequest req ,HttpServletResponse resp) throws IOException {
 
         if (PortalParam.getInstance().validate(req)) {
@@ -143,5 +156,20 @@ public class FairServlet extends HttpServlet {
             computeCombinedScore = req.getParameter("combined") != null && req.getParameter("combined").trim().equals("true");
         }
         return true;
+    }
+    private List<String> testAcronyms(List<String> allOntologyAcronyms){
+        Collection<String> ontologies_acronyms = Arrays.asList(pOntologies.split(","));
+        List<String> ontologyAcronymsToEvaluate = new ArrayList<>();
+        if (allOntologyAcronyms.containsAll(ontologies_acronyms)) {
+            ontologyAcronymsToEvaluate.addAll(ontologies_acronyms);
+            return ontologyAcronymsToEvaluate;
+        } else {
+           return null;
+        }
+
+    }
+
+    private boolean notUseCache(boolean cacheIsEnabled , String forceRefresh){
+        return !cacheIsEnabled || (forceRefresh != null);
     }
 }

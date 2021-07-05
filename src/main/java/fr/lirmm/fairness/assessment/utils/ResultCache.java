@@ -73,9 +73,10 @@ public class ResultCache {
 
             while (it.hasNext()) {
 
-                Fair.getInstance().evaluate(new Ontology(it.next(), portalInstance));
+                Fair fair = new Fair();
+                fair.evaluate(new Ontology(it.next(), portalInstance));
 
-                JsonObject tmp = new FairJsonConverter(Fair.getInstance()).toJson();
+                JsonObject tmp = new FairJsonConverter(fair).toJson();
                 tmp.entrySet().forEach(x -> jsonObjects.add(x.getKey(), x.getValue()));
 
             }

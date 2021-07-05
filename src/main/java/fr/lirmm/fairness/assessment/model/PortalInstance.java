@@ -18,7 +18,7 @@ public class PortalInstance {
 	private String name = null;
 	private String url = null;
 	private String apikey = null;
-	private boolean enableAllOntologies = false;
+	private boolean cacheEnabled = false;
 	
 	public PortalInstance() {
 		super();
@@ -29,7 +29,7 @@ public class PortalInstance {
 		this.name = prop.getProperty("name");
 		this.url = prop.getProperty("url");
 		this.apikey = prop.getProperty("apikey");
-		this.enableAllOntologies = Boolean.valueOf(prop.getProperty("enableAllOntologies"));
+		this.cacheEnabled = Boolean.parseBoolean(prop.getProperty("cacheEnabled"));
 	}
 	
 	public static PortalInstance getInstanceByName(String name) throws IOException {
@@ -103,11 +103,7 @@ public class PortalInstance {
 		this.apikey = apikey;
 	}
 
-	public boolean isEnableAllOntologies() {
-		return enableAllOntologies;
-	}
-
-	public void setEnableAllOntologies(boolean enableAllOntologies) {
-		this.enableAllOntologies = enableAllOntologies;
+	public boolean isCacheEnabled() {
+		return this.cacheEnabled;
 	}
 }
