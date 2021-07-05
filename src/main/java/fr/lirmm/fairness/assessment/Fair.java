@@ -69,7 +69,7 @@ public class Fair extends AbstractScoredEntity implements Evaluable {
 	}
 
 	public static void main(String[] args) {
-
+		System.out.println(System.getenv("env"));
 	}
 
 

@@ -45,7 +45,7 @@ public class FairServlet extends HttpServlet {
 
 
         try {
-
+         
             if(!validateParams(req ,resp))
                 return;
 
