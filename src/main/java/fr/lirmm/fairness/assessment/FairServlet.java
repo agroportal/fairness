@@ -1,6 +1,5 @@
 package fr.lirmm.fairness.assessment;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
@@ -19,14 +18,10 @@ import fr.lirmm.fairness.assessment.model.Ontology;
 import fr.lirmm.fairness.assessment.model.PortalInstance;
 import fr.lirmm.fairness.assessment.utils.ResultCache;
 import fr.lirmm.fairness.assessment.utils.converters.CombinedFairJsonConverter;
-import fr.lirmm.fairness.assessment.utils.converters.ErrorJsonConverter;
 import fr.lirmm.fairness.assessment.utils.converters.FairJsonConverter;
-import fr.lirmm.fairness.assessment.utils.requestparams.ParamTest;
 import fr.lirmm.fairness.assessment.utils.requestparams.params.CombinedParam;
 import fr.lirmm.fairness.assessment.utils.requestparams.params.OntologiesParam;
 import fr.lirmm.fairness.assessment.utils.requestparams.params.PortalParam;
-import fr.lirmm.fairness.assessment.utils.requestparams.RequestParamValidator;
-import fr.lirmm.fairness.assessment.utils.requestparams.tests.Required;
 import org.json.JSONException;
 
 /**
@@ -40,91 +35,104 @@ public class FairServlet extends HttpServlet {
     private String pOntologies = "";
     private boolean computeCombinedScore = false;
     private ResultCache resultCache = new ResultCache();
+
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
+        JsonObject response = new JsonObject();
+        List<String> allOntologyAcronyms = null;
+        String error = null;
+        long startTime = System.currentTimeMillis();
         try {
-         
-            if(!validateParams(req ,resp))
-                return;
-
-
-            String force = req.getParameter("sync");
-            boolean cacheIsEnabled =  portalInstance.isCacheEnabled();
-            List<String> allOntologyAcronyms = portalInstance.getAllOntologiesAcronyms();
-
-            if(!cacheIsEnabled && force != null && !force.trim().isEmpty()) {
-            }else if(cacheIsEnabled){
-
-            }
-
-            List<String> ontologyAcronymsToEvaluate = new ArrayList<>();
-            if (pOntologies != null && pOntologies.equals("all")) {
-                ontologyAcronymsToEvaluate.addAll(allOntologyAcronyms);
-            }else if (pOntologies !=null){
-                ontologyAcronymsToEvaluate = testAcronyms(allOntologyAcronyms);
-                if(ontologyAcronymsToEvaluate !=null) {
-
-                }else {
-                    this.respond(
-                            ErrorJsonConverter.toStringJson(String.format("Ontologies '%s' not found", pOntologies)), resp);
-                }
-            }
-
-            JsonObject ontologies = null;
-            if(this.notUseCache(cacheIsEnabled ,force)){
-                if (ontologyAcronymsToEvaluate.size() > 0) {
-                    Iterator<String> it = ontologyAcronymsToEvaluate.iterator();
-                    ontologies = new JsonObject();
-                    while (it.hasNext()) {
-                        Fair fair = new Fair();
-                        String acronym = it.next();
-                        fair.evaluate(new Ontology(acronym , portalInstance));
-                        ontologies.add(acronym ,new FairJsonConverter(fair).toJson().get(acronym));
-                    }
-                }
-            }else {
-                JsonObject allResponse = resultCache.read(pPortalInstanceName);
-                if(ontologyAcronymsToEvaluate.size() == allOntologyAcronyms.size()){
-                    ontologies = allResponse.getAsJsonObject("ontologies");
-                }else if (ontologyAcronymsToEvaluate.size() > 0) {
-                    Iterator<String> it = ontologyAcronymsToEvaluate.iterator();
-                    ontologies = new JsonObject();
-                    while (it.hasNext()) {
-                        String acronym = it.next();
-                        ontologies.add(acronym , allResponse.getAsJsonObject("ontologies").get(acronym));
-                    }
-                }
-            }
-
-
-            JsonObject response = new JsonObject();
-            Gson gson = new GsonBuilder().create();
-
-            if (ontologies != null) {
-                response.add("ontologies" , ontologies);
-                if (computeCombinedScore) {
-                    response.add("combinedScores", this.getCombinedScore(ontologies));
-                }
-            }
-
-            response.add("request", gson.toJsonTree(req.getRequestURL().append('?').append(req.getQueryString())));
-            this.respond(response.toString(), resp);
-        } catch (Exception e) {
-            e.printStackTrace();
-            this.respond(ErrorJsonConverter.toStringJson(e.getMessage()), resp);
+            error = validateParams(req);
+            if(error == null)
+                allOntologyAcronyms = portalInstance.getAllOntologiesAcronyms();
+        } catch (JSONException | IOException e) {
+            error = "Portal " + portalInstance.getUrl() + " is not accessible";
         }
 
+        if(error == null){
+            try {
+                List<String> ontologyAcronymsToEvaluate = new ArrayList<>();
+                if (pOntologies != null && pOntologies.equals("all")) {
+                    ontologyAcronymsToEvaluate.addAll(allOntologyAcronyms);
+                }else if (pOntologies !=null){
+                    ontologyAcronymsToEvaluate = testAcronyms(allOntologyAcronyms);
+                    if(ontologyAcronymsToEvaluate ==null) {
+                        error = String.format("Ontologies '%s' not found", pOntologies);
+                    }
+                }
+
+                JsonObject ontologies = null;
+                if(error == null){
+                    if(this.isCacheDisabled(req)){
+                        if (ontologyAcronymsToEvaluate.size() > 0) {
+                            Iterator<String> it = ontologyAcronymsToEvaluate.iterator();
+                            ontologies = new JsonObject();
+                            while (it.hasNext()) {
+                                Fair fair = new Fair();
+                                String acronym = it.next();
+                                fair.evaluate(new Ontology(acronym , portalInstance));
+                                ontologies.add(acronym ,new FairJsonConverter(fair).toJson().get(acronym));
+                            }
+                        }
+                    }else {
+                        JsonObject allResponse = resultCache.read(pPortalInstanceName);
+                        if(ontologyAcronymsToEvaluate.size() == allOntologyAcronyms.size()){
+                            ontologies = allResponse.getAsJsonObject("ontologies");
+                        }else if (ontologyAcronymsToEvaluate.size() > 0) {
+                            Iterator<String> it = ontologyAcronymsToEvaluate.iterator();
+                            ontologies = new JsonObject();
+                            while (it.hasNext()) {
+                                String acronym = it.next();
+                                ontologies.add(acronym , allResponse.getAsJsonObject("ontologies").get(acronym));
+                            }
+                        }
+                    }
+                }
+
+                if (ontologies != null) {
+                    response.add("ontologies" , ontologies);
+                    if (computeCombinedScore) {
+                        response.add("combinedScores", this.getCombinedScore(ontologies));
+                    }
+                }
+                response.add("status" , getStatus(error == null , getRequestURI(req) , System.currentTimeMillis() - startTime , error));
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                response.add("status" , getStatus(true , getRequestURI(req) , System.currentTimeMillis() - startTime , e.getMessage()));
+            }
+        }
+
+        this.respond(response.toString(), resp);
 
     }
 
-    private void respond(String json, HttpServletResponse resp) throws IOException {
-        PrintWriter out = resp.getWriter();
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
-        out.print(json);
-        out.flush();
+
+    private JsonObject getStatus(boolean success , String request , long time , String message){
+        JsonObject jsonObject = new JsonObject();
+        Gson gson = new GsonBuilder().create();
+        jsonObject.add("request" ,gson.toJsonTree(request));
+        jsonObject.add("success" ,gson.toJsonTree(success));
+        if (message !=null && !message.isEmpty()) {
+            jsonObject.add("message" ,gson.toJsonTree(message));
+        }
+        jsonObject.add("executionTime" ,gson.toJsonTree(time));
+        return jsonObject;
+    }
+
+    private void respond(String json, HttpServletResponse resp)  {
+        PrintWriter out;
+        try {
+            out = resp.getWriter();
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("UTF-8");
+            out.print(json);
+            out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private JsonElement getCombinedScore(JsonObject ontologies){
@@ -135,27 +143,25 @@ public class FairServlet extends HttpServlet {
         }
         return gson.toJsonTree((new CombinedFairJsonConverter(combinedFair)).toJson());
     }
-    private boolean validateParams(HttpServletRequest req ,HttpServletResponse resp) throws IOException {
+    private String validateParams(HttpServletRequest req) throws IOException {
 
         if (PortalParam.getInstance().validate(req)) {
             pPortalInstanceName = PortalParam.getInstance().getValue();
             portalInstance = PortalInstance.getInstanceByName(pPortalInstanceName);
         } else {
-            this.respond(ErrorJsonConverter.toStringJson( PortalParam.getInstance().getErrorMessage()), resp);
-            return false;
+            return  PortalParam.getInstance().getErrorMessage();
         }
 
         if (OntologiesParam.getInstance().validate(req)) {
             pOntologies = OntologiesParam.getInstance().getValue();
         } else {
-            this.respond(ErrorJsonConverter.toStringJson(OntologiesParam.getInstance().getErrorMessage()), resp);
-            return false;
+            return OntologiesParam.getInstance().getErrorMessage();
         }
 
         if (CombinedParam.getInstance().validate(req)) {
             computeCombinedScore = req.getParameter("combined") != null && req.getParameter("combined").trim().equals("true");
         }
-        return true;
+        return null;
     }
     private List<String> testAcronyms(List<String> allOntologyAcronyms){
         Collection<String> ontologies_acronyms = Arrays.asList(pOntologies.split(","));
@@ -169,7 +175,13 @@ public class FairServlet extends HttpServlet {
 
     }
 
-    private boolean notUseCache(boolean cacheIsEnabled , String forceRefresh){
-        return !cacheIsEnabled || (forceRefresh != null);
+    private boolean isCacheDisabled(HttpServletRequest req){
+        String force = req.getParameter("sync");
+        boolean cacheIsEnabled =  portalInstance.isCacheEnabled();
+        return !cacheIsEnabled || (force != null);
+    }
+
+    private String getRequestURI(HttpServletRequest request){
+        return request.getRequestURL().append('?').append(request.getQueryString()).toString();
     }
 }

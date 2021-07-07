@@ -1,6 +1,9 @@
 package fr.lirmm.fairness.assessment.model;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -105,5 +108,27 @@ public class PortalInstance {
 
 	public boolean isCacheEnabled() {
 		return this.cacheEnabled;
+	}
+	public  boolean isAccessible(){
+		HttpURLConnection urluriConnection = null;
+		try {
+			URL urluri = new URL(this.getUrl());
+			HttpURLConnection.setFollowRedirects(false);
+			urluriConnection = (HttpURLConnection) urluri.openConnection();
+			//urluriConnection.setRequestMethod("HEAD");
+			//urluriConnection.setRequestProperty("Authorization", "apikey token=" + this.apikey);
+			urluriConnection.setConnectTimeout(1000); // 1 second
+			int httpstatusCode = urluriConnection.getResponseCode();
+			urluriConnection.disconnect();
+			if ((httpstatusCode == 200) || (httpstatusCode == 302)) {
+				return true;
+			} else {
+				return  false;
+			}
+		} catch (Exception e) {
+			if(urluriConnection !=null)
+				urluriConnection.disconnect();
+			return false;
+		}
 	}
 }

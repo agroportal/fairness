@@ -147,7 +147,7 @@ public class F1 extends AbstractPrincipleCriterion {
 							this.addResult(7, 0, "HTTP error=" + urlVersionIriConnection.getResponseMessage());
 						}
 					}
-				} catch (java.io.InterruptedIOException e) {
+				} catch (java.io.InterruptedIOException | UnknownHostException e) {
 					urlVersionIriConnection.disconnect();
 					this.addResult(7, 0, "UnknownHostException HTTP error");
 				}

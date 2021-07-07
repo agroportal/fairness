@@ -2,9 +2,12 @@ package fr.lirmm.fairness.assessment;
 
 import com.google.gson.Gson;
 import fr.lirmm.fairness.assessment.utils.Environments;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.impl.Log4JLogger;
 
 import java.io.*;
 import java.util.*;
+import java.util.logging.Logger;
 
 public class Configuration {
 
@@ -17,14 +20,20 @@ public class Configuration {
 
 	private Configuration() {
 		super();
-		switch (System.getProperty("env")){
-			case "dev":
-				this.env = Environments.DEV;
-				break;
-			case "prod":
-			default :
-				this.env = Environments.PROD;
-		}
+		Logger.getAnonymousLogger().info("GET CONG ENV : ");
+		Logger.getAnonymousLogger().info("ENV : " + System.getProperty("env"));
+		String env = System.getProperty("env");
+		if(env == null)
+			this.env = Environments.PROD;
+		else
+			switch (env){
+				case "dev":
+					this.env = Environments.DEV;
+					break;
+				case "prod":
+				default :
+					this.env = Environments.PROD;
+			}
 
 	}
 
