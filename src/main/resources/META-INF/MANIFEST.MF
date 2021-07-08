@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Main-Class: 
+Class-Path: javassist-3.26.0-GA.jar json-20090211.jar jackson-databind-2
+ .12.3.jar jackson-annotations-2.12.3.jar commons-collections-3.2.2.jar 
+ commons-digester-1.8.1.jar jackson-core-2.12.3.jar commons-cli-1.4.jar 
+ commons-beanutils-1.9.2.jar gson-2.8.6.jar commons-validator-1.6.jar co
+ mmons-logging-1.2.jar reflections-0.9.12.jar
+

@@ -41,6 +41,7 @@ public class FairServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
         JsonObject response = new JsonObject();
         List<String> allOntologyAcronyms = null;
+        System.out.println("test");
         String error = null;
         long startTime = System.currentTimeMillis();
         try {
@@ -101,6 +102,7 @@ public class FairServlet extends HttpServlet {
                     }
                 }
                 response.add("status" , getStatus(error == null , getRequestURI(req) , System.currentTimeMillis() - startTime , error));
+                Logger.getAnonymousLogger().info("EVALUATION  ENDED WITH STATUS : " + response.get("status"));
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -111,7 +113,6 @@ public class FairServlet extends HttpServlet {
             response.add("status" , getStatus(false , getRequestURI(req), System.currentTimeMillis() - startTime , error));
         }
 
-        Logger.getAnonymousLogger().info("EVALUATION  ENDED WITH STATUS : " + response.get("status"));
         this.respond(response.toString(), resp);
 
     }
@@ -190,6 +191,9 @@ public class FairServlet extends HttpServlet {
     }
 
     private String getRequestURI(HttpServletRequest request){
-        return portalInstance.getUrl()+'?'+request.getQueryString();
+        if(portalInstance!= null)
+            return portalInstance.getUrl()+'?'+request.getQueryString();
+        else
+            return request.getRequestURL().toString()+(request.getQueryString() != null ? "?" + request.getQueryString() :"");
     }
 }

@@ -24,10 +24,9 @@ public class A1 extends AbstractPrincipleCriterion {
 			//Q1: Does the ontology URI and other identifiers, if exist, resolve to the ontology?
 			Result r = Tester.doEvaluation(ontology, this.questions.get(0), new Testable() {
 				@Override
-				public Result doTest(Ontology ontology, AbstractCriterionQuestion question) {
+				public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
 					String uri = ontology.getUri();
 					String id = ontology.getId();
-					Result result = new Result();
 					double score;
 
 					try {
@@ -52,32 +51,29 @@ public class A1 extends AbstractPrincipleCriterion {
 								if (((idhttpstatusCode == 200) || (idhttpstatusCode == 302)))
 								{
 									score = 1;
-									result.setResult(score * question.getPoints(), "Resolvable ontology URI and identifier" , question);
+									setSuccess("Resolvable ontology URI and identifier" , question);
 								}
 
 								if (score < 1)
 								{
-									result.setResult(score * question.getPoints() ,"Resolvable ontology URI or identifier but not both" , question);
+									setScore(score * question.getPoints() ,"Resolvable ontology URI or identifier but not both" , question);
 								}
 
 							} else {
-								result.setResult( 0, "HTTP error=" + urluriConnection.getResponseMessage() , question);
+								setFailure( "HTTP error=" + urluriConnection.getResponseMessage() , question);
 							}
 							urluriConnection.disconnect();
 						}
 						else {
-							result.setResult(0, "Invalid ontology URI/GUID" , question);
+							setFailure("Invalid ontology URI/GUID" , question);
 						}
 
-					} catch (UnknownHostException | SocketTimeoutException | MalformedURLException e) {
-						result.setResult(0, "UnknownHostException HTTP error" , question);
-					} catch (IOException e) {
-						e.printStackTrace();
+					} catch (Exception e) {
+						setFailure("UnknownHostException HTTP error" , question);
 					}
-					return result;
 				}
 			});
-			this.addResult(0 ,  r.getScore() , r.getExplication());
+			this.addResult(r);
 
 			//Q2: Does a metadata URI/GUID (if metadata described externally) resolve to
 			// the metadata record?
@@ -87,7 +83,7 @@ public class A1 extends AbstractPrincipleCriterion {
 			//Q3: Are ontology and its metadata supporting content negociation?
 			r = Tester.doEvaluation(ontology, this.questions.get(2), new Testable() {
 				@Override
-				public Result doTest(Ontology ontology, AbstractCriterionQuestion question) {
+				public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
 					try {
 						String xmlresource = ontology.getXmlMetadata();
 						String jsonresource = ontology.getJsonMetadata();
@@ -96,7 +92,7 @@ public class A1 extends AbstractPrincipleCriterion {
 
 						if ((xmlresource.isEmpty()) && (jsonresource.isEmpty()) && (htmlresource.isEmpty())
 								&& (textresource.isEmpty())) {
-							return new Result(0.0,"Ontology and ontology metadata are not accessible with content-negociation", question);
+							setFailure("Ontology and ontology metadata are not accessible with content-negociation", question);
 						}else {
 							int nbFormats= 4;
 							double points = (question.getPoints())/nbFormats;
@@ -113,29 +109,29 @@ public class A1 extends AbstractPrincipleCriterion {
 							if (!textresource.isEmpty()) {
 								score += points;
 							}
-							return  new Result( score, "Ontology and its metadata are accessible in different formats" , question);
+							setScore( score, "Ontology and its metadata are accessible in different formats" , question);
 						}
 					} catch (IOException e) {
-						return new Result(0.0,"Ontology and ontology metadata are not accessible with content-negociation", question);
+						setFailure("Ontology and ontology metadata are not accessible with content-negociation", question);
 					}
 				}
 			});
-			this.addResult(2 , r.getScore() , r.getExplication());
+			this.addResult(r);
 
 			// Q4: Is an ontology accessible through another standard protocol such as
 			// SPARQL?
 			r = Tester.doEvaluation(ontology, this.questions.get(3), new Testable() {
 				@Override
-				public Result doTest(Ontology ontology, AbstractCriterionQuestion question) {
+				public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
 					String endPoint = ontology.getEndPoint();
 					if (endPoint!= null && !endPoint.isEmpty()) {
-						return  new Result(question.getPoints(),"Ontology is accessible through a SPARQL endpoint" ,question);
+						setSuccess("Ontology is accessible through a SPARQL endpoint" ,question);
 					} else {
-						return  new Result(0, "Ontology is not accessible through another standard protocol (SPARQL endpoint)" , question);
+						setFailure( "Ontology is not accessible through another standard protocol (SPARQL endpoint)" , question);
 					}
 				}
 			});
-			this.addResult(3, r.getScore() , r.getExplication());
+			this.addResult(r);
 	}
 	
 }

@@ -59,6 +59,10 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 		this.results.add(index,new Result(score , explanation , questions.get(index)));
 	}
 
+	protected void addResult(Result result){
+		this.results.add(result);
+	}
+
 	public List<Result> getResults() {
 		return results;
 	}

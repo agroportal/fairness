@@ -7,6 +7,7 @@ import fr.lirmm.fairness.assessment.utils.Result;
 public class Tester {
 
     public static Result doEvaluation(Ontology ontology, AbstractCriterionQuestion question, Testable test){
-        return test.doTest(ontology, question) ;
+         test.doTest(ontology, question) ;
+         return test.getResult();
     }
 }

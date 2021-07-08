@@ -4,38 +4,34 @@
       "maxCredits": 41,
       "portalMaxCredits": 35,
       "questions": {
-      "F1Q1": {
-        "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
-        "points": 3
-      },
-      "F1Q2": {
-        "question": "If yes, is this identifier a resolvable/dereferenceable URI?",
-        "points": 6
-      },
-      "F1Q3": {
-        "question": "Does an ontology provide an additional “external” identifier i.e., a guarantee globally unique and persistent identifier assigned by an accredited body?",
-        "points": 6
-      },
-      "F1Q4": {
-        "question": "If yes, is this external identifier a DOI?",
-        "points": 5
-      },
-      "F1Q5": {
-        "question": "Are the ontology metadata included in the ontology file –and consequently share the same identifiers?",
-        "points": 6
-      },
-      "F1Q6": {
-        "question": "If not, is the metadata record clearly identified by its own GUPRI?",
-        "points": 6
-      },
-      "F1Q7": {
-        "question": "Does an ontology provide a version specific URI?",
-        "points": 4
-      },
-      "F1Q8": {
-        "question": "If yes, is this URI resolvable/dereferenceable?",
-        "points": 5
-      }
+        "F1Q1": {
+          "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+          "points": 6
+        },
+        "F1Q2": {
+          "question": "Does an ontology provide an additional “external” identifier i.e., a guarantee globally unique and persistent identifier assigned by an accredited body?",
+          "points": 6
+        },
+        "F1Q3": {
+          "question": "If yes, is this external identifier a DOI?",
+          "points": 5
+        },
+        "F1Q4": {
+          "question": "Are the ontology metadata included in the ontology file –and consequently share the same identifiers?",
+          "points": 6
+        },
+        "F1Q5": {
+          "question": "If not, is the metadata record clearly identified by its own GUPRI?",
+          "points": 6
+        },
+        "F1Q6": {
+          "question": "Does an ontology provide a version specific URI?",
+          "points": 4
+        },
+        "F1Q7": {
+          "question": "If yes, is this URI resolvable/dereferenceable?",
+          "points": 5
+        }
       }
     },
     "F2": {

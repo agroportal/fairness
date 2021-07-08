@@ -2,3 +2,10 @@
 /target/
 /build
 .idea
+/fairness-assessment.iml
+/.classpath
+/.project
+/.settings
+/out
+/bin
+/target
