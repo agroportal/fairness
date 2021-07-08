@@ -3,6 +3,7 @@ package fr.lirmm.fairness.assessment;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -64,14 +65,17 @@ public class FairServlet extends HttpServlet {
 
                 JsonObject ontologies = null;
                 if(error == null){
+                    Logger.getAnonymousLogger().info("START EVALUATION OF : " + ontologyAcronymsToEvaluate.size() + " ONTOLOGIES FROM " + pPortalInstanceName.toUpperCase(Locale.ROOT));
                     if(this.isCacheDisabled(req)){
                         if (ontologyAcronymsToEvaluate.size() > 0) {
                             Iterator<String> it = ontologyAcronymsToEvaluate.iterator();
                             ontologies = new JsonObject();
+                            int i = 0;
                             while (it.hasNext()) {
                                 Fair fair = new Fair();
                                 String acronym = it.next();
                                 fair.evaluate(new Ontology(acronym , portalInstance));
+                                Logger.getAnonymousLogger().info("("+(i++)+"/"+ontologyAcronymsToEvaluate.size()+") > Ontology " + acronym + " evaluated in " + fair.getExecutionTime() + " s " );
                                 ontologies.add(acronym ,new FairJsonConverter(fair).toJson().get(acronym));
                             }
                         }
@@ -100,10 +104,14 @@ public class FairServlet extends HttpServlet {
 
             } catch (Exception e) {
                 e.printStackTrace();
-                response.add("status" , getStatus(true , getRequestURI(req) , System.currentTimeMillis() - startTime , e.getMessage()));
+                response.add("status" , getStatus(false , getRequestURI(req) , System.currentTimeMillis() - startTime , e.getMessage()));
             }
         }
+        else {
+            response.add("status" , getStatus(false , getRequestURI(req), System.currentTimeMillis() - startTime , error));
+        }
 
+        Logger.getAnonymousLogger().info("EVALUATION  ENDED WITH STATUS : " + response.get("status"));
         this.respond(response.toString(), resp);
 
     }
@@ -130,7 +138,7 @@ public class FairServlet extends HttpServlet {
             out.print(json);
             out.flush();
         } catch (IOException e) {
-            e.printStackTrace();
+           Logger.getAnonymousLogger().severe("JSON RESPONSE ERROR : " + e.getMessage());
         }
 
     }
@@ -182,6 +190,6 @@ public class FairServlet extends HttpServlet {
     }
 
     private String getRequestURI(HttpServletRequest request){
-        return request.getRequestURL().append('?').append(request.getQueryString()).toString();
+        return portalInstance.getUrl()+'?'+request.getQueryString();
     }
 }

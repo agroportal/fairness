@@ -20,8 +20,7 @@ public class Configuration {
 
 	private Configuration() {
 		super();
-		Logger.getAnonymousLogger().info("GET CONG ENV : ");
-		Logger.getAnonymousLogger().info("ENV : " + System.getProperty("env"));
+		Logger.getAnonymousLogger().info("GET CONG ENV : " + System.getProperty("env"));
 		String env = System.getProperty("env");
 		if(env == null)
 			this.env = Environments.PROD;
