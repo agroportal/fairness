@@ -58,8 +58,8 @@ public class F4 extends AbstractPrincipleCriterion {
 			// Q2: Is the ontology registered in multiple open ontology repositories?  Here we
 			// consider OBO foundry, NCBO Bioportal, Ontobee, Aber and OLS.
 			
-			score =1; // Ontology is in AgroPortal repository 
-			points= 1; // 1pt per ontology repository 
+			score = 1; // Ontology is in AgroPortal repository //TODO make generic
+			points= 1;  // 1pt per ontology repository
 			
 			if (includedInDataCatalog.isEmpty()) {
 				this.addResult(1, score, "Ontology is not registred in any additional open ontology repository (except AgroPortal)");
@@ -73,9 +73,9 @@ public class F4 extends AbstractPrincipleCriterion {
 					else if (includedInDataCatalog.get(i).contains("ebi.ac.uk/ols")) {
 						score += points;
 					}
-					else if (includedInDataCatalog.get(i).contains("obofoundry.org")) {
+					/*else if (includedInDataCatalog.get(i).contains("obofoundry.org")) {
 						score += points;
-					}					
+					}*/
 					else if (includedInDataCatalog.get(i).contains("ontobee.org"))  {
 						
 						score+=points; 
@@ -118,7 +118,7 @@ public class F4 extends AbstractPrincipleCriterion {
 				this.addResult(2, score, String.format("Ontology is registred in %d de-facto ontology libraries", i));
 			}
 			
-		 // To do -> Q4: Are the ontology libraries or repositories properly indexed by Web search engines?
+		 // TODO  Q4: Are the ontology libraries or repositories properly indexed by Web search engines?
 			
 			
 			
