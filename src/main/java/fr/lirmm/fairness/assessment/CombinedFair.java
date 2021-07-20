@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import fr.lirmm.fairness.assessment.principles.AbstractPrinciple;
 import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriterion;
 import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
+import fr.lirmm.fairness.assessment.utils.CombinedResult;
 import fr.lirmm.fairness.assessment.utils.Result;
 
 
@@ -59,12 +60,16 @@ public class CombinedFair {
     }
 
     private void combineCriterionQuestion(AbstractPrincipleCriterion combinedCriterion , int indexQuestion , JsonObject newQuestion , String questionLabel){
+        CombinedResult combinedQuestion;
         if(combinedCriterion.getResults().size() <= indexQuestion){
-            combinedCriterion.getResults().add(new Result(newQuestion.get("score").getAsDouble() / fairCount , "" ,
-                    new AbstractCriterionQuestion(questionLabel , newQuestion.get("question").getAsString() , newQuestion.get("maxCredits").getAsDouble())));
+           combinedQuestion = new CombinedResult(newQuestion.get("score").getAsDouble() / fairCount  ,
+                    new AbstractCriterionQuestion(questionLabel , newQuestion.get("question").getAsString() , newQuestion.get("maxCredits").getAsDouble()));
+            combinedCriterion.getResults().add(combinedQuestion);
+
         }else {
-            Result combinedQuestion = combinedCriterion.getResults().get(indexQuestion);
-            combinedQuestion.setResult( combinedQuestion.getScore() + (newQuestion.get("score").getAsDouble() / fairCount), "",combinedQuestion.getQuestion());
+            combinedQuestion = (CombinedResult) combinedCriterion.getResults().get(indexQuestion);
+            combinedQuestion.setResult( combinedQuestion.getScore() + (newQuestion.get("score").getAsDouble() / fairCount), combinedQuestion.getQuestion());
         }
+        combinedQuestion.addStateCount(newQuestion.get("score").getAsDouble());
     }
 }

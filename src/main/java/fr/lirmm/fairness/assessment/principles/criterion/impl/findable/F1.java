@@ -6,6 +6,7 @@ import java.net.*;
 import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Tester;
+import fr.lirmm.fairness.assessment.utils.QuestionResult;
 import fr.lirmm.fairness.assessment.utils.Result;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.json.JSONException;
@@ -30,7 +31,7 @@ public class F1 extends AbstractPrincipleCriterion {
 		UrlValidator customURIValidator = new UrlValidator(CustomURISchemes);
 
 		// Q1- Does an ontology have a local identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?
-		Result r = Tester.doEvaluation(ontology, this.questions.get(0), new Testable() {
+		QuestionResult r = Tester.doEvaluation(ontology, this.questions.get(0), new Testable() {
 			@Override
 			public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
 

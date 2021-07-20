@@ -1,6 +1,7 @@
 {
   "F": {
     "F1": {
+      "label": "Ontologies and ontology metadata are assigned a globally unique and persistent identifier. ",
       "maxCredits": 41,
       "portalMaxCredits": 35,
       "questions": {
@@ -35,6 +36,7 @@
       }
     },
     "F2": {
+      "label": "Ontologies are described with rich ontology metadata",
       "maxCredits": 27,
       "portalMaxCredits": 27,
       "questions" : {
@@ -57,6 +59,7 @@
       }
     },
     "F3": {
+      "label" : "Ontology metadata clearly and explicitly includes the identifier of the ontologies they describe.",
       "maxCredits": 21,
       "portalMaxCredits": 0,
       "questions": {
@@ -75,6 +78,7 @@
       }
     },
     "F4": {
+      "label": "Ontologies and ontology metadata are registered or indexed in a searchable resource typically an ontology repository.",
       "maxCredits": 24,
       "portalMaxCredits": 24,
       "questions": {
@@ -99,6 +103,7 @@
   },
   "A": {
     "A1": {
+      "label": "Ontologies and ontology metadata are retrievable by their identifier using a standardized communication protocol.",
       "maxCredits":43,
       "portalMaxCredits": 43,
       "questions": {
@@ -121,6 +126,7 @@
       }
     },
     "A11": {
+      "label": "The protocol to retrieve ontologies and ontology metadata is open, free and universally implementable.",
       "maxCredits":28,
       "portalMaxCredits": 28,
       "questions": {
@@ -135,6 +141,7 @@
       }
     },
     "A12": {
+      "label": "The protocol to retrieve ontologies and ontology metadata support authentification and authorization when an ontology has access restriction.",
       "maxCredits": 22,
       "portalMaxCredits": 22,
       "questions": {
@@ -149,6 +156,7 @@
       }
     },
     "A2": {
+      "label": "Ontology metadata should be accessible even when the ontology is no longer available.",
       "maxCredits": 20,
       "portalMaxCredits": 20,
       "questions": {
@@ -177,6 +185,7 @@
   },
   "I": {
     "I1": {
+      "label": "Ontologies and ontology metadata use a formal, accessible, shared and broadly  applicable language for knowledge representation. ",
       "maxCredits": 44,
       "portalMaxCredits": 44,
       "questions": {
@@ -204,6 +213,7 @@
 
     },
     "I2": {
+      "label": "Ontologies and ontology metadata use vocabularies that follow FAIR principles. ",
       "maxCredits": 32,
       "portalMaxCredits": 22,
       "questions": {
@@ -243,6 +253,7 @@
 
     },
     "I3": {
+      "label": "Ontologies or ontology metadata include qualified references to other (meta)data. ",
       "maxCredits": 33,
       "portalMaxCredits": 11,
       "questions": {
@@ -271,6 +282,7 @@
   },
   "R": {
     "R1": {
+      "label": "Ontologies and ontology metadata are richly described with a plurality of accurate and relevant attributes.",
       "maxCredits": 32,
       "portalMaxCredits": 32,
       "questions": {
@@ -293,6 +305,7 @@
       }
     },
     "R11": {
+      "label" : "Ontologies and ontology metadata are released with a clear and accessible  usage license.",
       "maxCredits": 37,
       "portalMaxCredits": 37,
       "questions": {
@@ -315,6 +328,7 @@
       }
       },
     "R12": {
+      "label": "Ontologies and ontology metadata are associated with detailed provenance.",
       "maxCredits": 38,
       "portalMaxCredits": 38,
       "questions": {
@@ -345,6 +359,7 @@
       }
     },
     "R13": {
+      "label" : "Ontologies and ontology metadata meet domain-relevant community standards.",
       "maxCredits": 36,
       "portalMaxCredits": 36,
       "questions": {

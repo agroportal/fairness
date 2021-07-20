@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import fr.lirmm.fairness.assessment.utils.QuestionResult;
 import org.reflections.Reflections;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
@@ -42,7 +43,7 @@ public abstract class AbstractPrinciple extends AbstractScoredEntity implements 
 				this.weights.add(criterion.getTotalScoreWeight());
 				System.out.println("> " + criterion.getClass().getSimpleName() + " points : " + criterion.getScores());
 				System.out.println("> Total score for " + criterion.getClass().getSimpleName() + " : " + criterion.getTotalScore());
-				System.out.println("> Explanations : " + criterion.getResults().stream().map(x->x.getExplication()).collect(Collectors.toList()));
+				System.out.println("> Explanations : " + criterion.getResults().stream().map(x-> ((QuestionResult)x).getExplication()).collect(Collectors.toList()));
 				System.out.println("> Normalized total score for " + criterion.getClass().getSimpleName() + " : " + criterion.getNormalizedTotalScore());
 			}
 			catch(Exception iae) {

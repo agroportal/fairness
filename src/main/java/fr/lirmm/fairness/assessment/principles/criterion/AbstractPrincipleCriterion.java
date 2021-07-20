@@ -8,10 +8,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import fr.lirmm.fairness.assessment.Configuration;
+import fr.lirmm.fairness.assessment.utils.QuestionResult;
 import fr.lirmm.fairness.assessment.utils.Result;
 import fr.lirmm.fairness.assessment.principles.AbstractScoredEntity;
 import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
-import org.apache.commons.validator.routines.DoubleValidator;
 import org.json.JSONException;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
@@ -25,12 +25,11 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 	private Double maxCredits = 0.0;
 	private Double portalMaxCredits = 0.0;
 	protected List<Result> results = new ArrayList<>();
-
-
+	protected String label;
 	
 	public AbstractPrincipleCriterion() {
 		super();
-		this.fillQuestions();
+		this.fillProperties();
 		this.questionsPoints = this.questions.stream().map(AbstractCriterionQuestion::getPoints).collect(Collectors.toList());
 	}
 
@@ -56,7 +55,7 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 
 
 	protected void addResult(int index, double score, String explanation) {
-		this.results.add(index,new Result(score , explanation , questions.get(index)));
+		this.results.add(index,new QuestionResult(score , explanation , questions.get(index)));
 	}
 
 	protected void addResult(Result result){
@@ -68,7 +67,7 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 	}
 
 
-	private void fillQuestions() {
+	private void fillProperties() {
 		try {
 			Map<?, ?> fairConfigs = Configuration.getInstance().getFairConfigs();
 			Map<? , ?> criteria = (Map<?, ?>) fairConfigs.values().stream()
@@ -77,6 +76,7 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 			Map<String,?> criterionList = (Map<String,?>) criteria.get(this.getClass().getSimpleName());
 			this.maxCredits = Double.parseDouble(criterionList.get("maxCredits").toString());
 			this.portalMaxCredits = Double.parseDouble(criterionList.get("portalMaxCredits").toString());
+			this.label = criterionList.get("label").toString();
 			this.questions = new ArrayList<>();
 
 			for (Map.Entry<String,Map<?,?>> q: ((Map<String, Map<?,?>>)criterionList.get("questions")).entrySet()) {
@@ -88,6 +88,9 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 	}
 
 
+	public String getLabel() {
+		return label;
+	}
 
 	@Override
 	public String toString() {
