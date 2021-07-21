@@ -9,3 +9,4 @@
 /out
 /bin
 /target
+/src/main/resources/config/*/config.*.properties
