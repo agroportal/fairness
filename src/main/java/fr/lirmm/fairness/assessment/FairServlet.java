@@ -20,7 +20,6 @@ import fr.lirmm.fairness.assessment.model.PortalInstance;
 import fr.lirmm.fairness.assessment.utils.ResultCache;
 import fr.lirmm.fairness.assessment.utils.converters.CombinedFairJsonConverter;
 import fr.lirmm.fairness.assessment.utils.converters.FairJsonConverter;
-import fr.lirmm.fairness.assessment.utils.requestparams.params.CombinedParam;
 import fr.lirmm.fairness.assessment.utils.requestparams.params.OntologiesParam;
 import fr.lirmm.fairness.assessment.utils.requestparams.params.PortalParam;
 import org.json.JSONException;
@@ -34,7 +33,6 @@ public class FairServlet extends HttpServlet {
     private String pPortalInstanceName = "";
     private PortalInstance portalInstance = null;
     private String pOntologies = "";
-    private boolean computeCombinedScore = false;
     private ResultCache resultCache = new ResultCache();
 
     @Override
@@ -97,7 +95,7 @@ public class FairServlet extends HttpServlet {
 
                 if (ontologies != null) {
                     response.add("ontologies" , ontologies);
-                    if (computeCombinedScore) {
+                    if (isCombinedParamUsed(req)) {
                         response.add("combinedScores", this.getCombinedScore(ontologies));
                     }
                 }
@@ -167,9 +165,6 @@ public class FairServlet extends HttpServlet {
             return OntologiesParam.getInstance().getErrorMessage();
         }
 
-        if (CombinedParam.getInstance().validate(req)) {
-            computeCombinedScore = req.getParameter("combined") != null && req.getParameter("combined").trim().equals("true");
-        }
         return null;
     }
     private List<String> testAcronyms(List<String> allOntologyAcronyms){
@@ -190,6 +185,9 @@ public class FairServlet extends HttpServlet {
         return !cacheIsEnabled || (force != null);
     }
 
+    private boolean isCombinedParamUsed(HttpServletRequest request){
+        return request.getParameter("combined") != null;
+    }
     private String getRequestURI(HttpServletRequest request){
         if(portalInstance!= null)
             return portalInstance.getUrl()+'?'+request.getQueryString();
