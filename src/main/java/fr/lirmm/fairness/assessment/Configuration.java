@@ -2,8 +2,6 @@ package fr.lirmm.fairness.assessment;
 
 import com.google.gson.Gson;
 import fr.lirmm.fairness.assessment.utils.Environments;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.impl.Log4JLogger;
 
 import java.io.*;
 import java.util.*;
@@ -13,33 +11,14 @@ public class Configuration {
 
 	public static final String FAIR_CONFIG_FILE_PATH = "config/common/questions.config.json";
 	private final static String defaultPropFileName = "config";
-	private Environments env;
 	private static Configuration instance = null;
-	private Map<String, Properties> portalsCongigsMap = new HashMap<String, Properties>();
+	private final Map<String, Properties> portalsConfigsMap = new HashMap<String, Properties>();
 	private Map<?, ?> FairConfigMap = new HashMap<>();
 
 	private Configuration() {
 		super();
-		Logger.getAnonymousLogger().info("GET CONG ENV : " + System.getProperty("env"));
-		String env = System.getProperty("env");
-		if(env == null)
-			this.env = Environments.PROD;
-		else
-			switch (env){
-				case "dev":
-					this.env = Environments.DEV;
-					break;
-				case "prod":
-				default :
-					this.env = Environments.PROD;
-			}
-
 	}
 
-	public Environments getEnv() {
-		System.out.println("get env " + this.env );
-		return env;
-	}
 
 	public static Configuration getInstance() {
 		if(instance == null) {
@@ -54,7 +33,7 @@ public class Configuration {
  
 	public Properties getProperties(String configScope) throws IOException {
 		
-		Properties properties = this.portalsCongigsMap.get(configScope);
+		Properties properties = this.portalsConfigsMap.get(configScope);
 		
 		if(properties == null) {
 		
@@ -62,12 +41,12 @@ public class Configuration {
 			properties = new Properties();
 			
 			try {
-				String propFileName = String.format("config/%s/%s.%s.properties", configScope,defaultPropFileName, this.env.toString().toLowerCase(Locale.ROOT));
+				String propFileName = String.format("config/%s/%s.properties", configScope,defaultPropFileName);
 				inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
 				
 				if (inputStream != null) {
 					properties.load(inputStream);
-					this.portalsCongigsMap.put(configScope, properties);
+					this.portalsConfigsMap.put(configScope, properties);
 				} else {
 					throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
 				}

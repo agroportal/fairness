@@ -28,7 +28,8 @@ public class F2 extends AbstractPrincipleCriterion {
 			String[][] allMetadata = this.allMetadataToEvaluate(ontology);
 			for(int i = 0 ; i < allMetadata.length; i ++) {
 				double score = this.evaluatecheckMetadata(allMetadata[i], i);
-				this.addResult(i, score, String.format("%d %s properties provided", nbValidProp, metadataFlags[i]));
+				// TODO change NO_MAPPING to not other
+				this.addResult(i, score, String.format("%d \"%s\" properties found", nbValidProp, metadataFlags[i]));
 			}
 		}
 		catch (Exception e) {
@@ -42,7 +43,7 @@ public class F2 extends AbstractPrincipleCriterion {
 		int score = 0;
 		int points= 0; 	
 		int i=0; 
-		if (metadataFlags[importanceLevel]== "MUST") 
+		if (metadataFlags[importanceLevel] == "MUST")
 		{points=4;}
 		else if (metadataFlags[importanceLevel]== "SHOULD")
 		{points=2;}
@@ -63,7 +64,7 @@ public class F2 extends AbstractPrincipleCriterion {
 	
 	private String[][] allMetadataToEvaluate(Ontology ontology) {
 		return new String[][] {
-			new String[] {
+			new String[] { // must properties
 				ontology.getName(),
 				ontology.getAlternative(),
 				ontology.getHiddenLabel(),
@@ -91,17 +92,17 @@ public class F2 extends AbstractPrincipleCriterion {
 				ontology.getBugDatabase(),
 				ontology.getMailingList(), 
 			},
-			new String[] {
+			new String[] { // should properties
 				ontology.getMetrics(), 
 				ontology.getNumberOfClasses(),
 				ontology.getNumberOfProperties(),
 				ontology.getNumberOfIndividuals(),
 				ontology.getNumberOfAxioms(), 
 			},
-			new String[] {
+			new String[] { // optional properties
 				ontology.getPreferredNamespacePrefix()
 			},
-			new String[] {
+			new String[] { // no mapping
 				String.join(";", ontology.getLanguage()),
 				ontology.getAbstra(),
 				ontology.getPublication(),

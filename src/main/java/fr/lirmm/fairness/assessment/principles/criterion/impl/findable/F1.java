@@ -35,9 +35,10 @@ public class F1 extends AbstractPrincipleCriterion {
 			@Override
 			public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
 
+				//TODO test if absent change explanation
 				if (customURIValidator.isValid(uri)) {
 					setSuccess("Valid ontology URI", question);
-				}else {
+				}else{
 					setFailure( "Invalid ontology URI"  , question);
 				}
 
@@ -85,15 +86,17 @@ public class F1 extends AbstractPrincipleCriterion {
 		this.addResult(1, r.getScore(), r.getExplication());
 		*/
 
+		//TODO is the same as Q1 only the tested meta data change
 
 		// Q2  : Does an ontology provide an additional external identifier i.e., a guarantee globally unique and persistent identifier assigned by an accredited body?
 		r = Tester.doEvaluation(ontology, questions.get(1), new Testable() {
 			@Override
 			public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
-				Result r = new Result();
 
 				String[] customIDSchemes = { "http", "https" };
 				UrlValidator customIDValidator = new UrlValidator(customIDSchemes);
+				// TODO test existence
+				// TODO give 3 points if exist
 				if (customIDValidator.isValid(ontologyId)) {
 					setSuccess("Valid GUID" , question);
 				} else {
@@ -105,6 +108,8 @@ public class F1 extends AbstractPrincipleCriterion {
 		this.addResult(r);
 
 
+		// TODO add valid to the statement
+		// TODO combine with  Q2
 		// Q3: If yes, is this external identifier a DOI?
 		if(r.isSuccess()){
 			r = Tester.doEvaluation(ontology, questions.get(2), new Testable() {
@@ -163,29 +168,32 @@ public class F1 extends AbstractPrincipleCriterion {
 			this.addResult(2 , 0 , r.getExplication());
 		}
 
-
+		// TODO merge Q4 and Q5 (combination)
 		// Q4: Are the ontology metadata included in the ontology file and consequently share the same identifiers?
 		this.addResult(3, 0, "Metadata are not included in the ontology file");
 
 		// Q5: If not, is the metadata record clearly identified by a resolvable URI?
 		this.addResult(4, this.questionsPoints.get(4), "Metadata are identified by a resolvable URI");
 
-		// Q6: Does an ontology provide a version specific URI?
+
+		// Q6: Does an ontology provide a  version specific URI?
 		if (ontologyVersionIri != null) {
 			r = Tester.doEvaluation(ontology, questions.get(5), new Testable() {
 				@Override
 				public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
 					String[] CustomVersionIriSchemes = {"http", "https"};
 					UrlValidator customVersionIriValidator = new UrlValidator(CustomVersionIriSchemes);
+					//TODO test if absent change explanation
 					if (customVersionIriValidator.isValid(ontologyVersionIri)) {
 						setSuccess("Valid URI version", question);
 					} else {
-						setFailure("Invalid ontology URI version", question);
+						setFailure("Invalid ontology version URI ", question);
 					}
 				}
 			});
 			this.addResult(r);
 
+			// TODO combine with Q6
 			// Q7: If yes, is this version URI resolvable/dereferenceable?
 			if(r.isSuccess()) {
 				r = Tester.doEvaluation(ontology, questions.get(6), new Testable() {

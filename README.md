@@ -1,4 +1,4 @@
-<h1 align="center">Fariness - The Fariness assement service</h1>
+<h1 align="center">Fairness - The Fairness assessment service</h1>
 
 <p align="center">
  <i>
@@ -11,9 +11,9 @@
   </i>
   <br>
    <i>
-    It's an implementatation in Java Web service of the framework 
+    It's an implementation in a Java Web service of the framework 
     <a href="https://hal.archives-ouvertes.fr/lirmm-03208544/">"FAIR or FAIRer? An integrated quantitative FAIRness assessment grid for semantic resources and ontologies"</a>
-    ,a list of defined FAIR questions related to metadata of <a href="https://github.com/sifrproject/MOD-Ontology/">the MOD ontology metadata model 1.4</a>.
+    ,a list of defined FAIR questions related to a metadata of <a href="https://github.com/sifrproject/MOD-Ontology/">the MOD ontology metadata model 1.4</a>.
   </i>
   <br>
 </p>
@@ -32,32 +32,32 @@
 ## Main Features
 *   Compute the FAIR score of a list of ontologies. 
 *   Compute the average FAIR score of a list of ontologies.
-*   A cache system of to store the result FAIR score of all ontologies in a portal
+*   A cache system to store the FAIR score result  of all ontologies in a portal
 
 ## General Usage 
-The Web service is callable with an http request using prgaming languages (like java ) , command line (like curl ) or simply with a web browser (like Firefox) at [http://services.stageportal.lirmm.fr/fairness/v2/](http://services.stageportal.lirmm.fr/fairness/v2/).
+The Web service is callable with an http request using programming languages (like java ) , command line (like curl ) or directly with a web browser (like Firefox) at [http://services.stageportal.lirmm.fr/fairness/v2/](http://services.stageportal.lirmm.fr/fairness/v2/).
 ### Web Service request full syntax
-```
+``` java
  www.services.stageportal.lirmm.fr/fairness/v2/?portal={stageportal|agroportal|bioportal}&ontologies={comma-separated list of acronyms|all}[&combined][&sync]
 ```
-### Web Service request paramters
+### Web Service request parameters
 Parameter | Possible Values | Description | Mandatory
 ------------ | -------------  | ------------- | -------------
 *portal* | agroportal , bioportal ( or stageportal in test environnement ) | Specifies the repository  where the semantic resource is stored | yes
 *ontologies* | all or comma-separated list of acronyms (EX: EPHY,FCU) | Specifies the semantic resources for the fair assessment | yes
-*combined* |  no value | If is present,in additation of the listed ontologies FAIR scores, it adds the average FAIR scores of the set  | no
+*combined* |  no value | If is present,in addition of the listed ontologies FAIR scores, it adds the average FAIR scores of the set  | no
 *sync* | no value | If present , forces to not use the cache and recompute the FAIR scores| no
 ### Web Service request response
-In result it returns a JSON with the following skeleton :  
+In result, it returns a JSON with the following skeleton :  
  ```yaml
 {
   "ontologies": { 
     "FCU": { // ontology acronym
-      "Findable": { // FAIR principle
-        "F1": { // Principle criterion
+      "Findable": { // FAIR principal
+        "F1": { // Subprincipal
           "label": "Ontologies and ontology metadata are assigned a globally unique and persistent identifier. ",
           "results": {
-            "F1Q1": { // Criterion question
+            "F1Q1": { // Subprincipal question
               "question": "Does an ontology have a ?local? identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?", // question statement 
               "score": 6, // Question test result 
               "explication": "Valid ontology URI", // Question result explanation 
@@ -70,10 +70,10 @@ In result it returns a JSON with the following skeleton :
             "F1Q6": {...},
             "F1Q7": {...},
           },
-          "score": 12, // Criterion FAIR score
+          "score": 12, // Subprincipal FAIR score
           "normalizedScore": 29, // Creiterion normalized FAIR score
-          "maxCredits": 41, // Criterion theoretical max score 
-          "portalMaxCredits": 35 // Criterion max points calculable with this version of API
+          "maxCredits": 41, // Subprincipal theoretical max score 
+          "portalMaxCredits": 35 // Subprincipal max points calculable with this version of API
         },
         "F2": {...},
         "F3": {...},
@@ -100,38 +100,37 @@ In result it returns a JSON with the following skeleton :
  ```
 Each **score** in the result comes with :
 
-* A **maxCredits** it's the maximum that a score can go , definined in the original Framework
-* A **portalMaxCredits** it's the maximum that a score can go in this implementation
+* A **maxCredits**, the maximum that a score can go , defined in the original Framework
+* A **portalMaxCredits**, the maximum that a score can go in this implementation
   ``` javascript
   portalMaxCredits = maxCredits - not implemented questions
   ```
-* A **normalizedScore** wich is
+* A **normalizedScore** which is
   ``` javascript
   normalizedScore = score / maxCredits
   ```
-The list ot the FAIR questions used by the tool to assess FAIRness is here : https://github.com/agroportal/fairness/blob/master/FAIR%20questions.md 
 
 ## How it works
 
-From the definition of the questions proposed in the Framework ["FAIR or FAIRer? An integrated quantitative FAIRness assessment grid for semantic resources and ontologies"](https://hal.archives-ouvertes.fr/lirmm-03208544/) ,we implemented a Java function to each of the questions that test it's validity using the resources MOD meta-data.
+From the definition of the questions proposed in the Framework ["FAIR or FAIRer? An integrated quantitative FAIRness assessment grid for semantic resources and ontologies"](https://hal.archives-ouvertes.fr/lirmm-03208544/) ,we implemented a Java functions to each of them that test its validity using the resources MOD meta-data.
 
-Listed below  ot the FAIR questions used by the tool to assess FAIRness is here : https://github.com/agroportal/fairness/blob/master/FAIR%20questions.md 
-The obtained results over AgroPortal semantic resources are prsented here : https://github.com/agroportal/fairness/tree/master/Results
+* The FAIR questions used by the tool to assess FAIRness is here : [FAIR-Questions](https://github.com/agroportal/fairness/blob/master/doc/results/FAIR-questions.md)
+* The obtained results over AgroPortal semantic resources is here : [FAIR-Results](https://github.com/agroportal/fairness/tree/master/results/FAIR-result.xlsx)
 
-## Local instalation 
-### Prerequisites
+## Local installation 
+To do a local installation of this web service, you will nill 
+### 1- Prerequisites
 
 - Have a Tomcat server >= 7 running
 - Have Java >= 8
 
-### Donwload latest version of fairness
-The war file is findabale [here]()
-### Deploy the war in the Tomcat server
-Deploy it by simply dropping the war file into the *$CATALINA_HOME\webapps* directory of any Tomcat instance. If the instance is running, the deployment will start instantly as Tomcat unpacks the archive and configures its context path.
-If the instance is not running, then the server will deploy the project the next time it is started.
-### Configuration
-* **Portals configuration** 
-  Currently are preconfigured 3 portals *agroportal* , *sifr-bioportal* and *stageportal* , each of them have a folder with it's *config.properties.example* containing the following 
+### 2- Clone this projet
+``` shell
+      git clone git@github.com:agroportal/fairness.git
+```
+### 3- Configuration
+* **Portals configuration**
+  Currently are preconfigured with 3 portals *agroportal* , *sifr-bioportal* and *stageportal* , each of them have a folder with it's *config.properties.example* containing the following
    ``` properties 
     name=BioPortal #The name of the portal
     url=http://data.bioportal.lirmm.fr #The rest api uri of the portal
@@ -139,13 +138,25 @@ If the instance is not running, then the server will deploy the project the next
     cacheFilePath=<your_path> #The path where to save the cache 
     cacheEnabled=true # enabble or disable the cache globaly
   ```
-  Fill up the **apikey** and **cacheFilePath** *config.properties.example* with the correspending infos , finally rename it to **config.properties** 
-  > **To note** : Other portals can be added simply  by adding a folder with there name  and a config.properties, but are supported only portals with MOD meta-data implemented
-  
+  Fill up the **apikey** and **cacheFilePath** *config.properties.example* with the corresponding infos , finally rename it to **config.properties**
+  > **To note** : Other portals can be added simply  by adding a folder with their names  and put on it the  **config.properties** file, but are supported only portals with MOD meta-data implemented
+
 * **Questions configuration**
-  The configuration json file of the questions is fidable [here](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/questions.config.json), where are listed all the questions with there statment and max score
+  The JSON configuration file of the questions is findable [here](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/questions.config.json), where are listed all the questions with there statement and max credits
 
+### 4- Build the project
 
+### 5- Deploy the built war in the Tomcat server
+Deploy it by simply dropping the war file into the *$CATALINA_HOME\webapps* directory of any Tomcat instance. If the instance is running, the deployment will start instantly as Tomcat unpacks the archive and configures its context path.
+If the instance is not running, then the server will deploy the project the next time it is started.
+
+### 6- (Optional) Create a cron job to do a daily update of the cache files
+The following command program  update the cache every day at midnight
+``` shell
+  0 0 * * * /home/ontoportal/cache_rest.sh /usr/share/tomacat/webapps/fairness-assessment
+ ```
+To add this job to the local system, execute the command **crontab -e** , it opens a text file, press "i" to go to insert mode, copy the above command.
+Then press "Esc" and type ":wq" to save and exit  
 ## Contacts 
 Emna Amdouni, University of Montpellier (emna.amdouni@lirmm.fr)
 Clement Jonquet, University of Montpellier (jonquet@lirmm.fr)

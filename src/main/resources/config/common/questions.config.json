@@ -6,7 +6,7 @@
       "portalMaxCredits": 35,
       "questions": {
         "F1Q1": {
-          "question": "Does an ontology have a “local” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+          "question": "Does an ontology have a /“local/” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
           "points": 6
         },
         "F1Q2": {
@@ -36,7 +36,7 @@
       }
     },
     "F2": {
-      "label": "Ontologies are described with rich ontology metadata",
+      "label": "Ontologies are described with rich ontology metadata.",
       "maxCredits": 27,
       "portalMaxCredits": 27,
       "questions" : {
@@ -59,7 +59,7 @@
       }
     },
     "F3": {
-      "label" : "Ontology metadata clearly and explicitly includes the identifier of the ontologies they describe.",
+      "label" : "Ontology metadata clearly and explicitly include the identifier of the ontology they describe.",
       "maxCredits": 21,
       "portalMaxCredits": 0,
       "questions": {
@@ -83,15 +83,15 @@
       "portalMaxCredits": 24,
       "questions": {
         "F4Q1":{
-          "question" : "Is the ontology registered in multiple ontology libraries? (1 point per ontology library)" ,
+          "question" : "Is the ontology registered in multiple ontology \"libraries\"? (1 point per  library)" ,
           "points" : 7
         },
         "F4Q2":{
-          "question" : "Is the ontology registered in multiple open ontology repositories? (1 point per ontology repository up to credits)" ,
+          "question" : "Is the ontology registered in multiple open ontology \"repositories\"? (1 point per  repository up to credits)" ,
           "points" : 9
         },
         "F4Q3":{
-          "question" : "Is an ontology registered in the \"de facto\" reference libraries or repositories? (1 point per a \"de facto\" refernce library up to 4 credits)" ,
+          "question" : "Is an ontology registered in the \"de facto\" reference libraries or repositories? (1 point per a \"de facto\" reference library up to 4 credits)" ,
           "points" : 4
         },
         "F4Q4":{
@@ -116,7 +116,7 @@
           "points": 7
         },
         "A1Q3": {
-          "question": "Are ontology and its metadata supporting content negociation ? (6 points per format up to 24 credits) ",
+          "question": "Are ontology and its metadata supporting content negotiation ? (3 points per format up to 24 credits) ",
           "points": 24
         },
         "A1Q4": {

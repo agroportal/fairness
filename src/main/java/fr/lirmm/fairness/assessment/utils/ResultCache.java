@@ -26,8 +26,10 @@ public class ResultCache {
 
         } finally {
             try {
-                file.flush();
-                file.close();
+                if(file != null){
+                    file.flush();
+                    file.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }

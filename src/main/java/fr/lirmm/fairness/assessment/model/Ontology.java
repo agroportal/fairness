@@ -122,6 +122,7 @@ public class Ontology {
 		dataDump = this.restApi.getSubmissionJsonObject("dataDump");
 		openSearchDescription = this.restApi.getSubmissionJsonObject("openSearchDescription");
 		uriLookupEndpoint = this.restApi.getSubmissionJsonObject("uriLookupEndpoint");
+		endPoint = this.restApi.getSubmissionJsonObject("endpoint");
 		modificationDate = this.restApi.getSubmissionJsonObject("modificationDate");
 		valid = this.restApi.getSubmissionJsonObject("valid");
 		type = this.restApi.getOntologyJsonObject("ontologyType");
@@ -175,11 +176,14 @@ public class Ontology {
 		endorsedBy= this.restApi.getJsonMetadataArrayObject("endorsedBy");
 	}
 
+
+	public String getMetaDataURL(){
+		return String.join("/", new String[] { this.portalInstance.getUrl(), "ontologies", this.acronym,
+				"latest_submission?display=all" });
+	}
 	//TODO test content negotiation
 	private String getMetadata(String format) throws IOException {
-		final String url = String.join("/", new String[] { this.portalInstance.getUrl(), "ontologies", this.acronym,
-				"latest_submission?display=all" });
-		return OntologyRestApi.get(url, this.portalInstance.getApikey(), format);
+		return OntologyRestApi.get(getMetaDataURL(), this.portalInstance.getApikey(), format);
 	}
 
 	public String getHtmlMetadata() throws IOException {
