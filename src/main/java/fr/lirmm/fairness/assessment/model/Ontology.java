@@ -181,7 +181,7 @@ public class Ontology {
 		return String.join("/", new String[] { this.portalInstance.getUrl(), "ontologies", this.acronym,
 				"latest_submission?display=all" });
 	}
-	//TODO test content negotiation
+
 	private String getMetadata(String format) throws IOException {
 		return OntologyRestApi.get(getMetaDataURL(), this.portalInstance.getApikey(), format);
 	}

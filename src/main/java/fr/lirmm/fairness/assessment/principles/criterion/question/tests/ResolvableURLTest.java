@@ -21,7 +21,7 @@ public class ResolvableURLTest implements Test<String> {
         try {
             url = new URL(element[0]);
             urlConnection = (HttpURLConnection) url.openConnection();
-            //HttpURLConnection.setFollowRedirects(false);
+            HttpURLConnection.setFollowRedirects(false);
             urlConnection.setRequestMethod("HEAD");
 
             if(element.length == 3 && element[2]!= null && !element[2].isEmpty()){
@@ -33,7 +33,7 @@ public class ResolvableURLTest implements Test<String> {
                 urlConnection.setRequestProperty("Accept", element[1]);
             }
 
-            //urlConnection.setConnectTimeout(1000); // 1 second
+            urlConnection.setConnectTimeout(1000); // 1 second
             int urlConnectionResponseCode = urlConnection.getResponseCode();
             System.out.println("Response CODE for " + element[0] + " : " + urlConnectionResponseCode);
             System.out.println(urlConnection.getResponseMessage());

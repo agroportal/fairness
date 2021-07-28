@@ -6,32 +6,23 @@
       "portalMaxCredits": 35,
       "questions": {
         "F1Q1": {
-          "question": "Does an ontology have a /“local/” identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
-          "points": 6
+          "question": "Does an ontology have a \"local\" identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+          "points": [3,6],
+          "properties": ["owl:ontologyIRI"]
         },
         "F1Q2": {
-          "question": "Does an ontology provide an additional “external” identifier i.e., a guarantee globally unique and persistent identifier assigned by an accredited body?",
-          "points": 6
+          "question": "Does an ontology provide an additional \"external\" identifier i.e., a guarantee globally unique and persistent identifier assigned by an accredited body?",
+          "points": [3,3,5],
+          "properties": ["dct:identifier"]
         },
         "F1Q3": {
-          "question": "If yes, is this external identifier a DOI?",
-          "points": 5
+          "question": "Are the ontology metadata included in the ontology file- and consequently share the same identifiers or is the metadata record clearly identified by its own URI.",
+          "points": [12],
+          "properties": ["dct:identifier"]
         },
         "F1Q4": {
-          "question": "Are the ontology metadata included in the ontology file –and consequently share the same identifiers?",
-          "points": 6
-        },
-        "F1Q5": {
-          "question": "If not, is the metadata record clearly identified by its own GUPRI?",
-          "points": 6
-        },
-        "F1Q6": {
-          "question": "Does an ontology provide a version specific URI?",
-          "points": 4
-        },
-        "F1Q7": {
-          "question": "If yes, is this URI resolvable/dereferenceable?",
-          "points": 5
+          "question": "Does an ontology provide a version specific URI and is this URI resolvable/ dereferenceable?",
+          "points": [2,2,5]
         }
       }
     },
@@ -41,15 +32,15 @@
       "portalMaxCredits": 27,
       "questions" : {
           "F2Q1": {
-            "question": "Is an ontology described with additional “MIRO must” metadata properties? (4 points per property up to 16 credits)",
+            "question": "Is an ontology described with additional 'MIRO must' metadata properties? (4 points per property up to 16 credits)",
             "points": 16
           },
           "F2Q2": {
-            "question": "Is an ontology described with additional “MIRO should” metadata properties? (2 points per property up to 5 credits)",
+            "question": "Is an ontology described with additional 'MIRO should' metadata properties? (2 points per property up to 5 credits)",
             "points": 5
           },
           "F2Q3": {
-            "question": "Is an ontology described with additional “MIRO optional” metadata properties? (1 point per property up to 3 credits)",
+            "question": "Is an ontology described with additional 'MIRO optional' metadata properties? (1 point per property up to 3 credits)",
             "points": 3
           },
           "F2Q4": {
@@ -83,15 +74,15 @@
       "portalMaxCredits": 24,
       "questions": {
         "F4Q1":{
-          "question" : "Is the ontology registered in multiple ontology \"libraries\"? (1 point per  library)" ,
+          "question" : "Is the ontology registered in multiple ontology 'libraries' ? (1 point per  library)" ,
           "points" : 7
         },
         "F4Q2":{
-          "question" : "Is the ontology registered in multiple open ontology \"repositories\"? (1 point per  repository up to credits)" ,
+          "question" : "Is the ontology registered in multiple open ontology 'repositories' ? (1 point per  repository up to credits)" ,
           "points" : 9
         },
         "F4Q3":{
-          "question" : "Is an ontology registered in the \"de facto\" reference libraries or repositories? (1 point per a \"de facto\" reference library up to 4 credits)" ,
+          "question" : "Is an ontology registered in the 'de facto' reference libraries or repositories? (1 point per a 'de facto' reference library up to 4 credits)" ,
           "points" : 4
         },
         "F4Q4":{
@@ -161,7 +152,7 @@
       "portalMaxCredits": 20,
       "questions": {
         "A2Q1": {
-          "question": "Are \"most\" ontology versions accessible?  (ad-hoc solution)",
+          "question": "Are 'most' ontology versions accessible?  (ad-hoc solution)",
           "points": 7
         },
         "A2Q2": {
@@ -295,7 +286,7 @@
           "points": 8
         },
         "R1Q3": {
-          "question": "How much of the ontology classes (or concepts) are defined using a proprty restriction (e.g. OWL quantifier, cardinality or has value restrictions) or an equivalent class (e.g. an OWL named class)?",
+          "question": "How much of the ontology classes (or concepts) are defined using a property restriction (e.g. OWL quantifier, cardinality or has value restrictions) or an equivalent class (e.g. an OWL named class)?",
           "points": 8
         },
         "R1Q4": {
@@ -341,7 +332,7 @@
           "points": 10
         },
         "R12Q3": {
-          "question": "Is the ontology clearly versionned?",
+          "question": "Is the ontology clearly versioned?",
           "points": 5
         },
         "R12Q4": {

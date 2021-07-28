@@ -38,6 +38,6 @@ public class Result implements Serializable {
 
 
     public boolean isSuccess() {
-        return  this.score == this.question.getPoints();
+        return  this.score == this.question.getMaxPoint();
     }
 }

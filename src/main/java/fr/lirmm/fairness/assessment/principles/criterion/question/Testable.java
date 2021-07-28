@@ -17,7 +17,7 @@ public abstract class Testable {
     }
 
     public void setSuccess(String explication , AbstractCriterionQuestion question) {
-        result.setResult(question.getPoints() , explication ,question);
+        result.setResult(question.getMaxPoint() , explication ,question);
     }
 
     public void setFailure(String explication , AbstractCriterionQuestion question){

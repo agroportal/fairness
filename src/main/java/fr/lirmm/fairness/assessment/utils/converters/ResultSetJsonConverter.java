@@ -1,6 +1,5 @@
 package fr.lirmm.fairness.assessment.utils.converters;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
@@ -33,7 +32,7 @@ public class ResultSetJsonConverter extends AbstractJsonConverter<List<Result>> 
 				}
 			}
 			if(question != null) {
-				object.add("maxCredits" , gson.toJsonTree(question.getPoints()));
+				object.add("maxCredits" , gson.toJsonTree(question.getMaxPoint()));
 				jsonObject.add(question.getLabel() , object);
 			}
 

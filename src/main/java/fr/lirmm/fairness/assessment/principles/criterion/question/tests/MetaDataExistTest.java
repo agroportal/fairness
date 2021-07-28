@@ -5,6 +5,7 @@ package fr.lirmm.fairness.assessment.principles.criterion.question.tests;
 public class MetaDataExistTest implements Test<String> {
 
 
+    public static final String NOT_EXIST_EXPLANATION = "Not present" ;
     private static MetaDataExistTest instance;
 
     @Override

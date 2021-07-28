@@ -30,7 +30,7 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 	public AbstractPrincipleCriterion() {
 		super();
 		this.fillProperties();
-		this.questionsPoints = this.questions.stream().map(AbstractCriterionQuestion::getPoints).collect(Collectors.toList());
+		this.questionsPoints = this.questions.stream().map(AbstractCriterionQuestion::getMaxPoint).collect(Collectors.toList());
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 			this.questions = new ArrayList<>();
 
 			for (Map.Entry<String,Map<?,?>> q: ((Map<String, Map<?,?>>)criterionList.get("questions")).entrySet()) {
-				this.questions.add(new AbstractCriterionQuestion(q.getKey(), q.getValue().get("question").toString() , Double.parseDouble(q.getValue().get("points").toString())));
+				this.questions.add(new AbstractCriterionQuestion(q.getKey(), q.getValue().get("question").toString() , new Double[]{Double.parseDouble(q.getValue().get("points").toString())}));
 			}
 		} catch(Exception ioe) {
 			ioe.printStackTrace();

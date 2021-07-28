@@ -29,7 +29,11 @@ public class F2 extends AbstractPrincipleCriterion {
 			for(int i = 0 ; i < allMetadata.length; i ++) {
 				double score = this.evaluatecheckMetadata(allMetadata[i], i);
 				// TODO change NO_MAPPING to not other
-				this.addResult(i, score, String.format("%d \"%s\" properties found", nbValidProp, metadataFlags[i]));
+				if (metadataFlags[i].equals("NO_MAPPING")) {
+					this.addResult(i, score, String.format("%d \"%s\" properties found", nbValidProp, "not other"));
+				}else {
+					this.addResult(i, score, String.format("%d \"%s\" properties found", nbValidProp, metadataFlags[i]));
+				}
 			}
 		}
 		catch (Exception e) {

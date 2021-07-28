@@ -63,10 +63,10 @@ public class A1 extends AbstractPrincipleCriterion {
                     idErrorMessage = "Ontology ID not present";
                 }
 
-                if (score == question.getPoints()) {
+                if (score == question.getMaxPoint()) {
                     setSuccess("Resolvable ontology URI and ID", question);
                 } else if (score > 0) {
-                    setScore(score * question.getPoints(), uriErrorMessage +
+                    setScore(score * question.getMaxPoint(), uriErrorMessage +
                             ((!uriErrorMessage.isEmpty() && !idErrorMessage.isEmpty()) ? " and " : "")
                             + idErrorMessage, question);
 
@@ -77,7 +77,7 @@ public class A1 extends AbstractPrincipleCriterion {
 
         //Q2 : Does the ontology URI (if metadata is included in the ontology file) or the external metadata URI resolve to the metadata record ?
 
-        this.addResult(1, this.questions.get(1).getPoints(), "The repository provides an external metadata URI which resolves to the metadata record"); //we test on AgroPortal metadata -> max points.
+        this.addResult(1, this.questions.get(1).getMaxPoint(), "The repository provides an external metadata URI which resolves to the metadata record"); //we test on AgroPortal metadata -> max points.
 
         //Q3: Are ontology and its metadata supporting content negotiation?
         r = Tester.doEvaluation(ontology, this.questions.get(2), new Testable() {
@@ -90,7 +90,7 @@ public class A1 extends AbstractPrincipleCriterion {
                 double score = 0.0;
 
                 System.out.println("Accepted formats for the ontology are : " + acceptedFormats);
-                score += acceptedFormats.size() * (question.getPoints() / (formats.length * 2));
+                score += acceptedFormats.size() * (question.getMaxPoint() / (formats.length * 2));
                 if (acceptedFormats.size() > 0) {
                     ontologyMessage = "Ontology accept the following formats: " + acceptedFormats;
                 } else {
@@ -99,7 +99,7 @@ public class A1 extends AbstractPrincipleCriterion {
 
                 acceptedFormats = contentNegotiationTest(ontology.getMetaDataURL(), ontology.getPortalInstance().getApikey(), formats);
                 System.out.println("Accepted formats for the meta are : " + acceptedFormats);
-                score += acceptedFormats.size() * (question.getPoints() / (formats.length * 2));
+                score += acceptedFormats.size() * (question.getMaxPoint() / (formats.length * 2));
                 if (acceptedFormats.size() > 0) {
                     metadataMessage = "Ontology metadata accept the following formats: " + acceptedFormats;
                 } else {
