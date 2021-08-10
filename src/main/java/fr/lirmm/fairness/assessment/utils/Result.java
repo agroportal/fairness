@@ -7,6 +7,7 @@ import java.io.Serializable;
 public class Result implements Serializable {
     private static final long serialVersionUID = 2746658890779865382L;
 
+
     protected double score;
 
     protected AbstractCriterionQuestion question;
@@ -36,8 +37,4 @@ public class Result implements Serializable {
         this.question = question;
    }
 
-
-    public boolean isSuccess() {
-        return  this.score == this.question.getMaxPoint();
-    }
 }

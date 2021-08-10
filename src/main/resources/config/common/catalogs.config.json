@@ -1,0 +1,43 @@
+{
+  "repositories" : [
+    {
+      "label" : "bioportal",
+      "url": "bioportal.bioontology.org",
+      "authentification": true
+    },
+    {
+      "label" : "agroportal",
+      "url": "agroportal.lirmm.fr"
+    },
+    {
+      "label" : "OLS",
+      "url": "ebi.ac.uk/ols"
+    },
+    {
+      "label" : "Ontobee",
+      "url": "ontobee.org"
+    },
+    {
+      "label" : "Ontohub",
+      "url": "ontohub.org"
+    },
+    {
+      "label" : "AberOWL",
+      "url": "aber-owl.net"
+    }
+  ],
+  "libraries" : [
+    {
+      "label" : "Obo Foundry",
+      "url": "obofoundry.org"
+    },
+    {
+      "label" : "Agrisemantics",
+      "url": "vest.agrisemantics.org"
+    },
+    {
+      "label" : "Fair Sharing",
+      "url": "fairsharing.org"
+    }
+  ]
+}

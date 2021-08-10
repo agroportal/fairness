@@ -11,21 +11,17 @@ import fr.lirmm.fairness.assessment.principles.criterion.question.tests.Resolvab
 import fr.lirmm.fairness.assessment.principles.criterion.question.tests.URLValidTest;
 import fr.lirmm.fairness.assessment.principles.criterion.question.tests.ValidDOITest;
 import fr.lirmm.fairness.assessment.utils.QuestionResult;
-import fr.lirmm.fairness.assessment.utils.Result;
-import org.apache.commons.validator.routines.UrlValidator;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
 import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriterion;
-import fr.lirmm.fairness.assessment.utils.OntologyRestApi;
 
 public class F1 extends AbstractPrincipleCriterion {
 
     private static final long serialVersionUID = -7465284349442369392L;
 
     @Override
-    protected void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException {
+    protected void doEvaluation(Ontology ontology) throws JSONException, IOException {
 
         String apiKey = ontology.getPortalInstance().getApikey();
 
@@ -34,14 +30,14 @@ public class F1 extends AbstractPrincipleCriterion {
         QuestionResult r = Tester.doEvaluation(ontology, this.questions.get(0), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
-                if (MetaDataExistTest.isValid(ontology.getUri())) {
-                    if (URLValidTest.isValid(ontology.getUri())) {
-                        setSuccess("Present and valid ontology URI", question);
+                if (MetaDataExistTest.isValid(ontology.getOntologyIRI())) {
+                    if (URLValidTest.isValid(ontology.getOntologyIRI())) {
+                        setSuccess(question);
                     } else {
-                        setScore(question.getMaxPoint(1) , "Present but invalid ontology URI", question);
+                        setScore(1 , question);
                     }
                 } else {
-                    setFailure("ontology URI " + MetaDataExistTest.NOT_EXIST_EXPLANATION, question);
+                    setFailure(question);
                 }
             }
         });
@@ -53,23 +49,23 @@ public class F1 extends AbstractPrincipleCriterion {
         r = Tester.doEvaluation(ontology, questions.get(1), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
-                if (MetaDataExistTest.isValid(ontology.getId())) {
-                    if (URLValidTest.isValid(ontology.getId())) {
-                        String handle = isDOILink(ontology.getId());
+                if (MetaDataExistTest.isValid(ontology.getIdentifier())) {
+                    if (URLValidTest.isValid(ontology.getIdentifier())) {
+                        String handle = isDOILink(ontology.getIdentifier());
                         if(!handle.isEmpty()){
                             if(ValidDOITest.isValid(handle, apiKey)){
-                                setSuccess("Present and valid external identifier", question);
+                                setSuccess(question);
                             }else {
-                                setScore(question.getMaxPoint(2), "The external DOI identifier is invalid", question);
+                                setScore(3 , question);
                             }
                         }else {
-                            setScore(question.getMaxPoint(2), "Valid ontology ID but it's not a DOI", question);
+                            setScore(2, question);
                         }
                     } else {
-                        setScore(question.getMaxPoint(1), "Present but invalid ontology ID", question);
+                        setScore(1, question);
                     }
                 } else {
-                    setFailure("ID  " + MetaDataExistTest.NOT_EXIST_EXPLANATION, question);
+                    setFailure(question);
                 }
 
             }
@@ -77,26 +73,26 @@ public class F1 extends AbstractPrincipleCriterion {
         this.addResult(r);
 
         //Q3 Are the ontology metadata included in the ontology file- and consequently share the same identifiers or is the metadata record clearly identified by its own URI.
-        this.addResult(2, this.questions.get(2).getMaxPoint(), "The repository makes explicit relation between metadata and ontology.");
+        this.addResult(2, this.questions.get(2).getMaxPoint().getScore(), "The repository makes explicit relation between metadata and ontology.");
 
 
         // Q4: Does an ontology provide a version specific URI and is this URI resolvable/ dereferenceable?
-        r = Tester.doEvaluation(ontology, questions.get(5), new Testable() {
+        r = Tester.doEvaluation(ontology, questions.get(3), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 String ontologyVersionIri = ontology.getVersionIri();
                 if (MetaDataExistTest.isValid(ontologyVersionIri)) {
                     if (URLValidTest.isValid(ontologyVersionIri)) {
                         if (ResolvableURLTest.isValid(ontologyVersionIri)) {
-                            setSuccess("Present, valid and resolvable version URI", question);
+                            setSuccess(question);
                         } else {
-                            setScore(question.getMaxPoint(2), "Valid but not resolvable version URI", question);
+                            setScore(2,question);
                         }
                     } else {
-                        setScore(question.getMaxPoint(1),"Present but invalid ontology version URI ", question);
+                        setScore(1, question);
                     }
                 } else {
-                    setFailure("Ontology version uri " + MetaDataExistTest.NOT_EXIST_EXPLANATION, question);
+                    setFailure(question);
                 }
 
 

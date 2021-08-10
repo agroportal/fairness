@@ -22,8 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class OntologyRestApi {
 
-	private final static Set<String> INVALID_METADATA_VALUES = new HashSet<String>(
-			Arrays.asList(new String[] { null, "null", "", "[]" }));
+
 	private String ontologyMetadata = null;
 	private ObjectMapper mapper = null;
 
@@ -118,7 +117,5 @@ public class OntologyRestApi {
 		}
 		return result;
 	}
-	public static boolean isValidMetadatumValue(String value) {
-		return !INVALID_METADATA_VALUES.contains(value);
-	}
+
 }

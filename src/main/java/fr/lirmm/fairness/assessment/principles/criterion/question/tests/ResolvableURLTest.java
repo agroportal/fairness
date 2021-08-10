@@ -25,7 +25,7 @@ public class ResolvableURLTest implements Test<String> {
             urlConnection.setRequestMethod("HEAD");
 
             if(element.length == 3 && element[2]!= null && !element[2].isEmpty()){
-                System.out.println("add api key" + element[2]);
+
                 urlConnection.setRequestProperty("Authorization", "apikey token=" + element[2]);
             }
 
@@ -35,11 +35,8 @@ public class ResolvableURLTest implements Test<String> {
 
             urlConnection.setConnectTimeout(1000); // 1 second
             int urlConnectionResponseCode = urlConnection.getResponseCode();
-            System.out.println("Response CODE for " + element[0] + " : " + urlConnectionResponseCode);
-            System.out.println(urlConnection.getResponseMessage());
             return (urlConnectionResponseCode == 200) || (urlConnectionResponseCode == 302);
         } catch (IOException e) {
-            System.out.println("exception resolvable URL test" + e.getMessage());
             return  false;
         } finally {
             if(urlConnection != null){

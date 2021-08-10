@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.GsonBuilder;
 import org.json.JSONException;
 
 import fr.lirmm.fairness.assessment.utils.OntologyRestApi;
@@ -18,7 +19,7 @@ public class Ontology {
 	private PortalInstance portalInstance = null;
 	private OntologyRestApi restApi = null;
 
-	private String acronym = null, uri = null, id = null, versionIri = null, name = null, ontologyMetadata = null,
+	private String acronym = null, ontologyIRI = null, identifier = null, versionIri = null, name = null, ontologyMetadata = null,
 			group = null, alternative = null, hiddenLabel = null, hasOntoLang = null, description = null,
 			homePage = null, pullLocation = null, keyWords = null, coverage = null;
 	private String prefNamSpacUri = null, uriRegexPat = null, expId = null, creator = null, contributor = null,
@@ -44,7 +45,7 @@ public class Ontology {
 	private String usedOntologyEngineeringTool = null, usedOntologyEngineeringMethodology = null,
 			conformsToKnowledgeRepresentationParadigm = null, designedForOntologyTask = null, competencyQuestion = null,
 			fundedBy = null, status = null, dateSubmitted = null;
-	private String projects= null;
+	private List<String> projects= null;
 	private List<String> endorsedBy= new ArrayList<String>();
 	private List<String> isIncompatibleWith = new ArrayList<String>();
 	private List<String> language = new ArrayList<String>();
@@ -66,8 +67,10 @@ public class Ontology {
 	private void fillOntology() throws IOException, JSONException {
 		this.ontologyMetadata = this.getJsonMetadata();
 		this.restApi = new OntologyRestApi(this.ontologyMetadata);
-		uri = this.restApi.getSubmissionJsonObject("URI");
-		id = this.restApi.getSubmissionJsonObject("identifier");
+		//TODO rename properties to the mod nomination https://docs.google.com/spreadsheets/d/16GPvfkUTPZaMc7I7_3qZ5H7xse915kPMS3z00tptV6g/edit#gid=1638855124
+		// Colonne F pour agroportal et Colonne H MOD1.4 a utiliser
+		ontologyIRI = this.restApi.getSubmissionJsonObject("URI");
+		identifier = this.restApi.getSubmissionJsonObject("identifier");
 		acronym = this.restApi.getOntologyJsonObject("acronym");
 		versionIri = this.restApi.getSubmissionJsonObject("versionIRI");
 		name = this.restApi.getOntologyJsonObject("name");
@@ -124,7 +127,7 @@ public class Ontology {
 		uriLookupEndpoint = this.restApi.getSubmissionJsonObject("uriLookupEndpoint");
 		endPoint = this.restApi.getSubmissionJsonObject("endpoint");
 		modificationDate = this.restApi.getSubmissionJsonObject("modificationDate");
-		valid = this.restApi.getSubmissionJsonObject("valid");
+		valid = this.restApi.getSubmissionJsonObject("valid"); // TODO valid is not existent
 		type = this.restApi.getOntologyJsonObject("ontologyType");
 		viewingrestriction = this.restApi.getOntologyJsonObject("viewingRestriction");
 		hasOntoSyntax = this.restApi.getSubmissionJsonObject("hasOntologySyntax");
@@ -172,7 +175,11 @@ public class Ontology {
 		status = this.restApi.getSubmissionJsonObject("status");
 		dateSubmitted = this.restApi.getSubmissionJsonObject("creationDate");
 		released = this.restApi.getSubmissionJsonObject("released");
-		projects= this.restApi.getOntologyLinksyJsonObject("projects");
+		projects = new GsonBuilder().create()
+				.fromJson(
+						OntologyRestApi.get(this.restApi.getOntologyLinksyJsonObject("projects") , portalInstance.getApikey() ,"application/json"),
+						List.class
+						);
 		endorsedBy= this.restApi.getJsonMetadataArrayObject("endorsedBy");
 	}
 
@@ -206,8 +213,8 @@ public class Ontology {
 		return acronym;
 	}
 
-	public String getUri() {
-		return uri;
+	public String getOntologyIRI() {
+		return ontologyIRI;
 	}
 
 	public PortalInstance getPortalInstance() {
@@ -218,8 +225,8 @@ public class Ontology {
 		return ontologyMetadata;
 	}
 
-	public String getId() {
-		return id;
+	public String getIdentifier() {
+		return identifier;
 	}
 
 	public String getVersionIri() {
@@ -540,7 +547,7 @@ public class Ontology {
 		return useGuidelines;
 	}
 
-	public String getConatct() {
+	public String getContact() {
 		return contact;
 	}
 
@@ -648,12 +655,12 @@ public class Ontology {
 		return similarTo;
 	}
 	
-   public String getProjects() 
+   public List<String> getProjects()
    {
 	   return projects;  
    }
    
-   public List <String> getendorsedBy()
+   public List <String> getEndorsedBy()
    {
 	   return endorsedBy; 
    }

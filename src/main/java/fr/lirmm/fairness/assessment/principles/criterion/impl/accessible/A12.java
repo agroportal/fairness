@@ -17,9 +17,12 @@ public class A12 extends AbstractPrincipleCriterion {
 	@Override
 	protected void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException {
 
-		try {
+		// Q1: Are an ontology and its metadata through a protocol that supports authentification and authorization?
+		this.addResult(0, this.questions.get(0).getMaxPoint().getScore(), "The repository supports authentification and authorization.");
 
-			List<String> includedInDataCatalog = ontology.getIncludedInDataCatalog();
+		/* OLD Q1 and Q2
+		try {
+			List<String> includedInDataCatalog = ontology.getIncludedInDataCatalog();Œ
 			double score = 0; // AgroPortal ontologies are automatically registered in
 			// FAIRsharing and Agrisemantics Map of Data Standards.
 			double points=0;
@@ -73,6 +76,7 @@ public class A12 extends AbstractPrincipleCriterion {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		*/
 	}
 	
 }

@@ -3,8 +3,14 @@ package fr.lirmm.fairness.assessment.principles.criterion.impl.interoperable;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.internal.LinkedTreeMap;
+import fr.lirmm.fairness.assessment.Configuration;
+import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
+import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
+import fr.lirmm.fairness.assessment.principles.criterion.question.Tester;
 import org.json.JSONException;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
@@ -13,96 +19,111 @@ import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriter
 
 public class I2 extends AbstractPrincipleCriterion {
 
-	private static final long serialVersionUID = -8239004504267037012L;
+    private static final long serialVersionUID = -8239004504267037012L;
 
-	@Override
-	protected void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException {
-		
-		List<String> useImports = ontology.getUseImports();
-		List<String> ontologyRelatedTo = ontology.getOntologyRelatedTo();
-		List<String> isAlignedTo = ontology.getIsAlignedTo();
-		List<String> similarTo = ontology.getSimilarTo();
-		List<String> metadataVoc = ontology.getMetadataVoc();
-		String explanationEvolution= ontology.getExplanationEvolution();
-		String translationOfWork= ontology.getTranslationOfWork();
+    @Override
+    protected void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException {
 
-		try {
-			// Q1: Does an ontology import other vocabularies?
-			if (!useImports.isEmpty()) {
-				this.addResult(0, this.questionsPoints.get(0), "Ontology imports other vocabularies");
-			} else {
-				this.addResult(0, 0.0, "Ontology does not import other vocabularies");
-			}
+        List<String> useImports = ontology.getUseImports();
+        List<String> ontologyRelatedTo = ontology.getOntologyRelatedTo();
+        List<String> isAlignedTo = ontology.getIsAlignedTo();
+        List<String> similarTo = ontology.getSimilarTo();
+        List<String> metadataVoc = ontology.getMetadataVoc();
+        String explanationEvolution = ontology.getExplanationEvolution();
+        String translationOfWork = ontology.getTranslationOfWork();
 
-			// Q2: Does an ontology reuse other vocabularies URIs?
-			if (!ontologyRelatedTo.isEmpty()) {
-				this.addResult(1, this.questionsPoints.get(1), "Ontology reuses other vocabularies URIS");
-			} else {
-				this.addResult(1, 0.0, "Ontology does not reuse other vocabularies URIS");
-			}
 
-			// Q3: If yes, does it include the minimum information on that term (cf.
-			// MIREOT)? Note: Default value 0, this indicator can not be evaluated in
-			// %s.
-			this.addResult(2, 0.0, String.format("Default value 0, this indicator can not be evaluated in %s",
-					ontology.getPortalInstance().getName()));
+        //TODO in futur test the faire score of the imported ontologies, and do an average in all questions
 
-			// Q4: Is an ontology aligned to other vocabularies?
-			if (!isAlignedTo.isEmpty()) {
-				this.addResult(3, this.questionsPoints.get(3), "Ontology is aligned to other vocabularies");
-			} else {
-				this.addResult(3, 0.0, "Ontology is not aligned to other vocabularies");
-			}
+        // Q1: Does an ontology import other FAIR vocabularies?
+        this.addResult(Tester.doEvaluation(ontology, questions.get(0), new Testable() {
+            @Override
+            public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+                if (!useImports.isEmpty()) {
+                    this.setSuccess(question);
+                } else {
+                    this.setFailure(question);
+                }
+            }
+        }));
 
-			// Q5: If yes, are those alignements well represented and to unambigous
-			// entities?
-			this.addResult(4, 0.0, String.format("Default value 0, this indicator can not be evaluated in %s",
-					ontology.getPortalInstance().getName()));
 
-			// Q6: If yes, are those alignements curated?
-			this.addResult(5, 0.0, String.format("Default value 0, this indicator can not be evaluated in %s",
-					ontology.getPortalInstance().getName()));
+        // Q2: Does an ontology reuse other vocabularies URIs?
+        this.addResult(Tester.doEvaluation(ontology, questions.get(1), new Testable() {
+            @Override
+            public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+                if (!ontologyRelatedTo.isEmpty()) {
+                    this.setSuccess(question);
+                } else {
+                    this.setFailure(question);
+                }
+            }
+        }));
 
-			// Q7: Does an ontology provide information about influencal other vocabularies?
-			int nbRelations = 0;
-			if (!similarTo.isEmpty()) {
-				nbRelations++; 
-			} 
-		   if (!explanationEvolution.isEmpty())
-		   {
-			   nbRelations++; 
-		   }
-		   if (!translationOfWork.isEmpty())
-		   {
-			   nbRelations++;   
-		   }
-	        
-		   if (nbRelations!=0)
-		   {
-		    this.addResult(6, this.questionsPoints.get(6) ,
-			     String.format("Ontology specifies" +  nbRelations + "influencal relations in %s", ontology.getPortalInstance().getName()));
-		   }
-		   
-		   else 
-		   {
-			  this.addResult(6, 0.0,
-					     String.format("Ontology specifies %d influencal relations in %s", ontology.getPortalInstance().getName()));
-		   }
 
-			// Q8: Does an ontology reuse standards metadata vocabularies to describe its
-			// metadata?
-			if (!metadataVoc.isEmpty()) {
-				this.addResult(7, this.questionsPoints.get(7),
-						"Ontology reuses standards metadata vocabularies to describe its metadata");
-			} else {
-				this.addResult(7, this.questionsPoints.get(7),
-						"Ontology does not reuse standards metadata vocabularies to describe its metadata");
-			}
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
+        // Q3: If yes, does it include the minimum information for those URIs(eg. MIREOT)?
+        this.setNotResolvable(2);
+
+        // Q4: Is the ontology aligned to other FAIR vocabularies?
+        this.addResult(Tester.doEvaluation(ontology, questions.get(3), new Testable() {
+            @Override
+            public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+                if (!isAlignedTo.isEmpty()) {
+                    this.setSuccess(question);
+                } else {
+                    this.setFailure(question);
+                }
+            }
+        }));
+
+
+        // Q5: If yes, are those alignements well represented and to unambiguous entities?
+        this.setNotResolvable(4);
+
+        // Q6: Does an ontology provide information about influential other vocabularies?
+        this.addResult(Tester.doEvaluation(ontology, questions.get(5), new Testable() {
+            @Override
+            public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+                if (!similarTo.isEmpty() || !translationOfWork.isEmpty() || !explanationEvolution.isEmpty()) {
+                    this.setSuccess(question);
+                } else {
+                    this.setFailure(question);
+                }
+            }
+        }));
+
+
+        // Q7: Does an ontology reuse standards metadata vocabularies to describe its metadata?
+        this.addResult(Tester.doEvaluation(ontology, questions.get(6), new Testable() {
+            @Override
+            public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+                try {
+                    ArrayList<LinkedTreeMap<?,?>> vocs = (ArrayList<LinkedTreeMap<?,?>>) Configuration.getInstance().getMetadataVocConfig().get("vocabularies");
+                    double total = 0.0;
+                    int count = 0;
+
+                    if (!metadataVoc.isEmpty()) {
+                        for (LinkedTreeMap<?, ?> voc : vocs) {
+                            String pref = (String) voc.get("prefix");
+                            if (metadataVoc.contains(pref)) {
+                                count++;
+                                total += (double) voc.get("score");
+                            }
+                        }
+                    }
+
+                    if(total == 0.0){
+                        setScore(question.getMaxPoint().getScore() * (total / count), question.getMaxPoint().getExplanation(), question);
+                     } else {
+                        setFailure(question);
+                    }
+                } catch (IOException e) {
+                    setFailure("Fail to load the config file", question);
+                }
+
+            }
+        }));
+
+    }
+
 }

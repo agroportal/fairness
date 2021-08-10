@@ -27,6 +27,8 @@ public class ValidDOITest implements Test<String>{
 
     }
 
+
+
     public static ValidDOITest getInstance() {
         if( instance == null){
             instance = new ValidDOITest();

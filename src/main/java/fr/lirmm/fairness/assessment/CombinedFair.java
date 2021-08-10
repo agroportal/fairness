@@ -1,11 +1,17 @@
 package fr.lirmm.fairness.assessment;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import fr.lirmm.fairness.assessment.principles.AbstractPrinciple;
 import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriterion;
 import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
 import fr.lirmm.fairness.assessment.utils.CombinedResult;
 import fr.lirmm.fairness.assessment.utils.Result;
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.List;
 
 
 public class CombinedFair {
@@ -18,7 +24,7 @@ public class CombinedFair {
         this.fairCount = fairCount;
     }
 
-    public void addFairToCombine(JsonObject fair){
+    public void addFairToCombine(JsonObject fair) throws JSONException {
 
         getFair().getScores().add(fair.get("score").getAsDouble() / fairCount );
         getFair().getScoresWeights().add(fair.get("maxCredits").getAsDouble() / fairCount);
@@ -34,7 +40,7 @@ public class CombinedFair {
         return fair;
     }
 
-    private void combinePrinciple(int indexPrinciple , JsonObject newPrinciple){
+    private void combinePrinciple(int indexPrinciple , JsonObject newPrinciple) throws JSONException {
         AbstractPrinciple combinedPrinciple = this.getFair().getPrinciples()[indexPrinciple];
         combinedPrinciple.getScores().add(newPrinciple.get("score").getAsDouble() / fairCount);
         combinedPrinciple.getScoresWeights().add(newPrinciple.get("maxCredits").getAsDouble() / fairCount);
@@ -47,7 +53,7 @@ public class CombinedFair {
 
     }
 
-    private void combinePrincipleCriterion(AbstractPrinciple combinedPrinciple,int indexCriterion , JsonObject newCriterion){
+    private void combinePrincipleCriterion(AbstractPrinciple combinedPrinciple,int indexCriterion , JsonObject newCriterion) throws JSONException {
         AbstractPrincipleCriterion combinedCriterion = combinedPrinciple.getPrincipleCriteria().get(indexCriterion);
         combinedCriterion.getScores().add(newCriterion.get("score").getAsDouble() / fairCount);
         combinedCriterion.getScoresWeights().add(newCriterion.get("maxCredits").getAsDouble() / fairCount);
@@ -59,11 +65,13 @@ public class CombinedFair {
         }
     }
 
-    private void combineCriterionQuestion(AbstractPrincipleCriterion combinedCriterion , int indexQuestion , JsonObject newQuestion , String questionLabel){
+    private void combineCriterionQuestion(AbstractPrincipleCriterion combinedCriterion , int indexQuestion , JsonObject newQuestion , String questionLabel) throws JSONException {
         CombinedResult combinedQuestion;
         if(combinedCriterion.getResults().size() <= indexQuestion){
            combinedQuestion = new CombinedResult(newQuestion.get("score").getAsDouble() / fairCount  ,
-                    new AbstractCriterionQuestion(questionLabel , newQuestion.get("question").getAsString() , newQuestion.get("maxCredits").getAsDouble()));
+                    new AbstractCriterionQuestion(questionLabel , newQuestion.get("question").getAsString() ,
+                            AbstractCriterionQuestion.getQuestionResultsArray(newQuestion.get("points").getAsJsonArray()) ,
+                            new Gson().fromJson(newQuestion.get("properties") , List.class)));
             combinedCriterion.getResults().add(combinedQuestion);
 
         }else {
@@ -72,4 +80,7 @@ public class CombinedFair {
         }
         combinedQuestion.addStateCount(newQuestion.get("score").getAsDouble());
     }
+
+
+
 }

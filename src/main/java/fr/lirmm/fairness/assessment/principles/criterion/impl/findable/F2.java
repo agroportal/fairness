@@ -3,76 +3,52 @@ package fr.lirmm.fairness.assessment.principles.criterion.impl.findable;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
+import java.util.Arrays;
 
+import fr.lirmm.fairness.assessment.principles.criterion.question.tests.MetaDataExistTest;
+import fr.lirmm.fairness.assessment.utils.QuestionResult;
 import org.json.JSONException;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
 import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriterion;
-import fr.lirmm.fairness.assessment.utils.OntologyRestApi;
 
 public class F2 extends AbstractPrincipleCriterion {
 	
 	private static final long serialVersionUID = -3376420498708614002L;
 
-	private String[] metadataFlags = new String[] {
-		"MUST",
-		"SHOULD",
-		"OPTIONAL",
-		"NO_MAPPING" 
-	};
+
 	private int nbValidProp=0;
 
 	@Override 
-	protected void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException {
-		try { 
+	protected void doEvaluation(Ontology ontology) throws JSONException, IOException {
+
 			String[][] allMetadata = this.allMetadataToEvaluate(ontology);
 			for(int i = 0 ; i < allMetadata.length; i ++) {
-				double score = this.evaluatecheckMetadata(allMetadata[i], i);
-				// TODO change NO_MAPPING to not other
-				if (metadataFlags[i].equals("NO_MAPPING")) {
-					this.addResult(i, score, String.format("%d \"%s\" properties found", nbValidProp, "not other"));
-				}else {
-					this.addResult(i, score, String.format("%d \"%s\" properties found", nbValidProp, metadataFlags[i]));
-				}
+				this.addResult(this.evaluateCheckMetadata(allMetadata[i], i));
 			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 	
-	private int evaluatecheckMetadata(String[] metadata, int importanceLevel) {
-		nbValidProp=0; 
-		double credits = this.questionsPoints.get(importanceLevel);
-		int score = 0;
-		int points= 0; 	
-		int i=0; 
-		if (metadataFlags[importanceLevel] == "MUST")
-		{points=4;}
-		else if (metadataFlags[importanceLevel]== "SHOULD")
-		{points=2;}
-		else if ((metadataFlags[importanceLevel]== "OPTIONAL") || (metadataFlags[importanceLevel]== "NO_MAPPING"))
-		{points=1;}	
-		
-		while((i<metadata.length)&&  (score<=credits-points))
-		{ 
-			if (OntologyRestApi.isValidMetadatumValue(metadata[i])) {
-				score += points; 
-				nbValidProp++;
-			}	
-			i++;
-		}	
-		
-		return score; 
+	private QuestionResult evaluateCheckMetadata(String[] metadata, int questionIndex) {
+		QuestionResult result = this.questions.get(questionIndex).getMaxPoint(Math.max(this.nbValidProp - 1 , 0));
+		this.nbValidProp=0;
+
+		for (int j = 0; j < Math.min(metadata.length, this.questions.get(questionIndex).getPoints().size()); j++) {
+			if (MetaDataExistTest.isValid(metadata[j])) {
+				this.nbValidProp++;
+			}
+		}
+
+		return  new QuestionResult(result.getScore(), result.getExplanation() , this.questions.get(questionIndex) );
 	}
 	
 	private String[][] allMetadataToEvaluate(Ontology ontology) {
 		return new String[][] {
+				//Q1
 			new String[] { // must properties
 				ontology.getName(),
 				ontology.getAlternative(),
 				ontology.getHiddenLabel(),
-				ontology.getId(),
+				ontology.getIdentifier(),
 				ontology.getHasOntoLang(),
 				ontology.getDescription(),
 				ontology.getHomePage(),
@@ -96,6 +72,7 @@ public class F2 extends AbstractPrincipleCriterion {
 				ontology.getBugDatabase(),
 				ontology.getMailingList(), 
 			},
+				//Q2
 			new String[] { // should properties
 				ontology.getMetrics(), 
 				ontology.getNumberOfClasses(),
@@ -103,9 +80,11 @@ public class F2 extends AbstractPrincipleCriterion {
 				ontology.getNumberOfIndividuals(),
 				ontology.getNumberOfAxioms(), 
 			},
+				//Q3
 			new String[] { // optional properties
 				ontology.getPreferredNamespacePrefix()
 			},
+				//Q4
 			new String[] { // no mapping
 				String.join(";", ontology.getLanguage()),
 				ontology.getAbstra(),

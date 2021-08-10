@@ -1,72 +1,84 @@
 package fr.lirmm.fairness.assessment.principles.criterion.impl.reusable;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
+import java.util.Arrays;
 
+import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
+import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
+import fr.lirmm.fairness.assessment.principles.criterion.question.Tester;
+import fr.lirmm.fairness.assessment.utils.Result;
 import org.json.JSONException;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
 import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriterion;
 
 public class R13 extends AbstractPrincipleCriterion {
-	
-	private static final long serialVersionUID = 8721990196106759026L;
 
-	private static String[] groupsToCheck = new String[] {"OBO", "", "WHEAT", "CROP", "INRAE"};
-	private static String[] oboFoundryOntologiesToCheck = new String[] {"BFO", "CHEBI", "DOID", "GO", "OBI", "PATO", "PO", "PR", "XAO" , "ZFA"};  
+    private static final long serialVersionUID = 8721990196106759026L;
 
-	@Override
-	protected void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException {
 
-		try {			
-			final String group = ontology.getGroup();
-			for (int i = 0; i < groupsToCheck.length; i++) {
-				if (i!=1)
-				{
-				final String groupToCheck = groupsToCheck[i];
-				final boolean groupFound = group.contains(groupToCheck);
-				this.addResult(i, groupFound ? this.questionsPoints.get(i) : 0, String.format(
-						"Ontology is %sincluded in the %s group/project", groupFound ? "" : "NOT ", groupToCheck));
-				}
-				else 
-				{  
-					if (group.contains("OBO"))
-				    {
-				    boolean oboOnologyFound= false;
-					final String acronym= ontology.getAcronym();
-				    int j=0;
-				    String oboFoundryToCheck=""; 
-				    while ((!oboOnologyFound) && (j<oboFoundryOntologiesToCheck.length))    
-					{
-					oboFoundryToCheck= oboFoundryOntologiesToCheck[j];
-					oboOnologyFound= acronym.contains(oboFoundryToCheck);
-					j++; 
-					}	    
-				    this.addResult(1, oboOnologyFound ? this.questionsPoints.get(1) : 0, String.format(
-							"Ontology is %s included in the %s OBO foundry", oboOnologyFound ? "" : "NOT ", oboFoundryToCheck));
-					}
-					else 
-					{
-					   this.addResult(1, 0.0, "Ontology is not included in the OBO foundry group");
-					}
-				}
-			}	
-			
-			// Q6: Is the ontology openly and freely available?
-			String visibility= ontology.getViewingrestriction();
-				if(visibility.contains("public"))
-				{
-				  this.addResult(5,this.questionsPoints.get(5), "Ontology is openly and freely available");	
-				}
-				else
-				{
-			      this.addResult(5, 0, "Ontology is not openly and freely available");
-				}
-		}
-			catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
+    @Override
+    protected void doEvaluation(Ontology ontology) throws JSONException, IOException {
+
+
+        // Q1: Does an ontology provide information about projects using or organization endorsing?
+        Result r = Tester.doEvaluation(ontology, questions.get(0), new Testable() {
+            @Override
+            public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+
+                if ((ontology.getProjects().isEmpty()) && (ontology.getEndorsedBy().isEmpty())) {
+                    this.setFailure("Ontology does not provide information about projects and endorsing organizations", question);
+                } else {
+                    int count = 0;
+                    if ((!ontology.getEndorsedBy().isEmpty())) {
+                        count++;
+                    }
+                    if (!ontology.getProjects().isEmpty()) {
+                        count++;
+                    }
+                    this.setScore(count, question);
+                }
+            }
+        });
+        this.addResult(r);
+
+
+
+        //Q2: Is the ontology included in a specific community set or group?
+        r = Tester.doEvaluation(ontology, questions.get(1), new Testable() {
+            @Override
+            public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+                final String group = ontology.getGroup();
+                String[] groupsToCheck = new String[]{"OBO", "WHEAT", "CROP", "INRAE"};
+                String[] oboFoundryOntologiesToCheck = new String[]{"BFO", "CHEBI", "GO", "PATO", "PO", "PR"};
+
+                if (group.equals("OBO") && Arrays.asList(oboFoundryOntologiesToCheck).contains(ontology.getAcronym())) {
+                    this.setSuccess(question);
+                }else if (group.equals("OBO")) {
+                    this.setScore(1 , question);
+                }else if (Arrays.asList(groupsToCheck).contains(group)) {
+                    this.setScore(0, question);
+                }else {
+                    this.setFailure( question);
+                }
+            }
+        });
+        this.addResult(r);
+
+        // Q3: Is the ontology openly and freely available?
+        String visibility = ontology.getViewingrestriction();
+        this.addResult(Tester.doEvaluation(ontology, questions.get(2), new Testable() {
+            @Override
+            public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+                if (visibility.contains("public")) {
+                    this.setSuccess(question);
+                } else {
+                    this.setFailure(question);
+                }
+            }
+        }));
+
+    }
+
 }
+

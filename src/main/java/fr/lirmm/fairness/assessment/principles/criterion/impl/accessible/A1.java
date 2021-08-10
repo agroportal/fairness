@@ -2,12 +2,13 @@ package fr.lirmm.fairness.assessment.principles.criterion.impl.accessible;
 
 import java.io.IOException;
 import java.net.*;
-import java.util.ArrayList;
 import java.util.List;
 
+import fr.lirmm.fairness.assessment.principles.criterion.question.tests.ContentNegotiationTest;
 import fr.lirmm.fairness.assessment.principles.criterion.question.tests.MetaDataExistTest;
 import fr.lirmm.fairness.assessment.principles.criterion.question.tests.ResolvableURLTest;
 import fr.lirmm.fairness.assessment.principles.criterion.question.tests.URLValidTest;
+import fr.lirmm.fairness.assessment.utils.QuestionResult;
 import fr.lirmm.fairness.assessment.utils.Result;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Tester;
@@ -29,16 +30,16 @@ public class A1 extends AbstractPrincipleCriterion {
         Result r = Tester.doEvaluation(ontology, this.questions.get(0), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
-                String uri = ontology.getUri();
-                String id = ontology.getId();
-                double score = 0;
+                String uri = ontology.getOntologyIRI();
+                String id = ontology.getIdentifier();
+                int count = 0;
                 String uriErrorMessage = "";
                 String idErrorMessage = "";
 
                 if (MetaDataExistTest.isValid(uri)) {
                     if (URLValidTest.isValid(uri)) {
                         if (ResolvableURLTest.isValid(uri)) {
-                            score += 0.5;
+                            count ++;
                         } else {
                             uriErrorMessage = "Not resolvable ontology URI";
                         }
@@ -52,7 +53,7 @@ public class A1 extends AbstractPrincipleCriterion {
                 if (MetaDataExistTest.isValid(id)) {
                     if (URLValidTest.isValid(id)) {
                         if (ResolvableURLTest.isValid(id)) {
-                            score += 0.5;
+                            count ++;
                         } else {
                             idErrorMessage = "Not resolvable ontology ID";
                         }
@@ -63,12 +64,13 @@ public class A1 extends AbstractPrincipleCriterion {
                     idErrorMessage = "Ontology ID not present";
                 }
 
-                if (score == question.getMaxPoint()) {
-                    setSuccess("Resolvable ontology URI and ID", question);
-                } else if (score > 0) {
-                    setScore(score * question.getMaxPoint(), uriErrorMessage +
+                if (count == 1.0) {
+                    setSuccess(question);
+                } else if (count > 0) {
+                    QuestionResult result = question.getMaxPoint(count);
+                    setScore( result.getScore(), result.getExplanation() + " (" + uriErrorMessage +
                             ((!uriErrorMessage.isEmpty() && !idErrorMessage.isEmpty()) ? " and " : "")
-                            + idErrorMessage, question);
+                            + idErrorMessage + ")", question);
 
                 }
             }
@@ -76,30 +78,28 @@ public class A1 extends AbstractPrincipleCriterion {
         this.addResult(r);
 
         //Q2 : Does the ontology URI (if metadata is included in the ontology file) or the external metadata URI resolve to the metadata record ?
-
-        this.addResult(1, this.questions.get(1).getMaxPoint(), "The repository provides an external metadata URI which resolves to the metadata record"); //we test on AgroPortal metadata -> max points.
+        this.addResult(1, this.questions.get(1).getMaxPoint().getScore(), "The repository provides an external metadata URI which resolves to the metadata record"); //we test on AgroPortal metadata -> max points.
 
         //Q3: Are ontology and its metadata supporting content negotiation?
         r = Tester.doEvaluation(ontology, this.questions.get(2), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
-                String[] formats = {"application/json", "application/xml", "text/html", "text/plain"};
-                List<String> acceptedFormats = contentNegotiationTest(ontology.getUri(), "", formats);
+
+                List<String> acceptedFormats = ContentNegotiationTest.acceptedFormats(ontology.getOntologyIRI(), "");
                 String ontologyMessage = "";
                 String metadataMessage = "";
-                double score = 0.0;
+                int count = 0;
 
-                System.out.println("Accepted formats for the ontology are : " + acceptedFormats);
-                score += acceptedFormats.size() * (question.getMaxPoint() / (formats.length * 2));
+                count += acceptedFormats.size();
                 if (acceptedFormats.size() > 0) {
                     ontologyMessage = "Ontology accept the following formats: " + acceptedFormats;
                 } else {
                     ontologyMessage = "Ontology is not content-negotiable";
                 }
 
-                acceptedFormats = contentNegotiationTest(ontology.getMetaDataURL(), ontology.getPortalInstance().getApikey(), formats);
-                System.out.println("Accepted formats for the meta are : " + acceptedFormats);
-                score += acceptedFormats.size() * (question.getMaxPoint() / (formats.length * 2));
+                acceptedFormats = ContentNegotiationTest.acceptedFormats(ontology.getMetaDataURL(), ontology.getPortalInstance().getApikey());
+
+                count += acceptedFormats.size();
                 if (acceptedFormats.size() > 0) {
                     metadataMessage = "Ontology metadata accept the following formats: " + acceptedFormats;
                 } else {
@@ -107,12 +107,13 @@ public class A1 extends AbstractPrincipleCriterion {
                 }
 
 
-                if (score == 0) {
-                    setFailure("Ontology and ontology metadata are not content-negotiable", question);
+                if (count == 0) {
+                    setFailure(question);
                 } else {
-                    setScore(score, ontologyMessage +
+                    QuestionResult result = question.getMaxPoint(count);
+                    setScore(result.getScore(),  result.getExplanation() + " ("+ontologyMessage +
                             (!ontologyMessage.isEmpty() && !metadataMessage.isEmpty() ? ", " : "")
-                            + metadataMessage, question);
+                            + metadataMessage + ")", question);
                 }
             }
         });
@@ -124,34 +125,15 @@ public class A1 extends AbstractPrincipleCriterion {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 String endPoint = ontology.getEndPoint();
-                if (endPoint != null && !endPoint.isEmpty()) {
+                if(MetaDataExistTest.isValid(endPoint)){
                     // TODO test if agroportal sparql with the agroportal endpoint
-                    setSuccess("Ontology is accessible through a SPARQL endpoint", question);
+                    // Test url resolvable url
+                    setSuccess(question);
                 } else {
-                    setFailure("Ontology is not accessible through another standard protocol (such as SPARQL endpoint)", question);
+                    setFailure(question);
                 }
             }
         });
         this.addResult(r);
-    }
-
-
-    private List<String> contentNegotiationTest(String url, String apikey, String[] formats) {
-
-        List<String> foundFormats = new ArrayList<String>();
-        List<String> args = new ArrayList<>();
-        for (String format : formats) {
-            args.clear();
-            args.add(url);
-            args.add(format);
-            if (apikey != null) {
-                args.add(apikey);
-            }
-
-            if (ResolvableURLTest.isValid(args.toArray(String[]::new))) {
-                foundFormats.add(format);
-            }
-        }
-        return foundFormats;
     }
 }

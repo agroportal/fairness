@@ -142,7 +142,7 @@ public class FairServlet extends HttpServlet {
 
     }
 
-    private JsonElement getCombinedScore(JsonObject ontologies){
+    private JsonElement getCombinedScore(JsonObject ontologies) throws JSONException {
         CombinedFair combinedFair = new CombinedFair(ontologies.size());
         Gson gson = new GsonBuilder().create();
         for (String s : ontologies.keySet()) {

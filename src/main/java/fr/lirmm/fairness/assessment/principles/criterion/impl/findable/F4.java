@@ -1,10 +1,17 @@
 package fr.lirmm.fairness.assessment.principles.criterion.impl.findable;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.google.gson.internal.LinkedTreeMap;
+import fr.lirmm.fairness.assessment.Configuration;
+import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
+import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
+import fr.lirmm.fairness.assessment.principles.criterion.question.Tester;
+import fr.lirmm.fairness.assessment.utils.Result;
 import org.json.JSONException;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
@@ -12,124 +19,76 @@ import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriter
 
 public class F4 extends AbstractPrincipleCriterion {
 
-	private static final long serialVersionUID = -3047153112624011099L;
+    private static final long serialVersionUID = -3047153112624011099L;
 
-	@Override
-	protected void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException {
+    @Override
+    protected void doEvaluation(Ontology ontology) throws JSONException, IOException {
 
-		try {
-			int i; 
-			double score = 0, points=0;
-			// Q1: Is the ontology registered in multiple ontology libraries?
-
-			score= 0;
-			List<String> includedInDataCatalog = ontology.getIncludedInDataCatalog();		
-			if (includedInDataCatalog.isEmpty()) {
-				this.addResult(0, 0, "The ontology doesn't declare existing in other ontology libraries ");
-			} else {
-				points= 1; // Give 1pt per ontology library
-				i = 0;
-				while ((i <= (includedInDataCatalog.size()- 1)) && (score < this.questionsPoints.get(0)))
-				{
-					if (includedInDataCatalog.get(i).contains("obofoundry.org")) { //lib
-						score+=points;
-					} else if (includedInDataCatalog.get(i).contains("ontobee.org")) { //repo
-						score+=points;
-					} else if (includedInDataCatalog.get(i).contains("aber-owl.net")) { // repo
-						score+=points;
-					}
-					else if (includedInDataCatalog.get(i).contains("vest.agrisemantics.org")) { //lib
-						score+=points;
-					}
-					else if (includedInDataCatalog.get(i).contains("ontohub.org")) { // repo
-						score+=points;
-					}
-					else if (includedInDataCatalog.get(i).contains("fairsharing.org")) { // lib
-						score+=points;
-					}
-					i++;
-				}
-				if(score == 0){
-					// TODO add
-					this.addResult(0, 0, String.format("The ontology is registered in %d ontology libraries", i));
-				}else{
-					// TODO add the libraries found in
-					this.addResult(0, score, String.format("The ontology is registered in %d ontology libraries", i));
-				}
-			}
+        Result r;
+        ArrayList<LinkedTreeMap> repos = (ArrayList<LinkedTreeMap>) Configuration.getInstance().getRepositoriesConfig().get("repositories");
+        ArrayList<LinkedTreeMap> libs = (ArrayList<LinkedTreeMap>) Configuration.getInstance().getRepositoriesConfig().get("libraries");
+        String currentRepo = ontology.getPortalInstance().getUrl();
+        List<String> includedInDataCatalog = ontology.getIncludedInDataCatalog();
 
 
-			// Q2: Is the ontology registered in multiple open ontology repositories?  Here we
-			// consider OBO foundry, NCBO Bioportal, Ontobee, Aber and OLS.
-			
-			score = 1; // Ontology is in AgroPortal repository //TODO make generic
-			points= 1;  // 1pt per ontology repository
-			
-			if (includedInDataCatalog.isEmpty()) {
-				this.addResult(1, score, "Ontology is not registered in any additional open ontology repository (except AgroPortal)");
-			} else {
-				i = 0;
-				while ((i < (includedInDataCatalog.size())) && (score < this.questionsPoints.get(1))) {
+        // Q1: Is the ontology registered in multiple ontology libraries?
+        r = Tester.doEvaluation(ontology, questions.get(0), new Testable() {
+            @Override
+            public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+                int found = 0;
+                if (includedInDataCatalog.isEmpty()) {
+                    for (int i = 0; i < repos.size() && found < question.getPoints().size(); i++) {
+                        if (includedInDataCatalog.contains(repos.get(i).get("url").toString()) || (currentRepo.contains(repos.get(i).get("url").toString())))
+                            found++;
+                    }
 
-					if (includedInDataCatalog.get(i).contains("bioportal.bioontology.org")) {
-						score += points;
-					}
-					else if (includedInDataCatalog.get(i).contains("ebi.ac.uk/ols")) {
-						score += points;
-					}
-					else if (includedInDataCatalog.get(i).contains("ontobee.org"))  {
-						
-						score+=points; 
-					}else if (includedInDataCatalog.get(i).contains("ontohub.org")) { // repo
-						score+=points;
-					}
-					else if (includedInDataCatalog.get(i).contains("aber-owl.net"))
-					{
-						score+=points;
-					}
-					
-					i++;
-				}
-				this.addResult(1, score, String.format("Ontology is registered in %d open ontology libraries", i));
-			}
+                    for (int i = 0; i < libs.size() && found < question.getPoints().size(); i++) {
+                        if (includedInDataCatalog.contains(libs.get(i).get("url").toString()) || (currentRepo.contains(libs.get(i).get("url").toString())))
+                            found++;
+                    }
+
+                    setScore(found, question);
+                } else {
+                    setFailure(question.getMaxPoint(0).getExplanation() + getLabels(repos) + ""
+                            + getLabels(libs), question);
+                }
+
+            }
+        });
+        this.addResult(r);
 
 
-			// Q3: Is an ontology registered in the "de facto" reference libraries or repositories?
-			// TODO remove
-			if (includedInDataCatalog.isEmpty()) {
-				this.addResult(2, 0, "Ontology is not registered in any additional de-fact ontology repository (except AgroPortal)");
-			} else {
-				score=1; // ontology is registered in AgroPortal ("de facto repository")
-				i = 0;
-				points= this.questionsPoints.get(2)/3;
+        // Q2: Is the ontology registered in multiple open ontology repositories?  Here we
+        // consider OBO foundry, NCBO Bioportal, Ontobee, Aber and OLS.
+        r = Tester.doEvaluation(ontology, questions.get(0), new Testable() {
+            @Override
+            public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+                int found = 0;
+                List<String> includedInDataCatalog = ontology.getIncludedInDataCatalog();
+                if (includedInDataCatalog.isEmpty()) {
+                    for (int i = 0; i < repos.size() && found < question.getPoints().size(); i++) {
+                        if (includedInDataCatalog.contains(repos.get(i).get("url").toString()) || (currentRepo.contains(repos.get(i).get("url").toString())))
+                            found++;
+                    }
 
-				while ((i < (includedInDataCatalog.size())) && (score < this.questionsPoints.get(2))) {
+                    setScore(found, question);
+                } else {
+                    setFailure(question.getMaxPoint(0).getExplanation() + getLabels(repos), question);
+                }
 
-					if (includedInDataCatalog.get(i).contains("bioportal.bioontology.org")) {
-						score += points; 
-					}
+            }
+        });
+        this.addResult(r);
 
-					else if (includedInDataCatalog.get(i).contains("www.ebi.ac.uk/ols")) {
-						score += points;
-					}
-
-					else if (includedInDataCatalog.get(i).contains("www.ontobee.org")) {
-						score += points;
-					}
-					i++;
-				}
-				this.addResult(2, score, String.format("Ontology is registered in %d de-facto ontology libraries", i));
-			}
-			
-		 // TODO  Q4: Are the ontology libraries or repositories properly indexed by Web search engines?
+        //Q3: Are the ontology libraries or repositories properly indexed by Web search engines?
+        //TODO implement F4Q3
+        this.setNotResolvable(2);
 
 
-			//TODO change explanation
-			this.addResult(3, 0, "Not yet implemented");
-		}
-			catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
+    }
+
+    private List<Object> getLabels(ArrayList<LinkedTreeMap> repos) {
+        return Arrays.stream(repos.toArray()).map(x -> ((LinkedTreeMap) x).get("label")).collect(Collectors.toList());
+    }
+
 }

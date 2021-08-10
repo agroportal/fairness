@@ -1,0 +1,140 @@
+{
+  "vocabularies" : [
+    {
+      "prefix" : "rdfs",
+      "score" : 0.75
+    },
+    {
+      "prefix" : "owl",
+      "score" : 0.75
+    },
+    {
+      "prefix" : "skos",
+      "score" : 0.75
+    },
+    {
+      "prefix" : "dc",
+      "score" : 0.75
+    },
+    {
+      "prefix" : "dcterms",
+      "score" : 0.75
+    },
+    {
+      "prefix" : "omv",
+      "score" : 0.5
+    },
+    {
+      "prefix" : "mod",
+      "score" : 0.5
+    },
+    {
+      "prefix" : "door",
+      "score" : 0.25
+    },
+    {
+      "prefix" : "voaf",
+      "score" : 0.5
+    },
+    {
+      "prefix" : "void",
+      "score" : 0.5
+    },
+    {
+      "prefix" : "idot",
+      "score" : 0.25
+    },
+    {
+      "prefix" : "vann",
+      "score" : 0.5
+    },
+    {
+      "prefix" : "dcat",
+      "score" : 0.75
+    },
+    {
+      "prefix" : "adms",
+      "score" : 0.5
+    },
+    {
+      "prefix" : "schema",
+      "score" : 0.75
+    },
+    {
+      "prefix" : "foaf",
+      "score" : 0.75
+    },
+    {
+      "prefix" : "doap",
+      "score" : 0.5
+    },
+    {
+      "prefix" : "cc",
+      "score" : 0.75
+    },
+    {
+      "prefix" : "prov",
+      "score" : 0.75
+    },
+    {
+      "prefix" : "pav",
+      "score" : 0.75
+    },
+    {
+      "prefix" : "oboInOwl",
+      "score" : 0.5
+    },
+    {
+      "prefix" : "sd",
+      "score" : 0.75
+    },
+    {
+      "prefix" : "nkos",
+      "score" : 0.25
+    },
+    {
+      "prefix" : "cito",
+      "score" : 0.25
+    },
+    {
+      "prefix" : "wdrs",
+      "score" : 0.5
+    },
+    {
+      "prefix" : "bibo",
+      "score" : 0.5
+    },
+    {
+      "prefix" : "disco",
+      "score" : 0.5
+    },
+    {
+      "prefix" : "oa",
+      "score" : 0.75
+    },
+    {
+      "prefix" : "iao",
+      "score" : 0.5
+    },
+    {
+      "prefix" : "sio",
+      "score" : 0.5
+    },
+    {
+      "prefix" : "void-ext",
+      "score" : 0.25
+    },
+    {
+      "prefix" : "ro",
+      "score" : 0.25
+    },
+    {
+      "prefix" : "swoogle",
+      "score" : 0.5
+    },
+    {
+      "prefix" : "edam",
+      "score" : 0.5
+    }
+  ]
+}

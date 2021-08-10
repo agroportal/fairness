@@ -22,7 +22,7 @@ public class CombinedResult extends Result {
 
 
     public void addStateCount(double score){
-        if(score == question.getMaxPoint())
+        if(score == question.getMaxPoint().getScore())
             this.successCount++;
         else if (score > 0)
             this.averageCount++;

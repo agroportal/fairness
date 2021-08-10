@@ -26,15 +26,21 @@ public class ResultSetJsonConverter extends AbstractJsonConverter<List<Result>> 
 				object.add("question" , gson.toJsonTree(question.getQuestion()));
 			}
 			object.add("score" , gson.toJsonTree(Math.round(result.getScore()*100.0)/100.0));
+			//TODO addd response value
 			if(result instanceof QuestionResult){
-				if(!((QuestionResult)result).getExplication().trim().isBlank()){
-					object.add("explication" , gson.toJsonTree(((QuestionResult)result).getExplication()));
+				if(!((QuestionResult)result).getExplanation().trim().isBlank()){
+					object.add("explanation" , gson.toJsonTree(((QuestionResult)result).getExplanation()));
 				}
 			}
 			if(question != null) {
-				object.add("maxCredits" , gson.toJsonTree(question.getMaxPoint()));
+				object.add("maxCredits" , gson.toJsonTree(question.getMaxPoint().getScore()));
+				object.add("points" , gson.toJsonTree(question.getPoints()));
+				if(question.getProperties() != null){
+					object.add("properties" , gson.toJsonTree(question.getProperties()));
+				}
 				jsonObject.add(question.getLabel() , object);
 			}
+
 
 			if(result instanceof CombinedResult){
 				JsonObject state = new JsonObject();

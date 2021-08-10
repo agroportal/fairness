@@ -7,6 +7,10 @@ import java.net.SocketTimeoutException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import fr.lirmm.fairness.assessment.Configuration;
 import fr.lirmm.fairness.assessment.utils.QuestionResult;
 import fr.lirmm.fairness.assessment.utils.Result;
@@ -21,7 +25,6 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 	
 	private static final long serialVersionUID = -5519124612489307590L;
 	protected List<AbstractCriterionQuestion> questions = null;
-	protected List<Double> questionsPoints = null; //TODO remove after ending refactoring
 	private Double maxCredits = 0.0;
 	private Double portalMaxCredits = 0.0;
 	protected List<Result> results = new ArrayList<>();
@@ -30,7 +33,6 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 	public AbstractPrincipleCriterion() {
 		super();
 		this.fillProperties();
-		this.questionsPoints = this.questions.stream().map(AbstractCriterionQuestion::getMaxPoint).collect(Collectors.toList());
 	}
 
 	@Override
@@ -39,7 +41,7 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 		System.out.println("> Evaluating '" + this.getClass().getSimpleName() + "' of ontology '" + ontology.getAcronym() + "' on repository '" + ontology.getPortalInstance().getName() + "' (" + ontology.getPortalInstance().getUrl() + "?apikey=" + ontology.getPortalInstance().getApikey() + ").");
 		this.doEvaluation(ontology);
 		this.scores = this.results.stream().map(x -> x.getScore()).collect(Collectors.toList());
-		this.weights = this.questionsPoints;
+		this.weights = this.questions.stream().map(x -> x.getMaxPoint().getScore()).collect(Collectors.toList());;
 	}
 
 	@Override
@@ -57,6 +59,11 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 	protected void addResult(int index, double score, String explanation) {
 		this.results.add(index,new QuestionResult(score , explanation , questions.get(index)));
 	}
+
+	protected void setNotResolvable(int index){
+		this.results.add(QuestionResult.notResolvable(questions.get(index)));
+	}
+
 
 	protected void addResult(Result result){
 		this.results.add(result);
@@ -79,8 +86,13 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 			this.label = criterionList.get("label").toString();
 			this.questions = new ArrayList<>();
 
+			Gson gson = new GsonBuilder().create();
 			for (Map.Entry<String,Map<?,?>> q: ((Map<String, Map<?,?>>)criterionList.get("questions")).entrySet()) {
-				this.questions.add(new AbstractCriterionQuestion(q.getKey(), q.getValue().get("question").toString() , new Double[]{Double.parseDouble(q.getValue().get("points").toString())}));
+				this.questions.add(new AbstractCriterionQuestion(
+						q.getKey(),
+						q.getValue().get("question").toString() ,
+						AbstractCriterionQuestion.getQuestionResultsArray(gson.toJsonTree(q.getValue().get("points"), ArrayList.class).getAsJsonArray()),
+						(List<String>) q.getValue().get("properties")));
 			}
 		} catch(Exception ioe) {
 			ioe.printStackTrace();

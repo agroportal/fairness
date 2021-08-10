@@ -3,7 +3,14 @@ package fr.lirmm.fairness.assessment.principles.criterion.impl.interoperable;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
+import java.util.Arrays;
 
+import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
+import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
+import fr.lirmm.fairness.assessment.principles.criterion.question.Tester;
+import fr.lirmm.fairness.assessment.principles.criterion.question.tests.MetaDataExistTest;
+import fr.lirmm.fairness.assessment.utils.QuestionResult;
+import fr.lirmm.fairness.assessment.utils.Result;
 import org.json.JSONException;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
@@ -11,103 +18,87 @@ import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriter
 
 public class I1 extends AbstractPrincipleCriterion {
 
-	private static final long serialVersionUID = -7037423784770664158L;
+    private static final long serialVersionUID = -7037423784770664158L;
 
-	@Override
-	protected void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException {
-		
-		String ontoLang = ontology.getHasOntoLang();
-		String ontoSyntax = ontology.getHasOntoSyntax();
-		String formalLevel = ontology.getHasFormalLevel();
-		String hasFormat = ontology.getHasFormat();
-		String isFormatOf = ontology.getIsFormatOf();
-		try {
+    @Override
+    protected void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException {
 
-			// Q1: What is the representation language used for (metadata)data? Note that
-			// I1Q1Points is set to 0 in the configuration file because the attributed point
-			// value is not fix and depends on the nature of the ontology.
-			// Q2: Is the representation language used a W3C Recommendation?
-			switch (ontoLang) {
-			case "OWL":
-				this.addResult(0, 20.0, "Ontology and ontology metadata are in OWL");
-				this.addResult(1, this.questionsPoints.get(1),
-						"Ontology and ontology metadata are represented in a W3C language");
-				break;
+        String ontoLang = ontology.getHasOntoLang();
+        String ontoSyntax = ontology.getHasOntoSyntax();
+        String formalLevel = ontology.getHasFormalLevel();
+        String hasFormat = ontology.getHasFormat();
+        String isFormatOf = ontology.getIsFormatOf();
 
-			case "OBO":
+        // Q1: What is the representation language used for (metadata)data?
+        Result r = Tester.doEvaluation(ontology, questions.get(0), new Testable() {
+            @Override
+            public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+                String[] languages = {"PDF", "TXT", "CSV", "XML", "OBO", "RDFS", "SKOS", "OWL"};
+                String ontoLang = ontology.getHasOntoLang();
+                int index = Arrays.asList(languages).indexOf(ontoLang.trim());
+                if (index > -1)
+                    setScore(index, question);
+                else
+                    setFailure(question);
+            }
+        });
+        this.addResult(r);
 
-				this.addResult(0, 14.0, "Ontology and ontology metadata are in OBO");
-				this.addResult(1, this.questionsPoints.get(1),
-						"Ontology and ontology metadata are represented in a W3C language");
-				break;
+        // Q2: Is the representation language used a W3C Recommendation?
+        r = Tester.doEvaluation(ontology, questions.get(1), new Testable() {
+            @Override
+            public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+                String[] languages = {"XML", "RDFS", "SKOS", "OWL"};
+                int index = Arrays.asList(languages).indexOf(ontoLang.trim());
+                if (index > -1)
+                    setSuccess(question);
+                else
+                    setFailure(question);
+            }
+        });
+        this.addResult(r);
 
-			case "RDFS":
-				this.addResult(0, 16.0, "Ontology and ontology metadata are in RDFS");
-				this.addResult(1, this.questionsPoints.get(1),
-						"Ontology and ontology metadata are represented in a W3C language");
-				break;
+        // Q3: Is the syntax of the ontology informed?
+        this.addResult(Tester.doEvaluation(ontology, questions.get(2), new Testable() {
+            @Override
+            public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+                if (MetaDataExistTest.isValid(ontoSyntax)) {
+                    QuestionResult result = question.getMaxPoint();
+                    this.setSuccess(result.getExplanation() + " (" + ontoSyntax + ")", question);
+                } else {
+                    this.setFailure(question);
+                }
+            }
+        }));
 
-			case "SKOS":
-				this.addResult(0, 18.0, "Ontology and ontology metadata are in SKOS");
-				this.addResult(1, this.questionsPoints.get(1),
-						"Ontology and ontology metadata are represented in a W3C language");
-				break;
 
-			case "CSV":
-				this.addResult(0, 11.0, "Ontology and ontology metadata are in CSV");
-				this.addResult(1, this.questionsPoints.get(1),
-						"Ontology and ontology metadata are not in a W3C language");
-				break;
+        // Q4: Is the formality level of the ontology asserted by the author?
+        this.addResult(Tester.doEvaluation(ontology, questions.get(3), new Testable() {
+            @Override
+            public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+                if (MetaDataExistTest.isValid(formalLevel)) {
+                    QuestionResult result = question.getMaxPoint();
+                    this.setSuccess(result.getExplanation() + " (" + formalLevel + ")", question);
+                    this.setSuccess(question);
+                } else {
+                    this.setFailure(question);
+                }
+            }
+        }));
 
-			case "XML":
-				this.addResult(0, 12.0, "Ontology and ontology metadata are in XML");
-				this.addResult(1, this.questionsPoints.get(1),
-						"Ontology and ontology metadata are represented in a W3C language");
-				break;
+        // Q5: Is the availability of other formats informed?
+        this.addResult(Tester.doEvaluation(ontology, questions.get(4), new Testable() {
+            @Override
+            public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+                if (MetaDataExistTest.isValid(hasFormat) && MetaDataExistTest.isValid(isFormatOf)) {
+                    this.setSuccess(question);
+                } else {
+                    this.setFailure(question);
+                }
+            }
+        }));
 
-			case "PDF":
-				this.addResult(0, 5, "Ontology and ontology metadata are in PDF");
-				this.addResult(1, this.questionsPoints.get(1),
-						"Ontology and ontology metadata are represented in a W3C language");
-				break;
 
-			case "TXT":
-				this.addResult(0, 5, "Ontology and ontology metadata are in TXT");
-				this.addResult(1, this.questionsPoints.get(1),
-						"Ontology and ontology metadata are represented in a W3C language");
-				break;
+    }
 
-			default:
-				this.addResult(0, this.questionsPoints.get(0),
-						"Ontology and ontology metadata are not in a formal, accessible, shared and broadly applicable language");
-				this.addResult(1, this.questionsPoints.get(1),
-						"Ontology and ontology metadata are represented in a W3C language");
-			}
-
-			// Q3: Is the syntax of the ontology informed?
-			if (!ontoSyntax.isEmpty()) {
-				this.addResult(2, this.questionsPoints.get(2), "Ontology syntax is informed");
-			} else {
-				this.addResult(2, 0, "Ontology syntax is not informed");
-			}
-
-			// Q4: Is the formality level of the ontology asserted by the author?
-			if (!formalLevel.isEmpty()) {
-				this.addResult(3, this.questionsPoints.get(3), "Ontology formality level is informed");
-			} else {
-				this.addResult(3, 0, "Ontology formality level is not informed");
-			}
-
-			// Q5: Is the availability of other formats informed?
-			if (((!hasFormat.isEmpty())&&(!hasFormat.contains("null"))) || ((!isFormatOf.isEmpty())&& (!isFormatOf.contains("null")))) {
-				this.addResult(4, this.questionsPoints.get(4),
-						"The availability of other ontology formats is informed");
-			} else {
-				this.addResult(4, 0, "No information about other ontology formats ");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
 }

@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 
+import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
+import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
+import fr.lirmm.fairness.assessment.principles.criterion.question.Tester;
+import fr.lirmm.fairness.assessment.utils.Result;
 import org.json.JSONException;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
@@ -15,9 +19,34 @@ public class A2 extends AbstractPrincipleCriterion {
 
 	@Override
 	protected void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException {
-		
+
+
+		// Q1: Is the ontology accessible in a repository that supports versioning?
+		this.addResult(0, this.questions.get(0).getMaxPoint().getScore(), "The repository supports versioning");
+
+		// Q2: Are the metadata of each version available?
+		this.addResult(1, this.questions.get(1).getMaxPoint().getScore(), "The repository provides metadata for each version");
+
+		// Q3: Are ontology metadata accessible even if no more versions of the ontology are available?
+		this.addResult(2, this.questions.get(2).getMaxPoint().getScore(), "The repository supports accessibility even if no more versions are available");
+
+
+
+		// Q4: Is the status of the ontology clearly informed?
+		Result r = Tester.doEvaluation(ontology, questions.get(3), new Testable() {
+			@Override
+			public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+				if(ontology.getStatus().isEmpty()){
+					this.setSuccess(question);
+				}else {
+					this.setFailure( question);
+				}
+			}
+		});
+		this.addResult(r);
+
+		/* OLD Q1-Q3
 		String acronym = ontology.getAcronym();
-		String status = ontology.getStatus();
 
 		try {
 
@@ -37,7 +66,6 @@ public class A2 extends AbstractPrincipleCriterion {
 			this.addResult(2, this.questionsPoints.get(2), String.format("Default value 2, %s AgroPortal enables access to ontology metadata even if no more version of the ontology are available", ontology.getPortalInstance().getName()));
 			
 			// Q4: Is the status of the ontology clearly informed?
-
 			if (!status.isEmpty()) {
 				this.addResult(3, questionsPoints.get(3), "The status of the ontology is clearly informed");
 			}
@@ -48,6 +76,7 @@ public class A2 extends AbstractPrincipleCriterion {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+			*/
 	}
 	
 }

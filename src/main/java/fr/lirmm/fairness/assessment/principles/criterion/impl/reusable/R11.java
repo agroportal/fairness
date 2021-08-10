@@ -1,45 +1,67 @@
 package fr.lirmm.fairness.assessment.principles.criterion.impl.reusable;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
-import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
+import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
+import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
+import fr.lirmm.fairness.assessment.principles.criterion.question.Tester;
+import fr.lirmm.fairness.assessment.principles.criterion.question.tests.ContentNegotiationTest;
+import fr.lirmm.fairness.assessment.principles.criterion.question.tests.MetaDataExistTest;
+import fr.lirmm.fairness.assessment.principles.criterion.question.tests.ResolvableURLTest;
+import fr.lirmm.fairness.assessment.principles.criterion.question.tests.URLValidTest;
+import fr.lirmm.fairness.assessment.utils.Result;
 import org.json.JSONException;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
 import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriterion;
-import fr.lirmm.fairness.assessment.utils.OntologyRestApi;
 
 public class R11 extends AbstractPrincipleCriterion {
 
-	private static final long serialVersionUID = 1326075077978659656L;
+    private static final long serialVersionUID = 1326075077978659656L;
 
-	@Override
-	protected void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException {
+    @Override
+    protected void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException {
 
-		try {
-			String license = ontology.getLicense();
-			String accessRights = ontology.getAccessRights();
-			String morePermissions = ontology.getMorePermissions();
-			String useGuidelines = ontology.getUseGuidelines();
-			String rightsHolder = ontology.getConatct();
-			final boolean licenseIsSpecified = OntologyRestApi.isValidMetadatumValue(license);
-			final boolean accessRightsSpecified = OntologyRestApi.isValidMetadatumValue(accessRights);
-			
-			// Q1: Is the ontology license clearly specified (i.e., with a persistent, unique identifier)? 
-		
-			if (licenseIsSpecified) {
-			      this.addResult(0, this.questionsPoints.get(0), "Ontology license is clearly specified");
-			}
-			else 
-			{
-				this.addResult(0, 0.0, "Ontology license is not clearly specified");
-			}
 
-			// Q2: If yes, is the license description accessible and resolvable by a
-			// machine?
+        String accessRights = ontology.getAccessRights();
+        String morePermissions = ontology.getMorePermissions();
+        String useGuidelines = ontology.getUseGuidelines();
+        String rightsHolder = ontology.getContact();
+
+
+        // Q1: Is the ontology license clearly specified (i.e., with a persistent, unique identifier)?
+        Result r = Tester.doEvaluation(ontology, questions.get(0), new Testable() {
+            @Override
+            public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+                String license = ontology.getLicense();
+                if (MetaDataExistTest.isValid(license)) {
+                    if (URLValidTest.isValid(license)) {
+                        if (ResolvableURLTest.isValid(license)) {
+                            if (ContentNegotiationTest.isValid(license , "")) {
+                                this.setSuccess(question);
+                            } else {
+                                this.setScore(3, question);
+                            }
+                        } else {
+                            this.setScore(2, question);
+                        }
+                    } else {
+                        this.setScore(1, question);
+                    }
+                } else {
+                    this.setFailure(question);
+                }
+            }
+        });
+        this.addResult(r);
+
+
+			/*
+			// Q2: If yes, is the license description accessible and resolvable by a machine?
 			if (licenseIsSpecified && ((license.contains("http")) || (license.contains("https")))) {
 				URL urluri = new URL(license);
 				HttpURLConnection urluriConnection = (HttpURLConnection) urluri.openConnection();
@@ -48,7 +70,7 @@ public class R11 extends AbstractPrincipleCriterion {
 				int httpstatusCode = 0;
 				httpstatusCode = urluriConnection.getResponseCode();
 				if ((httpstatusCode == 200) || (httpstatusCode == 302)) {
-					this.addResult(1, this.questionsPoints.get(1), "License is accessible and resolvable");
+					this.addResult(1, this.questions.get(1).getMaxPoint(), "License is accessible and resolvable");
 				} else {
 					this.addResult(1, 0.0, String.format("License is not resolvable HTTP error=%s",
 							urluriConnection.getResponseMessage()));
@@ -56,28 +78,38 @@ public class R11 extends AbstractPrincipleCriterion {
 			} else {
 				this.addResult(1, 0.0, "License is not resolvable");
 			}
-             
-			//Q3: Are the ontology access rights clearly specified/declared?
-			
-			if (accessRightsSpecified) {
-				this.addResult(2, this.questionsPoints.get(2), "Access rights are clearly defined");
-			} else {
-				this.addResult(2, 0.0, "Access rights are not clearly defined");
-			}
-			
-			// Q4: Are the permissions, usage guidelines and copyright holder clearly documented?
-			int infoCount = 0;
-			for (String info : new String[] { morePermissions, useGuidelines, rightsHolder }) {
-				if (OntologyRestApi.isValidMetadatumValue(info)) {
-					infoCount++;
-				}
-			}
-			this.addResult(3, ((this.questionsPoints.get(3)/3) * infoCount),
-					infoCount == 0 ? "Neither ontology license nor access rights are accessible by machine"
-							: "Ontology license and/or access rights are accessible by machine");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
+            */
+
+
+        //Q2: Are the ontology access rights clearly specified?
+        this.addResult(Tester.doEvaluation(ontology, questions.get(1), new Testable() {
+            @Override
+            public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+                if (MetaDataExistTest.isValid(accessRights)) {
+                    this.setSuccess(question);
+                } else {
+                    this.setFailure(question);
+                }
+            }
+        }));
+
+
+        // Q3: Are the permissions, usage guidelines and copyright holder clearly documented?
+        this.addResult(Tester.doEvaluation(ontology, questions.get(2), new Testable() {
+            @Override
+            public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+                List<String> infoCount = new ArrayList<>();
+                for (String info : new String[]{morePermissions, useGuidelines, rightsHolder}) {
+                    if (MetaDataExistTest.isValid(info)) {
+                        infoCount.add(info);
+                    }
+
+                    this.setScore(infoCount.size(), question);
+                }
+            }
+        }));
+
+
+    }
+
 }

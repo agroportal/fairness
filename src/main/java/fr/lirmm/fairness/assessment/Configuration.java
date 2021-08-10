@@ -1,6 +1,8 @@
 package fr.lirmm.fairness.assessment;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import fr.lirmm.fairness.assessment.utils.Environments;
 
 import java.io.*;
@@ -10,10 +12,14 @@ import java.util.logging.Logger;
 public class Configuration {
 
 	public static final String FAIR_CONFIG_FILE_PATH = "config/common/questions.config.json";
+	public static final String REPOS_CONFIG_FILE_PATH = "config/common/catalogs.config.json";
+	public static final String METADATA_VOC_CONFIG_FILE_PATH = "config/common/metadata.voc.config.json";
 	private final static String defaultPropFileName = "config";
 	private static Configuration instance = null;
 	private final Map<String, Properties> portalsConfigsMap = new HashMap<String, Properties>();
 	private Map<?, ?> FairConfigMap = new HashMap<>();
+	private Map<?,?> reposConfigsMap = new HashMap<>();
+	private Map<?,?> metadataVocConfigsMap = new HashMap<>();
 
 	private Configuration() {
 		super();
@@ -64,22 +70,39 @@ public class Configuration {
 	}
 
 	public Map<?, ?> getFairConfigs() throws IOException {
-		if(this.FairConfigMap.isEmpty()){
+		return this.getFileConfigConfig(FAIR_CONFIG_FILE_PATH , FairConfigMap);
+
+	}
+
+	public Map<?,?> getRepositoriesConfig() throws IOException {
+		return this.getFileConfigConfig(REPOS_CONFIG_FILE_PATH , reposConfigsMap);
+	}
+
+	public Map<?,?> getMetadataVocConfig() throws IOException {
+		return  this.getFileConfigConfig(METADATA_VOC_CONFIG_FILE_PATH , metadataVocConfigsMap);
+	}
+
+
+	private Map<?,?> getFileConfigConfig(String fileName , Map<?,?> out) throws IOException {
+		if(out.isEmpty()){
 			// create Gson instance
 			Gson gson = new Gson();
 			// create a reader
-			InputStream inputStream = getClass().getClassLoader().getResourceAsStream(FAIR_CONFIG_FILE_PATH);
+			InputStream inputStream = getClass().getClassLoader().getResourceAsStream(fileName);
 
 			if (inputStream != null) {
 				Reader reader = new InputStreamReader(inputStream);
 				// convert JSON file to map
-				this.FairConfigMap = gson.fromJson(reader, Map.class);
+				out = gson.fromJson(reader , Map.class);
+
 				reader.close();
 			} else {
-				throw new FileNotFoundException("property file '" + FAIR_CONFIG_FILE_PATH + "' not found in the classpath");
+				throw new FileNotFoundException("property file '" + METADATA_VOC_CONFIG_FILE_PATH + "' not found in the classpath");
 			}
-		}
-		return this.FairConfigMap;
 
+		}
+
+		return out;
 	}
+
 }

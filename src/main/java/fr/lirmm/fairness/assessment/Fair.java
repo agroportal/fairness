@@ -2,10 +2,17 @@ package fr.lirmm.fairness.assessment;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.api.client.http.*;
+import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.internal.LinkedTreeMap;
 import fr.lirmm.fairness.assessment.model.PortalInstance;
 import fr.lirmm.fairness.assessment.principles.AbstractScoredEntity;
 
@@ -38,7 +45,37 @@ public class Fair extends AbstractScoredEntity implements Evaluable {
 			new Reusable()
 		};
 	}
-	
+
+	public static void main(String[] args) {
+
+			List<String> out = new ArrayList<>();
+			out.add("syphax");
+			out.add("bouazzouni");
+			searchGoogle(out);
+	}
+
+	public static void searchGoogle(List<String> keywords){
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			HttpTransport httpTransport = new NetHttpTransport();
+			HttpRequestFactory requestFactory = httpTransport.createRequestFactory();
+			Gson parser = new GsonBuilder().create();
+			GenericUrl url = new GenericUrl("https://kgsearch.googleapis.com/v1/entities:search");
+			url.put("query", "syphaxbouazzouni");
+			url.put("limit", "1");
+			url.put("indent", "true");
+			url.put("key", "AIzaSyAGgXIIa0rcBRLDv2Tsdk8OX0rIHYBscoE");
+			HttpRequest request = requestFactory.buildGetRequest(url);
+			HttpResponse httpResponse = request.execute();
+			String responseString = httpResponse.parseAsString();
+
+			JsonNode node = mapper.readTree(responseString).get("itemListElement");
+			System.out.println(node);
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
 
 
 	@Override

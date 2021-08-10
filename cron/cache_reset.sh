@@ -46,7 +46,7 @@ if [ -d "$war_dir/WEB-INF" ]
     path=$(pwd)
     java_cmd="java -Denv=$env -classpath \"./lib/\*:./classes/.\" fr.lirmm.fairness.assessment.CacheSaverCMD"
     echo "[+] Running '$java_cmd' in '$path' "
-    java -Denv=$env -classpath "lib/*:./classes/." fr.lirmm.fairness.assessment.CacheSaverCMD > ~/log/FAIR_CACHE/$(date +\%Y\%m\%d\%H\%M\%S)_chache_all.log 2>&1
+    java -Denv=$env -classpath "lib/*:./classes/." fr.lirmm.fairness.assessment.CacheSaverCMD  2>&1 | tee ~/log/FAIR_CACHE/$(date +\%Y\%m\%d\%H\%M\%S)_chache_all.log
 
 else
   echo "the war directory of FAIR assessment is not found in : $war_dir"
