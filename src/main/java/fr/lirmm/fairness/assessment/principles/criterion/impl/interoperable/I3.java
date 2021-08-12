@@ -24,8 +24,7 @@ public class I3 extends AbstractPrincipleCriterion {
 
            //Q3: Does the ontology use a valid URIs to encode some metadata values?
 			// TODO change implementation to test a list of properties
-           this.addResult(2, this.questions.get(2).getMaxPoint().getScore(),
-					String.format("ontologies uses URIs to encode metadata values in TODO add list of accepted properties"));//TODO add list of accepted properties
+           this.setDefaultSucesses(2, "ontologies uses URIs to encode metadata values in TODO add list of accepted properties");//TODO add list of accepted properties
 
 	}
 	

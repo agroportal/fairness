@@ -1,17 +1,17 @@
 package fr.lirmm.fairness.assessment;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import fr.lirmm.fairness.assessment.principles.AbstractPrinciple;
 import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriterion;
 import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
 import fr.lirmm.fairness.assessment.utils.CombinedResult;
-import fr.lirmm.fairness.assessment.utils.Result;
-import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 public class CombinedFair {
@@ -68,10 +68,11 @@ public class CombinedFair {
     private void combineCriterionQuestion(AbstractPrincipleCriterion combinedCriterion , int indexQuestion , JsonObject newQuestion , String questionLabel) throws JSONException {
         CombinedResult combinedQuestion;
         if(combinedCriterion.getResults().size() <= indexQuestion){
+
            combinedQuestion = new CombinedResult(newQuestion.get("score").getAsDouble() / fairCount  ,
                     new AbstractCriterionQuestion(questionLabel , newQuestion.get("question").getAsString() ,
                             AbstractCriterionQuestion.getQuestionResultsArray(newQuestion.get("points").getAsJsonArray()) ,
-                            new Gson().fromJson(newQuestion.get("properties") , List.class)));
+                           getProperties(newQuestion)));
             combinedCriterion.getResults().add(combinedQuestion);
 
         }else {
@@ -82,5 +83,25 @@ public class CombinedFair {
     }
 
 
+    private List<String> getProperties(JsonObject newQuestion){
+
+        JsonElement properties = new Gson().fromJson(newQuestion.get("properties"), JsonElement.class);
+        List<String> out = new ArrayList<>();
+
+        System.out.println(properties);
+        if(properties == null)
+            out =  null;
+        else if(properties.isJsonObject())
+             out =  new ArrayList(properties.getAsJsonObject().keySet());
+        else  if(properties.isJsonArray()){
+            List<String> finalOut = out;
+            properties.getAsJsonArray().forEach((x)-> {
+                finalOut.add(x.getAsString());
+            });
+        }
+
+        System.out.println("return: " + out);
+       return out;
+    }
 
 }

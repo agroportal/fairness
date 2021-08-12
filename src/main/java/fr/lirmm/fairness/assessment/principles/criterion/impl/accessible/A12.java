@@ -18,7 +18,7 @@ public class A12 extends AbstractPrincipleCriterion {
 	protected void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException {
 
 		// Q1: Are an ontology and its metadata through a protocol that supports authentification and authorization?
-		this.addResult(0, this.questions.get(0).getMaxPoint().getScore(), "The repository supports authentification and authorization.");
+		this.setDefaultSucesses(0 ,"The repository supports authentification and authorization.");
 
 		/* OLD Q1 and Q2
 		try {

@@ -64,9 +64,6 @@
               "score": 12,
               "explanation": "The repository makes explicit relation between metadata and ontology."
             }
-          ],
-          "properties": [
-            "dct:identifier"
           ]
         },
         "F1Q4": {
@@ -357,6 +354,9 @@
               "score": 7,
               "explanation": "The ontology is registered in 7 ontology libraries."
             }
+          ],
+          "properties": [
+            "schema:includedInDataCatalog"
           ]
         },
         "F4Q2": {
@@ -402,6 +402,9 @@
               "score": 9,
               "explanation": "The ontology is registered in 9 ontology repository."
             }
+          ],
+          "properties": [
+            "schema:includedInDataCatalog"
           ]
         },
         "F4Q3": {
@@ -415,6 +418,9 @@
               "score": 4,
               "explanation": "The ontology libraries or repositories are properly indexed by Web search engines."
             }
+          ],
+          "properties": [
+            "schema:includedInDataCatalog"
           ]
         }
       }
@@ -441,6 +447,10 @@
               "score": 6,
               "explanation": "2 resolvable identifiers found."
             }
+          ],
+          "properties": [
+           "owl:ontologyIRI",
+            "dct:identifier"
           ]
         },
         "A1Q2": {
@@ -508,6 +518,9 @@
               "score": 6,
               "explanation": "Ontology is not accessible through another standard protocol (such as SPARQL endscore)."
             }
+          ],
+          "properties": [
+            "sd:endpoint"
           ]
         }
       }
@@ -524,6 +537,10 @@
               "score": 20,
               "explanation": "The repository supports HTTP for access and URI for identification."
             }
+          ],
+          "properties": [
+            "owl:ontologyIRI",
+            "dct:identifier"
           ]
         },
         "A11Q2": {
@@ -533,6 +550,10 @@
               "score": 20,
               "explanation": "The ontology is accessible under another open, free, and universally implementable protocol (such as sparql endscore)"
             }
+          ],
+          "properties": [
+            "owl:ontologyIRI",
+            "dct:identifier"
           ]
         }
       }
@@ -596,6 +617,9 @@
               "score": 4,
               "explanation": "The status of the ontology is clearly informed."
             }
+          ],
+          "properties": [
+            "omv:status"
           ]
         }
       }
@@ -646,6 +670,9 @@
               "score": 20,
               "explanation": "Ontology and ontology metadata are represented in OWL."
             }
+          ],
+          "properties": [
+            "omv:status"
           ]
         },
         "I1Q2": {
@@ -659,6 +686,9 @@
               "score": 10,
               "explanation": "Ontology and ontology metadata are represented in a W3C language."
             }
+          ],
+          "properties": [
+            "omv:hasOntologyLanguage"
           ]
         },
         "I1Q3": {
@@ -672,6 +702,9 @@
               "score": 5,
               "explanation": "Ontology syntax is informed."
             }
+          ],
+          "properties": [
+            "omv:hasOntologySyntax"
           ]
         },
         "I1Q4": {
@@ -685,6 +718,9 @@
               "score": 5,
               "explanation": "Ontology formality level is informed."
             }
+          ],
+          "properties": [
+            "omv:hasFormalityLevel"
           ]
         },
         "I1Q5": {
@@ -698,6 +734,9 @@
               "score": 4,
               "explanation": "Ontology formality level is informed."
             }
+          ],
+          "properties": [
+            "dct:hasFormat","dct:isFormatOf"
           ]
         }
       }
@@ -718,6 +757,9 @@
               "score": 5,
               "explanation": "Ontology imports other FAIR vocabularies."
             }
+          ],
+          "properties": [
+            "omv:imports"
           ]
         },
         "I2Q2": {
@@ -731,6 +773,9 @@
               "score": 5,
               "explanation": "Ontology reuses other vocabularies URIs."
             }
+          ],
+          "properties": [
+            "dct:relation"
           ]
         },
         "I2Q3": {
@@ -745,6 +790,7 @@
               "explanation": "The Ontology include the minimum information for those URIs."
             }
           ]
+
         },
         "I2Q4": {
           "question": "Is an ontology aligned to other FAIR vocabularies ?",
@@ -757,6 +803,9 @@
               "score": 5,
               "explanation": "Ontology is aligned to other vocabularies."
             }
+          ],
+          "properties": [
+            "voaf:hasEquivalenceWith"
           ]
         },
         "I2Q5": {
@@ -783,6 +832,9 @@
               "score": 2,
               "explanation": "Ontology declares influential relations."
             }
+          ],
+          "properties": [
+              "voaf:specializes", "schema:translationOfWork", "voaf:similar"
           ]
         },
         "I2Q7": {
@@ -796,6 +848,9 @@
               "score": 5,
               "explanation": "Ontology reuses standards metadata vocabularies to describe its metadata."
             }
+          ],
+          "properties": [
+            "voaf:metadataVoc"
           ]
         }
       }
@@ -880,6 +935,9 @@
               "score": 5,
               "explanation": "Ontology provides 5 or more informations about its classes or concept."
             }
+          ],
+          "properties": [
+            "mod:prefLabelProperty", "mod:synonymProperty", "mod:definitionProperty", "mod:authorProperty", "bpm:obsoleteProperty"
           ]
         },
         "R1Q2": {
@@ -897,6 +955,9 @@
               "score": 3,
               "explanation": "Ontology provides 2 or more information about its hierarchy."
             }
+          ],
+          "properties": [
+            "mod:hierarchyProperty", " mod:obsoleteParent"
           ]
         },
         "R1Q3": {
@@ -981,6 +1042,9 @@
               "score": 15,
               "explanation": "Ontology license is clearly specified."
             }
+          ],
+          "properties": [
+            "dct:license"
           ]
         },
         "R11Q2": {
@@ -994,6 +1058,9 @@
               "score": 7,
               "explanation": "Access rights are documented."
             }
+          ],
+          "properties": [
+            "dct:accessRights"
           ]
         },
         "R11Q3": {
@@ -1015,6 +1082,9 @@
               "score": 15,
               "explanation": "The 3 are documented."
             }
+          ],
+          "properties": [
+            "cc:morePermissions", "cc:useGuidelines", "dct:rightsHolder"
           ]
         }
       }
@@ -1047,6 +1117,9 @@
               "score": 8,
               "explanation": "The ontology provide 4 or more informations about the actors involved in its development. "
             }
+          ],
+          "properties": [
+            "dct:creator", "pav:curatedBy",  "dct:contributor","schema:translator"
           ]
         },
         "R12Q2": {
@@ -1068,6 +1141,9 @@
               "score": 6,
               "explanation": "The ontology provide 3 or more informations on its general provenance."
             }
+          ],
+          "properties": [
+            "dct:source", "prov:wasGeneratedBy", "prov:WasInvalidatedBy"
           ]
         },
         "R12Q3": {
@@ -1089,6 +1165,9 @@
               "score": 6,
               "explanation": "The accrual methods and policy  are well documented."
             }
+          ],
+          "properties": [
+            "dct:accuralMethod", "dct:accrualPeriodicity", "dct:accrualPolicy"
           ]
         },
         "R12Q4": {
@@ -1106,6 +1185,9 @@
               "score": 4,
               "explanation": "The ontology provide 2 informations about versioning."
             }
+          ],
+          "properties": [
+            "owl:versionInfo", "owl:priorVersion"
           ]
         },
         "R12Q5": {
@@ -1140,6 +1222,11 @@
               "score": 6,
               "explanation": "Ontology provides 6 informations about methodology and tools used to build it."
             }
+          ],
+          "properties": [
+            "omv:usedOntologyEngineeringTool",
+            "omv:usedOntologyEngineeringMethodology",
+            "omv:conformsToKnowledgeRepresentationParadigm"
           ]
         },
         "R12Q7": {
@@ -1157,6 +1244,9 @@
               "score": 4,
               "explanation": "Ontology provides 4 informations about rationale documentation."
             }
+          ],
+          "properties": [
+            "omv:designedForOntologyTask", "mod:competencyQuestion"
           ]
         },
         "R12Q8": {
@@ -1170,6 +1260,9 @@
               "score": 2,
               "explanation": "The ontology do inform about its funding organization."
             }
+          ],
+          "properties": [
+            "dct:fundedBy"
           ]
         }
       }
@@ -1194,6 +1287,10 @@
               "score": 10,
               "explanation": "Ontology provide information about projects and endorsing organizations"
             }
+          ],
+          "properties": [
+            "mod:ontologyInUse",
+            "omv:endorsedBy"
           ]
         },
         "R13Q2": {
@@ -1215,6 +1312,9 @@
               "score": 20,
               "explanation": "Ontology is included in the  OBO Foundry and have been manually reviewed by the Foundry."
             }
+          ],
+          "properties": [
+            "mod:group"
           ]
         },
         "R13Q3": {
@@ -1228,6 +1328,9 @@
               "score": 6,
               "explanation": "Ontology is openly and freely available."
             }
+          ],
+          "properties": [
+            "dct:accessRights"
           ]
         }
       }

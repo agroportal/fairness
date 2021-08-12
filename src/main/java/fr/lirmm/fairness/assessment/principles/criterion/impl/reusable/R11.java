@@ -44,13 +44,13 @@ public class R11 extends AbstractPrincipleCriterion {
                             if (ContentNegotiationTest.isValid(license , "")) {
                                 this.setSuccess(question);
                             } else {
-                                this.setScore(3, question);
+                                this.setScoreLevel(3, question);
                             }
                         } else {
-                            this.setScore(2, question);
+                            this.setScoreLevel(2, question);
                         }
                     } else {
-                        this.setScore(1, question);
+                        this.setScoreLevel(1, question);
                     }
                 } else {
                     this.setFailure(question);
@@ -104,7 +104,7 @@ public class R11 extends AbstractPrincipleCriterion {
                         infoCount.add(info);
                     }
 
-                    this.setScore(infoCount.size(), question);
+                    this.setScoreLevel(infoCount.size(), question);
                 }
             }
         }));

@@ -47,7 +47,7 @@ public class F4 extends AbstractPrincipleCriterion {
                             found++;
                     }
 
-                    setScore(found, question);
+                    setScoreLevel(found, question);
                 } else {
                     setFailure(question.getMaxPoint(0).getExplanation() + getLabels(repos) + ""
                             + getLabels(libs), question);
@@ -60,7 +60,7 @@ public class F4 extends AbstractPrincipleCriterion {
 
         // Q2: Is the ontology registered in multiple open ontology repositories?  Here we
         // consider OBO foundry, NCBO Bioportal, Ontobee, Aber and OLS.
-        r = Tester.doEvaluation(ontology, questions.get(0), new Testable() {
+        r = Tester.doEvaluation(ontology, questions.get(1), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 int found = 0;
@@ -71,7 +71,7 @@ public class F4 extends AbstractPrincipleCriterion {
                             found++;
                     }
 
-                    setScore(found, question);
+                    setScoreLevel(found, question);
                 } else {
                     setFailure(question.getMaxPoint(0).getExplanation() + getLabels(repos), question);
                 }

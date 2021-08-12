@@ -1,0 +1,736 @@
+{
+  "properties": [
+    {
+      "portal": "omv:acronym",
+      "mod": "omv:acronym",
+      "type": "string",
+      "source": "ontology"
+    },
+    {
+      "portal": "omv:name",
+      "mod": "dct:title",
+      "type": "string",
+      "source": "ontology"
+    },
+    {
+      "portal": "dct:alternative",
+      "mod": "dct:alternative",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "skos:hiddenLabel",
+      "mod": "skos:hiddenLabel",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:URI",
+      "mod": "owl:ontologyIRI",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "owl:versionIRI",
+      "mod": "owl:versionIRI",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "dct:identifier",
+      "mod": "dct:identifier",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:version",
+      "mod": "owl:versionInfo",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:status",
+      "mod": "omv:status",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "owl:deprecated",
+      "mod": "owl:deprecated",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:hasLicense",
+      "mod": "dct:license",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:hasOntologyLanguage",
+      "mod": "omv:hasOntologyLanguage",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:hasFormalityLevel",
+      "mod": "omv:hasFormalityLevel",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:hasOntologySyntax",
+      "mod": "omv:hasOntologySyntax",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:naturalLanguage",
+      "mod": "dct:language",
+      "type": "array",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:description",
+      "mod": "dct:description",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "dct:abstract",
+      "mod": "dct:abstract",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "cc:morePermissions",
+      "mod": "cc:morePermissions",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "cc:useGuidelines",
+      "mod": "cc:useGuidelines",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "bpm:publication",
+      "mod": "dct:bibliographicCitation",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:documentation",
+      "mod": "foaf:page",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "bpm:pullLocation",
+      "mod": "omv:resourceLocator",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:notes",
+      "mod": "rdfs:comment",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:keywords",
+      "mod": "omv:keywords",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:isOfType",
+      "mod": "omv:isOfType",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:designedForOntologyTask",
+      "mod": "omv:designedForOntologyTask",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:usedOntologyEngineeringTool",
+      "mod": "omv:usedOntologyEngineeringTool",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:usedOntologyEngineeringMethodology",
+      "mod": "omv:usedOntologyEngineeringMethodology",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:conformsToKnowledgeRepresentationParadigm",
+      "mod": "omv:conformsToKnowledgeRepresentationParadigm",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "dct:coverage",
+      "mod": "dct:coverage",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "mod:competencyQuestion",
+      "mod": "mod:competencyQuestion",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "foaf:depiction",
+      "mod": "foaf:depiction",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "foaf:logo",
+      "mod": "foaf:logo",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "foaf:homepage",
+      "mod": "foaf:homepage",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "bpm:viewingRestriction",
+      "mod": "dct:accessRights",
+      "type": "string",
+      "source": "ontology"
+    },
+    {
+      "portal": "bpm:diffFilePath",
+      "mod": "vann:changes",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "vann:example",
+      "mod": "vann:example",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "vann:preferredNamespaceUri",
+      "mod": "vann:preferredNamespaceUri",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "vann:preferredNamespacePrefix",
+      "mod": "vann:preferredNamespacePrefix",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "bpm:prefLabelProperty",
+      "mod": "mod:prefLabelProperty",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "bpm:synonymProperty",
+      "mod": "mod:synonymProperty",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "bpm:definitionProperty",
+      "mod": "mod:definitionProperty",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "bpm:authorProperty",
+      "mod": "mod:authorProperty",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "bpm:obsoleteProperty",
+      "mod": "mod:obsoleteProperty",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "bpm:hierarchyProperty",
+      "mod": "mod:hierarchyProperty",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "bpm:obsoleteParent",
+      "mod": "mod:obsoleteParent",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "void:uriRegexPattern",
+      "mod": "void:uriRegexPattern",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "voaf:toDoList",
+      "mod": "voaf:toDoList",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "idot:exampleIdentifier",
+      "mod": "idot:exampleIdentifier",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "schema:award",
+      "mod": "schema:award",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "schema:associatedMedia",
+      "mod": "schema:associatedMedia",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "schema:includedInDataCatalog",
+      "mod": "schema:includedInDataCatalog",
+      "type": "array",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:hasCreator",
+      "mod": "dct:creator",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:hasContributor",
+      "mod": "dct:contributor",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "dct:publisher",
+      "mod": "dct:publisher",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "pav:curatedBy",
+      "mod": "pav:curatedBy",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "schema:translator",
+      "mod": "schema:translator",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "bpm:contact",
+      "mod": "dct:rightsHolder",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:hasDomain",
+      "mod": "dct:subject",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "bpm:group",
+      "mod": "mod:group",
+      "type": "string",
+      "source": "ontology"
+    },
+    {
+      "portal": "omv:useImports",
+      "mod": "owl:imports",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:hasPriorVersion",
+      "mod": "owl:priorVersion",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:isBackwardCompatibleWith",
+      "mod": "owl:backwardCompatibleWith",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:isIncompatibleWith",
+      "mod": "owl:incompatibleWith",
+      "type": "array",
+      "source": "submission"
+    },
+    {
+      "portal": "bpm:viewOf",
+      "mod": "dct:isPartOf",
+      "type": "string",
+      "source": "ontology"
+    },
+    {
+      "portal": "dct:hasPart",
+      "mod": "dct:hasPart",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "bpm:submissions",
+      "mod": "dct:hasVersion",
+      "type": "string",
+      "source": "link"
+    },
+    {
+      "portal": "dct:isFormatOf",
+      "mod": "dct:isFormatOf",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "dct:hasFormat",
+      "mod": "dct:hasFormat",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "door:ontologyRelatedTo",
+      "mod": "dct:relation",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "door:explanationEvolution",
+      "mod": "voaf:specializes",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "schema:workTranslation",
+      "mod": "schema:workTranslation",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "schema:translationOfWork",
+      "mod": "schema:translationOfWork",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "door:comesFromTheSameDomain",
+      "mod": "door:comesFromTheSameDomain",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "door:similarTo",
+      "mod": "voaf:similar",
+      "type": "array",
+      "source": "submission"
+    },
+    {
+      "portal": "door:isAlignedTo",
+      "mod": "voaf:hasEquivalencesWith",
+      "type": "array",
+      "source": "submission"
+    },
+    {
+      "portal": "door:hasDisparateModelling",
+      "mod": "door:hasDisparateModelling",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "voaf:usedBy",
+      "mod": "voaf:usedBy",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "voaf:generalizes",
+      "mod": "voaf:generalizes",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "voaf:hasDisjunctionsWith",
+      "mod": "voaf:hasDisjunctionsWith",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:keyClasses",
+      "mod": "omv:keyClasses",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "bpm:roots",
+      "mod": "void:rootResource",
+      "type": "string",
+      "source": "link"
+    },
+    {
+      "portal": "bpm:ui",
+      "mod": "mod:browsingUI",
+      "type": "string",
+      "source": "link"
+    },
+    {
+      "portal": "sd:endpoint",
+      "mod": "sd:endpoint",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "voaf:metadataVoc",
+      "mod": "voaf:metadataVoc",
+      "type": "array",
+      "source": "submission"
+    },
+    {
+      "portal": "void:dataDump",
+      "mod": "void:dataDump",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "void:openSearchDescription",
+      "mod": "void:openSearchDescription",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "void:uriLookupEndpoint",
+      "mod": "void:uriLookupEndpoint",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:knownUsage",
+      "mod": "omv:knownUsage",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:endorsedBy",
+      "mod": "omv:endorsedBy",
+      "type": "array",
+      "source": "submission"
+    },
+    {
+      "portal": "bpm:projects",
+      "mod": "mod:ontologyInUse",
+      "type": "array",
+      "source": "link"
+    },
+    {
+      "portal": "dct:audience",
+      "mod": "dct:audience",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "foaf:fundedBy",
+      "mod": "foaf:fundedBy",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "doap:repository",
+      "mod": "doap:repository",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "doap:bugDatabase",
+      "mod": "doap:bugDatabase",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "doap:mailingList",
+      "mod": "doap:mailing-list",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "bpm:reviews",
+      "mod": "mod:hasEvaluation",
+      "type": "string",
+      "source": "link"
+    },
+    {
+      "portal": "bpm:notes",
+      "mod": "schema:comment",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "bpm:analytics",
+      "mod": "mod:analytics",
+      "type": "string",
+      "source": "link"
+    },
+    {
+      "portal": "bpm:released",
+      "mod": "dct:created",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:modificationDate",
+      "mod": "dct:modified",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "dct:valid",
+      "mod": "dct:valid",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "bpm:creationDate",
+      "mod": "dct:dateSubmitted",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "pav:curatedOn",
+      "mod": "pav:curatedOn",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "mod:metrics",
+      "mod": "mod:metrics",
+      "type": "string",
+      "source": "link"
+    },
+    {
+      "portal": "omv:numberOfClasses",
+      "mod": "omv:numberOfClasses",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:numberOfIndividuals",
+      "mod": "omv:numberOfIndividuals",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:numberOfProperties",
+      "mod": "omv:numberOfProperties",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:numberOfAxioms",
+      "mod": "omv:numberOfAxioms",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "bpm:maxDepth",
+      "mod": "mod:maxDepth",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "bpm:maxChildCount",
+      "mod": "mod:maxChildCount",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "bpm:averageChildCount",
+      "mod": "mod:averageChildCount",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "bpm:classesWithOneChild",
+      "mod": "mod:classesWithOneChild",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "bpm:classesWithMoreThan25Children",
+      "mod": "mod:classesWithMoreThan25Children",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "bpm:classesWithNoDefinition",
+      "mod": "mod:classesWithNoDefinition",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "dct:source",
+      "mod": "dct:source",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "prov:wasGeneratedBy",
+      "mod": "prov:wasGeneratedBy",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "prov:wasInvalidatedBy",
+      "mod": "prov:wasInvalidatedBy",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "dct:accrualMethod",
+      "mod": "dct:accrualMethod",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "dct:accrualPeriodicity",
+      "mod": "dct:accrualPeriodicity",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "dct:accrualPolicy",
+      "mod": "dct:accrualPolicy",
+      "type": "string",
+      "source": "submission"
+    },
+    {
+      "portal": "omv:ontologyType",
+      "mod": "omv:ontologyType",
+      "type": "string",
+      "source": "ontology"
+    }
+  ]
+}

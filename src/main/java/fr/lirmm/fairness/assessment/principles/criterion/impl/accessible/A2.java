@@ -22,13 +22,13 @@ public class A2 extends AbstractPrincipleCriterion {
 
 
 		// Q1: Is the ontology accessible in a repository that supports versioning?
-		this.addResult(0, this.questions.get(0).getMaxPoint().getScore(), "The repository supports versioning");
+		this.setDefaultSucesses(0, "The repository supports versioning.");
 
 		// Q2: Are the metadata of each version available?
-		this.addResult(1, this.questions.get(1).getMaxPoint().getScore(), "The repository provides metadata for each version");
+		this.setDefaultSucesses(1,"The repository provides metadata for each version.");
 
 		// Q3: Are ontology metadata accessible even if no more versions of the ontology are available?
-		this.addResult(2, this.questions.get(2).getMaxPoint().getScore(), "The repository supports accessibility even if no more versions are available");
+		this.setDefaultSucesses(2, "The repository supports accessibility even if no more versions are available");
 
 
 

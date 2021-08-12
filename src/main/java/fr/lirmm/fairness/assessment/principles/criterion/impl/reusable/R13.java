@@ -25,9 +25,8 @@ public class R13 extends AbstractPrincipleCriterion {
         Result r = Tester.doEvaluation(ontology, questions.get(0), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
-
                 if ((ontology.getProjects().isEmpty()) && (ontology.getEndorsedBy().isEmpty())) {
-                    this.setFailure("Ontology does not provide information about projects and endorsing organizations", question);
+                    this.setFailure("Ontology does not provide information about projects and endorsing organizations",question);
                 } else {
                     int count = 0;
                     if ((!ontology.getEndorsedBy().isEmpty())) {
@@ -36,7 +35,7 @@ public class R13 extends AbstractPrincipleCriterion {
                     if (!ontology.getProjects().isEmpty()) {
                         count++;
                     }
-                    this.setScore(count, question);
+                    this.setScoreLevel(count,question);
                 }
             }
         });
@@ -55,9 +54,9 @@ public class R13 extends AbstractPrincipleCriterion {
                 if (group.equals("OBO") && Arrays.asList(oboFoundryOntologiesToCheck).contains(ontology.getAcronym())) {
                     this.setSuccess(question);
                 }else if (group.equals("OBO")) {
-                    this.setScore(1 , question);
+                    this.setScoreLevel(1 , question);
                 }else if (Arrays.asList(groupsToCheck).contains(group)) {
-                    this.setScore(0, question);
+                    this.setScoreLevel(0, question);
                 }else {
                     this.setFailure( question);
                 }
@@ -66,10 +65,10 @@ public class R13 extends AbstractPrincipleCriterion {
         this.addResult(r);
 
         // Q3: Is the ontology openly and freely available?
-        String visibility = ontology.getViewingrestriction();
         this.addResult(Tester.doEvaluation(ontology, questions.get(2), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+                String visibility = ontology.getAccessRights();
                 if (visibility.contains("public")) {
                     this.setSuccess(question);
                 } else {

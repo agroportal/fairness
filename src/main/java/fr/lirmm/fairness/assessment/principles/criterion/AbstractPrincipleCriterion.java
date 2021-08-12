@@ -12,6 +12,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import fr.lirmm.fairness.assessment.Configuration;
+import fr.lirmm.fairness.assessment.principles.criterion.question.Tester;
 import fr.lirmm.fairness.assessment.utils.QuestionResult;
 import fr.lirmm.fairness.assessment.utils.Result;
 import fr.lirmm.fairness.assessment.principles.AbstractScoredEntity;
@@ -56,10 +57,14 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 	protected abstract void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException;
 
 
-	protected void addResult(int index, double score, String explanation) {
-		this.results.add(index,new QuestionResult(score , explanation , questions.get(index)));
+	protected void addResult(int index, double score, String explanation , Map<String ,String> values) {
+		this.results.add(index,new QuestionResult(score , explanation ,values, questions.get(index)));
 	}
 
+
+	protected void setDefaultSucesses(int index , String explacation){
+		this.results.add(QuestionResult.success(explacation ,questions.get(index)));
+	}
 	protected void setNotResolvable(int index){
 		this.results.add(QuestionResult.notResolvable(questions.get(index)));
 	}

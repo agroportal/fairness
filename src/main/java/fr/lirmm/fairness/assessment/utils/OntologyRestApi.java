@@ -70,7 +70,7 @@ public class OntologyRestApi {
 		return (metadataValue);
 	}
 
-	public String getOntologyLinksyJsonObject(String metadataname) throws JSONException, IOException {
+	public String getOntologyLinksJsonObject(String metadataname) throws JSONException, IOException {
 		JsonNode mappings = this.jsonToNode(ontologyMetadata);
 		String metadataValue;
 

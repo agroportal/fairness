@@ -51,8 +51,10 @@ public class AbstractCriterionQuestion {
         List<QuestionResult> result = new ArrayList(jsonArray.size());
 
         for (JsonElement jsonElement : jsonArray) {
+
             result.add(new QuestionResult( jsonElement.getAsJsonObject().get("score").getAsDouble() ,
-                    jsonElement.getAsJsonObject().get("explanation").getAsString() ,null));
+                    jsonElement.getAsJsonObject().get("explanation").getAsString(),
+                    new HashMap<>(),null));
         }
         return result;
     }

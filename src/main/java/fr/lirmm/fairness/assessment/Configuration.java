@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 public class Configuration {
 
+	public static final String PROPERTIES_CONFIG_FILE_PATH = "config/common/properties.config.json";
 	public static final String FAIR_CONFIG_FILE_PATH = "config/common/questions.config.json";
 	public static final String REPOS_CONFIG_FILE_PATH = "config/common/catalogs.config.json";
 	public static final String METADATA_VOC_CONFIG_FILE_PATH = "config/common/metadata.voc.config.json";
@@ -20,6 +21,7 @@ public class Configuration {
 	private Map<?, ?> FairConfigMap = new HashMap<>();
 	private Map<?,?> reposConfigsMap = new HashMap<>();
 	private Map<?,?> metadataVocConfigsMap = new HashMap<>();
+	private Map<?,?> propertiesConfigMap = new HashMap<>();
 
 	private Configuration() {
 		super();
@@ -81,7 +83,9 @@ public class Configuration {
 	public Map<?,?> getMetadataVocConfig() throws IOException {
 		return  this.getFileConfigConfig(METADATA_VOC_CONFIG_FILE_PATH , metadataVocConfigsMap);
 	}
-
+	public List<Map<?,?>> getPropertiesConfig() throws IOException {
+		return (List<Map<?, ?>>) this.getFileConfigConfig(PROPERTIES_CONFIG_FILE_PATH , propertiesConfigMap).get("properties");
+	}
 
 	private Map<?,?> getFileConfigConfig(String fileName , Map<?,?> out) throws IOException {
 		if(out.isEmpty()){
@@ -97,7 +101,7 @@ public class Configuration {
 
 				reader.close();
 			} else {
-				throw new FileNotFoundException("property file '" + METADATA_VOC_CONFIG_FILE_PATH + "' not found in the classpath");
+				throw new FileNotFoundException("property file '" + fileName + "' not found in the classpath");
 			}
 
 		}

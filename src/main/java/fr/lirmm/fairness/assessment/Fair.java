@@ -48,10 +48,6 @@ public class Fair extends AbstractScoredEntity implements Evaluable {
 
 	public static void main(String[] args) {
 
-			List<String> out = new ArrayList<>();
-			out.add("syphax");
-			out.add("bouazzouni");
-			searchGoogle(out);
 	}
 
 	public static void searchGoogle(List<String> keywords){

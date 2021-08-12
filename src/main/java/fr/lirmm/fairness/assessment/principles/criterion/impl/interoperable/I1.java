@@ -37,7 +37,7 @@ public class I1 extends AbstractPrincipleCriterion {
                 String ontoLang = ontology.getHasOntoLang();
                 int index = Arrays.asList(languages).indexOf(ontoLang.trim());
                 if (index > -1)
-                    setScore(index, question);
+                    setScoreLevel(index, question);
                 else
                     setFailure(question);
             }

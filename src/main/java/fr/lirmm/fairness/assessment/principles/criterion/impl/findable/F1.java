@@ -1,7 +1,6 @@
 package fr.lirmm.fairness.assessment.principles.criterion.impl.findable;
 
 import java.io.IOException;
-import java.net.*;
 
 import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
@@ -34,7 +33,7 @@ public class F1 extends AbstractPrincipleCriterion {
                     if (URLValidTest.isValid(ontology.getOntologyIRI())) {
                         setSuccess(question);
                     } else {
-                        setScore(1 , question);
+                        setScoreLevel(1 , question);
                     }
                 } else {
                     setFailure(question);
@@ -56,13 +55,13 @@ public class F1 extends AbstractPrincipleCriterion {
                             if(ValidDOITest.isValid(handle, apiKey)){
                                 setSuccess(question);
                             }else {
-                                setScore(3 , question);
+                                setScoreLevel(3 , question);
                             }
                         }else {
-                            setScore(2, question);
+                            setScoreLevel(2, question);
                         }
                     } else {
-                        setScore(1, question);
+                        setScoreLevel(1, question);
                     }
                 } else {
                     setFailure(question);
@@ -73,7 +72,9 @@ public class F1 extends AbstractPrincipleCriterion {
         this.addResult(r);
 
         //Q3 Are the ontology metadata included in the ontology file- and consequently share the same identifiers or is the metadata record clearly identified by its own URI.
-        this.addResult(2, this.questions.get(2).getMaxPoint().getScore(), "The repository makes explicit relation between metadata and ontology.");
+        this.setDefaultSucesses(2, "The repository makes explicit relation between metadata and ontology.");
+        
+
 
 
         // Q4: Does an ontology provide a version specific URI and is this URI resolvable/ dereferenceable?
@@ -86,10 +87,10 @@ public class F1 extends AbstractPrincipleCriterion {
                         if (ResolvableURLTest.isValid(ontologyVersionIri)) {
                             setSuccess(question);
                         } else {
-                            setScore(2,question);
+                            setScoreLevel(2,question);
                         }
                     } else {
-                        setScore(1, question);
+                        setScoreLevel(1, question);
                     }
                 } else {
                     setFailure(question);

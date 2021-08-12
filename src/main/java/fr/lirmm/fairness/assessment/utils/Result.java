@@ -1,5 +1,6 @@
 package fr.lirmm.fairness.assessment.utils;
 
+import com.google.gson.annotations.Expose;
 import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
 
 import java.io.Serializable;
@@ -7,7 +8,7 @@ import java.io.Serializable;
 public class Result implements Serializable {
     private static final long serialVersionUID = 2746658890779865382L;
 
-
+    @Expose
     protected double score;
 
     protected AbstractCriterionQuestion question;

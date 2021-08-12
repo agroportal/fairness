@@ -13,7 +13,6 @@ import org.json.JSONException;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
 import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriterion;
-import fr.lirmm.fairness.assessment.utils.OntologyRestApi;
 
 public class R1 extends AbstractPrincipleCriterion {
 
@@ -37,7 +36,7 @@ public class R1 extends AbstractPrincipleCriterion {
                         count ++;
                     }
                 }
-                setScore(count, question);
+                setScoreLevel(count, question);
 
             }
         });
@@ -55,7 +54,7 @@ public class R1 extends AbstractPrincipleCriterion {
                     }
                 }
 
-                setScore(count, question);
+                setScoreLevel(count, question);
 
             }
         });

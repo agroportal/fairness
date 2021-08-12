@@ -78,7 +78,10 @@ public class A1 extends AbstractPrincipleCriterion {
         this.addResult(r);
 
         //Q2 : Does the ontology URI (if metadata is included in the ontology file) or the external metadata URI resolve to the metadata record ?
-        this.addResult(1, this.questions.get(1).getMaxPoint().getScore(), "The repository provides an external metadata URI which resolves to the metadata record"); //we test on AgroPortal metadata -> max points.
+        //we test on AgroPortal metadata -> max points.
+        this.setDefaultSucesses(1 ,"The repository provides an external metadata URI which resolves to the metadata record");
+
+
 
         //Q3: Are ontology and its metadata supporting content negotiation?
         r = Tester.doEvaluation(ontology, this.questions.get(2), new Testable() {
