@@ -135,7 +135,7 @@ From the definition of the questions proposed in the Framework ["FAIR or FAIRer?
 * The obtained results over AgroPortal semantic resources is here : [FAIR-Results](https://github.com/agroportal/fairness/tree/master/doc/results/FAIR-result.xlsx)
 
 To make the application reusable , me use a list on configuration files written in json for :
-* [questions.config.json](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/questions.config.json) defining the questions with there scores , properties used and possible explanation.
+* [questions.config.json](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/questions.config.json) defining the questions with there scores , properties used and possible explanation.(Note: An html table version of this file is findable [here](https://github.com/agroportal/fairness/blob/master/doc/questions.config.md) )
 * [properties.config.json](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/properties.config.json) defining the list of MOD properties with there equivalent in Agroportal, source (ontology ,summision or links) and type (String or Array).
 * [metadata.voc.config.json](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/metadata.voc.config.json) defining a list of standards metadata vocabularies (e.g OWL,DC,RDFS), used in I2Q7.
 * [catalogs.config.json](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/catalogs.config.json) defining a list of open ontology repositories and labries (e.g Fair Sharing , OLS), used in F4Q1 and F4Q2.
