@@ -106,33 +106,20 @@ public class Ontology {
 	}
 
 	private void addOntologyLinkPropertyValue(Property property) throws JSONException, IOException {
-
-		String mainProperty = property.getLabel();
-		String subProperty = "";
-		if(mainProperty.contains(".")) {
-			subProperty = mainProperty.split("\\.")[1];
-			mainProperty = mainProperty.split("\\.")[0];
-		}
-		property.setValue((List<String>) this.getLinkContent(mainProperty , subProperty));
+		property.setValue(List.of(this.restApi.getOntologyLinksJsonObject(property.getLabel())));
 		this.addPropertyValue(property);
 	}
 
 	private void addOntologyLinkArrayPropertyValue(Property property) throws JSONException, IOException {
-		property.setValue((List<String>) this.getLinkContent(property.getLabel(),""));
+		Gson gson = new GsonBuilder().create();
+		property.setValue((gson.fromJson(
+				OntologyRestApi.get(this.restApi.getOntologyLinksJsonObject(property.getLabel()) , portalInstance.getApikey() ,"application/json"),
+				List.class)));
 		this.addPropertyValue(property);
 
 	}
 
-	private List<?> getLinkContent(String property,String subProperty) throws JSONException, IOException {
-		Gson gson = new GsonBuilder().create();
-		if(subProperty.isEmpty()){
-			return List.of(this.restApi.getOntologyLinksJsonObject(property));
-		}else {
-			return List.of(gson.fromJson(
-					OntologyRestApi.get(this.restApi.getOntologyLinksJsonObject(property) , portalInstance.getApikey() ,"application/json"),
-					Map.class).get(subProperty));
-		}
-	}
+
 	public String getMetaDataURL(){
 		return String.join("/", new String[] { this.portalInstance.getUrl(), "ontologies", this.acronym,
 				"latest_submission?display=all" });

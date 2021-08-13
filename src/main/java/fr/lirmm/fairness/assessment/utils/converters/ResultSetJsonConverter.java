@@ -58,7 +58,7 @@ public class ResultSetJsonConverter extends AbstractJsonConverter<List<Result>> 
 				if(question!=null && question.getProperties() != null){
 					object.add("properties" , gson.toJsonTree(question.getProperties()));
 				}
-				
+
 				state.add("success" , gson.toJsonTree(((CombinedResult)result).getSuccessCount()));
 				state.add("average" , gson.toJsonTree(((CombinedResult)result).getAverageCount()));
 				state.add("fail" , gson.toJsonTree(((CombinedResult)result).getFailCount()));

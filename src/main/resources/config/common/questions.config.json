@@ -85,6 +85,9 @@
               "score": 9,
               "explanation": "Present, valid and resolvable version URI."
             }
+          ],
+          "properties": [
+            "owl:ontologyIRI"
           ]
         }
       }

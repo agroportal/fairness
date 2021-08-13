@@ -88,7 +88,6 @@ public class CombinedFair {
         JsonElement properties = new Gson().fromJson(newQuestion.get("properties"), JsonElement.class);
         List<String> out = new ArrayList<>();
 
-        System.out.println(properties);
         if(properties == null)
             out =  null;
         else if(properties.isJsonObject())
@@ -100,7 +99,6 @@ public class CombinedFair {
             });
         }
 
-        System.out.println("return: " + out);
        return out;
     }
 
