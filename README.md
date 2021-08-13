@@ -57,11 +57,28 @@ In result, it returns a JSON with the following skeleton :
         "F1": { // Subprincipal
           "label": "Ontologies and ontology metadata are assigned a globally unique and persistent identifier. ",
           "results": {
-            "F1Q1": { // Subprincipal question
-              "question": "Does an ontology have a ?local? identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?", // question statement 
-              "score": 6, // Question test result 
-              "explication": "Valid ontology URI", // Question result explanation 
-              "maxCredits": 6 // Question maximum score
+           "F1Q1": {
+                 "question": "Does an ontology have a \"local\" identifier i.e., a globally unique and potentially persistent identifier assigned by the developer                               (or developing organization)?",
+                 "score": 9,
+                 "explanation": "Present and valid ontology URI.", //Score explanation
+                 "properties": {//List of properties used in the test with there values
+                              "owl:ontologyIRI": "http://ontology.inrae.fr/frenchcropusage"
+                 },
+                 "maxCredits": 9,
+                 "points": [ //Array of possible scores and explanation for this question
+                        {
+                          "explanation": "Ontology URI is not present.",
+                          "score": 0
+                        },
+                        {
+                        "explanation": "Present but invalid ontology URI.",
+                        "score": 3
+                        },
+                        {
+                        "explanation": "Present and valid ontology URI.",
+                        "score": 9
+                        }
+               ]
             },
             "F1Q2": {...},
             "F1Q3": {...},
@@ -115,8 +132,13 @@ Each **score** in the result comes with :
 From the definition of the questions proposed in the Framework ["FAIR or FAIRer? An integrated quantitative FAIRness assessment grid for semantic resources and ontologies"](https://hal.archives-ouvertes.fr/lirmm-03208544/) ,we implemented a Java functions to each of them that test its validity using the resources MOD meta-data.
 
 * The FAIR questions used by the tool to assess FAIRness is here : [FAIR-Questions](https://github.com/agroportal/fairness/blob/master/doc/results/FAIR-questions.md)
-* The obtained results over AgroPortal semantic resources is here : [FAIR-Results](https://github.com/agroportal/fairness/tree/master/results/FAIR-result.xlsx)
+* The obtained results over AgroPortal semantic resources is here : [FAIR-Results](https://github.com/agroportal/fairness/tree/master/doc/results/FAIR-result.xlsx)
 
+To make the application reusable , me use a list on configuration files written in json for :
+* [questions.config.json](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/questions.config.json) defining the questions with there scores , properties used and possible explanation.
+* [properties.config.json](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/properties.config.json) defining the list of MOD properties with there equivalent in Agroportal, source (ontology ,summision or links) and type (String or Array).
+* [metadata.voc.config.json](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/metadata.voc.config.json) defining a list of standards metadata vocabularies (e.g OWL,DC,RDFS), used in I2Q7.
+* [catalogs.config.json](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/catalogs.config.json) defining a list of open ontology repositories and labries (e.g Fair Sharing , OLS), used in F4Q1 and F4Q2.
 ## Local installation 
 To do a local installation of this web service, you will nill 
 ### 1- Prerequisites
@@ -141,8 +163,6 @@ To do a local installation of this web service, you will nill
   Fill up the **apikey** and **cacheFilePath** *config.properties.example* with the corresponding infos , finally rename it to **config.properties**
   > **To note** : Other portals can be added simply  by adding a folder with their names  and put on it the  **config.properties** file, but are supported only portals with MOD meta-data implemented
 
-* **Questions configuration**
-  The JSON configuration file of the questions is findable [here](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/questions.config.json), where are listed all the questions with there statement and max credits
 
 ### 4- Build the project
 
