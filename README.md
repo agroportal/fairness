@@ -1,4 +1,4 @@
-<h1 align="center"> OFAIRE-Ontology FAIRness Evaluator</h1>
+<h1 align="center"> OFAIRE- Ontology FAIRness Evaluator</h1>
 
 <p align="center">
  <i>
