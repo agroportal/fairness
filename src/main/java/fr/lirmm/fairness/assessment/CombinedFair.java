@@ -12,22 +12,28 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeSet;
 
 
 public class CombinedFair {
 
 
     private final Fair fair;
-    private double fairCount;
-    public CombinedFair(double fairCount) {
+    private int fairCount;
+    private TreeSet<Double> sortedScores;
+    public CombinedFair(int fairCount) {
         fair = new Fair();
         this.fairCount = fairCount;
+        this.sortedScores = new TreeSet<Double>();
     }
 
     public void addFairToCombine(JsonObject fair) throws JSONException {
 
         getFair().getScores().add(fair.get("score").getAsDouble() / fairCount );
         getFair().getScoresWeights().add(fair.get("maxCredits").getAsDouble() / fairCount);
+
+        this.sortedScores.add(fair.get("score").getAsDouble());
+
         int i = 0;
         for (AbstractPrinciple principle : getFair().getPrinciples()) {
             combinePrinciple(i, fair.get(principle.getClass().getSimpleName()).getAsJsonObject());
@@ -102,4 +108,24 @@ public class CombinedFair {
        return out;
     }
 
+
+    public double getMinScore(){
+        return this.sortedScores.first();
+    }
+    public double getMaxScore(){
+        return this.sortedScores.last();
+    }
+
+    public double getMedianScore(){
+        int middle = this.fairCount/2;
+        Double[] sortedScores = new Double[this.fairCount];
+
+        sortedScores = this.sortedScores.toArray(sortedScores);
+        double medianValue = 0;
+        if (this.fairCount%2 == 1)
+            medianValue = sortedScores[middle];
+        else
+            medianValue = (sortedScores[middle-1] + sortedScores[middle]) / 2;
+        return medianValue;
+    }
 }

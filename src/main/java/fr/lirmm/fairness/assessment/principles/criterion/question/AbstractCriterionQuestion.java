@@ -36,7 +36,7 @@ public class AbstractCriterionQuestion {
     }
 
     public  QuestionResult getMaxPoint(int index){
-        return  getPoints().get(index);
+        return  getPoints().get(Math.min(getPoints().size()-1,index));
     }
 
     public QuestionResult getMaxPoint(){
