@@ -1,4 +1,4 @@
-<h1 align="center">Fairness - The Fairness assessment service</h1>
+<h1 align="center"> O'FAIRE- an Ontology FAIRness Evaluator</h1>
 
 <p align="center">
  <i>
@@ -132,7 +132,7 @@ Each **score** in the result comes with :
 From the definition of the questions proposed in the Framework ["FAIR or FAIRer? An integrated quantitative FAIRness assessment grid for semantic resources and ontologies"](https://hal.archives-ouvertes.fr/lirmm-03208544/) ,we implemented a Java functions to each of them that test its validity using the resources MOD meta-data.
 
 * The FAIR questions used by the tool to assess FAIRness is here : [FAIR-Questions](https://github.com/agroportal/fairness/blob/master/doc/results/FAIR-questions.md)
-* The obtained results over AgroPortal semantic resources is here : [FAIR-Results](https://github.com/agroportal/fairness/tree/master/doc/results/FAIR-result.xlsx)
+* The obtained results over AgroPortal semantic resources is here : [FAIR-Results](https://github.com/agroportal/fairness/tree/master/doc/results/FAIR-results.xlsx)
 
 To make the application reusable , me use a list on configuration files written in json for :
 * [questions.config.json](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/questions.config.json) defining the questions with there scores , properties used and possible explanation.(Note: An html table version of this file is findable [here](https://github.com/agroportal/fairness/blob/master/doc/questions.config.md) )
