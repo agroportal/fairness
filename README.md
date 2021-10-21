@@ -180,5 +180,6 @@ Then press "Esc" and type ":wq" to save and exit
 ## Contacts 
 Emna Amdouni, University of Montpellier (emna.amdouni@lirmm.fr)
 Clement Jonquet, University of Montpellier (jonquet@lirmm.fr)
-Syphax Bouazzouni , University of Montpellier (syphax.bouazzouni@lirmm.fr)
+Syphax Bouazzouni , University of Montpellier (syphax.bouazzouni@lirmm.fr).
+
 Your suggestions and comments are welcome. Thank you.
