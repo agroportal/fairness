@@ -177,9 +177,7 @@ The following command program  update the cache every day at midnight
  ```
 To add this job to the local system, execute the command **crontab -e** , it opens a text file, press "i" to go to insert mode, copy the above command.
 Then press "Esc" and type ":wq" to save and exit  
-## Contacts 
-Emna Amdouni, University of Montpellier (emna.amdouni@lirmm.fr).
-Syphax Bouazzouni, University of Montpellier (syphax.bouazzouni@lirmm.fr).
-Clement Jonquet, University of Montpellier (jonquet@lirmm.fr).
-
+## Contact Us
+Emna Amdouni, University of Montpellier (emna.amdouni@lirmm.fr). Clement Jonquet, University of Montpellier (jonquet@lirmm.fr) and Syphax Bouazzouni, University of Montpellier (syphax.bouazzouni@lirmm.fr).
 Your suggestions and comments are welcome. Thank you.
+
