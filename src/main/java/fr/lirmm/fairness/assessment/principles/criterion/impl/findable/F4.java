@@ -11,6 +11,7 @@ import fr.lirmm.fairness.assessment.Configuration;
 import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Tester;
+import fr.lirmm.fairness.assessment.principles.criterion.question.tests.MetaDataExistTest;
 import fr.lirmm.fairness.assessment.utils.Result;
 import org.json.JSONException;
 
@@ -27,16 +28,18 @@ public class F4 extends AbstractPrincipleCriterion {
         Result r;
         ArrayList<LinkedTreeMap> repos = (ArrayList<LinkedTreeMap>) Configuration.getInstance().getRepositoriesConfig().get("repositories");
         ArrayList<LinkedTreeMap> libs = (ArrayList<LinkedTreeMap>) Configuration.getInstance().getRepositoriesConfig().get("libraries");
-        String currentRepo = ontology.getPortalInstance().getUrl();
-        List<String> includedInDataCatalog = ontology.getIncludedInDataCatalog();
+
+
 
 
         // Q1: Is the ontology registered in multiple ontology libraries?
-        r = Tester.doEvaluation(ontology, questions.get(0), new Testable() {
+        this.addResult(Tester.doEvaluation(ontology, questions.get(0), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+                String currentRepo = ontology.getPortalInstance().getUrl();
+                List<String> includedInDataCatalog = ontology.getIncludedInDataCatalog();
                 int found = 0;
-                if (includedInDataCatalog.isEmpty()) {
+                if (MetaDataExistTest.isValid(includedInDataCatalog.toString())) {
                     for (int i = 0; i < repos.size() && found < question.getPoints().size(); i++) {
                         if (includedInDataCatalog.contains(repos.get(i).get("url").toString()) || (currentRepo.contains(repos.get(i).get("url").toString())))
                             found++;
@@ -53,18 +56,18 @@ public class F4 extends AbstractPrincipleCriterion {
                 }
 
             }
-        });
-        this.addResult(r);
+        }));
 
 
         // Q2: Is the ontology registered in multiple open ontology repositories?  Here we
         // consider OBO foundry, NCBO Bioportal, Ontobee, Aber and OLS.
-        r = Tester.doEvaluation(ontology, questions.get(1), new Testable() {
+        this.addResult(Tester.doEvaluation(ontology, questions.get(1), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 int found = 0;
                 List<String> includedInDataCatalog = ontology.getIncludedInDataCatalog();
-                if (includedInDataCatalog.isEmpty()) {
+                String currentRepo = ontology.getPortalInstance().getUrl();
+                if (MetaDataExistTest.isValid(includedInDataCatalog.toString())) {
                     for (int i = 0; i < repos.size() && found < question.getPoints().size(); i++) {
                         if (includedInDataCatalog.contains(repos.get(i).get("url").toString()) || (currentRepo.contains(repos.get(i).get("url").toString())))
                             found++;
@@ -75,8 +78,7 @@ public class F4 extends AbstractPrincipleCriterion {
                 }
 
             }
-        });
-        this.addResult(r);
+        }));
 
         //Q3: Are the ontology libraries or repositories properly indexed by Web search engines?
         //TODO implement F4Q3

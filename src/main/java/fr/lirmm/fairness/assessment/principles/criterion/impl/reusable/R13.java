@@ -6,6 +6,7 @@ import java.util.Arrays;
 import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Tester;
+import fr.lirmm.fairness.assessment.principles.criterion.question.tests.MetaDataExistTest;
 import fr.lirmm.fairness.assessment.utils.Result;
 import org.json.JSONException;
 
@@ -25,14 +26,15 @@ public class R13 extends AbstractPrincipleCriterion {
         this.addResult(Tester.doEvaluation(ontology, questions.get(0), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
-                if ((ontology.getProjects().isEmpty()) && (ontology.getEndorsedBy().isEmpty())) {
+                if ((!MetaDataExistTest.isValid(ontology.getProjects().toString()))
+                        && (!MetaDataExistTest.isValid(ontology.getEndorsedBy().toString()))) {
                     this.setFailure(question);
                 } else {
                     int count = 0;
-                    if ((!ontology.getEndorsedBy().isEmpty())) {
+                    if (MetaDataExistTest.isValid(ontology.getEndorsedBy().toString())) {
                         count++;
                     }
-                    if (!ontology.getProjects().isEmpty()) {
+                    if (MetaDataExistTest.isValid(ontology.getProjects().toString())) {
                         count++;
                     }
                     this.setScoreLevel(count,question);

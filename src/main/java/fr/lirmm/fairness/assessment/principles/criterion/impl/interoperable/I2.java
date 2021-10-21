@@ -3,14 +3,14 @@ package fr.lirmm.fairness.assessment.principles.criterion.impl.interoperable;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import com.google.gson.internal.LinkedTreeMap;
 import fr.lirmm.fairness.assessment.Configuration;
 import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Tester;
+import fr.lirmm.fairness.assessment.principles.criterion.question.tests.MetaDataExistTest;
 import org.json.JSONException;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
@@ -32,7 +32,7 @@ public class I2 extends AbstractPrincipleCriterion {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 List<String> useImports = ontology.getUseImports();
-                if (!useImports.isEmpty()) {
+                if (MetaDataExistTest.isValid(useImports.toString())) {
                     this.setSuccess(question);
                 } else {
                     this.setFailure(question);
@@ -46,7 +46,7 @@ public class I2 extends AbstractPrincipleCriterion {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 List<String> ontologyRelatedTo = ontology.getOntologyRelatedTo();
-                if (!ontologyRelatedTo.isEmpty()) {
+                if (MetaDataExistTest.isValid(ontologyRelatedTo.toString())) {
                     this.setSuccess(question);
                 } else {
                     this.setFailure(question);
@@ -63,7 +63,7 @@ public class I2 extends AbstractPrincipleCriterion {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 List<String> isAlignedTo = ontology.getIsAlignedTo();
-                if (!isAlignedTo.isEmpty()) {
+                if (MetaDataExistTest.isValid(isAlignedTo.toString())) {
                     this.setSuccess(question);
                 } else {
                     this.setFailure(question);
@@ -85,9 +85,10 @@ public class I2 extends AbstractPrincipleCriterion {
                 String hasPriorVersion = ontology.getHasPriorVersion();
                 String generalizes = ontology.getGeneralizes();
 
-                if (!similarTo.isEmpty() || !translationOfWork.isEmpty()
-                        || !explanationEvolution.isEmpty()    || !hasPriorVersion.isEmpty()
-                        || !generalizes.isEmpty()) {
+
+                if ( MetaDataExistTest.isValid(similarTo.toString()) || MetaDataExistTest.isValid(translationOfWork)
+                        || MetaDataExistTest.isValid(explanationEvolution)    || MetaDataExistTest.isValid(hasPriorVersion)
+                        || MetaDataExistTest.isValid(generalizes)) {
                     this.setSuccess(question);
                 } else {
                     this.setFailure(question);
@@ -106,7 +107,7 @@ public class I2 extends AbstractPrincipleCriterion {
                     int count = 0;
 
                     List<String> metadataVoc = ontology.getMetadataVoc();
-                    if (!metadataVoc.isEmpty()) {
+                    if (MetaDataExistTest.isValid(metadataVoc.toString())) {
                         for (LinkedTreeMap<?, ?> voc : vocs) {
                             String pref = (String) voc.get("prefix");
                             if (metadataVoc.contains(pref)) {

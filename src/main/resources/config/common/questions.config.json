@@ -431,7 +431,11 @@
               "score": 24,
               "explanation": "Ontology and its metadata support together 4 or more formats."
             }
+          ],
+          "properties": [
+            "owl:ontologyIRI"
           ]
+
         },
         "A1Q4": {
           "question": "Are ontology and its metadata accessible through another standard protocol such as SPARQL?",

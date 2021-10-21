@@ -7,6 +7,7 @@ import java.net.SocketTimeoutException;
 import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Tester;
+import fr.lirmm.fairness.assessment.principles.criterion.question.tests.MetaDataExistTest;
 import fr.lirmm.fairness.assessment.utils.Result;
 import org.json.JSONException;
 
@@ -36,7 +37,7 @@ public class A2 extends AbstractPrincipleCriterion {
 		this.addResult(Tester.doEvaluation(ontology, questions.get(3), new Testable() {
 			@Override
 			public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
-				if(!ontology.getStatus().isEmpty()){
+				if(MetaDataExistTest.isValid(ontology.getStatus())){
 					this.setSuccess(question);
 				}else {
 					this.setFailure( question);
