@@ -725,12 +725,6 @@
       "mod": "dct:accrualPolicy",
       "type": "string",
       "source": "submission"
-    },
-    {
-      "portal": "omv:ontologyType",
-      "mod": "omv:ontologyType",
-      "type": "string",
-      "source": "ontology"
     }
   ]
 }

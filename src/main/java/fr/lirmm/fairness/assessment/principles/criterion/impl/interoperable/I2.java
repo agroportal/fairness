@@ -24,14 +24,6 @@ public class I2 extends AbstractPrincipleCriterion {
     @Override
     protected void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException {
 
-        List<String> useImports = ontology.getUseImports();
-        List<String> ontologyRelatedTo = ontology.getOntologyRelatedTo();
-        List<String> isAlignedTo = ontology.getIsAlignedTo();
-        List<String> similarTo = ontology.getSimilarTo();
-        List<String> metadataVoc = ontology.getMetadataVoc();
-        String explanationEvolution = ontology.getExplanationEvolution();
-        String translationOfWork = ontology.getTranslationOfWork();
-
 
         //TODO in futur test the faire score of the imported ontologies, and do an average in all questions
 
@@ -39,6 +31,7 @@ public class I2 extends AbstractPrincipleCriterion {
         this.addResult(Tester.doEvaluation(ontology, questions.get(0), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+                List<String> useImports = ontology.getUseImports();
                 if (!useImports.isEmpty()) {
                     this.setSuccess(question);
                 } else {
@@ -52,6 +45,7 @@ public class I2 extends AbstractPrincipleCriterion {
         this.addResult(Tester.doEvaluation(ontology, questions.get(1), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+                List<String> ontologyRelatedTo = ontology.getOntologyRelatedTo();
                 if (!ontologyRelatedTo.isEmpty()) {
                     this.setSuccess(question);
                 } else {
@@ -68,6 +62,7 @@ public class I2 extends AbstractPrincipleCriterion {
         this.addResult(Tester.doEvaluation(ontology, questions.get(3), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+                List<String> isAlignedTo = ontology.getIsAlignedTo();
                 if (!isAlignedTo.isEmpty()) {
                     this.setSuccess(question);
                 } else {
@@ -84,7 +79,15 @@ public class I2 extends AbstractPrincipleCriterion {
         this.addResult(Tester.doEvaluation(ontology, questions.get(5), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
-                if (!similarTo.isEmpty() || !translationOfWork.isEmpty() || !explanationEvolution.isEmpty()) {
+                List<String> similarTo = ontology.getSimilarTo();
+                String explanationEvolution = ontology.getExplanationEvolution();
+                String translationOfWork = ontology.getTranslationOfWork();
+                String hasPriorVersion = ontology.getHasPriorVersion();
+                String generalizes = ontology.getGeneralizes();
+
+                if (!similarTo.isEmpty() || !translationOfWork.isEmpty()
+                        || !explanationEvolution.isEmpty()    || !hasPriorVersion.isEmpty()
+                        || !generalizes.isEmpty()) {
                     this.setSuccess(question);
                 } else {
                     this.setFailure(question);
@@ -102,6 +105,7 @@ public class I2 extends AbstractPrincipleCriterion {
                     double total = 0.0;
                     int count = 0;
 
+                    List<String> metadataVoc = ontology.getMetadataVoc();
                     if (!metadataVoc.isEmpty()) {
                         for (LinkedTreeMap<?, ?> voc : vocs) {
                             String pref = (String) voc.get("prefix");

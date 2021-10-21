@@ -29,7 +29,7 @@ public class Property {
         this.value = value;
     }
 
-    public List<String> getValue() {
+    public List<?> getValue() {
         return value;
     }
 

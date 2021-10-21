@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 
-import fr.lirmm.fairness.assessment.utils.QuestionResult;
+import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
+import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
+import fr.lirmm.fairness.assessment.principles.criterion.question.Tester;
 import org.json.JSONException;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
@@ -18,12 +20,17 @@ public class F3 extends AbstractPrincipleCriterion {
 	protected void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException {
         // Q1: Are the ontology metadata included and maintained in the ontology file?
 		this.setNotResolvable(0);
+
 		// Q2: If not, are the ontology metadata described in an external file?
-		// TODO change explanation to precise that agroportal provide external metadata file
-		this.setDefaultSucesses(1, "(TODO:change explanation) Ontology metadata are not included in an external file");
+		this.setDefaultSuccess(1);
 		//Q3: Does that external file explicitly link to the ontology and vice-versa?
 		// TODO change explanation
-		this.addResult(2, this.questions.get(2).getMaxPoint().getScore() / 2 , "(TODO:change explanation)  Agroportal make  explicit link from metadata to the ontology", null);
+		this.addResult(Tester.doEvaluation(ontology, questions.get(2), new Testable() {
+			@Override
+			public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+				this.setScoreLevel(1,question);
+			}
+		}));
 	}
 	
 }

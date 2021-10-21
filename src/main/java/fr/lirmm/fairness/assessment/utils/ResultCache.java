@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ResultCache {
 
-    public   static String FILE_SAVE_NAME = "save.json";
+    public static String FILE_SAVE_NAME = "save.json";
 
     private void store(String json, String fileName) throws IOException {
         FileWriter file = null;

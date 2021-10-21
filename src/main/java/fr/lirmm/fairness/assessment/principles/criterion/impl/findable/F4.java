@@ -46,7 +46,6 @@ public class F4 extends AbstractPrincipleCriterion {
                         if (includedInDataCatalog.contains(libs.get(i).get("url").toString()) || (currentRepo.contains(libs.get(i).get("url").toString())))
                             found++;
                     }
-
                     setScoreLevel(found, question);
                 } else {
                     setFailure(question.getMaxPoint(0).getExplanation() + getLabels(repos) + ""
@@ -70,7 +69,6 @@ public class F4 extends AbstractPrincipleCriterion {
                         if (includedInDataCatalog.contains(repos.get(i).get("url").toString()) || (currentRepo.contains(repos.get(i).get("url").toString())))
                             found++;
                     }
-
                     setScoreLevel(found, question);
                 } else {
                     setFailure(question.getMaxPoint(0).getExplanation() + getLabels(repos), question);

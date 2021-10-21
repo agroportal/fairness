@@ -23,45 +23,41 @@ public class I1 extends AbstractPrincipleCriterion {
     @Override
     protected void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException {
 
-        String ontoLang = ontology.getHasOntoLang();
-        String ontoSyntax = ontology.getHasOntoSyntax();
-        String formalLevel = ontology.getHasFormalLevel();
-        String hasFormat = ontology.getHasFormat();
-        String isFormatOf = ontology.getIsFormatOf();
+
 
         // Q1: What is the representation language used for (metadata)data?
-        Result r = Tester.doEvaluation(ontology, questions.get(0), new Testable() {
+        this.addResult(Tester.doEvaluation(ontology, questions.get(0), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 String[] languages = {"PDF", "TXT", "CSV", "XML", "OBO", "RDFS", "SKOS", "OWL"};
                 String ontoLang = ontology.getHasOntoLang();
                 int index = Arrays.asList(languages).indexOf(ontoLang.trim());
                 if (index > -1)
-                    setScoreLevel(index, question);
+                    setScoreLevel(index+1, question);
                 else
                     setFailure(question);
             }
-        });
-        this.addResult(r);
+        }));
 
         // Q2: Is the representation language used a W3C Recommendation?
-        r = Tester.doEvaluation(ontology, questions.get(1), new Testable() {
+        this.addResult(Tester.doEvaluation(ontology, questions.get(1), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 String[] languages = {"XML", "RDFS", "SKOS", "OWL"};
+                String ontoLang = ontology.getHasOntoLang();
                 int index = Arrays.asList(languages).indexOf(ontoLang.trim());
                 if (index > -1)
                     setSuccess(question);
                 else
                     setFailure(question);
             }
-        });
-        this.addResult(r);
+        }));
 
         // Q3: Is the syntax of the ontology informed?
         this.addResult(Tester.doEvaluation(ontology, questions.get(2), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+                String ontoSyntax = ontology.getHasOntoSyntax();
                 if (MetaDataExistTest.isValid(ontoSyntax)) {
                     QuestionResult result = question.getMaxPoint();
                     this.setSuccess(result.getExplanation() + " (" + ontoSyntax + ")", question);
@@ -76,10 +72,10 @@ public class I1 extends AbstractPrincipleCriterion {
         this.addResult(Tester.doEvaluation(ontology, questions.get(3), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+                String formalLevel = ontology.getHasFormalLevel();
                 if (MetaDataExistTest.isValid(formalLevel)) {
                     QuestionResult result = question.getMaxPoint();
                     this.setSuccess(result.getExplanation() + " (" + formalLevel + ")", question);
-                    this.setSuccess(question);
                 } else {
                     this.setFailure(question);
                 }
@@ -90,6 +86,9 @@ public class I1 extends AbstractPrincipleCriterion {
         this.addResult(Tester.doEvaluation(ontology, questions.get(4), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+                String hasFormat = ontology.getHasFormat();
+                String isFormatOf = ontology.getIsFormatOf();
+
                 if (MetaDataExistTest.isValid(hasFormat) && MetaDataExistTest.isValid(isFormatOf)) {
                     this.setSuccess(question);
                 } else {

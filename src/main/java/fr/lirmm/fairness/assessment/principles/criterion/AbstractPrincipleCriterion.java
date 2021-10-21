@@ -9,10 +9,7 @@ import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import fr.lirmm.fairness.assessment.Configuration;
-import fr.lirmm.fairness.assessment.principles.criterion.question.Tester;
 import fr.lirmm.fairness.assessment.utils.QuestionResult;
 import fr.lirmm.fairness.assessment.utils.Result;
 import fr.lirmm.fairness.assessment.principles.AbstractScoredEntity;
@@ -62,8 +59,8 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 	}
 
 
-	protected void setDefaultSucesses(int index , String explacation){
-		this.results.add(QuestionResult.success(explacation ,questions.get(index)));
+	protected void setDefaultSuccess(int index){
+		this.results.add(QuestionResult.success(questions.get(index).getMaxPoint().getExplanation() ,questions.get(index)));
 	}
 	protected void setNotResolvable(int index){
 		this.results.add(QuestionResult.notResolvable(questions.get(index)));

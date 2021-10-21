@@ -10,5 +10,5 @@ import fr.lirmm.fairness.assessment.model.Ontology;
 
 public interface Evaluable {
 	
-	public void evaluate(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException;	
+	void evaluate(Ontology ontology) throws JSONException, IOException;
 }

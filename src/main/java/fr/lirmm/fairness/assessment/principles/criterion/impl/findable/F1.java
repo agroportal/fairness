@@ -72,10 +72,8 @@ public class F1 extends AbstractPrincipleCriterion {
         this.addResult(r);
 
         //Q3 Are the ontology metadata included in the ontology file- and consequently share the same identifiers or is the metadata record clearly identified by its own URI.
-        this.setDefaultSucesses(2, "The repository makes explicit relation between metadata and ontology.");
+        this.setDefaultSuccess(2);
         
-
-
 
         // Q4: Does an ontology provide a version specific URI and is this URI resolvable/ dereferenceable?
         r = Tester.doEvaluation(ontology, questions.get(3), new Testable() {

@@ -24,7 +24,7 @@ public class R1 extends AbstractPrincipleCriterion {
 
 
         // Q1: Does the ontology provide information about how classes are defined?
-        Result r = Tester.doEvaluation(ontology, questions.get(0), new Testable() {
+        this.addResult(Tester.doEvaluation(ontology, questions.get(0), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 String[] allMetadata = {ontology.getPrefLabelProperty(), ontology.getSynonymProperty(),
@@ -39,14 +39,14 @@ public class R1 extends AbstractPrincipleCriterion {
                 setScoreLevel(count, question);
 
             }
-        });
-        this.addResult(r);
+        }));
+
 
         // Q2: Does the ontology provide information about its hierarchy?
-        r = Tester.doEvaluation(ontology, questions.get(0), new Testable() {
+        this.addResult(Tester.doEvaluation(ontology, questions.get(1), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
-                String[] allMetadata = {ontology.getHierarchyProperty(), ontology.getObsoleteParent()};
+                String[] allMetadata = {ontology.getHierarchyProperty(), ontology.getObsoleteParent() , ontology.getMaxDepth()};
                 int count = 0;
                 for (String metadata : allMetadata) {
                     if (MetaDataExistTest.isValid(metadata)) {
@@ -57,8 +57,8 @@ public class R1 extends AbstractPrincipleCriterion {
                 setScoreLevel(count, question);
 
             }
-        });
-        this.addResult(r);
+        }));
+
 
         //Q3: How much of the ontology classes are described with labels?
         this.setNotResolvable(2);

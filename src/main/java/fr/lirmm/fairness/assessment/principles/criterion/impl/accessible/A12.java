@@ -3,7 +3,6 @@ package fr.lirmm.fairness.assessment.principles.criterion.impl.accessible;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
-import java.util.List;
 
 import org.json.JSONException;
 
@@ -15,10 +14,10 @@ public class A12 extends AbstractPrincipleCriterion {
 	private static final long serialVersionUID = -1055045295187387264L;
 
 	@Override
-	protected void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException {
+	protected void doEvaluation(Ontology ontology) throws JSONException, IOException {
 
 		// Q1: Are an ontology and its metadata through a protocol that supports authentification and authorization?
-		this.setDefaultSucesses(0 ,"The repository supports authentification and authorization.");
+		this.setDefaultSuccess(0);
 
 		/* OLD Q1 and Q2
 		try {

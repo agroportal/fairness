@@ -1,33 +1,16 @@
 package fr.lirmm.fairness.assessment;
 
-import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.api.client.http.*;
-import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.internal.LinkedTreeMap;
-import fr.lirmm.fairness.assessment.model.PortalInstance;
 import fr.lirmm.fairness.assessment.principles.AbstractScoredEntity;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
 import fr.lirmm.fairness.assessment.principles.AbstractPrinciple;
 import fr.lirmm.fairness.assessment.principles.Evaluable;
-import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
 import fr.lirmm.fairness.assessment.principles.impl.Accessible;
 import fr.lirmm.fairness.assessment.principles.impl.Findable;
 import fr.lirmm.fairness.assessment.principles.impl.Interoperable;
 import fr.lirmm.fairness.assessment.principles.impl.Reusable;
-import fr.lirmm.fairness.assessment.utils.ResultCache;
-import fr.lirmm.fairness.assessment.utils.converters.CombinedFairJsonConverter;
-import fr.lirmm.fairness.assessment.utils.converters.FairJsonConverter;
-import org.json.JSONException;
+
 
 public class Fair extends AbstractScoredEntity implements Evaluable {
 
@@ -50,28 +33,6 @@ public class Fair extends AbstractScoredEntity implements Evaluable {
 
 	}
 
-	public static void searchGoogle(List<String> keywords){
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			HttpTransport httpTransport = new NetHttpTransport();
-			HttpRequestFactory requestFactory = httpTransport.createRequestFactory();
-			Gson parser = new GsonBuilder().create();
-			GenericUrl url = new GenericUrl("https://kgsearch.googleapis.com/v1/entities:search");
-			url.put("query", "syphaxbouazzouni");
-			url.put("limit", "1");
-			url.put("indent", "true");
-			url.put("key", "AIzaSyAGgXIIa0rcBRLDv2Tsdk8OX0rIHYBscoE");
-			HttpRequest request = requestFactory.buildGetRequest(url);
-			HttpResponse httpResponse = request.execute();
-			String responseString = httpResponse.parseAsString();
-
-			JsonNode node = mapper.readTree(responseString).get("itemListElement");
-			System.out.println(node);
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
 
 
 	@Override

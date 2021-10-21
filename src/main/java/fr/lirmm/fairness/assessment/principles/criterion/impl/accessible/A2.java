@@ -22,13 +22,13 @@ public class A2 extends AbstractPrincipleCriterion {
 
 
 		// Q1: Is the ontology accessible in a repository that supports versioning?
-		this.setDefaultSucesses(0, "The repository supports versioning.");
+		this.setDefaultSuccess(0, "The repository supports versioning.");
 
 		// Q2: Are the metadata of each version available?
-		this.setDefaultSucesses(1,"The repository provides metadata for each version.");
+		this.setDefaultSuccess(1,"The repository provides metadata for each version.");
 
 		// Q3: Are ontology metadata accessible even if no more versions of the ontology are available?
-		this.setDefaultSucesses(2, "The repository supports accessibility even if no more versions are available");
+		this.setDefaultSuccess(2, "The repository supports accessibility even if no more versions are available");
 
 
 
@@ -36,7 +36,7 @@ public class A2 extends AbstractPrincipleCriterion {
 		Result r = Tester.doEvaluation(ontology, questions.get(3), new Testable() {
 			@Override
 			public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
-				if(ontology.getStatus().isEmpty()){
+				if(!ontology.getStatus().isEmpty()){
 					this.setSuccess(question);
 				}else {
 					this.setFailure( question);

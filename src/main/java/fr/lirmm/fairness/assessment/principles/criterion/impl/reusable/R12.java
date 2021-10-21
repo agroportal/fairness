@@ -89,7 +89,6 @@ public class R12 extends AbstractPrincipleCriterion {
 			@Override
 			public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
 				String[] props ={ ontology.getFundedBy() };
-
 				this.setScoreLevel(countExistentMetaData(props, question.getPoints().size()), question);
 			}
 		}));

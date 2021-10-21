@@ -27,14 +27,13 @@ public class R11 extends AbstractPrincipleCriterion {
     protected void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException {
 
 
-        String accessRights = ontology.getAccessRights();
-        String morePermissions = ontology.getMorePermissions();
-        String useGuidelines = ontology.getUseGuidelines();
-        String rightsHolder = ontology.getContact();
+
+
+
 
 
         // Q1: Is the ontology license clearly specified (i.e., with a persistent, unique identifier)?
-        Result r = Tester.doEvaluation(ontology, questions.get(0), new Testable() {
+        this.addResult(Tester.doEvaluation(ontology, questions.get(0), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 String license = ontology.getLicense();
@@ -56,8 +55,8 @@ public class R11 extends AbstractPrincipleCriterion {
                     this.setFailure(question);
                 }
             }
-        });
-        this.addResult(r);
+        }));
+
 
 
 			/*
@@ -85,6 +84,7 @@ public class R11 extends AbstractPrincipleCriterion {
         this.addResult(Tester.doEvaluation(ontology, questions.get(1), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+                String accessRights = ontology.getAccessRights();
                 if (MetaDataExistTest.isValid(accessRights)) {
                     this.setSuccess(question);
                 } else {
@@ -99,6 +99,9 @@ public class R11 extends AbstractPrincipleCriterion {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 List<String> infoCount = new ArrayList<>();
+                String morePermissions = ontology.getMorePermissions();
+                String useGuidelines = ontology.getUseGuidelines();
+                String rightsHolder = ontology.getContact();
                 for (String info : new String[]{morePermissions, useGuidelines, rightsHolder}) {
                     if (MetaDataExistTest.isValid(info)) {
                         infoCount.add(info);

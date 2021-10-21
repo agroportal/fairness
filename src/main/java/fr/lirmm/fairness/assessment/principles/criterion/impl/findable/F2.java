@@ -5,7 +5,6 @@ import java.io.IOException;
 import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Tester;
-import fr.lirmm.fairness.assessment.principles.criterion.question.tests.MetaDataExistTest;
 import org.json.JSONException;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
@@ -21,12 +20,15 @@ public class F2 extends AbstractPrincipleCriterion {
         this.addResult(Tester.doEvaluation(ontology, questions.get(0), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
-                String[] props = {ontology.getName(), ontology.getAlternative(), ontology.getHiddenLabel(),
-                        ontology.getIdentifier(), ontology.getHasOntoLang(), ontology.getDescription(), ontology.getHomePage(), ontology.getPullLocation(),
-                        ontology.getKeyWords(), ontology.getCoverage(), ontology.getPrefNamSpacUri(), ontology.getUriRegexPat(),
-                        ontology.getExpId(), ontology.getCreator(), ontology.getContributor(), ontology.getPublisher(), ontology.getCuratedBy(),
-                        ontology.getTranslator(), ontology.getDomain(), ontology.getCompatWith(), ontology.getSameDomain(), ontology.getKnownUsage(),
-                        ontology.getAudience(), ontology.getRepository(), ontology.getBugDatabase(), ontology.getMailingList(),
+                String[] props = {ontology.getAcronym(), ontology.getName(),ontology.getAlternative() ,
+                        ontology.getHiddenLabel(), ontology.getDescription(), ontology.getDocumentation(),
+                        ontology.getPullLocation(), ontology.getKeyWords(), ontology.getCoverage(), ontology.getHomePage(),
+                        ontology.getExample(), ontology.getPreferredNamespaceUri(),  ontology.getUriRegexPat(),
+                        ontology.getExampleIdentifier(),  ontology.getCreator(), ontology.getContributor(),
+                        ontology.getPublisher(), ontology.getCuratedBy(),ontology.getTranslator(), ontology.getDomain()
+                        , ontology.getCompatWith(), ontology.getComesFromTheSameDomain(), ontology.getUriLookupEndpoint() ,
+                        ontology.getKnownUsage(), ontology.getAudience(), ontology.getRepository(), ontology.getBugDatabase(),
+                        ontology.getMailingList(), ontology.getReviews()
                 };
 
                 this.setScoreLevel(countExistentMetaData(props, question.getPoints().size()), question);
@@ -63,14 +65,14 @@ public class F2 extends AbstractPrincipleCriterion {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 String[] props = {
-                        String.join(";", ontology.getLanguage()), ontology.getAbstract(), ontology.getPublication(),
-                        ontology.getNotes(), ontology.getDepiction(), ontology.getLogo(), ontology.getToDoList(),
+                        String.join(";", ontology.getLanguage()), ontology.getAbstract(), ontology.getAnalytics(),
+                        ontology.getPublication(), ontology.getNotes(), ontology.getDepiction(), ontology.getLogo(), ontology.getToDoList(),
                         ontology.getAward(), ontology.getAssociatedMedia(), String.join(";", ontology.getIsIncompatibleWith()),
                         ontology.getHasPart(), ontology.getWorkTranslation(), ontology.getHasDisparateModelling(),
                         String.join(";", ontology.getUsedBy()), ontology.getHasDisjunctionsWith(),
-                        ontology.getKeyClasses(), ontology.getDataDump(), ontology.getOpenSearchDescription(),
+                        ontology.getKeyClasses(),  ontology.getRoots(),ontology.getUI(), ontology.getDataDump(), ontology.getOpenSearchDescription(),
                         ontology.getUriLookupEndpoint(), ontology.getReleased(), ontology.getModificationDate(),
-                        ontology.getValid(), ontology.getType(),
+                        ontology.getValid(), ontology.getCreationDate(), ontology.getCuratedOn(),ontology.getType(),
                 };
 
                 this.setScoreLevel(countExistentMetaData(props, question.getPoints().size()), question);

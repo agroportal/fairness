@@ -79,7 +79,7 @@ public class A1 extends AbstractPrincipleCriterion {
 
         //Q2 : Does the ontology URI (if metadata is included in the ontology file) or the external metadata URI resolve to the metadata record ?
         //we test on AgroPortal metadata -> max points.
-        this.setDefaultSucesses(1 ,"The repository provides an external metadata URI which resolves to the metadata record");
+        this.setDefaultSuccess(1);
 
 
 

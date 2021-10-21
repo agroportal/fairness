@@ -3,22 +3,22 @@
     "F1": {
       "label": "Ontologies and ontology metadata are assigned a globally unique and persistent identifier. ",
       "maxCredits": 41,
-      "portalMaxCredits": 35,
+      "portalMaxCredits": 41,
       "questions": {
         "F1Q1": {
           "question": "Does an ontology have a \"local\" identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
           "points": [
             {
               "score": 0,
-              "explanation": "Ontology URI is not present."
+              "explanation": "The Ontology URI is not present."
             },
             {
               "score": 3,
-              "explanation": "Present but invalid ontology URI."
+              "explanation": "The ontology URI is present but invalid."
             },
             {
               "score": 9,
-              "explanation": "Present and valid ontology URI."
+              "explanation": "The ontology URI is present and valid."
             }
           ],
           "properties": [
@@ -26,19 +26,19 @@
           ]
         },
         "F1Q2": {
-          "question": "Does an ontology provide an additional \"external\" identifier i.e., a guarantee globally unique and persistent identifier assigned by an accredited body?",
+          "question": "Does an ontology provide an additional \"external\" identifier i.e., a guarantee globally unique and persistent identifier assigned by an accredited body?  If yes, is the external identifier a DOI?",
           "points": [
             {
               "score": 0,
-              "explanation": "ID is not present."
+              "explanation": "The external identifier is not present and invalid."
             },
             {
               "score": 3,
-              "explanation": "Present but invalid ontology ID."
+              "explanation": "The external identifier is present but invalid."
             },
             {
               "score": 6,
-              "explanation": "Valid ontology ID but it's not a DOI."
+              "explanation": "The external identifier is valid but is not a DOI."
             },
             {
               "score": 9,
@@ -46,7 +46,7 @@
             },
             {
               "score": 11,
-              "explanation": "Present and valid external identifier"
+              "explanation": "The external DOI identifier is valid."
             }
           ],
           "properties": [
@@ -56,10 +56,6 @@
         "F1Q3": {
           "question": "Are the ontology metadata included in the ontology file- and consequently share the same identifiers or is the metadata record clearly identified by its own URI.",
           "points": [
-            {
-              "score": 0,
-              "explanation": "The repository does not make explicit relation between metadata and ontology."
-            },
             {
               "score": 12,
               "explanation": "The repository makes explicit relation between metadata and ontology."
@@ -71,23 +67,23 @@
           "points": [
             {
               "score": 0,
-              "explanation": "Ontology version uri is not present."
+              "explanation": "The version URI is not present."
             },
             {
               "score": 2,
-              "explanation": "Present but invalid ontology version URI."
+              "explanation": "The version URI is present but invalid."
             },
             {
               "score": 4,
-              "explanation": "Valid but not resolvable version URI."
+              "explanation": "The version URI is present but not resolvable."
             },
             {
               "score": 9,
-              "explanation": "Present, valid and resolvable version URI."
+              "explanation": "The version URI is present, valid and resolvable."
             }
           ],
           "properties": [
-            "owl:ontologyIRI"
+            "owl:versionIRI"
           ]
         }
       }
@@ -98,7 +94,7 @@
       "portalMaxCredits": 27,
       "questions": {
         "F2Q1": {
-          "question": "Is an ontology described with additional 'MIRO must' metadata properties? (4 points per property up to 16 credits)",
+          "question": "Is an ontology described with additional 'MIRO must' metadata properties? ",
           "points": [
             {
               "score": 0,
@@ -155,23 +151,23 @@
           ]
         },
         "F2Q2": {
-          "question": "Is an ontology described with additional 'MIRO should' metadata properties? (2 points per property up to 5 credits)",
+          "question": "Is an ontology described with additional 'MIRO should' metadata properties? ",
           "points": [
             {
               "score": 0,
-              "explanation": "no MIRO should property found."
+              "explanation": "The ontology describes 0 'MIRO should' properties."
             },
             {
               "score": 2,
-              "explanation": "1 MIRO should property found."
+              "explanation": "The ontology describes 1 'MIRO should' properties."
             },
             {
               "score": 4,
-              "explanation": "2 MIRO should properties found."
+              "explanation": "The ontology describes 2 'MIRO should' properties."
             },
             {
               "score": 5,
-              "explanation": "3 or more should must properties found."
+              "explanation": "The ontology describes 3 or more 'MIRO should' properties."
             }
           ],
           "properties": [
@@ -179,31 +175,27 @@
             "omv:numberOfClasses",
             "omv:numberOfIndividuals",
             "omv:numberOfProperties",
-            "mod:numberOfDataProperties",
-            "mod:numberOfObjectProperties",
-            "omv:numberOfAxioms",
-            "mod:numberOfLabels",
-            "mod:byteSize"
+            "omv:numberOfAxioms"
           ]
         },
         "F2Q3": {
-          "question": "Is an ontology described with additional 'MIRO optional' metadata properties? (1 score per property up to 3 credits)",
+          "question": "Is an ontology described with additional 'MIRO optional' metadata properties?",
           "points": [
             {
               "score": 0,
-              "explanation": "no MIRO optional property found."
+              "explanation": "The ontology describes 0 'MIRO optional' properties."
             },
             {
               "score": 1,
-              "explanation": "1 MIRO optional properties found."
+              "explanation": "The ontology describes 1 'MIRO optional' properties."
             },
             {
               "score": 2,
-              "explanation": "2 MIRO optional properties found."
+              "explanation": "The ontology describes 2 'MIRO optional' properties."
             },
             {
               "score": 3,
-              "explanation": "3 or more MIRO optional properties found."
+              "explanation": "The ontology describes 3 or more 'MIRO optional' properties."
             }
           ],
           "properties": [
@@ -211,23 +203,23 @@
           ]
         },
         "F2Q4": {
-          "question": "Is an ontology described with another metadata property with no explicit corresponding MIRO requirement?  (1 pt per property up to 3 credits) ",
+          "question": "Is an ontology described with another metadata property with no explicit corresponding MIRO requirement?",
           "points": [
             {
               "score": 0,
-              "explanation": "no other metadata property found."
+              "explanation": "The ontology describes 0 'no MIRO' properties."
             },
             {
               "score": 1,
-              "explanation": "1 other metadata properties found."
+              "explanation": "The ontology describes 1 'no MIRO' properties."
             },
             {
               "score": 2,
-              "explanation": "2 metadata properties found."
+              "explanation": "The ontology describes 2 'no MIRO' properties."
             },
             {
               "score": 3,
-              "explanation": "3 or more metadata properties found."
+              "explanation": "The ontology describes 3 or more  'no MIRO' properties."
             }
           ],
           "properties": [
@@ -255,7 +247,7 @@
             "void;classPartition",
             "void:dataDump",
             "void:openSearchDescription",
-            "void:uriLookupEndscore",
+            "void:uriLookupEndpoint",
             "schema:comments",
             "dct:created",
             "dct:modified",
@@ -270,18 +262,13 @@
     "F3": {
       "label": "Ontology metadata clearly and explicitly include the identifier of the ontology they describe.",
       "maxCredits": 21,
-      "portalMaxCredits": 0,
+      "portalMaxCredits": 16,
       "questions": {
         "F3Q1": {
           "question": "Are the ontology metadata included and maintained in the ontology file?",
           "points": [
             {
-              "score": 0,
-              "explanation": ""
-            },
-            {
-              "score": 21,
-              "explanation": ""
+              "score": 21
             }
           ]
         },
@@ -289,12 +276,8 @@
           "question": "If not, are the ontology metadata described in an external file?",
           "points": [
             {
-              "score": 0,
-              "explanation": "Ontology metadata are not included in an external file."
-            },
-            {
               "score": 11,
-              "explanation": "Ontology metadata are included in an external file."
+              "explanation": "The ontology repository provides ontology metadata in an external file."
             }
           ]
         },
@@ -310,7 +293,7 @@
               "explanation": "It exist a link only from one direction (form ontology to metadata or the inverse)."
             },
             {
-              "score": 11,
+              "score": 10,
               "explanation": "It exist a bidirectional link between the ontology and it's metadata."
             }
           ]
@@ -319,43 +302,27 @@
     },
     "F4": {
       "label": "Ontologies and ontology metadata are registered or indexed in a searchable resource typically an ontology repository.",
-      "maxCredits": 24,
-      "portalMaxCredits": 24,
+      "maxCredits": 20,
+      "portalMaxCredits": 16,
       "questions": {
         "F4Q1": {
-          "question": "Is the ontology registered in multiple ontology 'libraries' ? (1 score per  library)",
+          "question": "Is the ontology registered in multiple ontology 'libraries' ?",
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology is not registered in the following libraries: "
-            },
-            {
-              "score": 1,
-              "explanation": "The ontology is registered in 1 ontology libraries."
+              "explanation": "The ontology is registered in 0 ontology 'libraries'."
             },
             {
               "score": 2,
-              "explanation": "The ontology is registered in 2 ontology libraries."
-            },
-            {
-              "score": 3,
-              "explanation": "The ontology is registered in 3 ontology libraries."
+              "explanation": "The ontology is registered in 1 ontology 'libraries'."
             },
             {
               "score": 4,
-              "explanation": "The ontology is registered in 4 ontology libraries."
-            },
-            {
-              "score": 5,
-              "explanation": "The ontology is registered in 5 ontology libraries."
+              "explanation": "The ontology is registered in  2 ontology 'libraries'."
             },
             {
               "score": 6,
-              "explanation": "The ontology is registered in 6 ontology libraries."
-            },
-            {
-              "score": 7,
-              "explanation": "The ontology is registered in 7 ontology libraries."
+              "explanation": "The ontology is registered in 3 or more ontology 'libraries'."
             }
           ],
           "properties": [
@@ -363,47 +330,31 @@
           ]
         },
         "F4Q2": {
-          "question": "Is the ontology registered in multiple open ontology 'repositories' ? (1 score per  repository up to credits)",
+          "question": "Is the ontology registered in multiple open ontology 'repositories' ?",
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology is not registered in the following repositories: "
-            },
-            {
-              "score": 1,
-              "explanation": "The ontology is registered in 1 ontology repository."
+              "explanation": "The ontology is registered in 0 ontology 'repository'."
             },
             {
               "score": 2,
-              "explanation": "The ontology is registered in 2 ontology repository."
-            },
-            {
-              "score": 3,
-              "explanation": "The ontology is registered in 3 ontology repository."
+              "explanation": "The ontology is registered in 1 ontology 'repository'."
             },
             {
               "score": 4,
-              "explanation": "The ontology is registered in 4 ontology repository."
-            },
-            {
-              "score": 5,
-              "explanation": "The ontology is registered in 5 ontology repository."
+              "explanation": "The ontology is registered in 2 ontology 'repository'."
             },
             {
               "score": 6,
-              "explanation": "The ontology is registered in 6 ontology repository."
-            },
-            {
-              "score": 7,
-              "explanation": "The ontology is registered in 7 ontology repository."
+              "explanation": "The ontology is registered in 3 ontology 'repository'."
             },
             {
               "score": 8,
-              "explanation": "The ontology is registered in 8 ontology repository."
+              "explanation": "The ontology is registered in 4 ontology 'repository'."
             },
             {
-              "score": 9,
-              "explanation": "The ontology is registered in 9 ontology repository."
+              "score": 10,
+              "explanation": "The ontology is registered in 5 or more ontology 'repository'."
             }
           ],
           "properties": [
@@ -414,16 +365,8 @@
           "question": "Are the ontology libraries or repositories properly indexed by Web search engines?",
           "points": [
             {
-              "score": 0,
-              "explanation": "The ontology libraries or repositories are  not properly indexed by Web search engines."
-            },
-            {
-              "score": 4,
-              "explanation": "The ontology libraries or repositories are properly indexed by Web search engines."
+              "score": 8
             }
-          ],
-          "properties": [
-            "schema:includedInDataCatalog"
           ]
         }
       }
@@ -436,19 +379,19 @@
       "portalMaxCredits": 43,
       "questions": {
         "A1Q1": {
-          "question": "Does the ontology URI and other identifiers, if exist, resolve to the ontology? (3 points per a resolvable identifier up to 6 credits)",
+          "question": "Does the ontology URI and other identifiers, if exist, resolve to the ontology?",
           "points": [
             {
               "score": 0,
-              "explanation": "Not resolvable identifier found"
+              "explanation": "The ontology have 0 resolvable identifier."
             },
             {
               "score": 3,
-              "explanation": "1 resolvable identifier  found."
+              "explanation": "The ontology have 1 resolvable identifier."
             },
             {
               "score": 6,
-              "explanation": "2 resolvable identifiers found."
+              "explanation": "The ontology have 2 or more resolvable identifier."
             }
           ],
           "properties": [
@@ -460,53 +403,33 @@
           "question": "Does the ontology URI (if metadata is included in the ontology file) or the external metadata URI resolve to the metadata record?",
           "points": [
             {
-              "score": 0,
-              "explanation": ""
-            },
-            {
               "score": 7,
               "explanation": "The repository provides an external metadata URI which resolves to the metadata record"
             }
           ]
         },
         "A1Q3": {
-          "question": "Are ontology and its metadata supporting content negotiation? (3 points per format up to 24 credits) ",
+          "question": "Are ontology and its metadata supporting content negotiation?",
           "points": [
             {
               "score": 0,
               "explanation": "Ontology and its metadata does not support content negotiation."
             },
             {
-              "score": 3,
-              "explanation": "Ontology and its metadata support 1  format."
-            },
-            {
               "score": 6,
-              "explanation": "Ontology and its metadata support 2 formats."
-            },
-            {
-              "score": 9,
-              "explanation": "Ontology and its metadata support 3 formats."
+              "explanation": "Ontology or its metadata support together 1  format."
             },
             {
               "score": 12,
-              "explanation": "Ontology and its metadata support 4 formats."
-            },
-            {
-              "score": 15,
-              "explanation": "Ontology and its metadata support 5 formats."
+              "explanation": "Ontology and its metadata support together 2 formats."
             },
             {
               "score": 18,
-              "explanation": "Ontology and its metadata support 6 formats."
-            },
-            {
-              "score": 21,
-              "explanation": "Ontology and its metadata support 7 formats."
+              "explanation": "Ontology and its metadata support together 3 formats."
             },
             {
               "score": 24,
-              "explanation": "Ontology and its metadata support 8 or more formats."
+              "explanation": "Ontology and its metadata support together 4 or more formats."
             }
           ]
         },
@@ -515,11 +438,11 @@
           "points": [
             {
               "score": 0,
-              "explanation": "Ontology and its metadata does not support content negotiation."
+              "explanation": "The ontology is not accessible through a SPARQL endpoint."
             },
             {
               "score": 6,
-              "explanation": "Ontology is not accessible through another standard protocol (such as SPARQL endscore)."
+              "explanation": "Ontology is not accessible through SPARQL endpoint."
             }
           ],
           "properties": [
@@ -534,29 +457,21 @@
       "portalMaxCredits": 28,
       "questions": {
         "A11Q1": {
-          "question": "Is an ontology relying on HTTP/URIs for its identification and access mechanisms?",
+          "question": "If the ontology and its metadata are accessible through another protocol, is that protocol open, free and universally implementable?",
           "points": [
             {
               "score": 20,
               "explanation": "The repository supports HTTP for access and URI for identification."
             }
-          ],
-          "properties": [
-            "owl:ontologyIRI",
-            "dct:identifier"
           ]
         },
         "A11Q2": {
           "question": "Are the other protocols –if any– open, free, and universally implementable?",
           "points": [
             {
-              "score": 20,
-              "explanation": "The ontology is accessible under another open, free, and universally implementable protocol (such as sparql endscore)"
+              "score": 8,
+              "explanation": "The repository is relying on protocols that are open, free and universally implementable."
             }
-          ],
-          "properties": [
-            "owl:ontologyIRI",
-            "dct:identifier"
           ]
         }
       }
@@ -601,7 +516,7 @@
           ]
         },
         "A2Q3": {
-          "question": "Are ontology metadata accessible even if no more versions of the ontology are available ?",
+          "question": "Are ontology metadata accessible even if no more versions of the ontology are available?",
           "points": [
             {
               "score": 4,
@@ -610,15 +525,15 @@
           ]
         },
         "A2Q4": {
-          "question": "Is the status of the ontology clearly informed ?",
+          "question": "Is the status of the ontology clearly informed?",
           "points": [
             {
               "score": 0,
-              "explanation": "The status of the ontology is clearly informed."
+              "explanation": "The ontology status is not specified."
             },
             {
               "score": 4,
-              "explanation": "The status of the ontology is clearly informed."
+              "explanation": "The ontology status is clearly specified."
             }
           ],
           "properties": [
@@ -635,7 +550,7 @@
       "portalMaxCredits": 44,
       "questions": {
         "I1Q1": {
-          "question": "What is the representation language used for ontology and ontology metadata? (If the ontology is in an OWL format else follow our representation format scoring scale*)\n (*) Scoring scale of each representation format: (OWL, 20 pts)- (SKOS, 18 pts)- (RDFS, 16 pts)- (OBO, 14 pts)- (XML, 12 pts)- (CSV, 11 pts)- (PDF, 5 pts)- (TXT, 5 pts). ",
+          "question": "What is the representation language used for ontology and ontology metadata?",
           "points": [
             {
               "score": 0,
@@ -675,7 +590,7 @@
             }
           ],
           "properties": [
-            "omv:status"
+            "omv:hasOntologyLanguage"
           ]
         },
         "I1Q2": {
@@ -699,11 +614,11 @@
           "points": [
             {
               "score": 0,
-              "explanation": "Ontology syntax is not informed."
+              "explanation": "The ontology syntax is not informed."
             },
             {
               "score": 5,
-              "explanation": "Ontology syntax is informed."
+              "explanation": "The ontology syntax is informed."
             }
           ],
           "properties": [
@@ -715,11 +630,11 @@
           "points": [
             {
               "score": 0,
-              "explanation": "Ontology formality level is not informed."
+              "explanation": "The ontology formality level is not informed."
             },
             {
               "score": 5,
-              "explanation": "Ontology formality level is informed."
+              "explanation": "The ontology formality level is informed."
             }
           ],
           "properties": [
@@ -727,15 +642,15 @@
           ]
         },
         "I1Q5": {
-          "question": "Is the availability in other formats informed?",
+          "question": "Is the format of the ontology informed?",
           "points": [
             {
               "score": 0,
-              "explanation": "The availability of other ontology formats is informed."
+              "explanation": "No information is provided about the availability of the ontology in other formats."
             },
             {
               "score": 4,
-              "explanation": "Ontology formality level is informed."
+              "explanation": "The availability of other ontology formats is informed."
             }
           ],
           "properties": [
@@ -745,7 +660,7 @@
       }
     },
     "I2": {
-      "label": "Ontologies and ontology metadata use vocabularies that follow FAIR principles. ",
+      "label": "Ontologies and ontology metadata use vocabularies that follow FAIR principles.",
       "maxCredits": 32,
       "portalMaxCredits": 22,
       "questions": {
@@ -754,11 +669,11 @@
           "points": [
             {
               "score": 0,
-              "explanation": "Ontology does not import other vocabularies."
+              "explanation": "The ontology does not import other vocabularies."
             },
             {
               "score": 5,
-              "explanation": "Ontology imports other FAIR vocabularies."
+              "explanation": "The ontology imports other FAIR vocabularies."
             }
           ],
           "properties": [
@@ -766,15 +681,15 @@
           ]
         },
         "I2Q2": {
-          "question": "Does the ontology reuse URIs from other vocabularies?",
+          "question": "Does the ontology reuse URIs from other vocabularies (URIs)?",
           "points": [
             {
               "score": 0,
-              "explanation": "Ontology does not reuse other vocabularies URIs."
+              "explanation": "The ontology does not reuse other vocabularies."
             },
             {
               "score": 5,
-              "explanation": "Ontology reuses other vocabularies URIs."
+              "explanation": "The ontology reuses terms from other vocabularies."
             }
           ],
           "properties": [
@@ -782,29 +697,24 @@
           ]
         },
         "I2Q3": {
-          "question": "If yes, does it include the minimum information for those URIs (cf. MERIOT)? ",
+          "question": "If yes, does it include for those termes (e.g. MIREOT)? ",
           "points": [
             {
-              "score": 0,
-              "explanation": "The Ontology does not include the minimum information for those URIs."
-            },
-            {
-              "score": 3,
-              "explanation": "The Ontology include the minimum information for those URIs."
+              "score": 3
             }
           ]
 
         },
         "I2Q4": {
-          "question": "Is an ontology aligned to other FAIR vocabularies ?",
+          "question": "Is an ontology aligned to other FAIR vocabularies?",
           "points": [
             {
               "score": 0,
-              "explanation": "Ontology is not aligned to other vocabularies."
+              "explanation": "The ontology is not aligned to other vocabularies."
             },
             {
               "score": 5,
-              "explanation": "Ontology is aligned to other vocabularies."
+              "explanation": "The ontology is aligned to other vocabularies."
             }
           ],
           "properties": [
@@ -815,12 +725,7 @@
           "question": "If yes, are those alignments well represented and to unambiguous entities? if yes, are those alignements curated?",
           "points": [
             {
-              "score": 0,
-              "explanation": "The alignments are not well represented and not done to unambiguous entities."
-            },
-            {
-              "score": 7,
-              "explanation": "The alignments are well represented and done to unambiguous entities."
+              "score": 7
             }
           ]
         },
@@ -829,7 +734,7 @@
           "points": [
             {
               "score": 0,
-              "explanation": "Ontology does not declare  influential relations."
+              "explanation": "Ontology does not declare influential relations."
             },
             {
               "score": 2,
@@ -837,7 +742,7 @@
             }
           ],
           "properties": [
-              "voaf:specializes", "schema:translationOfWork", "voaf:similar"
+              "voaf:specializes", "schema:translationOfWork", "voaf:similar" ,"owl:priorVersion" , "voaf:generalizes"
           ]
         },
         "I2Q7": {
@@ -845,11 +750,11 @@
           "points": [
             {
               "score": 0,
-              "explanation": "Ontology does not reuse standards metadata vocabularies to describe its metadata."
+              "explanation": "The ontology does not reuse standards metadata vocabularies to describe its metadata."
             },
             {
               "score": 5,
-              "explanation": "Ontology reuses standards metadata vocabularies to describe its metadata."
+              "explanation": "The ontology reuses standards metadata vocabularies to describe its metadata."
             }
           ],
           "properties": [
@@ -861,18 +766,13 @@
     "I3": {
       "label": "Ontologies or ontology metadata include qualified references to other (meta)data. ",
       "maxCredits": 33,
-      "portalMaxCredits": 11,
+      "portalMaxCredits": 7,
       "questions": {
         "I3Q1": {
           "question": "Does an ontology provide qualified cross-references to external resources/databases?",
           "points": [
             {
-              "score": 0,
-              "explanation": "The ontology does not provide qualified cross-references to external resources/databases."
-            },
-            {
-              "score": 20,
-              "explanation": "The ontology provide qualified cross-references to external resources/databases."
+              "score": 20
             }
           ]
         },
@@ -880,22 +780,13 @@
           "question": "If yes, are those cross-references well represented and to unambiguous entities?",
           "points": [
             {
-              "score": 0,
-              "explanation": "The cross-references are not well represented and done to ambiguous entities."
-            },
-            {
-              "score": 6,
-              "explanation": "The cross-references are well represented and done to unambiguous entities."
+              "score": 6
             }
           ]
         },
         "I3Q3": {
           "question": "Does the ontology use valid URIs to encode some metadata values?",
           "points": [
-            {
-              "score": 0,
-              "explanation": "The ontology dont use URIs to encode metadata values."
-            },
             {
               "score": 7,
               "explanation": "The ontology use URIs to encode metadata values."
@@ -909,34 +800,34 @@
     "R1": {
       "label": "Ontologies and ontology metadata are richly described with a plurality of accurate and relevant attributes.",
       "maxCredits": 32,
-      "portalMaxCredits": 32,
+      "portalMaxCredits": 5,
       "questions": {
         "R1Q1": {
           "question": "Does the ontology provide information about how classes or concept are defined?",
           "points": [
             {
               "score": 0,
-              "explanation": "Ontology provides 0 information about its classes or concept."
+              "explanation": "The ontology provides 0 information about its classes or concept."
             },
             {
               "score": 1,
-              "explanation": "Ontology provides 1 information about its classes or concept."
+              "explanation": "The ontology provides 1 information about its classes or concept."
             },
             {
               "score": 2,
-              "explanation": "Ontology provides 2 informations about its classes or concept."
+              "explanation": "The ontology provides 2 informations about its classes or concept."
             },
             {
               "score": 3,
-              "explanation": "Ontology provides 3 informations about its classes or concept."
+              "explanation": "The ontology provides 3 informations about its classes or concept."
             },
             {
               "score": 4,
-              "explanation": "Ontology provides 4 informations about its classes or concept."
+              "explanation": "The ontology provides 4 informations about its classes or concept."
             },
             {
               "score": 5,
-              "explanation": "Ontology provides 5 or more informations about its classes or concept."
+              "explanation": "The ontology provides 5 or more informations about its classes or concept."
             }
           ],
           "properties": [
@@ -948,31 +839,30 @@
           "points": [
             {
               "score": 0,
-              "explanation": "Ontology provides 0 information about its hierarchy."
+              "explanation": "The ontology provides 0 information about its hierarchy."
             },
             {
-              "score": 1.5,
-              "explanation": "Ontology provides 1 information about its hierarchy."
+              "score": 1,
+              "explanation": "The ontology provides 1 information about its hierarchy."
+            },
+            {
+              "score": 2,
+              "explanation": "The ontology provides 2 informations about its hierarchy."
             },
             {
               "score": 3,
-              "explanation": "Ontology provides 2 or more information about its hierarchy."
+              "explanation": "The ontology provides 2 or more informations about its hierarchy."
             }
           ],
           "properties": [
-            "mod:hierarchyProperty", " mod:obsoleteParent"
+            "mod:hierarchyProperty", " mod:obsoleteParent" ,"mod:maxDepth"
           ]
         },
         "R1Q3": {
           "question": "How much of the ontology objects are described with labels?",
           "points": [
             {
-              "score": 0,
-              "explanation": "0 ontology object are described with labels."
-            },
-            {
-              "score": 7,
-              "explanation": "All the ontology objects are described with labels."
+              "score": 7
             }
           ]
         },
@@ -980,12 +870,7 @@
           "question": "How much of the ontology objects are defined using a text description?",
           "points": [
             {
-              "score": 0,
-              "explanation": "0 ontology object are defined using a text description."
-            },
-            {
-              "score": 6,
-              "explanation": "All the ontology objects are defined using a text description."
+              "score": 6
             }
           ]
         },
@@ -993,12 +878,7 @@
           "question": "How much of the ontology objects are defined using a property restriction (e.g. OWL quantifier, cardinality or has value restrictions) or an equivalent objects (e.g. an OWL named class)?",
           "points": [
             {
-              "score": 0,
-              "explanation": "0 ontology object are defined using a text description."
-            },
-            {
-              "score": 6,
-              "explanation": "All the ontology objects are defined using a text description."
+              "score": 6
             }
           ]
         },
@@ -1006,12 +886,7 @@
           "question": "How much of the ontology objects provide provenance information with annotation properties (e.g., author, date)? ",
           "points": [
             {
-              "score": 0,
-              "explanation": "0 ontology object provide provenance information with annotation properties."
-            },
-            {
-              "score": 5,
-              "explanation": "All the ontology objects provide provenance information with annotation properties."
+              "score": 5
             }
           ]
         }
@@ -1027,23 +902,23 @@
           "points": [
             {
               "score": 0,
-              "explanation": "Ontology license is not specified."
+              "explanation": "The ontology license is not specified."
             },
             {
               "score": 4,
-              "explanation": "Ontology license is specified but not valid URI."
+              "explanation": "The ontology license is specified but not valid URI."
             },
             {
               "score": 8,
-              "explanation": "Ontology license is valid but not resolvable."
+              "explanation": "The ontology license is valid but not resolvable."
             },
             {
               "score": 12,
-              "explanation": "Ontology license is resolvable but not content negotiable."
+              "explanation": "The ontology license is resolvable but not content negotiable."
             },
             {
               "score": 15,
-              "explanation": "Ontology license is clearly specified."
+              "explanation": "The ontology license is clearly specified."
             }
           ],
           "properties": [
@@ -1055,11 +930,11 @@
           "points": [
             {
               "score": 0,
-              "explanation": "Access rights are not documented."
+              "explanation": "The ontology access rights are not clearly specified."
             },
             {
               "score": 7,
-              "explanation": "Access rights are documented."
+              "explanation": "The ontology access rights are clearly specified."
             }
           ],
           "properties": [
@@ -1075,15 +950,15 @@
             },
             {
               "score": 5,
-              "explanation": "1 of them is documented."
+              "explanation": "The ontology document one of them."
             },
             {
               "score": 10,
-              "explanation": "2 of them are documented."
+              "explanation": "The ontology document two of them."
             },
             {
               "score": 15,
-              "explanation": "The 3 are documented."
+              "explanation": "The ontology document the permissions, usage guidelines and copyright holder."
             }
           ],
           "properties": [
@@ -1095,14 +970,14 @@
     "R12": {
       "label": "Ontologies and ontology metadata are associated with detailed provenance.",
       "maxCredits": 38,
-      "portalMaxCredits": 38,
+      "portalMaxCredits": 36,
       "questions": {
         "R12Q1": {
           "question": "Does the ontology provide information about the actors involved in its development? (e.g., creator, contributor, curator, translator)",
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology provide O information about the actors involved in its development."
+              "explanation": "The ontology provide 0 information about the actors involved in its development."
             },
             {
               "score": 3,
@@ -1154,23 +1029,23 @@
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology provide O accrual information about methods/periodicity/policy."
+              "explanation": "The ontology provide 0 accrual information."
             },
             {
               "score": 2,
-              "explanation": "The ontology provide 1 accrual information about methods/periodicity/policy."
+              "explanation": "The ontology provide 1 accrual information."
             },
             {
               "score": 4,
-              "explanation": "The ontology provide 2 accrual informations about methods/periodicity/policy."
+              "explanation": "The ontology provide 2 accrual informations."
             },
             {
               "score": 6,
-              "explanation": "The accrual methods and policy  are well documented."
+              "explanation": "The ontology provide 3 or more accrual informations."
             }
           ],
           "properties": [
-            "dct:accuralMethod", "dct:accrualPeriodicity", "dct:accrualPolicy"
+            "dct:accrualMethod", "dct:accrualPeriodicity", "dct:accrualPolicy"
           ]
         },
         "R12Q4": {
@@ -1197,12 +1072,7 @@
           "question": "Are the ontology latest change documented?",
           "points": [
             {
-              "score": 0,
-              "explanation": "The ontology latest changes are not documented."
-            },
-            {
-              "score": 2,
-              "explanation": "The ontology latest changes are documented."
+              "score": 2
             }
           ]
         },
@@ -1211,19 +1081,19 @@
           "points": [
             {
               "score": 0,
-              "explanation": "Ontology provides 0 information about methodology and tools used to build it."
+              "explanation": "The ontology provides 0 information about methodology and tools used to build it."
             },
             {
               "score": 2,
-              "explanation": "Ontology provides 2 informations about methodology and tools used to build it."
+              "explanation": "The ontology provides 2 informations about methodology and tools used to build it."
             },
             {
               "score": 4,
-              "explanation": "Ontology provides 4 informations about methodology and tools used to build it."
+              "explanation": "The ontology provides 4 informations about methodology and tools used to build it."
             },
             {
               "score": 6,
-              "explanation": "Ontology provides 6 informations about methodology and tools used to build it."
+              "explanation": "The ontology provides 6 informations about methodology and tools used to build it."
             }
           ],
           "properties": [
@@ -1233,19 +1103,19 @@
           ]
         },
         "R12Q7": {
-          "question": "Is the ontology rationale documented? ",
+          "question": "Is the ontology rationale documented?",
           "points": [
             {
               "score": 0,
-              "explanation": "Ontology provides 0 information about rationale documentation."
+              "explanation": "The ontology provides 0 information about rationale documentation."
             },
             {
               "score": 2,
-              "explanation": "Ontology provides 2 informations about rationale documentation."
+              "explanation": "The ontology provides 1 informations about rationale documentation."
             },
             {
               "score": 4,
-              "explanation": "Ontology provides 4 informations about rationale documentation."
+              "explanation": "The ontology provides 2 informations about rationale documentation."
             }
           ],
           "properties": [
@@ -1261,7 +1131,7 @@
             },
             {
               "score": 2,
-              "explanation": "The ontology do inform about its funding organization."
+              "explanation": "The ontology informs about its funding organization."
             }
           ],
           "properties": [
@@ -1280,15 +1150,15 @@
           "points": [
             {
               "score": 0,
-              "explanation": "Ontology does not provide information about projects and endorsing organizations."
+              "explanation": "The ontology does not provide information about projects and endorsing organizations."
             },
             {
               "score": 5,
-              "explanation": "Ontology provide information about projects or endorsing organizations."
+              "explanation": "The ontology provide information about projects or endorsing organizations."
             },
             {
               "score": 10,
-              "explanation": "Ontology provide information about projects and endorsing organizations"
+              "explanation": "The ontology provide information about projects and endorsing organizations"
             }
           ],
           "properties": [
@@ -1301,19 +1171,19 @@
           "points": [
             {
               "score": 0,
-              "explanation": "Ontology does not provide information about its community set or group."
+              "explanation": "The ontology does not provide information about its community set or group."
             },
             {
               "score": 10,
-              "explanation": "Ontology is included in one of this groups: \"WHEAT\", \"CROP\", \"INRAE\"."
+              "explanation": "The ontology is included in one of this groups: \"WHEAT\", \"CROP\", \"INRAE\"."
             },
             {
               "score": 15,
-              "explanation": "Ontology is included in the  OBO Foundry."
+              "explanation": "The ontology is included in the  OBO Foundry."
             },
             {
               "score": 20,
-              "explanation": "Ontology is included in the  OBO Foundry and have been manually reviewed by the Foundry."
+              "explanation": "The ontology is included in the  OBO Foundry and have been manually reviewed by the Foundry."
             }
           ],
           "properties": [
@@ -1325,11 +1195,11 @@
           "points": [
             {
               "score": 0,
-              "explanation": "Ontology is not openly and freely available."
+              "explanation": "The ontology is not openly and freely available."
             },
             {
               "score": 6,
-              "explanation": "Ontology is openly and freely available."
+              "explanation": "The ontology is openly and freely available."
             }
           ],
           "properties": [

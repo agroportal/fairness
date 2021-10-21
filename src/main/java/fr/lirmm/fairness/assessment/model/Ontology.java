@@ -78,12 +78,12 @@ public class Ontology {
 	}
 
 	private List<String> getPropertyValues(String property) {
-		return this.properties.get(property).getValue();
+		return (List<String>) this.properties.get(property).getValue();
 	}
-	public  String getPropertyValue(String property){
-		List<String> out = this.getPropertyValues(property);
+	public String getPropertyValue(String property){
+		List<?> out = this.getPropertyValues(property);
 		if(out!=null && !out.isEmpty())
-			return out.get(0);
+			return out.get(0).toString();
 		else
 			return "";
 	}
@@ -163,6 +163,13 @@ public class Ontology {
 		return this.getPropertyValue("identifier");
 	}
 
+	public String getGeneralizes() {
+		return this.getPropertyValue("generalizes");
+	}
+
+	public String getMaxDepth() {
+		return this.getPropertyValue("maxDepth");
+	}
 	public String getVersionIri() {
 		return this.getPropertyValue("versionIRI");
 	}
@@ -215,7 +222,7 @@ public class Ontology {
 		return this.getPropertyValue("uriRegexPattern");
 	}
 
-	public String getExpId() {
+	public String getExampleIdentifier() {
 		return this.getPropertyValue("exampleIdentifier");
 	}
 
@@ -247,7 +254,7 @@ public class Ontology {
 		return this.getPropertyValue("isBackwardCompatibleWith");
 	}
 
-	public String getSameDomain() {
+	public String getComesFromTheSameDomain() {
 		return this.getPropertyValue("comesFromTheSameDomain");
 	}
 
@@ -299,9 +306,27 @@ public class Ontology {
 	public String getPreferredNamespacePrefix() {
 		return this.getPropertyValue("preferredNamespacePrefix");
 	}
+	public String getPreferredNamespaceUri() {
+		return this.getPropertyValue("preferredNamespaceUri");
+	}
 
 	public String getAbstract() {
 		return this.getPropertyValue("abstract");
+	}
+	public String getAnalytics() {
+		return this.getPropertyValue("analytics");
+	}
+	public String getRoots() {
+		return this.getPropertyValue("roots");
+	}
+	public String getUI() {
+		return this.getPropertyValue("ui");
+	}
+	public String getCreationDate() {
+		return this.getPropertyValue("creationDate");
+	}
+	public String getCuratedOn() {
+		return this.getPropertyValue("curatedOn");
 	}
 
 	public String getPublication() {
@@ -513,6 +538,10 @@ public class Ontology {
 		return this.getPropertyValue("diffFilePath");
 	}
 
+	public String getReviews() {
+		return this.getPropertyValue("reviews");
+	}
+
 	public String getSubmissions() {
 		return this.getPropertyValue("submissions");
 	}
@@ -545,6 +574,8 @@ public class Ontology {
 		return this.getPropertyValue("status");
 	}
 
+	public String getDocumentation() { return this.getPropertyValue("documentation");}
+	public String getExample() { return this.getPropertyValue("example");}
 	public String getDateSubmitted() {
 		return this.getPropertyValue("dateSubmitted");
 	}

@@ -21,10 +21,10 @@ public class Tester {
                  Property values =  ontology.getProperties().values()
                          .stream().filter(x -> x.getMod().equals(property)).findFirst().orElse(null);
 
-                 if(values!=null && values.getValue() != null && values.getValue().size() == 1)
-                    test.addTestValue(property , values.getValue().get(0));
-                 else if (values!= null && values.getValue()!=null) {
-                     test.addTestValue(property , values.getValue().toString());
+                 if(values!=null && values.getValue() != null && values.getValue().size() == 1) {
+                     test.addTestValue(property, values.getValue().get(0).toString());
+                 }else if (values!= null && values.getValue()!=null) {
+                    test.addTestValue(property , values.getValue().toString());
                  }
              }
          }

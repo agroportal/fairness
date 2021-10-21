@@ -1,8 +1,6 @@
 package fr.lirmm.fairness.assessment.principles.criterion.impl.interoperable;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
 
 import org.json.JSONException;
 
@@ -24,7 +22,7 @@ public class I3 extends AbstractPrincipleCriterion {
 
            //Q3: Does the ontology use a valid URIs to encode some metadata values?
 			// TODO change implementation to test a list of properties
-           this.setDefaultSucesses(2, "ontologies uses URIs to encode metadata values in TODO add list of accepted properties");//TODO add list of accepted properties
+           this.setDefaultSuccess(2);//TODO add list of accepted properties
 
 	}
 	

@@ -22,11 +22,11 @@ public class R13 extends AbstractPrincipleCriterion {
 
 
         // Q1: Does an ontology provide information about projects using or organization endorsing?
-        Result r = Tester.doEvaluation(ontology, questions.get(0), new Testable() {
+        this.addResult(Tester.doEvaluation(ontology, questions.get(0), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 if ((ontology.getProjects().isEmpty()) && (ontology.getEndorsedBy().isEmpty())) {
-                    this.setFailure("Ontology does not provide information about projects and endorsing organizations",question);
+                    this.setFailure(question);
                 } else {
                     int count = 0;
                     if ((!ontology.getEndorsedBy().isEmpty())) {
@@ -38,13 +38,12 @@ public class R13 extends AbstractPrincipleCriterion {
                     this.setScoreLevel(count,question);
                 }
             }
-        });
-        this.addResult(r);
+        }));
 
 
 
         //Q2: Is the ontology included in a specific community set or group?
-        r = Tester.doEvaluation(ontology, questions.get(1), new Testable() {
+        this.addResult(Tester.doEvaluation(ontology, questions.get(1), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 final String group = ontology.getGroup();
@@ -61,8 +60,7 @@ public class R13 extends AbstractPrincipleCriterion {
                     this.setFailure( question);
                 }
             }
-        });
-        this.addResult(r);
+        }));
 
         // Q3: Is the ontology openly and freely available?
         this.addResult(Tester.doEvaluation(ontology, questions.get(2), new Testable() {
