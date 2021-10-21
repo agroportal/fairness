@@ -49,12 +49,12 @@ public class AbstractCriterionQuestion {
 
     public static List<QuestionResult> getQuestionResultsArray(JsonArray jsonArray) throws JSONException {
         List<QuestionResult> result = new ArrayList(jsonArray.size());
-
+        String explanation = "";
         for (JsonElement jsonElement : jsonArray) {
-
-            result.add(new QuestionResult( jsonElement.getAsJsonObject().get("score").getAsDouble() ,
-                    jsonElement.getAsJsonObject().get("explanation").getAsString(),
-                    new HashMap<>(),null));
+            explanation = ( jsonElement.getAsJsonObject().get("explanation") != null ? jsonElement.getAsJsonObject().get("explanation").getAsString() :"");
+            result.add(
+                    new QuestionResult( jsonElement.getAsJsonObject().get("score").getAsDouble() ,
+                            explanation, new HashMap<>(),null));
         }
         return result;
     }

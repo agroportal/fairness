@@ -27,7 +27,7 @@ public class A1 extends AbstractPrincipleCriterion {
 
 
         //Q1: Does the ontology URI and other identifiers, if exist, resolve to the ontology?
-        Result r = Tester.doEvaluation(ontology, this.questions.get(0), new Testable() {
+        this.addResult(Tester.doEvaluation(ontology, this.questions.get(0), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 String uri = ontology.getOntologyIRI();
@@ -36,6 +36,7 @@ public class A1 extends AbstractPrincipleCriterion {
                 String uriErrorMessage = "";
                 String idErrorMessage = "";
 
+                System.out.println("A1Q1 test");
                 if (MetaDataExistTest.isValid(uri)) {
                     if (URLValidTest.isValid(uri)) {
                         if (ResolvableURLTest.isValid(uri)) {
@@ -72,10 +73,11 @@ public class A1 extends AbstractPrincipleCriterion {
                             ((!uriErrorMessage.isEmpty() && !idErrorMessage.isEmpty()) ? " and " : "")
                             + idErrorMessage + ")", question);
 
+                }else {
+                    setFailure(question);
                 }
             }
-        });
-        this.addResult(r);
+        }));
 
         //Q2 : Does the ontology URI (if metadata is included in the ontology file) or the external metadata URI resolve to the metadata record ?
         //we test on AgroPortal metadata -> max points.
@@ -84,7 +86,7 @@ public class A1 extends AbstractPrincipleCriterion {
 
 
         //Q3: Are ontology and its metadata supporting content negotiation?
-        r = Tester.doEvaluation(ontology, this.questions.get(2), new Testable() {
+        this.addResult(Tester.doEvaluation(ontology, this.questions.get(2), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
 
@@ -119,12 +121,11 @@ public class A1 extends AbstractPrincipleCriterion {
                             + metadataMessage + ")", question);
                 }
             }
-        });
-        this.addResult(r);
+        }));
 
         // Q4: Is an ontology accessible through another standard protocol such as
         // SPARQL?
-        r = Tester.doEvaluation(ontology, this.questions.get(3), new Testable() {
+       this.addResult(Tester.doEvaluation(ontology, this.questions.get(3), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 String endPoint = ontology.getEndPoint();
@@ -136,7 +137,6 @@ public class A1 extends AbstractPrincipleCriterion {
                     setFailure(question);
                 }
             }
-        });
-        this.addResult(r);
+        }));
     }
 }
