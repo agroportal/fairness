@@ -36,7 +36,6 @@ public class A1 extends AbstractPrincipleCriterion {
                 String uriErrorMessage = "";
                 String idErrorMessage = "";
 
-                System.out.println("A1Q1 test");
                 if (MetaDataExistTest.isValid(uri)) {
                     if (URLValidTest.isValid(uri)) {
                         if (ResolvableURLTest.isValid(uri)) {

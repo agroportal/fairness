@@ -32,6 +32,8 @@ public class I2 extends AbstractPrincipleCriterion {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 List<String> useImports = ontology.getUseImports();
+                System.out.println("use imports");
+                System.out.println(useImports.toString());
                 if (MetaDataExistTest.isValid(useImports.toString())) {
                     this.setSuccess(question);
                 } else {

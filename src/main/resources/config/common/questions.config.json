@@ -681,7 +681,7 @@
             }
           ],
           "properties": [
-            "omv:imports"
+            "owl:imports"
           ]
         },
         "I2Q2": {
@@ -722,7 +722,7 @@
             }
           ],
           "properties": [
-            "voaf:hasEquivalenceWith"
+            "voaf:hasEquivalencesWith"
           ]
         },
         "I2Q5": {
@@ -1139,7 +1139,7 @@
             }
           ],
           "properties": [
-            "dct:fundedBy"
+            "foaf:fundedBy"
           ]
         }
       }
