@@ -725,6 +725,18 @@
       "mod": "dct:accrualPolicy",
       "type": "string",
       "source": "submission"
+    },
+    {
+      "portal": "bpm:properties",
+      "mod": "void:propertyPartition",
+      "type": "string",
+      "source": "link"
+    },
+    {
+      "portal": "bpm:classes",
+      "mod": "void:classPartition",
+      "type": "string",
+      "source": "link"
     }
   ]
 }

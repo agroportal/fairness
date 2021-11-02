@@ -60,7 +60,7 @@ public class I1 extends AbstractPrincipleCriterion {
                 String ontoSyntax = ontology.getHasOntoSyntax();
                 if (MetaDataExistTest.isValid(ontoSyntax)) {
                     QuestionResult result = question.getMaxPoint();
-                    this.setSuccess(result.getExplanation() + " (" + ontoSyntax + ")", question);
+                    this.setSuccess(result.getExplanation() , question);
                 } else {
                     this.setFailure(question);
                 }

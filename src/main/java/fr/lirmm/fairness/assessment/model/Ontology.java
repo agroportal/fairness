@@ -73,7 +73,7 @@ public class Ontology {
 		});
 	}
 
-	public Map<String, Property> getProperties() {
+	public Map<String, Property> getInstanceProperties() {
 		return properties;
 	}
 
@@ -622,11 +622,20 @@ public class Ontology {
    }
 
 
-
 	public List <String> getEndorsedBy()
    {
 	   return this.getPropertyValues("endorsedBy");
    }
+
+	public String getProperties()
+	{
+		return this.getPropertyValue("properties");
+	}
+
+	public String getClasses()
+	{
+		return this.getPropertyValue("classes");
+	}
    
 }
 

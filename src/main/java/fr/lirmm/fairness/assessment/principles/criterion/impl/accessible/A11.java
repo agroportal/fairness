@@ -20,8 +20,11 @@ public class A11 extends AbstractPrincipleCriterion {
 		this.setDefaultSuccess(0);
 
 
-		// Q2: Are the other protocols if any open, free, and universally implementable?
+		// Q2: If the ontology is accessible through another protocol, is that protocol open, free, and universally implementable?
 		this.setDefaultSuccess(1);
+
+		// Q3: Is the protocol open, free, and universally implementable if the ontology metadata are accessible through another protocol?
+		this.setDefaultSuccess(2);
 
 	}
 	

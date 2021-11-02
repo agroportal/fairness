@@ -24,8 +24,8 @@ public class F2 extends AbstractPrincipleCriterion {
                         ontology.getHiddenLabel(), ontology.getDescription(), ontology.getDocumentation(),
                         ontology.getPullLocation(), ontology.getKeyWords(), ontology.getCoverage(), ontology.getHomePage(),
                         ontology.getExample(), ontology.getPreferredNamespaceUri(),  ontology.getUriRegexPat(),
-                        ontology.getExampleIdentifier(),  ontology.getCreator(), ontology.getContributor(),
-                        ontology.getPublisher(), ontology.getCuratedBy(),ontology.getTranslator(), ontology.getDomain()
+                        ontology.getExampleIdentifier(), ontology.getPublisher(),
+                        ontology.getTranslator(), ontology.getDomain()
                         , ontology.getCompatWith(), ontology.getComesFromTheSameDomain(), ontology.getUriLookupEndpoint() ,
                         ontology.getKnownUsage(), ontology.getAudience(), ontology.getRepository(), ontology.getBugDatabase(),
                         ontology.getMailingList(), ontology.getReviews()
@@ -73,6 +73,7 @@ public class F2 extends AbstractPrincipleCriterion {
                         ontology.getKeyClasses(),  ontology.getRoots(),ontology.getUI(), ontology.getDataDump(), ontology.getOpenSearchDescription(),
                         ontology.getUriLookupEndpoint(), ontology.getReleased(), ontology.getModificationDate(),
                         ontology.getValid(), ontology.getCreationDate(), ontology.getCuratedOn(),ontology.getType(),
+                        ontology.getProperties(), ontology.getClasses()
                 };
 
                 this.setScoreLevel(countExistentMetaData(props, question.getPoints().size()), question);

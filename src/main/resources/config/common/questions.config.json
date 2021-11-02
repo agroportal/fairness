@@ -132,11 +132,7 @@
             "vann:preferredNamespaceUri",
             "void:uriRegexPattern",
             "idot:exampleIdentifier",
-            "dct:creator",
-            "dct:contributor",
             "dct:publisher",
-            "pav:curatedBy",
-            "schema:translator",
             "dct:subject",
             "owl:backwardCompatibleWith",
             "door:comesFromTheSameDomain",
@@ -186,16 +182,12 @@
               "explanation": "The ontology describes 0 'MIRO optional' properties."
             },
             {
-              "score": 1,
+              "score": 1.5,
               "explanation": "The ontology describes 1 'MIRO optional' properties."
             },
             {
               "score": 2,
-              "explanation": "The ontology describes 2 'MIRO optional' properties."
-            },
-            {
-              "score": 3,
-              "explanation": "The ontology describes 3 or more 'MIRO optional' properties."
+              "explanation": "The ontology describes 2 or more 'MIRO optional' properties."
             }
           ],
           "properties": [
@@ -254,7 +246,10 @@
             "dct:valid",
             "dct:dateSubmitted",
             "pav:curatedOn",
-            "omv:IsOfType"
+            "omv:IsOfType",
+            "void:propertyPartition",
+            "void:classPartition",
+            "schema:comment"
           ]
         }
       }
@@ -461,7 +456,7 @@
       "portalMaxCredits": 28,
       "questions": {
         "A11Q1": {
-          "question": "If the ontology and its metadata are accessible through another protocol, is that protocol open, free and universally implementable?",
+          "question": "Is the ontology relying on HTTP/URIs for its identification and access mechanisms?",
           "points": [
             {
               "score": 20,
@@ -470,10 +465,19 @@
           ]
         },
         "A11Q2": {
-          "question": "Are the other protocols –if any– open, free, and universally implementable?",
+          "question": "If the ontology and its metadata are accessible through another protocol, is that protocol open, free and universally implementable?",
           "points": [
             {
-              "score": 8,
+              "score": 4,
+              "explanation": "The repository is relying on protocols that are open, free and universally implementable."
+            }
+          ]
+        },
+        "A11Q3": {
+          "question": "Is the ontology relying on HTTP/URIs for its identification and access mechanisms?",
+          "points": [
+            {
+              "score": 4,
               "explanation": "The repository is relying on protocols that are open, free and universally implementable."
             }
           ]
@@ -486,10 +490,19 @@
       "portalMaxCredits": 22,
       "questions": {
         "A12Q1": {
-          "question": "Are an ontology and its metadata through a protocol that supports authentification and authorization?",
+          "question": "Is the ontology accessible through a protocol that supports authentication and authorization?",
           "points": [
             {
-              "score": 22,
+              "score": 11,
+              "explanation": "The repository supports authentification and authorization."
+            }
+          ]
+        },
+        "A12Q2": {
+          "question": "Are the ontology metadata accessible through a protocol that supports authentification and authorization?",
+          "points": [
+            {
+              "score": 11,
               "explanation": "The repository supports authentification and authorization."
             }
           ]
@@ -746,7 +759,7 @@
             }
           ],
           "properties": [
-              "voaf:specializes", "schema:translationOfWork", "voaf:similar" ,"owl:priorVersion" , "voaf:generalizes"
+              "voaf:specializes", "schema:translationOfWork", "voaf:similar" ,"owl:priorVersion" , "voaf:generalizes", "dct:isPartOf"
           ]
         },
         "I2Q7": {
@@ -942,7 +955,7 @@
             }
           ],
           "properties": [
-            "dct:accessRights"
+            "dct:rightsHolder"
           ]
         },
         "R11Q3": {
@@ -1183,11 +1196,11 @@
             },
             {
               "score": 15,
-              "explanation": "The ontology is included in the  OBO Foundry."
+              "explanation": "The ontology is included in the OBO library."
             },
             {
               "score": 20,
-              "explanation": "The ontology is included in the  OBO Foundry and have been manually reviewed by the Foundry."
+              "explanation": "The ontology is included in the OBO library and is part of the OBO foundry."
             }
           ],
           "properties": [

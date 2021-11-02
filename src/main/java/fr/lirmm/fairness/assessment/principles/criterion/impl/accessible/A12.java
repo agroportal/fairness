@@ -16,8 +16,13 @@ public class A12 extends AbstractPrincipleCriterion {
 	@Override
 	protected void doEvaluation(Ontology ontology) throws JSONException, IOException {
 
-		// Q1: Are an ontology and its metadata through a protocol that supports authentification and authorization?
+
+		// Q1: Is the ontology accessible through a protocol that supports authentication and authorization?
 		this.setDefaultSuccess(0);
+		// Q2: Are an ontology and its metadata through a protocol that supports authentification and authorization?
+		this.setDefaultSuccess(1);
+
+
 
 		/* OLD Q1 and Q2
 		try {
