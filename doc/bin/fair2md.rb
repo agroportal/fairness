@@ -15,6 +15,8 @@ template = "
         <th>Sub Principles </th>
         <th>Questions</th>
         <th>Questions credits</th>
+        <th>Used properties</th>
+        <th>State</th>
     </tr>
     <% principle.each  do |key , criterion| %><tr>
          <td rowspan=\"<%= criterion['questions'].size%>\">
@@ -30,6 +32,8 @@ template = "
       <% criterion['questions'].drop(1).to_h.each  do |key , question| %><tr>
             <td><%= question['question'] %></td>
             <td><%= question['points'] %></td>
+            <td><%= question['properties']== nil ? 'none' : question['properties'] %></td>
+            <td><%= question['properties'] == nil ? 'not implemented' : 'implemented'%></td>
          </tr><% end %>
     <% end %> </table>
  <% end %>
