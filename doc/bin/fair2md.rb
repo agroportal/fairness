@@ -14,11 +14,11 @@ template = "
     <tr>
         <th>Sub Principles </th>
         <th>Questions</th>
-        <th>Questions credits</th>
         <th>Used properties</th>
         <th>State</th>
     </tr>
-    <% principle.each  do |key , criterion| %><tr>
+    <% principle.each  do |key , criterion| %>
+    <tr>
          <td rowspan=\"<%= criterion['questions'].size%>\">
               <%= key+': '+ criterion['label'] %>
               <ul>
@@ -26,22 +26,76 @@ template = "
                 <li>Portal max Credits : <%= criterion['portalMaxCredits'] %></li>
               </ul>
           </td>
-         <td><%= criterion['questions'].values.first['question'] %></td>
-         <td><%= criterion['questions'].values.first['points'] %></td>
-      </tr>
-      <% criterion['questions'].drop(1).to_h.each  do |key , question| %><tr>
-            <td><%= question['question'] %></td>
-            <td><%= question['points'] %></td>
-            <td><%= question['properties']== nil ? 'none' : question['properties'] %></td>
+         <% q0 = criterion['questions'].values.first %>
+         <td>
+            <p><%= q0['question'] %></p>
+            <p>
+              Responses :
+                <% if  q0['points'].nil? %>
+                    None
+                <% else %>
+                    <ul>
+                      <% q0['points'].each_with_index do |point , index| %>
+                        <li><%= point['explanation']%> (score: <%= point['score']%>)</li>
+                      <% end %>
+                    </ul>
+                <% end %>
+            </p>
+         </td>
+         <td>
+              <% if  q0['properties'].nil? %>
+                    None
+                <% else %>
+                    <ul>
+                      <% q0['properties'].each do |prop| %>
+                          <li><%= prop %></li>
+                      <% end %>
+                    </ul>
+                <% end %>
+         </td>
+         <td><%= q0['properties'] == nil ? 'not implemented' : 'implemented'%></td>
+
+    </tr>
+      <% criterion['questions'].drop(1).to_h.each  do |key , question| %>
+    <tr>
+            <td>
+                 <p><%= question['question'] %></p>
+                  <p>
+                    Responses :
+                      <% if  question['points'].nil? %>
+                          None
+                      <% else %>
+                          <ul>
+                            <% question['points'].each_with_index do |point , index| %>
+                              <li><%= point['explanation']%> (score: <%= point['score']%>)</li>
+                            <% end %>
+                          </ul>
+                      <% end %>
+                  </p>
+            </td>
+
+            <td>
+                <% if  question['properties'].nil? %>
+                    None
+                <% else %>
+                    <ul>
+                      <% question['properties'].each do |prop| %>
+                         <li><%= prop %></li>
+                      <% end %>
+                    </ul>
+                <% end %>
+            </td>
             <td><%= question['properties'] == nil ? 'not implemented' : 'implemented'%></td>
-         </tr><% end %>
-    <% end %> </table>
+    </tr>
+<% end %>
+    <% end %>
+</table>
  <% end %>
 "
 result = ERB.new(template).result(namespace.instance_eval { binding })
 begin
   file = File.open(ARGV[0], "w")
-  file.write(result)
+  file.write(result.gsub /\t/, '')
 rescue IOError => e
   #some error occur, dir not writable etc.
 ensure
