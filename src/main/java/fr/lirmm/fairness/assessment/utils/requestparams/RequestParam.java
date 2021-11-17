@@ -35,4 +35,8 @@ public abstract class RequestParam {
             throw new Exception(getErrorMessage());
         }
     }
+
+    public String valueRequest(HttpServletRequest request){
+        return request.getParameter(this.key);
+    }
 }

@@ -60,7 +60,7 @@ public class FairServlet extends HttpServlet {
                     }
                 }
             } else {
-                JsonObject allResponses = resultCache.read(portalInstance.getName());
+                JsonObject allResponses = resultCache.read(portalInstance);
                 if (ontologyAcronymsToEvaluate.size() == requestController.getAllOntologyAcronyms().size()) {
                     ontologies = allResponses.getAsJsonObject("ontologies");
                 } else if (ontologyAcronymsToEvaluate.size() > 0) {

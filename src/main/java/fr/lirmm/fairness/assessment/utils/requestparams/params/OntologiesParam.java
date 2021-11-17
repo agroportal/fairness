@@ -10,10 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 
 public class OntologiesParam extends RequestParam {
 
-    private static RequestParam instance;
-
-    public OntologiesParam(String key) {
-        super(key);
+    public OntologiesParam() {
+        super("ontologies");
     }
 
     @Override
@@ -27,12 +25,5 @@ public class OntologiesParam extends RequestParam {
             this.errorMessage = e.getMessage();
             return false;
         }
-    }
-
-
-    public static RequestParam getInstance() {
-        if (instance == null)
-            instance = new OntologiesParam("ontologies");
-        return instance;
     }
 }

@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 public class PortalParam extends RequestParam {
 
     private final String[] AVAILABLE_PORTAL_INSTANCES = {"stageportal" ,"agroportal" , "bioportal"};
-    private static RequestParam instance;
-    public PortalParam(String key) {
-        super(key);
+
+    public PortalParam() {
+        super("portal");
     }
 
 
@@ -28,9 +28,5 @@ public class PortalParam extends RequestParam {
         }
     }
 
-    public static RequestParam getInstance() {
-        if(instance == null)
-            instance = new PortalParam("portal");
-        return  instance;
-    }
+
 }

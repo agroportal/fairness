@@ -5,10 +5,7 @@ import fr.lirmm.fairness.assessment.utils.requestparams.params.OntologiesParam;
 import fr.lirmm.fairness.assessment.utils.requestparams.params.PortalParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class RequestController {
 
@@ -21,13 +18,30 @@ public class RequestController {
 
 
     public PortalInstance getPortalInstance() throws Exception {
-       return PortalInstance.getInstanceByName(PortalParam.getInstance().get(req));
+        String portalName = null;
+        PortalParam portalParam = new PortalParam();
+        try {
+            portalName = portalParam.get(req);
+        } catch (Exception e) {
+            String env = System.getenv(PortalInstance.SERVER_DEFAULT_PORTAL);
+
+            if (portalParam.valueRequest(req)==null) {
+                portalName = env;
+            } else
+                throw e;
+        }
+
+        try {
+            return new PortalInstance(Configuration.getInstance() , portalName);
+        } catch (Exception e){
+            throw  new Exception("Portal configuration file not found (set a valid portal name parameter)");
+        }
     }
 
     public List<String> getOntologies() throws Exception {
         List<String> ontologyAcronymsToEvaluate = new ArrayList<>();
-
-        String pOntologies = OntologiesParam.getInstance().get(req);
+        OntologiesParam ontologiesParam = new OntologiesParam();
+        String pOntologies = ontologiesParam.get(req);
 
 
         try{
@@ -69,15 +83,13 @@ public class RequestController {
     }
 
     public String getRequestURI(HttpServletRequest request) {
-        try {
-            if (getPortalInstance() != null)
-                return getPortalInstance().getUrl() + '?' + request.getQueryString();
-            else
-                return request.getRequestURL().toString() + (request.getQueryString() != null ? "?" + request.getQueryString() : "");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return  "";
-        }
+
+        return  request.getScheme() + "://" +
+                request.getServerName() +
+                ":" + request.getServerPort() +
+                request.getRequestURI() +
+                (request.getQueryString() != null ? "?" +
+                        request.getQueryString() : "");
     }
 
     public boolean isCombinedParamUsed() {

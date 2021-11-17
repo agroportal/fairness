@@ -60,10 +60,10 @@ public class ResultCache {
         }
     }
 
-    public  void save(String portal){
+    public  void save(PortalInstance portalInstance){
         try {
             ResultCache resultCache = new ResultCache();
-            PortalInstance portalInstance = PortalInstance.getInstanceByName(portal);
+            String portal = portalInstance.getName();
 
             List<String> allOntologyAcronyms = portalInstance.getAllOntologiesAcronyms();
             Gson gson = new GsonBuilder().create();
@@ -92,10 +92,11 @@ public class ResultCache {
         }
     }
 
-    public JsonObject read(String portal) throws IOException {
+    public JsonObject read(PortalInstance portalInstance) throws IOException {
+        String portal = portalInstance.getName();
         if (!this.isSaved(portal)){
             System.out.println(portal+" save files not exist ");
-            this.save(portal);
+            this.save(portalInstance);
         }
         Gson gson = new GsonBuilder().create();
 

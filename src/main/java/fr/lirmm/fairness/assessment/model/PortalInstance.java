@@ -1,14 +1,15 @@
 package fr.lirmm.fairness.assessment.model;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import fr.lirmm.fairness.assessment.utils.requestparams.params.PortalParam;
 import org.json.JSONException;
 
 
@@ -16,49 +17,64 @@ import org.json.JSONException;
 import fr.lirmm.fairness.assessment.Configuration;
 import fr.lirmm.fairness.assessment.utils.OntologyRestApi;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class PortalInstance {
-	
+
+	public static final String SERVER_DEFAULT_PORTAL= "SERVER_DEFAULT_PORTAL";
 	private String name = null;
 	private String url = null;
 	private String apikey = null;
 	private boolean cacheEnabled = false;
+
+	private  static  PortalInstance  portalInstance = null;
 	
 	public PortalInstance() {
 		super();
 	}
 	
-	public PortalInstance(Properties prop) {
+	public PortalInstance(Configuration configuration , String portalName) throws IOException {
 		super();
+		Properties prop = configuration.getProperties(portalName);
+		if (prop == null)
+			throw new IOException();
+
 		this.name = prop.getProperty("name");
 		this.url = prop.getProperty("url");
 		this.apikey = prop.getProperty("apikey");
 		this.cacheEnabled = Boolean.parseBoolean(prop.getProperty("cacheEnabled"));
 	}
+
+	public PortalInstance(String url , String apikey , boolean cacheEnabled ) throws URISyntaxException {
+		super();
+		this.name = getDomainName(url) ;
+		this.url = url;
+		this.apikey = apikey;
+		this.cacheEnabled = cacheEnabled;
+	}
 	
-	public static PortalInstance getInstanceByName(String name) throws IOException {
-		PortalInstance instance = null;
-		Properties prop = Configuration.getInstance().getProperties(name);
-		if(prop != null) {
-			instance = new PortalInstance(prop);
+	/*
+	public static PortalInstance getInstance(HttpServletRequest request) throws IOException {
+		String portalName = null;
+		try {
+			portalName = PortalParam.getInstance().get(request);
+		} catch (Exception e) {
+			portalName = request.getServerName().toLowerCase(Locale.ROOT);
+			Logger.getAnonymousLogger().info("Portal name not set in the URL");
 		}
-		return instance;
-	}
-	
-	public Ontology getOntologyInstanceByAcronym(String acronym) throws JSONException, IOException {
-		return new Ontology(acronym, this);
-	}
-	
-	public List<Ontology> getAllOntologies(List<String> ontologiesAcronyms) throws JSONException, IOException {
-		List<Ontology> ontologies = new ArrayList<Ontology>(ontologiesAcronyms.size());
-		for (String ontologyAcronym : ontologiesAcronyms) {
-			ontologies.add(new Ontology(ontologyAcronym, this));
+
+		if(portalName != null && portalInstance==null) {
+			portalInstance = new PortalInstance(Configuration.getInstance() , portalName);
+		}else if (portalInstance==null){
+			portalInstance = new PortalInstance();
 		}
-		return ontologies;
+		return portalInstance;
 	}
-	
-	public List<Ontology> getAllOntologies() throws JSONException, IOException {
-		return this.getAllOntologies(this.getAllOntologiesAcronyms());
-	}
+	*/
+
+
+
+
 	
 	public List<String> getAllOntologiesAcronyms() throws JSONException, IOException {
 		List<String> ontoacronyms = new ArrayList<String>();
@@ -109,26 +125,15 @@ public class PortalInstance {
 	public boolean isCacheEnabled() {
 		return this.cacheEnabled;
 	}
-	public  boolean isAccessible(){
-		HttpURLConnection urluriConnection = null;
-		try {
-			URL urluri = new URL(this.getUrl());
-			HttpURLConnection.setFollowRedirects(false);
-			urluriConnection = (HttpURLConnection) urluri.openConnection();
-			//urluriConnection.setRequestMethod("HEAD");
-			//urluriConnection.setRequestProperty("Authorization", "apikey token=" + this.apikey);
-			urluriConnection.setConnectTimeout(1000); // 1 second
-			int httpstatusCode = urluriConnection.getResponseCode();
-			urluriConnection.disconnect();
-			if ((httpstatusCode == 200) || (httpstatusCode == 302)) {
-				return true;
-			} else {
-				return  false;
-			}
-		} catch (Exception e) {
-			if(urluriConnection !=null)
-				urluriConnection.disconnect();
-			return false;
-		}
+
+
+	private static String getDomainName(String url) throws URISyntaxException {
+		URI uri = new URI(url);
+		String domain = uri.getHost();
+		if(domain.startsWith("www."))
+			domain = domain.substring(4);
+
+		return  domain.substring(0,domain.indexOf('.'));
 	}
+
 }
