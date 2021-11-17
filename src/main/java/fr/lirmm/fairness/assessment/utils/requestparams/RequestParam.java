@@ -1,5 +1,6 @@
 package fr.lirmm.fairness.assessment.utils.requestparams;
 
+
 import javax.servlet.http.HttpServletRequest;
 
 public abstract class RequestParam {
@@ -26,4 +27,12 @@ public abstract class RequestParam {
         return errorMessage;
     }
 
+
+    public  String get(HttpServletRequest req) throws Exception {
+        if (this.validate(req)) {
+            return  getValue();
+        } else {
+            throw new Exception(getErrorMessage());
+        }
+    }
 }

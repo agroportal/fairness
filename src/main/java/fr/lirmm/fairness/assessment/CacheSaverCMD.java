@@ -5,7 +5,7 @@ import fr.lirmm.fairness.assessment.utils.ResultCache;
 public class CacheSaverCMD {
     public static void main(String[] args) {
         ResultCache resultCache = new ResultCache();
-        String[] portals = {"stageportal" ,"agroportal" , "bioportal"};
+        String[] portals = {"stageportal" , "agroportal" , "bioportal"};
 
         for (String portal : portals) {
             System.out.println("Cache saver for : " + portal);

@@ -64,7 +64,7 @@ public class ResultCache {
         try {
             ResultCache resultCache = new ResultCache();
             PortalInstance portalInstance = PortalInstance.getInstanceByName(portal);
-            // List<String> allOntologyAcronyms = Arrays.asList(new String[]{"E-PHY"});
+
             List<String> allOntologyAcronyms = portalInstance.getAllOntologiesAcronyms();
             Gson gson = new GsonBuilder().create();
             JsonObject output = new JsonObject();
@@ -85,6 +85,7 @@ public class ResultCache {
 
             output.add("ontologies", gson.toJsonTree(jsonObjects));
 
+            getFileSaveName(portal);
             resultCache.store(output.toString() , FILE_SAVE_NAME);
         } catch (IOException | JSONException e) {
             e.printStackTrace();
