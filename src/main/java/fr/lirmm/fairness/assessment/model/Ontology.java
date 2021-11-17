@@ -78,7 +78,14 @@ public class Ontology {
 	}
 
 	private List<String> getPropertyValues(String property) {
-		return (List<String>) this.properties.get(property).getValue();
+
+		Property propertyField =  this.properties.get(property);
+
+		if(propertyField != null){
+			return (List<String>) propertyField.getValue();
+		}
+
+		return new ArrayList<>();
 	}
 	public String getPropertyValue(String property){
 		List<?> out = this.getPropertyValues(property);

@@ -1,2 +1,28 @@
-package fr.lirmm.fairness.assessment.utils.requestparams.params;public class ApiParam {
+
+package fr.lirmm.fairness.assessment.utils.requestparams.params;
+
+import fr.lirmm.fairness.assessment.utils.requestparams.ParamTest;
+import fr.lirmm.fairness.assessment.utils.requestparams.RequestParam;
+import fr.lirmm.fairness.assessment.utils.requestparams.RequestParamValidator;
+import fr.lirmm.fairness.assessment.utils.requestparams.tests.Present;
+import fr.lirmm.fairness.assessment.utils.requestparams.tests.ValidUrl;
+
+import javax.servlet.http.HttpServletRequest;
+
+public class ApiParam extends RequestParam {
+    public ApiParam() {
+        super("apikey");
+    }
+
+    @Override
+    public boolean validate(HttpServletRequest request) {
+        try {
+            this.value = RequestParamValidator.getParam(request,getKey() ,  new ParamTest[]{new Present()});
+            return true;
+        } catch (Exception e) {
+            this.errorMessage = e.getMessage();
+            return  false;
+        }
+    }
+
 }

@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,13 +39,23 @@ public class OntologyRestApi {
 
 	public List<String> getJsonMetadataArrayObject(String metadataname) throws JSONException, IOException {
 		JsonNode mappings = this.jsonToNode(ontologyMetadata);
-		JSONObject objMappings = new JSONObject(mappings.toString());
-		JSONArray jsonArray = (JSONArray) objMappings.get(metadataname);
 		List<String> metadataValue = new ArrayList<String>();
 
-		for (int i = 0; i < jsonArray.length(); i++) {
-			metadataValue.add(i, jsonArray.getString(i));
+
+		JSONObject objMappings = new JSONObject(mappings.toString());
+		try{
+			Object tmp = objMappings.get(metadataname);
+			if(!JSONObject.NULL.equals(tmp)){
+				JSONArray jsonArray = (JSONArray) tmp;
+				for (int i = 0; i < jsonArray.length(); i++) {
+					metadataValue.add(i, jsonArray.getString(i));
+				}
+			}
+		} catch (Exception e){
+			Logger.getAnonymousLogger().info(e.getMessage());
 		}
+
+
 
 		return (metadataValue);
 	}
@@ -52,9 +63,13 @@ public class OntologyRestApi {
 	public String getOntologyJsonObject(String metadataname) throws JSONException, IOException {
 		JsonNode mappings = this.jsonToNode(ontologyMetadata);
 		JSONObject objMappings = new JSONObject(mappings.toString());
-		String metadataValue;
+		String metadataValue="";
 
-		metadataValue = objMappings.getJSONObject("ontology").getString(metadataname);
+		try{
+			metadataValue = objMappings.getJSONObject("ontology").getString(metadataname);
+		}catch (Exception e){
+			Logger.getAnonymousLogger().info(e.getMessage());
+		}
 
 		return (metadataValue);
 	}
@@ -62,21 +77,32 @@ public class OntologyRestApi {
 	public String getSubmissionJsonObject(String metadataname) throws JSONException, IOException {
 		JsonNode mappings = this.jsonToNode(ontologyMetadata);
 		JSONObject objMappings = new JSONObject(mappings.toString());
-		String metadataValue;
+		String metadataValue ="";
         
-		metadataValue = objMappings.getString(metadataname);
-		//System.out.println(metadataname+ metadataValue);
+		try{
+			metadataValue = objMappings.getString(metadataname);
+		} catch (Exception e){
+			Logger.getAnonymousLogger().info(e.getMessage());
+		}
 
 		return (metadataValue);
 	}
 
 	public String getOntologyLinksJsonObject(String metadataname) throws JSONException, IOException {
 		JsonNode mappings = this.jsonToNode(ontologyMetadata);
-		String metadataValue;
+		String metadataValue ="{}";
+		mappings = mappings.get("ontology");
 
-		metadataValue = mappings.get("ontology").findValue("links").get(metadataname).asText();
+		if(mappings != null)
+			mappings = mappings.findValue("links");
 
-		return (metadataValue);
+		if(mappings != null)
+			mappings = mappings.get(metadataname);
+		if(mappings !=null)
+			metadataValue = mappings.asText();
+
+
+		return metadataValue;
 	}
 
 	public JsonNode jsonToNode(String json) {

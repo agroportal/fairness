@@ -1,8 +1,11 @@
 package fr.lirmm.fairness.assessment;
 
 import fr.lirmm.fairness.assessment.model.PortalInstance;
+import fr.lirmm.fairness.assessment.utils.requestparams.params.ApiParam;
 import fr.lirmm.fairness.assessment.utils.requestparams.params.OntologiesParam;
 import fr.lirmm.fairness.assessment.utils.requestparams.params.PortalParam;
+import fr.lirmm.fairness.assessment.utils.requestparams.params.PortalUrlParam;
+
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
@@ -11,32 +14,44 @@ public class RequestController {
 
     private final HttpServletRequest req;
     private List<String> allOntologyAcronyms = null;
-
+    private PortalInstance portalInstance;
     public RequestController(HttpServletRequest req) {
         this.req = req;
+        this.portalInstance = null;
     }
 
+
+    public PortalInstance initPortalInstance() throws Exception {
+
+        try {
+            return this.getPortalInstanceByUrlApi();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                return this.getPortalInstanceByNameParam();
+            }catch (Exception e1){
+                e1.printStackTrace();
+                try{
+                    return this.getPortalInstanceByNameEnv();
+                }catch (Exception e11){
+                    e11.printStackTrace();
+                    throw new Exception("Portal configuration file not found (set a valid portal name parameter)");
+                }
+            }
+
+        }
+
+
+    }
 
     public PortalInstance getPortalInstance() throws Exception {
-        String portalName = null;
-        PortalParam portalParam = new PortalParam();
-        try {
-            portalName = portalParam.get(req);
-        } catch (Exception e) {
-            String env = System.getenv(PortalInstance.SERVER_DEFAULT_PORTAL);
 
-            if (portalParam.valueRequest(req)==null) {
-                portalName = env;
-            } else
-                throw e;
+        if (portalInstance==null){
+            portalInstance = initPortalInstance();
         }
-
-        try {
-            return new PortalInstance(Configuration.getInstance() , portalName);
-        } catch (Exception e){
-            throw  new Exception("Portal configuration file not found (set a valid portal name parameter)");
-        }
+        return portalInstance;
     }
+
 
     public List<String> getOntologies() throws Exception {
         List<String> ontologyAcronymsToEvaluate = new ArrayList<>();
@@ -47,7 +62,7 @@ public class RequestController {
         try{
             allOntologyAcronyms = getPortalInstance().getAllOntologiesAcronyms();
         } catch (Exception e){
-            throw new Exception("Portal " + getPortalInstance().getUrl() + " is not accessible");
+            throw new Exception("Portal " +getPortalInstance().getUrl() + " is not accessible");
         }
 
         if (pOntologies != null && pOntologies.equals("all")) {
@@ -74,7 +89,7 @@ public class RequestController {
 
     public boolean isCacheDisabled() throws Exception {
         String force = req.getParameter("sync");
-        boolean cacheIsEnabled = getPortalInstance().isCacheEnabled();
+        boolean cacheIsEnabled = this.getPortalInstance().isCacheEnabled();
         return !cacheIsEnabled || (force != null);
     }
 
@@ -94,5 +109,33 @@ public class RequestController {
 
     public boolean isCombinedParamUsed() {
         return req.getParameter("combined") != null;
+    }
+
+    private PortalInstance getPortalInstanceByUrlApi() throws Exception {
+        PortalUrlParam urlParam = new PortalUrlParam();
+       ApiParam apiParam  = new ApiParam();
+        if (!urlParam.validate(req)){
+             throw  new Exception(urlParam.getErrorMessage());
+        }
+
+        if(!apiParam.validate(req)){
+            throw  new Exception(apiParam.getErrorMessage());
+        }
+
+        return  new PortalInstance(urlParam.getValue(), apiParam.getValue(), false);
+    }
+
+    private PortalInstance getPortalInstanceByNameParam() throws Exception {
+        PortalParam portalParam = new PortalParam();
+
+        if(!portalParam.validate(req)){
+            throw  new Exception(portalParam.getErrorMessage());
+        }
+
+        return new PortalInstance(Configuration.getInstance(), portalParam.getValue());
+    }
+
+    private PortalInstance getPortalInstanceByNameEnv() throws Exception {
+        return new PortalInstance(Configuration.getInstance(), System.getenv(PortalInstance.SERVER_DEFAULT_PORTAL));
     }
 }

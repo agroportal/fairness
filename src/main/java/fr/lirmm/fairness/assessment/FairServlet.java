@@ -1,7 +1,6 @@
 package fr.lirmm.fairness.assessment;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -36,15 +35,14 @@ public class FairServlet extends HttpServlet {
 
         long startTime = System.currentTimeMillis();
 
+        ResponseController responseController = new ResponseController(resp); ;
         RequestController requestController = new RequestController(req);
-        ResponseController responseController = new ResponseController(resp);
 
         try {
-
             JsonObject ontologies = null;
-            List<String> ontologyAcronymsToEvaluate = requestController.getOntologies();
             PortalInstance portalInstance = requestController.getPortalInstance();
-
+            Logger.getAnonymousLogger().info("USE THE PORTAL : " + portalInstance.getName() + "; url= " + portalInstance.getUrl() + "; apikey= " + portalInstance.getApikey());
+            List<String> ontologyAcronymsToEvaluate = requestController.getOntologies();
 
             Logger.getAnonymousLogger().info("START EVALUATION OF : " + ontologyAcronymsToEvaluate.size() + " ONTOLOGIES FROM " + portalInstance.getName().toUpperCase(Locale.ROOT));
             if (requestController.isCacheDisabled()) {
@@ -86,6 +84,7 @@ public class FairServlet extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
+
             responseController.respond(false, requestController.getRequestURI(req) , startTime ,e.getMessage());
         }
 
