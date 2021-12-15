@@ -1,4 +1,4 @@
-<h1 align="center"> O'FAIRE- an Ontology FAIRness Evaluator</h1>
+<h1 align="center"> O'FAIRe- an Ontology FAIRness evaluator</h1>
 
 <p align="center">
  <i>
