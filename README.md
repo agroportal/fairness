@@ -179,7 +179,7 @@ To add this job to the local system, execute the command **crontab -e** , it ope
 Then press "Esc" and type ":wq" to save and exit  
 
 ## Contact us
-Emna Amdouni, University of Montpellier (emna.amdouni@lirmm.fr). Clement Jonquet, University of Montpellier (jonquet@lirmm.fr) and Syphax Bouazzouni, University of Montpellier (syphax.bouazzouni@lirmm.fr).
+Emna Amdouni, University of Montpellier (emna.amdouni@lirmm.fr). Syphax Bouazzouni, University of Montpellier (syphax.bouazzouni@lirmm.fr) and Clement Jonquet, University of Montpellier (jonquet@lirmm.fr).
 
 Your suggestions and comments are welcome. Thank you!
 
