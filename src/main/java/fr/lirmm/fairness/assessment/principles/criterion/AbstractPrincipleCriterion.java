@@ -78,29 +78,45 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 
 	private void fillProperties() {
 		try {
-			Map<?, ?> fairConfigs = Configuration.getInstance().getFairConfigs();
-			Map<? , ?> criteria = (Map<?, ?>) fairConfigs.values().stream()
-					.filter(principal -> ((Map<?,?>)principal).containsKey(this.getClass().getSimpleName()))
-					.findFirst().get();
-			Map<String,?> criterionList = (Map<String,?>) criteria.get(this.getClass().getSimpleName());
+
+			Map<String,?> criterionList = getCriteriaBy(this.getClassConfigName());
 			this.maxCredits = Double.parseDouble(criterionList.get("maxCredits").toString());
 			this.portalMaxCredits = Double.parseDouble(criterionList.get("portalMaxCredits").toString());
 			this.label = criterionList.get("label").toString();
-			this.questions = new ArrayList<>();
 
-			Gson gson = new GsonBuilder().create();
-			for (Map.Entry<String,Map<?,?>> q: ((Map<String, Map<?,?>>)criterionList.get("questions")).entrySet()) {
-				this.questions.add(new AbstractCriterionQuestion(
-						q.getKey(),
-						q.getValue().get("question").toString() ,
-						AbstractCriterionQuestion.getQuestionResultsArray(gson.toJsonTree(q.getValue().get("points"), ArrayList.class).getAsJsonArray()),
-						(List<String>) q.getValue().get("properties")));
-			}
+			fillQuestions(criterionList);
+
 		} catch(Exception ioe) {
 			ioe.printStackTrace();
 		}
 	}
 
+	private void fillQuestions(Map<String,?> criterionList) throws JSONException {
+		Gson gson = new GsonBuilder().create();
+		this.questions = new ArrayList<>();
+		for (Map.Entry<String,Map<?,?>> q: ((Map<String, Map<?,?>>)criterionList.get("questions")).entrySet()) {
+			this.questions.add(new AbstractCriterionQuestion(
+					q.getKey(),
+					q.getValue().get("question").toString() ,
+					AbstractCriterionQuestion.getQuestionResultsArray(gson.toJsonTree(q.getValue().get("points"), ArrayList.class).getAsJsonArray()),
+					(List<String>) q.getValue().get("properties")));
+		}
+	}
+
+	private Map<String, ?> getCriteriaBy(String principalName) throws IOException {
+		Map<?, ?> fairConfigs = Configuration.getInstance().getFairConfigs();
+		Map<? , ?> criteria = (Map<?, ?>) fairConfigs.values().stream()
+				.filter(principal -> ((Map<?,?>)principal).containsKey(principalName))
+				.findFirst().get();
+		return  (Map<String,?>) criteria.get(principalName);
+	}
+	private String getClassConfigName() {
+		String className = this.getClass().getSimpleName();
+		if(className.length() > 2)
+			className = className.substring(0,2) +"."+className.substring(2);
+
+		return className;
+	}
 
 	public String getLabel() {
 		return label;
@@ -108,7 +124,7 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 
 	@Override
 	public String toString() {
-		return this.getClass().getSimpleName();
+		return this.getClassConfigName();
 	}
 
 }
