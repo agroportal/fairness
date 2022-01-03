@@ -54,7 +54,11 @@ public class Ontology {
 					break;
 				case "ontology":
 					try {
-						this.addOntologyPropertyValue(property);
+						if(property.getType().equals("array")) {
+							this.addOntologyArrayPropertyValue(property);
+						}else {
+							this.addOntologyPropertyValue(property);
+						}
 					} catch (JSONException | IOException e) {
 						e.printStackTrace();
 					}
@@ -112,10 +116,18 @@ public class Ontology {
 		this.addPropertyValue(property);
 	}
 
+	private void addOntologyArrayPropertyValue(Property property) throws JSONException, IOException {
+		Gson gson = new GsonBuilder().create();
+		property.setValue(gson.fromJson(this.restApi.getOntologyJsonObject(property.getLabel()), List.class));
+		this.addPropertyValue(property);
+	}
+
+
 	private void addOntologyLinkPropertyValue(Property property) throws JSONException, IOException {
 		property.setValue(List.of(this.restApi.getOntologyLinksJsonObject(property.getLabel())));
 		this.addPropertyValue(property);
 	}
+
 
 	private void addOntologyLinkArrayPropertyValue(Property property) throws JSONException, IOException {
 		Gson gson = new GsonBuilder().create();
@@ -123,7 +135,6 @@ public class Ontology {
 				OntologyRestApi.get(this.restApi.getOntologyLinksJsonObject(property.getLabel()) , portalInstance.getApikey() ,"application/json"),
 				List.class)));
 		this.addPropertyValue(property);
-
 	}
 
 
@@ -185,8 +196,8 @@ public class Ontology {
 		return this.getPropertyValue("name");
 	}
 
-	public String getGroup() {
-		return this.getPropertyValue("group");
+	public List<String> getGroup() {
+		return this.getPropertyValues("group");
 	}
 
 	public String getAlternative() {

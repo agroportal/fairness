@@ -357,7 +357,7 @@
     {
       "portal": "bpm:group",
       "mod": "mod:group",
-      "type": "string",
+      "type": "array",
       "source": "ontology"
     },
     {

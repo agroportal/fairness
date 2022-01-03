@@ -2,6 +2,8 @@ package fr.lirmm.fairness.assessment.principles.criterion.impl.reusable;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
@@ -26,19 +28,16 @@ public class R13 extends AbstractPrincipleCriterion {
         this.addResult(Tester.doEvaluation(ontology, questions.get(0), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
-                if ((!MetaDataExistTest.isValid(ontology.getProjects().toString()))
-                        && (!MetaDataExistTest.isValid(ontology.getEndorsedBy().toString()))) {
-                    this.setFailure(question);
-                } else {
-                    int count = 0;
-                    if (MetaDataExistTest.isValid(ontology.getEndorsedBy().toString())) {
-                        count++;
-                    }
-                    if (MetaDataExistTest.isValid(ontology.getProjects().toString())) {
-                        count++;
-                    }
-                    this.setScoreLevel(count,question);
+
+                int count = 0;
+                if (MetaDataExistTest.isValid(ontology.getEndorsedBy().toString())) {
+                    count++;
                 }
+                if (MetaDataExistTest.isValid(ontology.getProjects().toString())) {
+                    count++;
+                }
+
+                this.setScoreLevel(count,question);
             }
         }));
 
@@ -48,19 +47,25 @@ public class R13 extends AbstractPrincipleCriterion {
         this.addResult(Tester.doEvaluation(ontology, questions.get(1), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
-                final String group = ontology.getGroup();
-                String[] groupsToCheck = new String[]{"OBO", "WHEAT", "CROP", "INRAE"};
+                final List<String> groups = ontology.getGroup();
+                System.out.println(groups);
+                String[] groupsToCheck = new String[]{"OBO-FOUNDRY", "WHEAT", "CROP", "INRAE"};
                 String[] oboFoundryOntologiesToCheck = new String[]{"BFO", "CHEBI", "GO", "PATO", "PO", "PR"};
-
-                if (group.equals("OBO") && Arrays.asList(oboFoundryOntologiesToCheck).contains(ontology.getAcronym())) {
-                    this.setSuccess(question);
-                }else if (group.equals("OBO")) {
-                    this.setScoreLevel(1 , question);
-                }else if (Arrays.asList(groupsToCheck).contains(group)) {
-                    this.setScoreLevel(0, question);
-                }else {
-                    this.setFailure( question);
+                System.out.println(Arrays.toString(groupsToCheck));
+                int maxScoreLevel = 0;
+                for (String group : groups) {
+                    if(group.contains("OBO-FOUNDRY") && Arrays.asList(oboFoundryOntologiesToCheck).contains(ontology.getAcronym())){
+                        maxScoreLevel = question.getPoints().size();
+                    }else if (group.contains("OBO-FOUNDRY")) {
+                        if(maxScoreLevel < 2)  maxScoreLevel = 2;
+                    }else {
+                        Optional<String> foundGroup = Arrays.stream(groupsToCheck).filter(group::contains).findFirst();
+                        if(foundGroup.isPresent()){
+                            if(maxScoreLevel < 1)  maxScoreLevel = 1;
+                        }
+                    }
                 }
+                this.setScoreLevel(maxScoreLevel,question);
             }
         }));
 
