@@ -643,6 +643,10 @@ public class Ontology {
 	{
 		return this.getPropertyValue("classes");
 	}
+	public String getDeprecated()
+	{
+		return this.getPropertyValue("deprecated");
+	}
    
 }
 

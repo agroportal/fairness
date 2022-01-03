@@ -6,7 +6,7 @@
       "portalMaxCredits": 41,
       "questions": {
         "F1Q1": {
-          "question": "Does an ontology have a \"local\" identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?",
+          "question": "Does the ontology have a \"local\" identifier, i.e., a globally unique and potentially identifier assigned by the developer (or developing organization)?",
           "points": [
             {
               "score": 0,
@@ -26,7 +26,7 @@
           ]
         },
         "F1Q2": {
-          "question": "Does an ontology provide an additional \"external\" identifier i.e., a guarantee globally unique and persistent identifier assigned by an accredited body?  If yes, is the external identifier a DOI?",
+          "question": "Does the ontology provide an additional \"external\" identifier, i.e., a guarantee globally unique and persistent identifier assigned by an accredited body? If yes, is the external identifier a DOI?",
           "points": [
             {
               "score": 0,
@@ -54,7 +54,7 @@
           ]
         },
         "F1Q3": {
-          "question": "Are the ontology metadata included in the ontology file- and consequently share the same identifiers or is the metadata record clearly identified by its own URI.",
+          "question": "Are the ontology metadata clearly identified either by the same identifier than the ontology (if included in the ontology file) or with its own globally unique and persistent identifier?",
           "points": [
             {
               "score": 12,
@@ -63,7 +63,7 @@
           ]
         },
         "F1Q4": {
-          "question": "Does an ontology provide a version specific URI and is this URI resolvable/ dereferenceable?",
+          "question": "Does the ontology provide a version-specific URI, and is this URI resolvable?",
           "points": [
             {
               "score": 0,
@@ -94,7 +94,7 @@
       "portalMaxCredits": 27,
       "questions": {
         "F2Q1": {
-          "question": "Is an ontology described with additional 'MIRO must' metadata properties? ",
+          "question": "Is the ontology described with additional 'MIRO must' metadata properties? ",
           "points": [
             {
               "score": 0,
@@ -147,7 +147,7 @@
           ]
         },
         "F2Q2": {
-          "question": "Is an ontology described with additional 'MIRO should' metadata properties? ",
+          "question": "Is the ontology described with additional 'MIRO should' metadata properties? ",
           "points": [
             {
               "score": 0,
@@ -175,7 +175,7 @@
           ]
         },
         "F2Q3": {
-          "question": "Is an ontology described with additional 'MIRO optional' metadata properties?",
+          "question": "Is the ontology described with additional 'MIRO optional' metadata properties?",
           "points": [
             {
               "score": 0,
@@ -195,7 +195,7 @@
           ]
         },
         "F2Q4": {
-          "question": "Is an ontology described with another metadata property with no explicit corresponding MIRO requirement?",
+          "question": "Is the ontology described with another metadata property with no explicit corresponding MIRO requirement?",
           "points": [
             {
               "score": 0,
@@ -249,7 +249,11 @@
             "omv:IsOfType",
             "void:propertyPartition",
             "void:classPartition",
-            "schema:comment"
+            "schema:comment",
+            "mod:classesWithMoreThan25Children",
+            "mod:classesWithOneChild",
+            "mod:classesWithNoDefinition",
+            "mod:maxChildCount"
           ]
         }
       }
@@ -433,7 +437,7 @@
 
         },
         "A1Q4": {
-          "question": "Are ontology and its metadata accessible through another standard protocol such as SPARQL?",
+          "question": "Are the ontology and its metadata accessible through another standard protocol such as SPARQL?",
           "points": [
             {
               "score": 0,
@@ -474,7 +478,7 @@
           ]
         },
         "A1.1Q3": {
-          "question": "Is the ontology relying on HTTP/URIs for its identification and access mechanisms?",
+          "question": " If the ontology metadata are accessible through another protocol, is that protocol open, free, and universally implementable?",
           "points": [
             {
               "score": 4,
@@ -524,7 +528,7 @@
           ]
         },
         "A2Q2": {
-          "question": "Are the metadata of each version available?",
+          "question": "Are the ontology metadata of each version available?",
           "points": [
             {
               "score": 5,
@@ -533,7 +537,7 @@
           ]
         },
         "A2Q3": {
-          "question": "Are ontology metadata accessible even if no more versions of the ontology are available?",
+          "question": "Are the ontology metadata accessible even if no more versions of the ontology are available?",
           "points": [
             {
               "score": 4,
@@ -549,12 +553,17 @@
               "explanation": "The ontology status is not specified."
             },
             {
+              "score": 2,
+              "explanation": "The ontology status is partially specified."
+            },
+            {
               "score": 4,
-              "explanation": "The ontology status is clearly specified."
+              "explanation": "The ontology status is fully specified."
             }
           ],
           "properties": [
-            "omv:status"
+            "omv:status",
+            "owl:deprecated"
           ]
         }
       }
@@ -955,7 +964,7 @@
             }
           ],
           "properties": [
-            "dct:rightsHolder"
+            "dct:accessRights"
           ]
         },
         "R1.1Q3": {
