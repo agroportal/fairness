@@ -33,9 +33,14 @@ public class ResolvableURLTest implements Test<String> {
                 urlConnection.setRequestProperty("Accept", element[1]);
             }
 
+
             urlConnection.setConnectTimeout(1000); // 1 second
             int urlConnectionResponseCode = urlConnection.getResponseCode();
-            return (urlConnectionResponseCode == 200) || (urlConnectionResponseCode == 302);
+            boolean goodUrlContentType = true;
+            if(element.length >= 2){
+                goodUrlContentType = urlConnection.getContentType().split(";")[0].equals(element[1]);
+            }
+            return ((urlConnectionResponseCode == 200) || (urlConnectionResponseCode == 302)&& goodUrlContentType);
         } catch (IOException e) {
             return  false;
         } finally {
