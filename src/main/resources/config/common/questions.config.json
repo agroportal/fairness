@@ -408,27 +408,43 @@
           ]
         },
         "A1Q3": {
-          "question": "Are ontology and its metadata supporting content negotiation?",
+          "question": "Do the ontology URI and the external metadata URI (if the metadata are not included in the ontology file), support content negotiation?",
           "points": [
             {
               "score": 0,
               "explanation": "Ontology and its metadata does not support content negotiation."
             },
             {
-              "score": 6,
+              "score": 3,
               "explanation": "Ontology or its metadata support together 1  format."
             },
             {
-              "score": 12,
+              "score": 6,
               "explanation": "Ontology and its metadata support together 2 formats."
             },
             {
-              "score": 18,
+              "score": 9,
               "explanation": "Ontology and its metadata support together 3 formats."
             },
             {
+              "score": 12,
+              "explanation": "Ontology and its metadata support together 4 formats."
+            },
+            {
+              "score": 15,
+              "explanation": "Ontology and its metadata support together 5 formats."
+            },
+            {
+              "score": 18,
+              "explanation": "Ontology and its metadata support together 6 formats."
+            },
+            {
+              "score": 21,
+              "explanation": "Ontology and its metadata support together 7 formats."
+            },
+            {
               "score": 24,
-              "explanation": "Ontology and its metadata support together 4 or more formats."
+              "explanation": "Ontology and its metadata support together 8 or more formats."
             }
           ],
           "properties": [
@@ -469,7 +485,7 @@
           ]
         },
         "A1.1Q2": {
-          "question": "If the ontology and its metadata are accessible through another protocol, is that protocol open, free and universally implementable?",
+          "question": "If the ontology is accessible through another protocol, is that protocol open, free, and universally implementable?",
           "points": [
             {
               "score": 4,
@@ -620,7 +636,7 @@
           ]
         },
         "I1Q2": {
-          "question": "Is the representation language used a W3C Recommendations?",
+          "question": "Is the representation language used a W3C Recommendation?",
           "points": [
             {
               "score": 0,
@@ -652,7 +668,7 @@
           ]
         },
         "I1Q4": {
-          "question": "Is the formality level (e.g. domain ontology) of the ontology informed by the author?",
+          "question": "Is the formality level of the ontology informed?",
           "points": [
             {
               "score": 0,
@@ -668,7 +684,7 @@
           ]
         },
         "I1Q5": {
-          "question": "Is the format of the ontology informed?",
+          "question": "Is the availability of other syntaxes/formats informed?",
           "points": [
             {
               "score": 0,
@@ -707,7 +723,7 @@
           ]
         },
         "I2Q2": {
-          "question": "Does the ontology reuse URIs from other vocabularies (URIs)?",
+          "question": "Does the ontology reuse terms from other vocabularies (URIs)?",
           "points": [
             {
               "score": 0,
@@ -723,7 +739,7 @@
           ]
         },
         "I2Q3": {
-          "question": "If yes, does it include for those termes (e.g. MIREOT)? ",
+          "question": "If yes, does it include the minimum information for those terms?",
           "points": [
             {
               "score": 3
@@ -732,7 +748,7 @@
 
         },
         "I2Q4": {
-          "question": "Is an ontology aligned to other FAIR vocabularies?",
+          "question": "Is the ontology aligned to other vocabularies?",
           "points": [
             {
               "score": 0,
@@ -756,7 +772,7 @@
           ]
         },
         "I2Q6": {
-          "question": "Does an ontology provide metadata information about relation to or influence of other vocabularies?",
+          "question": "Does the ontology provide metadata information about relation to or influence of other vocabularies?",
           "points": [
             {
               "score": 0,
@@ -772,7 +788,7 @@
           ]
         },
         "I2Q7": {
-          "question": "Does the ontology reuse standard & FAIR metadata vocabularies to describe its metadata?",
+          "question": "Does the ontology reuse standards & FAIR metadata vocabularies to describe its metadata?",
           "points": [
             {
               "score": 0,
