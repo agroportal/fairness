@@ -37,11 +37,8 @@ public class A2 extends AbstractPrincipleCriterion {
 		this.addResult(Tester.doEvaluation(ontology, questions.get(3), new Testable() {
 			@Override
 			public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
-				if(MetaDataExistTest.isValid(ontology.getStatus())){
-					this.setSuccess(question);
-				}else {
-					this.setFailure( question);
-				}
+				String[] props = new String[]{ontology.getStatus(), ontology.getDeprecated()};
+				this.setScoreLevel(countExistentMetaData(props ,question.getPoints().size()), question);
 			}
 		}));
 
@@ -76,7 +73,7 @@ public class A2 extends AbstractPrincipleCriterion {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-			*/
+		*/
 	}
 	
 }

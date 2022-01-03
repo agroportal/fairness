@@ -129,8 +129,7 @@ public class A1 extends AbstractPrincipleCriterion {
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 String endPoint = ontology.getEndPoint();
                 if(MetaDataExistTest.isValid(endPoint)){
-                    // TODO test if agroportal sparql with the agroportal endpoint
-                    // Test url resolvable url
+                    // TODO test if it's a valid endpoint
                     setSuccess(question);
                 } else {
                     setFailure(question);
