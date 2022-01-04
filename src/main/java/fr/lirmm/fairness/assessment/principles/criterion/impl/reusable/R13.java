@@ -48,10 +48,8 @@ public class R13 extends AbstractPrincipleCriterion {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 final List<String> groups = ontology.getGroup();
-                System.out.println(groups);
                 String[] groupsToCheck = new String[]{"OBO-FOUNDRY", "WHEAT", "CROP", "INRAE"};
                 String[] oboFoundryOntologiesToCheck = new String[]{"BFO", "CHEBI", "GO", "PATO", "PO", "PR"};
-                System.out.println(Arrays.toString(groupsToCheck));
                 int maxScoreLevel = 0;
                 for (String group : groups) {
                     if(group.contains("OBO-FOUNDRY") && Arrays.asList(oboFoundryOntologiesToCheck).contains(ontology.getAcronym())){
