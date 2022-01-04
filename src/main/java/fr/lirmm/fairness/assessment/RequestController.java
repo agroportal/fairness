@@ -26,7 +26,6 @@ public class RequestController {
         try {
             return this.getPortalInstanceByUrlApi();
         } catch (Exception e) {
-            e.printStackTrace();
             try {
                 return this.getPortalInstanceByNameParam();
             }catch (Exception e1){
@@ -40,8 +39,6 @@ public class RequestController {
             }
 
         }
-
-
     }
 
     public PortalInstance getPortalInstance() throws Exception {
