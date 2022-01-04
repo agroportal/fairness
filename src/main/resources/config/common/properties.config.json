@@ -363,7 +363,7 @@
     {
       "portal": "omv:useImports",
       "mod": "owl:imports",
-      "type": "string",
+      "type": "array",
       "source": "submission"
     },
     {
@@ -417,7 +417,7 @@
     {
       "portal": "door:ontologyRelatedTo",
       "mod": "dct:relation",
-      "type": "string",
+      "type": "array",
       "source": "submission"
     },
     {

@@ -32,6 +32,7 @@ public class I2 extends AbstractPrincipleCriterion {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 List<String> useImports = ontology.getUseImports();
+
                 if (MetaDataExistTest.isValid(useImports.toString())) {
                     this.setSuccess(question);
                 } else {
@@ -119,7 +120,7 @@ public class I2 extends AbstractPrincipleCriterion {
                         }
                     }
 
-                    if(total == 0.0){
+                    if(total == 0.0 && count>0){
                         setScore(question.getMaxPoint().getScore() * (total / count), question.getMaxPoint().getExplanation(), question);
                      } else {
                         setFailure(question);
