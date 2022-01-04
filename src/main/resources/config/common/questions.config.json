@@ -309,19 +309,19 @@
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology is registered in 0 ontology 'libraries'."
+              "explanation": "The ontology is registered in 0 ontology library."
             },
             {
               "score": 2,
-              "explanation": "The ontology is registered in 1 ontology 'libraries'."
+              "explanation": "The ontology is registered in 1 ontology library."
             },
             {
               "score": 4,
-              "explanation": "The ontology is registered in  2 ontology 'libraries'."
+              "explanation": "The ontology is registered in  2 ontology libraries."
             },
             {
               "score": 6,
-              "explanation": "The ontology is registered in 3 or more ontology 'libraries'."
+              "explanation": "The ontology is registered in 3 or more ontology libraries."
             }
           ],
           "properties": [
@@ -333,27 +333,27 @@
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology is registered in 0 ontology 'repository'."
+              "explanation": "The ontology is registered in 0 ontology repository."
             },
             {
               "score": 2,
-              "explanation": "The ontology is registered in 1 ontology 'repository'."
+              "explanation": "The ontology is registered in 1 ontology repository."
             },
             {
               "score": 4,
-              "explanation": "The ontology is registered in 2 ontology 'repository'."
+              "explanation": "The ontology is registered in 2 ontology repositories."
             },
             {
               "score": 6,
-              "explanation": "The ontology is registered in 3 ontology 'repository'."
+              "explanation": "The ontology is registered in 3  ontology repositories."
             },
             {
               "score": 8,
-              "explanation": "The ontology is registered in 4 ontology 'repository'."
+              "explanation": "The ontology is registered in 4  ontology repositories."
             },
             {
               "score": 10,
-              "explanation": "The ontology is registered in 5 or more ontology 'repository'."
+              "explanation": "The ontology is registered in 5 or more ontology repositories."
             }
           ],
           "properties": [
@@ -917,7 +917,7 @@
           ]
         },
         "R1Q5": {
-          "question": "How much of the ontology objects are defined using a property restriction (e.g. OWL quantifier, cardinality or has value restrictions) or an equivalent objects (e.g. an OWL named class)?",
+          "question": "How much ontology objects are defined using a property restriction or an equivalent class?",
           "points": [
             {
               "score": 6
@@ -968,7 +968,7 @@
           ]
         },
         "R1.1Q2": {
-          "question": "Are the ontology access rights clearly specified?",
+          "question": "Are the ontology access rights documented?",
           "points": [
             {
               "score": 0,
@@ -1015,7 +1015,7 @@
       "portalMaxCredits": 36,
       "questions": {
         "R1.2Q1": {
-          "question": "Does the ontology provide information about the actors involved in its development? (e.g., creator, contributor, curator, translator)",
+          "question": "Does the ontology provide information about the actors involved in its development? (creator, contributor, curator, translator)",
           "points": [
             {
               "score": 0,
@@ -1067,7 +1067,7 @@
           ]
         },
         "R1.2Q3": {
-          "question": "Are the accrual methods and policy documented? ",
+          "question": "Are the accrual methods and policy of the ontology documented?",
           "points": [
             {
               "score": 0,
@@ -1091,7 +1091,7 @@
           ]
         },
         "R1.2Q4": {
-          "question": "Is the ontology clearly versioned?",
+          "question": "Is the ontology clearly versioned with version information and links to previous versions?",
           "points": [
             {
               "score": 0,
@@ -1165,7 +1165,7 @@
           ]
         },
         "R1.2Q8": {
-          "question": "Does an ontology inform on its funding organization?",
+          "question": "Does an ontology inform about its funding organization?",
           "points": [
             {
               "score": 0,
