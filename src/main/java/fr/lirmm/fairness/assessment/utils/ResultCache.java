@@ -11,6 +11,7 @@ import org.json.JSONException;
 import java.io.*;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 public class ResultCache {
 
@@ -117,7 +118,7 @@ public class ResultCache {
 
     private String getFileSaveName(String portal)  {
         try {
-            FILE_SAVE_NAME = Configuration.getInstance().getProperties(portal).getProperty("cacheFilePath");
+            FILE_SAVE_NAME = Configuration.getInstance().getProperties(portal.toLowerCase(Locale.ROOT)).getProperty("cacheFilePath");
         } catch (IOException e) {
             e.printStackTrace();
         }
