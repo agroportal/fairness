@@ -52,7 +52,7 @@ public class CombinedFair {
         combinedPrinciple.getScoresWeights().add(newPrinciple.get("maxCredits").getAsDouble() / fairCount);
         int i = 0;
         for (AbstractPrincipleCriterion principleCriterion : combinedPrinciple.getPrincipleCriteria()) {
-            combinePrincipleCriterion(combinedPrinciple , i , newPrinciple.get(principleCriterion.getClass().getSimpleName()).getAsJsonObject());
+            combinePrincipleCriterion(combinedPrinciple , i , newPrinciple.get(principleCriterion.toString()).getAsJsonObject());
             i++;
         }
 
