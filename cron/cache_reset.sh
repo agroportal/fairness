@@ -37,7 +37,7 @@ if [ $# -eq 0 ]
 fi
 
 war_dir=$1
-
+log_dir_path="/var/log/tomcat/log/FAIR_CACHE"
 echo "check if the directory $war_dir/WEB-INF exist ?"
 if [ -d "$war_dir/WEB-INF" ]
  then
@@ -45,6 +45,9 @@ if [ -d "$war_dir/WEB-INF" ]
     path=$(pwd)
     java_cmd="java -classpath \"./lib/\*:./classes/.\" fr.lirmm.fairness.assessment.CacheSaverCMD"
     echo "[+] Running '$java_cmd' in '$path' "
+     if [ ! -d $log_dir_path ]; then
+       mkdir -r /var/log/tomcat/log/FAIR_CACHE
+     fi
     java -classpath "lib/*:./classes/." fr.lirmm.fairness.assessment.CacheSaverCMD  2>&1 | tee /var/log/tomcat/log/FAIR_CACHE/$(date +\%Y\%m\%d\%H\%M\%S)_chache_all.log
 
 else
