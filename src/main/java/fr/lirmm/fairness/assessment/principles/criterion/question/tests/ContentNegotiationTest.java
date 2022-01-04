@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ContentNegotiationTest implements Test<String> {
 
-    public final static  String[] FORMATS = {"application/json", "application/xml", "text/html", "text/plain"};
+    public final static  String[] FORMATS = {"application/json", "application/xml", "text/html", "text/plain","application/rdf+xml"};
     private static ContentNegotiationTest instance;
 
     @Override
