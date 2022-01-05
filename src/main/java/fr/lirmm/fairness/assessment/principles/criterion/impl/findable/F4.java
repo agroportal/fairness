@@ -12,7 +12,6 @@ import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriter
 import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Tester;
 import fr.lirmm.fairness.assessment.principles.criterion.question.tests.MetaDataExistTest;
-import fr.lirmm.fairness.assessment.utils.Result;
 import org.json.JSONException;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
@@ -25,9 +24,8 @@ public class F4 extends AbstractPrincipleCriterion {
     @Override
     protected void doEvaluation(Ontology ontology) throws JSONException, IOException {
 
-        Result r;
-        ArrayList<LinkedTreeMap> repos = (ArrayList<LinkedTreeMap>) Configuration.getInstance().getRepositoriesConfig().get("repositories");
-        ArrayList<LinkedTreeMap> libs = (ArrayList<LinkedTreeMap>) Configuration.getInstance().getRepositoriesConfig().get("libraries");
+        ArrayList<LinkedTreeMap<?,?>> repos = (ArrayList<LinkedTreeMap<?,?>>) Configuration.getInstance().getRepositoriesConfig().get("repositories");
+        ArrayList<LinkedTreeMap<?,?>> libs = (ArrayList<LinkedTreeMap<?,?>>) Configuration.getInstance().getRepositoriesConfig().get("libraries");
 
 
 
@@ -39,22 +37,20 @@ public class F4 extends AbstractPrincipleCriterion {
                 String currentRepo = ontology.getPortalInstance().getUrl();
                 List<String> includedInDataCatalog = ontology.getIncludedInDataCatalog();
                 int found = 0;
+                found+= foundIn(repos,currentRepo)? 1 : 0;
                 if (MetaDataExistTest.isValid(includedInDataCatalog.toString())) {
-                    for (int i = 0; i < repos.size() && found < question.getPoints().size(); i++) {
-                        if (includedInDataCatalog.contains(repos.get(i).get("url").toString()) || (currentRepo.contains(repos.get(i).get("url").toString())))
-                            found++;
+                    for (String catalog : includedInDataCatalog) {
+                        found += foundIn(repos, catalog)? 1 : 0;
+                        found += foundIn(libs, catalog)? 1 : 0;
                     }
 
-                    for (int i = 0; i < libs.size() && found < question.getPoints().size(); i++) {
-                        if (includedInDataCatalog.contains(libs.get(i).get("url").toString()) || (currentRepo.contains(libs.get(i).get("url").toString())))
-                            found++;
-                    }
+                }
+                if(found>0){
                     setScoreLevel(found, question);
                 } else {
                     setFailure(question.getMaxPoint(0).getExplanation() + getLabels(repos) + ""
                             + getLabels(libs), question);
                 }
-
             }
         }));
 
@@ -67,11 +63,16 @@ public class F4 extends AbstractPrincipleCriterion {
                 int found = 0;
                 List<String> includedInDataCatalog = ontology.getIncludedInDataCatalog();
                 String currentRepo = ontology.getPortalInstance().getUrl();
+
+                found+= foundIn(repos,currentRepo) ? 1 : 0;
                 if (MetaDataExistTest.isValid(includedInDataCatalog.toString())) {
-                    for (int i = 0; i < repos.size() && found < question.getPoints().size(); i++) {
-                        if (includedInDataCatalog.contains(repos.get(i).get("url").toString()) || (currentRepo.contains(repos.get(i).get("url").toString())))
-                            found++;
+                    for (String catalog : includedInDataCatalog) {
+                        found += foundIn(repos, catalog)? 1 : 0;
                     }
+
+                }
+
+                if(found>0){
                     setScoreLevel(found, question);
                 } else {
                     setFailure(question.getMaxPoint(0).getExplanation() + getLabels(repos), question);
@@ -87,8 +88,13 @@ public class F4 extends AbstractPrincipleCriterion {
 
     }
 
-    private List<Object> getLabels(ArrayList<LinkedTreeMap> repos) {
-        return Arrays.stream(repos.toArray()).map(x -> ((LinkedTreeMap) x).get("label")).collect(Collectors.toList());
+
+    private boolean foundIn(ArrayList<LinkedTreeMap<?,?>> catalogs , String catalogUrlToTest){
+        return catalogs.stream()
+                .anyMatch(dataCatalog -> catalogUrlToTest.contains(dataCatalog.get("url").toString()));
+    }
+    private List<Object> getLabels(ArrayList<LinkedTreeMap<?,?>> repos) {
+        return Arrays.stream(repos.toArray()).map(x -> ((LinkedTreeMap<?,?>) x).get("label")).collect(Collectors.toList());
     }
 
 }
