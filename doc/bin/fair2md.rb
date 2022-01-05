@@ -2,7 +2,11 @@
 require "json"
 require "erb"
 require 'ostruct'
-json_from_file = File.read("/Users/bouazzouni/Work/fairness/src/main/resources/config/common/questions.config.json")
+
+question_config_path = ARGV.length >= 1 ? ARGV[0] : "../../src/main/resources/config/common/questions.config.json"
+file_to_write_in = ARGV.length >= 2 ? ARGV[1] : "FAIR-questions.md"
+
+json_from_file = File.read(question_config_path)
 hash = JSON.parse(json_from_file)
 namespace = OpenStruct.new(hash: hash)
 
@@ -15,7 +19,6 @@ template = "
         <th>Sub Principles </th>
         <th>Questions</th>
         <th>Used properties</th>
-        <th>State</th>
     </tr>
     <% principle.each  do |key , criterion| %>
     <tr>
@@ -53,7 +56,6 @@ template = "
                     </ul>
                 <% end %>
          </td>
-         <td><%= q0['properties'] == nil ? 'not implemented' : 'implemented'%></td>
 
     </tr>
       <% criterion['questions'].drop(1).to_h.each  do |key , question| %>
@@ -73,7 +75,6 @@ template = "
                       <% end %>
                   </p>
             </td>
-
             <td>
                 <% if  question['properties'].nil? %>
                     None
@@ -85,7 +86,6 @@ template = "
                     </ul>
                 <% end %>
             </td>
-            <td><%= question['properties'] == nil ? 'not implemented' : 'implemented'%></td>
     </tr>
 <% end %>
     <% end %>
@@ -94,8 +94,8 @@ template = "
 "
 result = ERB.new(template).result(namespace.instance_eval { binding })
 begin
-  file = File.open(ARGV[0], "w")
-  file.write(result.gsub /\t/, '')
+  file = File.open(file_to_write_in, "w")
+  file.write(result.gsub(/\s+\n/, ''))
 rescue IOError => e
   #some error occur, dir not writable etc.
 ensure
