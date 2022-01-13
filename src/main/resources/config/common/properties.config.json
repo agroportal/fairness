@@ -133,7 +133,7 @@
       "source": "submission"
     },
     {
-      "portal": "omv:notes",
+      "portal": "bpm:notes",
       "mod": "rdfs:comment",
       "type": "string",
       "source": "submission"
