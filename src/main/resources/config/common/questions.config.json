@@ -827,8 +827,45 @@
           "points": [
             {
               "score": 7,
-              "explanation": "The ontology use URIs to encode metadata values."
+              "explanation": "The ontology have at least 7 metadata values encoded as URIs"
+            },
+            {
+              "score": 6,
+              "explanation": "The ontology have at least 6 metadata values encoded as URIs"
+            },
+            {
+              "score": 5,
+              "explanation": "The ontology have at least 5 metadata values encoded as URIs"
+            },
+            {
+              "score": 4,
+              "explanation": "The ontology have at least 4 metadata values encoded as URIs"
+            },
+            {
+              "score": 3,
+              "explanation": "The ontology have at least 3 metadata values encoded as URIs"
+            },
+            {
+              "score": 2,
+              "explanation": "The ontology have at least 2 metadata values encoded as URIs"
+            },
+            {
+              "score": 1,
+              "explanation": "The ontology have at least 1 metadata value encoded as URI"
+            },
+            {
+              "score": 0,
+              "explanation": "The ontology does not use URIs to encode metadata values."
             }
+          ],
+          "properties": [
+            "owl:imports","owl:priorVersion", "owl:backwardCompatibleWith", "owl:incompatibleWith",
+            "dct:isPartOf", "dct:hasPart", "dct:hasVersion", "dct:isFormatOf", "dct:hasFormat", "dct:relation",
+            "dct:relation", "schema:workTranslation", "schema:translationOfWork", "door:comesFromTheSameDomain",
+            "voaf:similar", "voaf:hasEquivalencesWith", "door:hasDisparateModelling", "voaf:usedBy", "voaf:generalizes", "voaf:hasDisjunctionsWith",
+            "omv:hasFormalityLevel", "dct:license","omv:hasOntologySyntax", "dct:subject",
+            "omv:hasOntologyLanguage", "mod:prefLabelProperty", "mod:definitionProperty", "mod:synonymProperty", "mod:authorProperty",
+            "mod:hierarchyProperty", "mod:obsoleteProperty"
           ]
         }
       }

@@ -1,7 +1,13 @@
 package fr.lirmm.fairness.assessment.principles.criterion.impl.interoperable;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 
+import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
+import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
+import fr.lirmm.fairness.assessment.principles.criterion.question.Tester;
+import fr.lirmm.fairness.assessment.principles.criterion.question.tests.URLValidTest;
 import org.json.JSONException;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
@@ -21,8 +27,61 @@ public class I3 extends AbstractPrincipleCriterion {
 			this.setNotResolvable(1);
 
            //Q3: Does the ontology use a valid URIs to encode some metadata values?
-			// TODO change implementation to test a list of properties
-           this.setDefaultSuccess(2);//TODO add list of accepted properties
+
+			this.addResult(Tester.doEvaluation(ontology, questions.get(2), new Testable() {
+				@Override
+				public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+					List<?>[] propertiesToTest =  new List[]{
+							ontology.getUseImports(),
+							Collections.singletonList(ontology.getHasPriorVersion()),
+							Collections.singletonList(ontology.getIsBackwardCompatibleWith()),
+							ontology.getIsIncompatibleWith(),
+							Collections.singletonList(ontology.getViewOf()),
+							Collections.singletonList(ontology.getHasPart()),
+							Collections.singletonList(ontology.getSubmissions()),
+							Collections.singletonList(ontology.getIsFormatOf()),
+							Collections.singletonList(ontology.getHasFormat()),
+							ontology.getOntologyRelatedTo(),
+							Collections.singletonList(ontology.getExplanationEvolution()),
+							Collections.singletonList(ontology.getWorkTranslation()),
+							Collections.singletonList(ontology.getTranslationOfWork()),
+							Collections.singletonList(ontology.getComesFromTheSameDomain()),
+							ontology.getSimilarTo(),
+							ontology.getIsAlignedTo(),
+							Collections.singletonList(ontology.getHasDisparateModelling()),
+							ontology.getUsedBy(),
+							Collections.singletonList(ontology.getGeneralizes()),
+							Collections.singletonList(ontology.getHasDisjunctionsWith()),
+							Collections.singletonList(ontology.getHasFormalLevel()),
+							Collections.singletonList(ontology.getHasLicense()),
+							Collections.singletonList(ontology.getHasOntoSyntax()),
+							Collections.singletonList(ontology.getHasDomain()),
+							ontology.getNaturalLanguage(),
+							Collections.singletonList(ontology.getHasOntoLang()),
+							Collections.singletonList(ontology.getPrefLabelProperty()),
+							Collections.singletonList(ontology.getDefinitionProperty()),
+							Collections.singletonList(ontology.getSynonymProperty()),
+							Collections.singletonList(ontology.getAuthorProperty()),
+							Collections.singletonList(ontology.getHierarchyProperty()),
+							Collections.singletonList(ontology.getObsoleteProperty()),
+
+					};
+					int maxLevels = question.getPoints().size()-1;
+					int count = 0;
+					List<?> property = null;
+					for (int i = 0 ; i < propertiesToTest.length && count < maxLevels ; i++ ) {
+						property = propertiesToTest[i];
+						boolean allAreValuesAreValid = property.stream().allMatch(x -> URLValidTest.isValid(x.toString()));
+
+						if(allAreValuesAreValid){
+							count++;
+						}
+					}
+					System.out.println(count + " properties are using valid URIs");
+					this.setScoreLevel(count , question);
+				}
+			}));
+
 
 	}
 	
