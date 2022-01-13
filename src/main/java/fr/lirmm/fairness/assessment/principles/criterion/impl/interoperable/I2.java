@@ -25,10 +25,10 @@ public class I2 extends AbstractPrincipleCriterion {
     protected void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException {
 
 
-        //TODO in futur test the faire score of the imported ontologies, and do an average in all questions
 
         // Q1: Does an ontology import other FAIR vocabularies?
         this.addResult(Tester.doEvaluation(ontology, questions.get(0), new Testable() {
+            //TODO in futur test the faire score of the imported ontologies, and do an average in all questions
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 List<String> useImports = ontology.getUseImports();

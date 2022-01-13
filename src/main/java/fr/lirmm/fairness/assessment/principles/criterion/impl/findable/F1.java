@@ -26,7 +26,7 @@ public class F1 extends AbstractPrincipleCriterion {
 
 
         // Q1- Does an ontology have a local identifier i.e., a globally unique and potentially persistent identifier assigned by the developer (or developing organization)?
-        QuestionResult r = Tester.doEvaluation(ontology, this.questions.get(0), new Testable() {
+        this.addResult(Tester.doEvaluation(ontology, this.questions.get(0), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 if (MetaDataExistTest.isValid(ontology.getOntologyIRI())) {
@@ -39,13 +39,12 @@ public class F1 extends AbstractPrincipleCriterion {
                     setFailure(question);
                 }
             }
-        });
-        this.addResult(r);
+        }));
 
 
         // Q2  : Does an ontology provide an additional external identifier i.e., a guarantee globally unique and persistent identifier assigned by an accredited body,
         // If yes, is this external identifier a valid DOI? ?
-        r = Tester.doEvaluation(ontology, questions.get(1), new Testable() {
+        this.addResult(Tester.doEvaluation(ontology, questions.get(1), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 if (MetaDataExistTest.isValid(ontology.getIdentifier())) {
@@ -68,15 +67,15 @@ public class F1 extends AbstractPrincipleCriterion {
                 }
 
             }
-        });
-        this.addResult(r);
+        }));
+
 
         //Q3 Are the ontology metadata included in the ontology file- and consequently share the same identifiers or is the metadata record clearly identified by its own URI.
         this.setDefaultSuccess(2);
         
 
         // Q4: Does an ontology provide a version specific URI and is this URI resolvable/ dereferenceable?
-        r = Tester.doEvaluation(ontology, questions.get(3), new Testable() {
+        this.addResult(Tester.doEvaluation(ontology, questions.get(3), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 String ontologyVersionIri = ontology.getVersionIri();
@@ -94,10 +93,9 @@ public class F1 extends AbstractPrincipleCriterion {
                     setFailure(question);
                 }
 
-
             }
-        });
-        this.addResult(r);
+        }));
+
     }
 
     private String isDOILink(String link){
