@@ -24,13 +24,7 @@ public class F3 extends AbstractPrincipleCriterion {
 		// Q2: If not, are the ontology metadata described in an external file?
 		this.setDefaultSuccess(1);
 		//Q3: Does that external file explicitly link to the ontology and vice-versa?
-
-		this.addResult(Tester.doEvaluation(ontology, questions.get(2), new Testable() {
-			@Override
-			public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
-				this.setScoreLevel(1,question);
-			}
-		}));
+		this.setDefaultSuccess(2);
 	}
 	
 }
