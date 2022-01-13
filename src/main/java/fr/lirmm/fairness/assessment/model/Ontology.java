@@ -77,7 +77,7 @@ public class Ontology {
 		});
 	}
 
-	public Map<String, Property> getInstanceProperties() {
+	public Map<String, Property> getPropertiesMap() {
 		return properties;
 	}
 
@@ -269,7 +269,7 @@ public class Ontology {
 		return this.getPropertyValue("hasDomain");
 	}
 
-	public String getCompatWith() {
+	public String getIsBackwardCompatibleWith() {
 		return this.getPropertyValue("isBackwardCompatibleWith");
 	}
 
@@ -508,10 +508,13 @@ public class Ontology {
 		return this.getPropertyValue("obsoleteProperty");
 	}
 
-	public String getLicense() {
+	public String getHasLicense() {
 		return this.getPropertyValue("hasLicense");
 	}
 
+	public String getHasDomain() {
+		return this.getPropertyValue("subject");
+	}
 
 	public String getMorePermissions() {
 		return this.getPropertyValue("morePermissions");
@@ -603,7 +606,7 @@ public class Ontology {
 		return this.getPropertyValues("isIncompatibleWith");
 	}
 
-	public List<String> getLanguage() {
+	public List<String> getNaturalLanguage() {
 		return this.getPropertyValues("naturalLanguage");
 	}
 

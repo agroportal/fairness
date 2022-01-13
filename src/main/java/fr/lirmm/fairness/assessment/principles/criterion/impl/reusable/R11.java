@@ -3,8 +3,6 @@ package fr.lirmm.fairness.assessment.principles.criterion.impl.reusable;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
-import java.util.ArrayList;
-import java.util.List;
 
 import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
@@ -13,7 +11,6 @@ import fr.lirmm.fairness.assessment.principles.criterion.question.tests.ContentN
 import fr.lirmm.fairness.assessment.principles.criterion.question.tests.MetaDataExistTest;
 import fr.lirmm.fairness.assessment.principles.criterion.question.tests.ResolvableURLTest;
 import fr.lirmm.fairness.assessment.principles.criterion.question.tests.URLValidTest;
-import fr.lirmm.fairness.assessment.utils.Result;
 import org.json.JSONException;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
@@ -36,7 +33,7 @@ public class R11 extends AbstractPrincipleCriterion {
         this.addResult(Tester.doEvaluation(ontology, questions.get(0), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
-                String license = ontology.getLicense();
+                String license = ontology.getHasLicense();
                 if (MetaDataExistTest.isValid(license)) {
                     if (URLValidTest.isValid(license)) {
                         if (ResolvableURLTest.isValid(license)) {

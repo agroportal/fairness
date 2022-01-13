@@ -26,7 +26,7 @@ public class F2 extends AbstractPrincipleCriterion {
                         ontology.getExample(), ontology.getPreferredNamespaceUri(),  ontology.getUriRegexPat(),
                         ontology.getExampleIdentifier(), ontology.getPublisher(),
                         ontology.getTranslator(), ontology.getDomain()
-                        , ontology.getCompatWith(), ontology.getComesFromTheSameDomain(), ontology.getUriLookupEndpoint() ,
+                        , ontology.getIsBackwardCompatibleWith(), ontology.getComesFromTheSameDomain(), ontology.getUriLookupEndpoint() ,
                         ontology.getKnownUsage(), ontology.getAudience(), ontology.getRepository(), ontology.getBugDatabase(),
                         ontology.getMailingList(), ontology.getReviews()
                 };
@@ -65,7 +65,7 @@ public class F2 extends AbstractPrincipleCriterion {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 String[] props = {
-                        String.join(";", ontology.getLanguage()), ontology.getAbstract(), ontology.getAnalytics(),
+                        String.join(";", ontology.getNaturalLanguage()), ontology.getAbstract(), ontology.getAnalytics(),
                         ontology.getPublication(), ontology.getNotes(), ontology.getDepiction(), ontology.getLogo(), ontology.getToDoList(),
                         ontology.getAward(), ontology.getAssociatedMedia(), String.join(";", ontology.getIsIncompatibleWith()),
                         ontology.getHasPart(), ontology.getWorkTranslation(), ontology.getHasDisparateModelling(),

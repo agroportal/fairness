@@ -33,7 +33,7 @@ public class Property {
         return value;
     }
 
-    public String getMod() {
+    public String getModEquivalent() {
         return mod;
     }
 
