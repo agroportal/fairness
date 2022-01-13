@@ -136,8 +136,6 @@
             "dct:subject",
             "owl:backwardCompatibleWith",
             "door:comesFromTheSameDomain",
-            "mod:sampleQueries",
-            "void:uriLookuPEndscore",
             "omv:knownUsage",
             "dct:audience",
             "doap:repository",
@@ -225,31 +223,29 @@
             "voaf:toDoList",
             "schema:award",
             "schema:associatedMedia",
-            "owl:isIncompatibleWith",
+            "owl:incompatibleWith",
             "dct:hasPart",
             "schema:workTranslation",
             "door:hasDisparateModelling",
             "voaf:usedBy",
             "voaf:hasDisjunctionsWith",
             "omv:keyClasses",
-            " void:rootResource",
+            "void:rootResource",
             "mod:browsingUI",
-            "mod:sampleQueries",
             "void:propertyPartition",
             "void;classPartition",
             "void:dataDump",
             "void:openSearchDescription",
             "void:uriLookupEndpoint",
-            "schema:comments",
+            "schema:comment",
             "dct:created",
             "dct:modified",
             "dct:valid",
             "dct:dateSubmitted",
             "pav:curatedOn",
-            "omv:IsOfType",
+            "omv:isOfType",
             "void:propertyPartition",
             "void:classPartition",
-            "schema:comment",
             "mod:classesWithMoreThan25Children",
             "mod:classesWithOneChild",
             "mod:classesWithNoDefinition",
@@ -873,7 +869,7 @@
             }
           ],
           "properties": [
-            "mod:prefLabelProperty", "mod:synonymProperty", "mod:definitionProperty", "mod:authorProperty", "bpm:obsoleteProperty"
+            "mod:prefLabelProperty", "mod:synonymProperty", "mod:definitionProperty", "mod:authorProperty", "mod:obsoleteProperty"
           ]
         },
         "R1Q2": {
@@ -897,7 +893,7 @@
             }
           ],
           "properties": [
-            "mod:hierarchyProperty", " mod:obsoleteParent" ,"mod:maxDepth"
+            "mod:hierarchyProperty", "mod:obsoleteParent" ,"mod:maxDepth"
           ]
         },
         "R1Q3": {
@@ -1063,7 +1059,7 @@
             }
           ],
           "properties": [
-            "dct:source", "prov:wasGeneratedBy", "prov:WasInvalidatedBy"
+            "dct:source", "prov:wasGeneratedBy", "prov:wasInvalidatedBy"
           ]
         },
         "R1.2Q3": {
