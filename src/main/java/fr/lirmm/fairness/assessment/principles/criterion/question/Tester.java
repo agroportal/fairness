@@ -4,6 +4,10 @@ import fr.lirmm.fairness.assessment.model.Ontology;
 import fr.lirmm.fairness.assessment.model.Property;
 import fr.lirmm.fairness.assessment.utils.QuestionResult;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 
 public class Tester {
 
@@ -11,14 +15,19 @@ public class Tester {
 
         test.doTest(ontology, question) ;
          if(question.getProperties()!=null){
-             for (String property : question.getProperties()) {
-                 Property values =  ontology.getInstanceProperties().values()
-                         .stream().filter(x -> x.getMod().equals(property)).findFirst().orElse(null);
-
+             List<Map.Entry<String,Property>> propertiesToEvaluate =  ontology.getPropertiesMap().entrySet()
+                     .stream().filter( kv -> question.getProperties().contains(kv.getValue().getModEquivalent())).collect(Collectors.toList());
+             Property values = null;
+             String label = "";
+             for (Map.Entry<String, Property> property : propertiesToEvaluate) {
+                  values =  property.getValue();
+                  label = property.getKey();
                  if(values!=null && values.getValue() != null && values.getValue().size() == 1) {
-                     test.addTestValue(property, values.getValue().get(0).toString());
+                     test.addTestValue(label, values.getValue().get(0).toString());
                  }else if (values!= null && values.getValue()!=null) {
-                    test.addTestValue(property , values.getValue().toString());
+                     test.addTestValue(label , values.getValue().toString());
+                 }else {
+                     test.addTestValue(label , "property not found"); //useful for debugging
                  }
              }
          }

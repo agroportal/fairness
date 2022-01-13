@@ -25,6 +25,12 @@ public class AbstractCriterionQuestion {
         this.label = label;
         this.question = text;
         this.points = points;
+        this.points.sort(new Comparator<QuestionResult>() {
+            @Override
+            public int compare(QuestionResult o1, QuestionResult o2) {
+                return (int) (o1.getScore() - o2.getScore());
+            }
+        });
         this.properties = properties;
     }
     public String getQuestion() {
