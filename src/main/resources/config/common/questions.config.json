@@ -283,7 +283,7 @@
     "F3": {
       "label": "Ontology metadata clearly and explicitly include the identifier of the ontology they describe.",
       "maxCredits": 21,
-      "portalMaxCredits": 16,
+      "portalMaxCredits": 21,
       "questions": {
         "F3Q1": {
           "question": "Are the ontology metadata included and maintained in the ontology file?",

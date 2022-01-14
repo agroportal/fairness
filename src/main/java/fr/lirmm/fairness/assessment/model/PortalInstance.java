@@ -31,7 +31,7 @@ public class PortalInstance {
 		super();
 		Properties prop = configuration.getPortalProperties(portalName);
 		if (prop == null)
-			throw new IOException();x
+			throw new IOException();
 
 		this.name = prop.getProperty("name");
 		this.url = prop.getProperty("url");
