@@ -98,23 +98,39 @@
           "points": [
             {
               "score": 0,
-              "explanation": "no MIRO must property found."
+              "explanation": "The ontology describes 0 'MIRO must' properties."
+            },
+            {
+              "score": 2,
+              "explanation": "The ontology describes 1 'MIRO must' properties."
             },
             {
               "score": 4,
-              "explanation": "1 MIRO must property found."
+              "explanation": "The ontology describes 2 'MIRO must' properties."
+            },
+            {
+              "score": 6,
+              "explanation": "The ontology describes 3 'MIRO must' properties."
             },
             {
               "score": 8,
-              "explanation": "2 MIRO must properties found."
+              "explanation": "The ontology describes 4 'MIRO must' properties."
+            },
+            {
+              "score": 10,
+              "explanation": "The ontology describes 5 'MIRO must' properties."
             },
             {
               "score": 12,
-              "explanation": "3 MIRO must properties found."
+              "explanation": "The ontology describes 6 'MIRO must' properties."
+            },
+            {
+              "score": 14,
+              "explanation": "The ontology describes 7 'MIRO must' properties."
             },
             {
               "score": 16,
-              "explanation": "4 or more MIRO must properties found."
+              "explanation": "The ontology describes 8 or more 'MIRO must' properties."
             }
           ],
           "properties": [
@@ -145,23 +161,35 @@
           ]
         },
         "F2Q2": {
-          "question": "Is the ontology described with additional 'MIRO should' metadata properties? ",
+          "question": "Is the ontology described with additional 'MIRO should' or 'optional' metadata properties?",
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology describes 0 'MIRO should' properties."
+              "explanation": "The ontology describes 0 'should or optional' properties."
+            },
+            {
+              "score": 1,
+              "explanation": "The ontology describes 1 'should or optional' properties."
             },
             {
               "score": 2,
-              "explanation": "The ontology describes 1 'MIRO should' properties."
+              "explanation": "The ontology describes 2 'should or optional' properties."
+            },
+            {
+              "score": 3,
+              "explanation": "The ontology describes 3 'should or optional' properties."
+            },
+            {
+              "score": 3,
+              "explanation": "The ontology describes 4 'should or optional' properties."
             },
             {
               "score": 4,
-              "explanation": "The ontology describes 2 'MIRO should' properties."
+              "explanation": "The ontology describes 5 'should or optional' properties."
             },
             {
-              "score": 5,
-              "explanation": "The ontology describes 3 or more 'MIRO should' properties."
+              "score": 4,
+              "explanation": "The ontology describes 6 or more 'should or optional' properties."
             }
           ],
           "properties": [
@@ -169,30 +197,11 @@
             "omv:numberOfClasses",
             "omv:numberOfIndividuals",
             "omv:numberOfProperties",
-            "omv:numberOfAxioms"
-          ]
-        },
-        "F2Q3": {
-          "question": "Is the ontology described with additional 'MIRO optional' metadata properties?",
-          "points": [
-            {
-              "score": 0,
-              "explanation": "The ontology describes 0 'MIRO optional' properties."
-            },
-            {
-              "score": 1.5,
-              "explanation": "The ontology describes 1 'MIRO optional' properties."
-            },
-            {
-              "score": 2,
-              "explanation": "The ontology describes 2 or more 'MIRO optional' properties."
-            }
-          ],
-          "properties": [
+            "omv:numberOfAxioms",
             "vann:preferredNamespacePrefix"
           ]
         },
-        "F2Q4": {
+        "F2Q3": {
           "question": "Is the ontology described with another metadata property with no explicit corresponding MIRO requirement?",
           "points": [
             {
@@ -209,8 +218,25 @@
             },
             {
               "score": 3,
-              "explanation": "The ontology describes 3 or more  'no MIRO' properties."
+              "explanation": "The ontology describes 3 'no MIRO' properties."
+            },
+            {
+              "score": 4,
+              "explanation": "The ontology describes 4 'no MIRO' properties."
+            },
+            {
+              "score": 5,
+              "explanation": "The ontology describes 5 'no MIRO' properties."
+            },
+            {
+              "score": 6,
+              "explanation": "The ontology describes 6 'no MIRO' properties."
+            },
+            {
+              "score": 7,
+              "explanation": "The ontology describes 7 or more  'no MIRO' properties."
             }
+
           ],
           "properties": [
             "dct:language",
@@ -297,8 +323,8 @@
     },
     "F4": {
       "label": "Ontologies and ontology metadata are registered or indexed in a searchable resource typically an ontology repository.",
-      "maxCredits": 20,
-      "portalMaxCredits": 16,
+      "maxCredits": 21,
+      "portalMaxCredits": 21,
       "questions": {
         "F4Q1": {
           "question": "Is the ontology registered in multiple ontology 'libraries' ?",
@@ -1001,43 +1027,43 @@
           ]
         },
         "R1.1Q2": {
-          "question": "Are the ontology access rights documented?",
+          "question": "Are the ontology access rights specified and permissions documented?",
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology access rights are not clearly specified."
+              "explanation": "The ontology access rights and permissions are not specified."
+            },
+            {
+              "score": 4,
+              "explanation": "The ontology access rights are clearly specified."
             },
             {
               "score": 7,
-              "explanation": "The ontology access rights are clearly specified."
+              "explanation": "The ontology access rights are clearly specified and permissions are documented."
             }
           ],
           "properties": [
-            "dct:accessRights"
+            "dct:accessRights", "cc:morePermissions"
           ]
         },
         "R1.1Q3": {
-          "question": "Are the permissions, usage guidelines and copyright holder clearly documented?",
+          "question": "Are the ontology usage guidelines and copyright holder documented?",
           "points": [
             {
-              "score": 0,
-              "explanation": "Neither ontology license nor access rights are documented"
-            },
-            {
-              "score": 5,
-              "explanation": "The ontology document one of them."
-            },
-            {
-              "score": 10,
-              "explanation": "The ontology document two of them."
-            },
-            {
               "score": 15,
-              "explanation": "The ontology document the permissions, usage guidelines and copyright holder."
+              "explanation": "The ontology documents 2 properties about usage guidelines and copyright holder."
+            },
+            {
+              "score": 7,
+              "explanation": "The ontology documents 1 property about usage guidelines and copyright holder."
+            },
+            {
+              "score": 0,
+              "explanation": "Neither ontology usage guidelines nor copyright holder are documented."
             }
           ],
           "properties": [
-            "cc:morePermissions", "cc:useGuidelines", "dct:rightsHolder"
+             "cc:useGuidelines", "dct:rightsHolder"
           ]
         }
       }

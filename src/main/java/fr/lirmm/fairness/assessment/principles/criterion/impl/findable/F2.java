@@ -16,7 +16,8 @@ public class F2 extends AbstractPrincipleCriterion {
 
     @Override
     protected void doEvaluation(Ontology ontology) throws JSONException, IOException {
-;
+
+        //Q1
         this.addResult(Tester.doEvaluation(ontology, questions.get(0), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
@@ -26,7 +27,7 @@ public class F2 extends AbstractPrincipleCriterion {
                         ontology.getExample(), ontology.getPreferredNamespaceUri(),  ontology.getUriRegexPat(),
                         ontology.getExampleIdentifier(), ontology.getPublisher(),
                         ontology.getTranslator(), ontology.getDomain()
-                        , ontology.getIsBackwardCompatibleWith(), ontology.getComesFromTheSameDomain(), ontology.getUriLookupEndpoint() ,
+                        , ontology.getIsBackwardCompatibleWith(), ontology.getComesFromTheSameDomain() ,
                         ontology.getKnownUsage(), ontology.getAudience(), ontology.getRepository(), ontology.getBugDatabase(),
                         ontology.getMailingList(), ontology.getReviews()
                 };
@@ -35,6 +36,7 @@ public class F2 extends AbstractPrincipleCriterion {
             }
         }));
 
+        //Q2
         this.addResult(Tester.doEvaluation(ontology, questions.get(1), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
@@ -43,17 +45,7 @@ public class F2 extends AbstractPrincipleCriterion {
                         ontology.getNumberOfClasses(),
                         ontology.getNumberOfProperties(),
                         ontology.getNumberOfIndividuals(),
-                        ontology.getNumberOfAxioms()
-                };
-
-                this.setScoreLevel(countExistentMetaData(props, question.getPoints().size()), question);
-            }
-        }));
-
-        this.addResult(Tester.doEvaluation(ontology, questions.get(2), new Testable() {
-            @Override
-            public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
-                String[] props = { // optional properties
+                        ontology.getNumberOfAxioms(),
                         ontology.getPreferredNamespacePrefix()
                 };
 
@@ -61,7 +53,8 @@ public class F2 extends AbstractPrincipleCriterion {
             }
         }));
 
-        this.addResult(Tester.doEvaluation(ontology, questions.get(3), new Testable() {
+        //Q3
+        this.addResult(Tester.doEvaluation(ontology, questions.get(2), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 String[] props = {
@@ -73,7 +66,8 @@ public class F2 extends AbstractPrincipleCriterion {
                         ontology.getKeyClasses(),  ontology.getRoots(),ontology.getUI(), ontology.getDataDump(), ontology.getOpenSearchDescription(),
                         ontology.getUriLookupEndpoint(), ontology.getReleased(), ontology.getModificationDate(),
                         ontology.getValid(), ontology.getCreationDate(), ontology.getCuratedOn(),ontology.getType(),
-                        ontology.getProperties(), ontology.getClasses()
+                        ontology.getProperties(), ontology.getClasses(), ontology.getClassesWithMoreThan25Children(),
+                        ontology.getClassesWithOneChild(), ontology.getClassesWithNoDefinition(), ontology.getMaxChildCount()
                 };
 
                 this.setScoreLevel(countExistentMetaData(props, question.getPoints().size()), question);
