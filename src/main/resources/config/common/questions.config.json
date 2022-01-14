@@ -853,31 +853,31 @@
           "points": [
             {
               "score": 7,
-              "explanation": "The ontology have at least 7 metadata values encoded as URIs"
+              "explanation": "The ontology has at least 7 metadata values encoded as URIs"
             },
             {
               "score": 6,
-              "explanation": "The ontology have at least 6 metadata values encoded as URIs"
+              "explanation": "The ontology has at least 6 metadata values encoded as URIs"
             },
             {
               "score": 5,
-              "explanation": "The ontology have at least 5 metadata values encoded as URIs"
+              "explanation": "The ontology has at least 5 metadata values encoded as URIs"
             },
             {
               "score": 4,
-              "explanation": "The ontology have at least 4 metadata values encoded as URIs"
+              "explanation": "The ontology has at least 4 metadata values encoded as URIs"
             },
             {
               "score": 3,
-              "explanation": "The ontology have at least 3 metadata values encoded as URIs"
+              "explanation": "The ontology has at least 3 metadata values encoded as URIs"
             },
             {
               "score": 2,
-              "explanation": "The ontology have at least 2 metadata values encoded as URIs"
+              "explanation": "The ontology has at least 2 metadata values encoded as URIs"
             },
             {
               "score": 1,
-              "explanation": "The ontology have at least 1 metadata value encoded as URI"
+              "explanation": "The ontology has at least 1 metadata value encoded as URI"
             },
             {
               "score": 0,
