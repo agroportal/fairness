@@ -118,7 +118,7 @@ public class ResultCache {
 
     private String getFileSaveName(String portal)  {
         try {
-            FILE_SAVE_NAME = Configuration.getInstance().getProperties(portal.toLowerCase(Locale.ROOT)).getProperty("cacheFilePath");
+            FILE_SAVE_NAME = Configuration.getInstance().getPortalProperties(portal.toLowerCase(Locale.ROOT)).getProperty("cacheFilePath");
         } catch (IOException e) {
             e.printStackTrace();
         }
