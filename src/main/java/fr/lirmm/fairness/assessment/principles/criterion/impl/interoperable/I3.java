@@ -71,13 +71,13 @@ public class I3 extends AbstractPrincipleCriterion {
 					List<?> property = null;
 					for (int i = 0 ; i < propertiesToTest.length && count < maxLevels ; i++ ) {
 						property = propertiesToTest[i];
-						boolean allAreValuesAreValid = property.stream().allMatch(x -> URLValidTest.isValid(x.toString()));
+						boolean allAreValuesAreValid = property.stream()
+								.allMatch(x -> URLValidTest.isValid(x.toString()));
 
-						if(allAreValuesAreValid){
+						if(allAreValuesAreValid && !property.isEmpty()){
 							count++;
 						}
 					}
-					System.out.println(count + " properties are using valid URIs");
 					this.setScoreLevel(count , question);
 				}
 			}));
