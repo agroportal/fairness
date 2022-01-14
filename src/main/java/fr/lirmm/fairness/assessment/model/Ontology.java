@@ -487,6 +487,9 @@ public class Ontology {
 	public String getClassesWithNoDefinition() {
 		return this.getPropertyValue("classesWithNoDefinition");
 	}
+	public String getClassesWithMoreThan25Children(){
+		return this.getPropertyValue("classesWithMoreThan25Children");
+	}
 
 	public String getPrefLabelProperty() {
 		return this.getPropertyValue("prefLabelProperty");
