@@ -323,8 +323,8 @@
     },
     "F4": {
       "label": "Ontologies and ontology metadata are registered or indexed in a searchable resource typically an ontology repository.",
-      "maxCredits": 21,
-      "portalMaxCredits": 21,
+      "maxCredits": 24,
+      "portalMaxCredits": 16,
       "questions": {
         "F4Q1": {
           "question": "Is the ontology registered in multiple ontology 'libraries' ?",
