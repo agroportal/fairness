@@ -81,8 +81,15 @@ public class R11 extends AbstractPrincipleCriterion {
         this.addResult(Tester.doEvaluation(ontology, questions.get(1), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
-                if (MetaDataExistTest.isValid(ontology.getContact())) {
-                    this.setSuccess(question);
+                String morePermissions = ontology.getMorePermissions();
+                String accessRights = ontology.getAccessRights();
+
+                if (MetaDataExistTest.isValid(accessRights)) {
+                    if(MetaDataExistTest.isValid(morePermissions)){
+                        this.setSuccess(question);
+                    }else {
+                        this.setScoreLevel(1,question);
+                    }
                 } else {
                     this.setFailure(question);
                 }
@@ -94,12 +101,10 @@ public class R11 extends AbstractPrincipleCriterion {
         this.addResult(Tester.doEvaluation(ontology, questions.get(2), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
-
-                String morePermissions = ontology.getMorePermissions();
                 String useGuidelines = ontology.getUseGuidelines();
                 String rightsHolder = ontology.getContact();
 
-                this.setScoreLevel(countExistentMetaData(new String[]{morePermissions, useGuidelines, rightsHolder},question.getPoints().size()), question);
+                this.setScoreLevel(countExistentMetaData(new String[]{useGuidelines, rightsHolder},question.getPoints().size()), question);
 
             }
         }));
