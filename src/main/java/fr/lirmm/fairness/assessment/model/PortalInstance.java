@@ -27,17 +27,11 @@ public class PortalInstance {
 	private String apikey = null;
 	private boolean cacheEnabled = false;
 
-	private  static  PortalInstance  portalInstance = null;
-	
-	public PortalInstance() {
-		super();
-	}
-	
 	public PortalInstance(Configuration configuration , String portalName) throws IOException {
 		super();
-		Properties prop = configuration.getProperties(portalName);
+		Properties prop = configuration.getPortalProperties(portalName);
 		if (prop == null)
-			throw new IOException();
+			throw new IOException();x
 
 		this.name = prop.getProperty("name");
 		this.url = prop.getProperty("url");

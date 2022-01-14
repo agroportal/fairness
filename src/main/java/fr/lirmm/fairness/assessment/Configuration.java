@@ -38,7 +38,11 @@ public class Configuration {
 	public Properties getProperties() throws IOException {
 		return this.getProperties("common");
 	}
- 
+
+	public Properties getPortalProperties(String name) throws IOException {
+		return this.getProperties("portals/"+name);
+	}
+
 	public Properties getProperties(String configScope) throws IOException {
 		
 		Properties properties = this.portalsConfigsMap.get(configScope);
