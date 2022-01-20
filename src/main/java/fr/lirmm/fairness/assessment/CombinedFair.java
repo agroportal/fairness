@@ -9,10 +9,7 @@ import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriter
 import fr.lirmm.fairness.assessment.utils.CombinedResult;
 import org.json.JSONException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeSet;
+import java.util.*;
 
 
 public class CombinedFair {
@@ -20,11 +17,11 @@ public class CombinedFair {
 
     private final Fair fair;
     private int fairCount;
-    private TreeSet<Double> sortedScores;
+    private List<Double> sortedScores;
     public CombinedFair(int fairCount) {
         fair = new Fair();
         this.fairCount = fairCount;
-        this.sortedScores = new TreeSet<Double>();
+        this.sortedScores = new ArrayList<>();
     }
 
     public void addFairToCombine(JsonObject fair) throws JSONException {
@@ -33,13 +30,13 @@ public class CombinedFair {
         getFair().getScoresWeights().add(fair.get("maxCredits").getAsDouble() / fairCount);
 
         this.sortedScores.add(fair.get("score").getAsDouble());
-
         int i = 0;
         for (AbstractPrinciple principle : getFair().getPrinciples()) {
             combinePrinciple(i, fair.get(principle.getClass().getSimpleName()).getAsJsonObject());
             i++;
         }
 
+        Collections.sort(this.sortedScores);
     }
 
     public Fair getFair() {
@@ -110,10 +107,16 @@ public class CombinedFair {
 
 
     public double getMinScore(){
-        return this.sortedScores.first();
+        if(this.sortedScores.size()>0)
+            return this.sortedScores.get(0);
+        else
+            return 0;
     }
     public double getMaxScore(){
-        return this.sortedScores.last();
+        if(this.sortedScores.size()>0)
+            return this.sortedScores.get(this.sortedScores.size()-1);
+        else
+            return 0;
     }
 
     public double getMedianScore(){
