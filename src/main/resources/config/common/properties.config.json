@@ -580,7 +580,7 @@
       "portal": "bpm:reviews",
       "mod": "mod:hasEvaluation",
       "type": "string",
-      "source": "link"
+      "source": "array"
     },
     {
       "portal": "bpm:notes",

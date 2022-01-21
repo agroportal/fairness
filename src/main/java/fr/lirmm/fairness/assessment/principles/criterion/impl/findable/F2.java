@@ -29,7 +29,7 @@ public class F2 extends AbstractPrincipleCriterion {
                         ontology.getTranslator(), ontology.getDomain()
                         , ontology.getIsBackwardCompatibleWith(), ontology.getComesFromTheSameDomain() ,
                         ontology.getKnownUsage(), ontology.getAudience(), ontology.getRepository(), ontology.getBugDatabase(),
-                        ontology.getMailingList(), ontology.getReviews()
+                        ontology.getMailingList(), ontology.getHasEvaluation()
                 };
 
                 this.setScoreLevel(countExistentMetaData(props, question.getPoints().size()), question);
