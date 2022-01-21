@@ -621,35 +621,35 @@
               "explanation": "Ontology and ontology metadata are not in a formal, accessible, shared and broadly applicable language."
             },
             {
-              "score": 4,
+              "score": 5,
               "explanation": "Ontology and ontology metadata are represented in PDF."
             },
             {
-              "score": 5,
+              "score": 7,
               "explanation": "Ontology and ontology metadata are represented in TXT."
             },
             {
-              "score": 11,
+              "score": 9,
               "explanation": "Ontology and ontology metadata are represented in CSV."
             },
             {
-              "score": 12,
+              "score": 10,
               "explanation": "Ontology and ontology metadata are represented in XML."
             },
             {
-              "score": 14,
+              "score": 11,
               "explanation": "Ontology and ontology metadata are represented in OBO."
             },
             {
-              "score": 16,
+              "score": 12,
               "explanation": "Ontology and ontology metadata are represented in RDFS."
             },
             {
-              "score": 18,
+              "score": 15,
               "explanation": "Ontology and ontology metadata are represented in SKOS."
             },
             {
-              "score": 20,
+              "score": 18,
               "explanation": "Ontology and ontology metadata are represented in OWL."
             }
           ],
