@@ -22,9 +22,9 @@ public class Tester {
              for (Map.Entry<String, Property> property : propertiesToEvaluate) {
                   values =  property.getValue();
                   label = property.getValue().getModEquivalent();
-                 if(values!=null && values.getValue() != null && values.getValue().size() == 1) {
+                 if(values.getValue() != null && values.getValue().size() == 1) {
                      test.addTestValue(label, values.getValue().get(0).toString());
-                 }else if (values!= null && values.getValue()!=null) {
+                 }else if (values.getValue() != null) {
                      test.addTestValue(label , values.getValue().toString());
                  }else {
                      test.addTestValue(label , "property not found"); //useful for debugging

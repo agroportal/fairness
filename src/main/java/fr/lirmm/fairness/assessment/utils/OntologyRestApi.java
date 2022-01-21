@@ -119,7 +119,7 @@ public class OntologyRestApi {
 		URL url;
 		HttpURLConnection conn;
 		String line;
-		String result = "";
+		StringBuilder result = new StringBuilder();
 		try {
 			BufferedReader rd = null;
 			url = new URL(urlToGet);
@@ -134,14 +134,14 @@ public class OntologyRestApi {
 			if (response == 200) {
 				rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 				while ((line = rd.readLine()) != null) {
-					result += line;
+					result.append(line);
 				}
 				rd.close();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return result;
+		return result.toString();
 	}
 
 }
