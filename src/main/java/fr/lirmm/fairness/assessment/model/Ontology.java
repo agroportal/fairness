@@ -563,7 +563,7 @@ public class Ontology {
 		return this.getPropertyValue("diffFilePath");
 	}
 
-	public String getReviews() {
+	public String getHasEvaluation() {
 		return this.getPropertyValue("reviews");
 	}
 

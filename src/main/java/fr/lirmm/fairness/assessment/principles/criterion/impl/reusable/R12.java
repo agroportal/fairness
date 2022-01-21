@@ -53,7 +53,7 @@ public class R12 extends AbstractPrincipleCriterion {
 		this.addResult(Tester.doEvaluation(ontology, questions.get(3), new Testable() {
 			@Override
 			public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
-				String[] props = { ontology.getVersion(), ontology.getHasPriorVersion() };
+				String[] props = { ontology.getVersion(), ontology.getHasPriorVersion(), ontology.getSubmissions() };
 				// TODO test if a valid URI to hasPriorVersion
 				this.setScoreLevel(countExistentMetaData(props , question.getPoints().size()), question);
 			}

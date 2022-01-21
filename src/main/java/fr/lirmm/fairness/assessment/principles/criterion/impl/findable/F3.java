@@ -7,6 +7,7 @@ import java.net.SocketTimeoutException;
 import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Tester;
+import fr.lirmm.fairness.assessment.utils.QuestionResult;
 import org.json.JSONException;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
@@ -19,7 +20,12 @@ public class F3 extends AbstractPrincipleCriterion {
 	@Override
 	protected void doEvaluation(Ontology ontology) throws JSONException, IOException, MalformedURLException, SocketTimeoutException {
         // Q1: Are the ontology metadata included and maintained in the ontology file?
-		this.setNotResolvable(0);
+		this.addResult(Tester.doEvaluation(ontology, questions.get(0), new Testable() {
+			@Override
+			public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
+				this.setScore(0.0, "This question " , question);
+			}
+		}));
 
 		// Q2: If not, are the ontology metadata described in an external file?
 		this.setDefaultSuccess(1);

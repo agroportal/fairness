@@ -83,13 +83,12 @@ public class I2 extends AbstractPrincipleCriterion {
                 List<String> similarTo = ontology.getSimilarTo();
                 String explanationEvolution = ontology.getExplanationEvolution();
                 String translationOfWork = ontology.getTranslationOfWork();
-                String hasPriorVersion = ontology.getHasPriorVersion();
                 String generalizes = ontology.getGeneralizes();
                 String isPartOf = ontology.getViewOf();
 
 
                 if ( MetaDataExistTest.isValid(similarTo.toString()) || MetaDataExistTest.isValid(translationOfWork)
-                        || MetaDataExistTest.isValid(explanationEvolution)    || MetaDataExistTest.isValid(hasPriorVersion)
+                        || MetaDataExistTest.isValid(explanationEvolution)
                         || MetaDataExistTest.isValid(generalizes)
                         || MetaDataExistTest.isValid(isPartOf)) {
                     this.setSuccess(question);

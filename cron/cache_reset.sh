@@ -47,7 +47,7 @@ if [ -d "$war_dir/WEB-INF" ]
     java_cmd="java -classpath \"./lib/\*:./classes/.\" fr.lirmm.fairness.assessment.CacheSaverCMD"
     echo "[+] Running '$java_cmd' in '$path' "
      if [ ! -d $log_dir_path ]; then
-       mkdir -r /var/log/tomcat/log/FAIR_CACHE
+       mkdir -p /var/log/tomcat/log/FAIR_CACHE
      fi
     touch log_file_name
     java -classpath "lib/*:./classes/." fr.lirmm.fairness.assessment.CacheSaverCMD  2>&1 | tee log_file_name
