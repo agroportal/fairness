@@ -345,7 +345,8 @@
     {
       "portal": "bpm:contact",
       "mod": "dct:rightsHolder",
-      "type": "string",
+      "type": "array",
+      "key": "name",
       "source": "submission"
     },
     {
