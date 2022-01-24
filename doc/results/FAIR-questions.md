@@ -37,7 +37,7 @@
             </td>
             <td>                    <ul>                         <li>owl:versionIRI</li>                    </ul>            </td>
     </tr>    <tr>
-         <td rowspan="4">
+         <td rowspan="3">
               F2: Ontologies are described with rich ontology metadata.
               <ul>
                 <li>Max Credits : 27</li>
@@ -46,27 +46,20 @@
           </td>         <td>
             <p>Is the ontology described with additional 'MIRO must' metadata properties? </p>
             <p>
-              Responses :                    <ul>                        <li>no MIRO must property found. (score: 0)</li>                        <li>1 MIRO must property found. (score: 4)</li>                        <li>2 MIRO must properties found. (score: 8)</li>                        <li>3 MIRO must properties found. (score: 12)</li>                        <li>4 or more MIRO must properties found. (score: 16)</li>                    </ul>            </p>
+              Responses :                    <ul>                        <li>The ontology describes 0 'MIRO must' properties. (score: 0)</li>                        <li>The ontology describes 1 'MIRO must' properties. (score: 2)</li>                        <li>The ontology describes 2 'MIRO must' properties. (score: 4)</li>                        <li>The ontology describes 3 'MIRO must' properties. (score: 6)</li>                        <li>The ontology describes 4 'MIRO must' properties. (score: 8)</li>                        <li>The ontology describes 5 'MIRO must' properties. (score: 10)</li>                        <li>The ontology describes 6 'MIRO must' properties. (score: 12)</li>                        <li>The ontology describes 7 'MIRO must' properties. (score: 14)</li>                        <li>The ontology describes 8 or more 'MIRO must' properties. (score: 16)</li>                    </ul>            </p>
          </td>
          <td>                    <ul>                          <li>omv:acronym</li>                          <li>dct:title</li>                          <li>dct:alternative</li>                          <li>skos:hiddenLabel</li>                          <li>dct:description</li>                          <li>foaf:page</li>                          <li>omv:resourceLocator</li>                          <li>omv:keywords</li>                          <li>dct:coverage</li>                          <li>foaf:homepage</li>                          <li>vann:example</li>                          <li>vann:preferredNamespaceUri</li>                          <li>void:uriRegexPattern</li>                          <li>idot:exampleIdentifier</li>                          <li>dct:publisher</li>                          <li>dct:subject</li>                          <li>owl:backwardCompatibleWith</li>                          <li>door:comesFromTheSameDomain</li>                          <li>omv:knownUsage</li>                          <li>dct:audience</li>                          <li>doap:repository</li>                          <li>doap:bugDatabase</li>                          <li>doap:mailing-list</li>                          <li>mod:hasEvaluation</li>                    </ul>         </td>    </tr>    <tr>
             <td>
-                 <p>Is the ontology described with additional 'MIRO should' metadata properties? </p>
+                 <p>Is the ontology described with additional 'MIRO should' or 'optional' metadata properties?</p>
                   <p>
-                    Responses :                          <ul>                              <li>The ontology describes 0 'MIRO should' properties. (score: 0)</li>                              <li>The ontology describes 1 'MIRO should' properties. (score: 2)</li>                              <li>The ontology describes 2 'MIRO should' properties. (score: 4)</li>                              <li>The ontology describes 3 or more 'MIRO should' properties. (score: 5)</li>                          </ul>                  </p>
+                    Responses :                          <ul>                              <li>The ontology describes 0 'should or optional' properties. (score: 0)</li>                              <li>The ontology describes 1 'should or optional' properties. (score: 1)</li>                              <li>The ontology describes 2 'should or optional' properties. (score: 2)</li>                              <li>The ontology describes 3 'should or optional' properties. (score: 3)</li>                              <li>The ontology describes 4 'should or optional' properties. (score: 3)</li>                              <li>The ontology describes 5 'should or optional' properties. (score: 4)</li>                              <li>The ontology describes 6 or more 'should or optional' properties. (score: 4)</li>                          </ul>                  </p>
             </td>
-            <td>                    <ul>                         <li>mod:metrics</li>                         <li>omv:numberOfClasses</li>                         <li>omv:numberOfIndividuals</li>                         <li>omv:numberOfProperties</li>                         <li>omv:numberOfAxioms</li>                    </ul>            </td>
-    </tr>    <tr>
-            <td>
-                 <p>Is the ontology described with additional 'MIRO optional' metadata properties?</p>
-                  <p>
-                    Responses :                          <ul>                              <li>The ontology describes 0 'MIRO optional' properties. (score: 0)</li>                              <li>The ontology describes 1 'MIRO optional' properties. (score: 1.5)</li>                              <li>The ontology describes 2 or more 'MIRO optional' properties. (score: 2)</li>                          </ul>                  </p>
-            </td>
-            <td>                    <ul>                         <li>vann:preferredNamespacePrefix</li>                    </ul>            </td>
+            <td>                    <ul>                         <li>mod:metrics</li>                         <li>omv:numberOfClasses</li>                         <li>omv:numberOfIndividuals</li>                         <li>omv:numberOfProperties</li>                         <li>omv:numberOfAxioms</li>                         <li>vann:preferredNamespacePrefix</li>                    </ul>            </td>
     </tr>    <tr>
             <td>
                  <p>Is the ontology described with another metadata property with no explicit corresponding MIRO requirement?</p>
                   <p>
-                    Responses :                          <ul>                              <li>The ontology describes 0 'no MIRO' properties. (score: 0)</li>                              <li>The ontology describes 1 'no MIRO' properties. (score: 1)</li>                              <li>The ontology describes 2 'no MIRO' properties. (score: 2)</li>                              <li>The ontology describes 3 or more  'no MIRO' properties. (score: 3)</li>                          </ul>                  </p>
+                    Responses :                          <ul>                              <li>The ontology describes 0 'no MIRO' properties. (score: 0)</li>                              <li>The ontology describes 1 'no MIRO' properties. (score: 1)</li>                              <li>The ontology describes 2 'no MIRO' properties. (score: 2)</li>                              <li>The ontology describes 3 'no MIRO' properties. (score: 3)</li>                              <li>The ontology describes 4 'no MIRO' properties. (score: 4)</li>                              <li>The ontology describes 5 'no MIRO' properties. (score: 5)</li>                              <li>The ontology describes 6 'no MIRO' properties. (score: 6)</li>                              <li>The ontology describes 7 or more  'no MIRO' properties. (score: 7)</li>                          </ul>                  </p>
             </td>
             <td>                    <ul>                         <li>dct:language</li>                         <li>dct:abstract</li>                         <li>mod:analytics</li>                         <li>dct:bibliographicCitation</li>                         <li>rdfs:comment</li>                         <li>foaf:depiction</li>                         <li>foaf:logo</li>                         <li>voaf:toDoList</li>                         <li>schema:award</li>                         <li>schema:associatedMedia</li>                         <li>owl:incompatibleWith</li>                         <li>dct:hasPart</li>                         <li>schema:workTranslation</li>                         <li>door:hasDisparateModelling</li>                         <li>voaf:usedBy</li>                         <li>voaf:hasDisjunctionsWith</li>                         <li>omv:keyClasses</li>                         <li>void:rootResource</li>                         <li>mod:browsingUI</li>                         <li>void:propertyPartition</li>                         <li>void;classPartition</li>                         <li>void:dataDump</li>                         <li>void:openSearchDescription</li>                         <li>void:uriLookupEndpoint</li>                         <li>schema:comment</li>                         <li>dct:created</li>                         <li>dct:modified</li>                         <li>dct:valid</li>                         <li>dct:dateSubmitted</li>                         <li>pav:curatedOn</li>                         <li>omv:isOfType</li>                         <li>void:propertyPartition</li>                         <li>void:classPartition</li>                         <li>mod:classesWithMoreThan25Children</li>                         <li>mod:classesWithOneChild</li>                         <li>mod:classesWithNoDefinition</li>                         <li>mod:maxChildCount</li>                    </ul>            </td>
     </tr>    <tr>
@@ -74,7 +67,7 @@
               F3: Ontology metadata clearly and explicitly include the identifier of the ontology they describe.
               <ul>
                 <li>Max Credits : 21</li>
-                <li>Portal max Credits : 16</li>
+                <li>Portal max Credits : 21</li>
               </ul>
           </td>         <td>
             <p>Are the ontology metadata included and maintained in the ontology file?</p>
@@ -99,7 +92,7 @@
          <td rowspan="3">
               F4: Ontologies and ontology metadata are registered or indexed in a searchable resource typically an ontology repository.
               <ul>
-                <li>Max Credits : 20</li>
+                <li>Max Credits : 24</li>
                 <li>Portal max Credits : 16</li>
               </ul>
           </td>         <td>
@@ -253,7 +246,7 @@
           </td>         <td>
             <p>What is the representation language used for ontology and ontology metadata?</p>
             <p>
-              Responses :                    <ul>                        <li>Ontology and ontology metadata are not in a formal, accessible, shared and broadly applicable language. (score: 0)</li>                        <li>Ontology and ontology metadata are represented in PDF. (score: 4)</li>                        <li>Ontology and ontology metadata are represented in TXT. (score: 5)</li>                        <li>Ontology and ontology metadata are represented in CSV. (score: 11)</li>                        <li>Ontology and ontology metadata are represented in XML. (score: 12)</li>                        <li>Ontology and ontology metadata are represented in OBO. (score: 14)</li>                        <li>Ontology and ontology metadata are represented in RDFS. (score: 16)</li>                        <li>Ontology and ontology metadata are represented in SKOS. (score: 18)</li>                        <li>Ontology and ontology metadata are represented in OWL. (score: 20)</li>                    </ul>            </p>
+              Responses :                    <ul>                        <li>Ontology and ontology metadata are not in a formal, accessible, shared and broadly applicable language. (score: 0)</li>                        <li>Ontology and ontology metadata are represented in PDF. (score: 5)</li>                        <li>Ontology and ontology metadata are represented in TXT. (score: 7)</li>                        <li>Ontology and ontology metadata are represented in CSV. (score: 9)</li>                        <li>Ontology and ontology metadata are represented in XML. (score: 10)</li>                        <li>Ontology and ontology metadata are represented in OBO. (score: 11)</li>                        <li>Ontology and ontology metadata are represented in RDFS. (score: 12)</li>                        <li>Ontology and ontology metadata are represented in SKOS. (score: 15)</li>                        <li>Ontology and ontology metadata are represented in OWL. (score: 18)</li>                    </ul>            </p>
          </td>
          <td>                    <ul>                          <li>omv:hasOntologyLanguage</li>                    </ul>         </td>    </tr>    <tr>
             <td>
@@ -329,7 +322,7 @@
                   <p>
                     Responses :                          <ul>                              <li>Ontology does not declare influential relations. (score: 0)</li>                              <li>Ontology declares influential relations. (score: 2)</li>                          </ul>                  </p>
             </td>
-            <td>                    <ul>                         <li>voaf:specializes</li>                         <li>schema:translationOfWork</li>                         <li>voaf:similar</li>                         <li>owl:priorVersion</li>                         <li>voaf:generalizes</li>                         <li>dct:isPartOf</li>                    </ul>            </td>
+            <td>                    <ul>                         <li>voaf:specializes</li>                         <li>schema:translationOfWork</li>                         <li>voaf:similar</li>                         <li>voaf:generalizes</li>                         <li>dct:isPartOf</li>                    </ul>            </td>
     </tr>    <tr>
             <td>
                  <p>Does the ontology reuse standards & FAIR metadata vocabularies to describe its metadata?</p>
@@ -359,7 +352,7 @@
             <td>
                  <p>Does the ontology use valid URIs to encode some metadata values?</p>
                   <p>
-                    Responses :                          <ul>                              <li>The ontology have at least 7 metadata values encoded as URIs (score: 7)</li>                              <li>The ontology have at least 6 metadata values encoded as URIs (score: 6)</li>                              <li>The ontology have at least 5 metadata values encoded as URIs (score: 5)</li>                              <li>The ontology have at least 4 metadata values encoded as URIs (score: 4)</li>                              <li>The ontology have at least 3 metadata values encoded as URIs (score: 3)</li>                              <li>The ontology have at least 2 metadata values encoded as URIs (score: 2)</li>                              <li>The ontology have at least 1 metadata value encoded as URI (score: 1)</li>                              <li>The ontology does not use URIs to encode metadata values. (score: 0)</li>                          </ul>                  </p>
+                    Responses :                          <ul>                              <li>The ontology has at least 7 metadata values encoded as URIs (score: 7)</li>                              <li>The ontology has at least 6 metadata values encoded as URIs (score: 6)</li>                              <li>The ontology has at least 5 metadata values encoded as URIs (score: 5)</li>                              <li>The ontology has at least 4 metadata values encoded as URIs (score: 4)</li>                              <li>The ontology has at least 3 metadata values encoded as URIs (score: 3)</li>                              <li>The ontology has at least 2 metadata values encoded as URIs (score: 2)</li>                              <li>The ontology has at least 1 metadata value encoded as URI (score: 1)</li>                              <li>The ontology does not use URIs to encode metadata values. (score: 0)</li>                          </ul>                  </p>
             </td>
             <td>                    <ul>                         <li>owl:imports</li>                         <li>owl:priorVersion</li>                         <li>owl:backwardCompatibleWith</li>                         <li>owl:incompatibleWith</li>                         <li>dct:isPartOf</li>                         <li>dct:hasPart</li>                         <li>dct:hasVersion</li>                         <li>dct:isFormatOf</li>                         <li>dct:hasFormat</li>                         <li>dct:relation</li>                         <li>dct:relation</li>                         <li>schema:workTranslation</li>                         <li>schema:translationOfWork</li>                         <li>door:comesFromTheSameDomain</li>                         <li>voaf:similar</li>                         <li>voaf:hasEquivalencesWith</li>                         <li>door:hasDisparateModelling</li>                         <li>voaf:usedBy</li>                         <li>voaf:generalizes</li>                         <li>voaf:hasDisjunctionsWith</li>                         <li>omv:hasFormalityLevel</li>                         <li>dct:license</li>                         <li>omv:hasOntologySyntax</li>                         <li>dct:subject</li>                         <li>omv:hasOntologyLanguage</li>                         <li>mod:prefLabelProperty</li>                         <li>mod:definitionProperty</li>                         <li>mod:synonymProperty</li>                         <li>mod:authorProperty</li>                         <li>mod:hierarchyProperty</li>                         <li>mod:obsoleteProperty</li>                    </ul>            </td>
     </tr></table> ## Reusable
@@ -410,7 +403,7 @@
             <td>                    None            </td>
     </tr>    <tr>
             <td>
-                 <p>How much of the ontology objects provide provenance information with annotation properties (e.g., author, date)? </p>
+                 <p>How much of the ontology objects provide provenance information with annotation properties? </p>
                   <p>
                     Responses :                          <ul>                              <li> (score: 5)</li>                          </ul>                  </p>
             </td>
@@ -429,18 +422,18 @@
          </td>
          <td>                    <ul>                          <li>dct:license</li>                    </ul>         </td>    </tr>    <tr>
             <td>
-                 <p>Are the ontology access rights documented?</p>
+                 <p>Are the ontology access rights specified and permissions documented?</p>
                   <p>
-                    Responses :                          <ul>                              <li>The ontology access rights are not clearly specified. (score: 0)</li>                              <li>The ontology access rights are clearly specified. (score: 7)</li>                          </ul>                  </p>
+                    Responses :                          <ul>                              <li>The ontology access rights and permissions are not specified. (score: 0)</li>                              <li>The ontology access rights are clearly specified. (score: 4)</li>                              <li>The ontology access rights are clearly specified and permissions are documented. (score: 7)</li>                          </ul>                  </p>
             </td>
-            <td>                    <ul>                         <li>dct:accessRights</li>                    </ul>            </td>
+            <td>                    <ul>                         <li>dct:accessRights</li>                         <li>cc:morePermissions</li>                    </ul>            </td>
     </tr>    <tr>
             <td>
-                 <p>Are the permissions, usage guidelines and copyright holder clearly documented?</p>
+                 <p>Are the ontology usage guidelines and copyright holder documented?</p>
                   <p>
-                    Responses :                          <ul>                              <li>Neither ontology license nor access rights are documented (score: 0)</li>                              <li>The ontology document one of them. (score: 5)</li>                              <li>The ontology document two of them. (score: 10)</li>                              <li>The ontology document the permissions, usage guidelines and copyright holder. (score: 15)</li>                          </ul>                  </p>
+                    Responses :                          <ul>                              <li>The ontology documents 2 properties about usage guidelines and copyright holder. (score: 15)</li>                              <li>The ontology documents 1 property about usage guidelines and copyright holder. (score: 7)</li>                              <li>Neither ontology usage guidelines nor copyright holder are documented. (score: 0)</li>                          </ul>                  </p>
             </td>
-            <td>                    <ul>                         <li>cc:morePermissions</li>                         <li>cc:useGuidelines</li>                         <li>dct:rightsHolder</li>                    </ul>            </td>
+            <td>                    <ul>                         <li>cc:useGuidelines</li>                         <li>dct:rightsHolder</li>                    </ul>            </td>
     </tr>    <tr>
          <td rowspan="8">
               R1.2: Ontologies and ontology metadata are associated with detailed provenance.
@@ -449,13 +442,13 @@
                 <li>Portal max Credits : 36</li>
               </ul>
           </td>         <td>
-            <p>Does the ontology provide information about the actors involved in its development? (creator, contributor, curator, translator)</p>
+            <p>Does the ontology provide information about the actors involved in its development?</p>
             <p>
               Responses :                    <ul>                        <li>The ontology provide 0 information about the actors involved in its development. (score: 0)</li>                        <li>The ontology provide 1 information about the actors involved in its development. (score: 3)</li>                        <li>The ontology provide 2 informations about the actors involved in its development. (score: 5)</li>                        <li>The ontology provide 3 informations about the actors involved in its development. (score: 7)</li>                        <li>The ontology provide 4 or more informations about the actors involved in its development.  (score: 8)</li>                    </ul>            </p>
          </td>
          <td>                    <ul>                          <li>dct:creator</li>                          <li>pav:curatedBy</li>                          <li>dct:contributor</li>                          <li>schema:translator</li>                    </ul>         </td>    </tr>    <tr>
             <td>
-                 <p>Does an ontology provide information on its general provenance? (e.g., source, generated by, invalidated by)</p>
+                 <p>Does an ontology provide information on its general provenance?</p>
                   <p>
                     Responses :                          <ul>                              <li>The ontology provide O information on its general provenance. (score: 0)</li>                              <li>The ontology provide 1 information on its general provenance. (score: 2)</li>                              <li>The ontology provide 2 informations on its general provenance. (score: 4)</li>                              <li>The ontology provide 3 or more informations on its general provenance. (score: 6)</li>                          </ul>                  </p>
             </td>
@@ -473,7 +466,7 @@
                   <p>
                     Responses :                          <ul>                              <li>The ontology provide O information about versioning. (score: 0)</li>                              <li>The ontology provide 1 information about versioning. (score: 2)</li>                              <li>The ontology provide 2 informations about versioning. (score: 4)</li>                          </ul>                  </p>
             </td>
-            <td>                    <ul>                         <li>owl:versionInfo</li>                         <li>owl:priorVersion</li>                    </ul>            </td>
+            <td>                    <ul>                         <li>owl:versionInfo</li>                         <li>owl:priorVersion</li>                         <li>dct:hasVersion</li>                    </ul>            </td>
     </tr>    <tr>
             <td>
                  <p>Are the ontology latest change documented?</p>
