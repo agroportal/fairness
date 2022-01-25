@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 
 public class CombinedParam extends RequestParam {
 
-    public CombinedParam() {
-        super("combined");
+    public CombinedParam(HttpServletRequest request) {
+        super("combined" , request);
     }
 
     @Override
-    public boolean validate(HttpServletRequest request) {
+    protected boolean validate() {
         try {
             this.value = RequestParamValidator.getParam(request,getKey() ,  new ParamTest[]{new Present()});
             return true;

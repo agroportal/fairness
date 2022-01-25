@@ -10,12 +10,12 @@ import fr.lirmm.fairness.assessment.utils.requestparams.tests.ValidUrl;
 import javax.servlet.http.HttpServletRequest;
 
 public class ApiParam extends RequestParam {
-    public ApiParam() {
-        super("apikey");
+    public ApiParam(HttpServletRequest request) {
+        super("apikey" ,request);
     }
 
     @Override
-    public boolean validate(HttpServletRequest request) {
+    protected boolean validate() {
         try {
             this.value = RequestParamValidator.getParam(request,getKey() ,  new ParamTest[]{new Present()});
             return true;

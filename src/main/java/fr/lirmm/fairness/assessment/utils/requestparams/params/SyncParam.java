@@ -9,14 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 
 public class SyncParam  extends RequestParam {
 
-    public SyncParam() {
-        super("sync");
+    public SyncParam(HttpServletRequest request) {
+        super("sync" ,request);
     }
 
     @Override
-    public boolean validate(HttpServletRequest request) {
+    protected boolean validate() {
         try {
-            this.value = RequestParamValidator.getParam(request,getKey() ,  new ParamTest[]{new Present()});
+            this.value = RequestParamValidator.getParam(request,getKey() ,  new ParamTest[]{});
             return true;
         } catch (Exception e) {
             this.errorMessage = e.getMessage();

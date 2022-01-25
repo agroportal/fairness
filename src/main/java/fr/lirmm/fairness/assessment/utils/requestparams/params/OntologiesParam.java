@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 
 public class OntologiesParam extends RequestParam {
 
-    public OntologiesParam() {
-        super("ontologies");
+    public OntologiesParam(HttpServletRequest request) {
+        super("ontologies" ,request);
     }
 
     @Override
-    public boolean validate(HttpServletRequest request) {
+    protected boolean validate() {
         try {
             this.value = RequestParamValidator.getParam(request , this.key ,
                     new ParamTest[]{new Present() ,

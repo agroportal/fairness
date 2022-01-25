@@ -12,13 +12,13 @@ public class PortalParam extends RequestParam {
 
     private final String[] AVAILABLE_PORTAL_INSTANCES = {"stageportal" ,"agroportal" , "bioportal"};
 
-    public PortalParam() {
-        super("portal");
+    public PortalParam(HttpServletRequest request) {
+        super("portal" ,request);
     }
 
 
     @Override
-    public boolean validate(HttpServletRequest request) {
+    protected boolean validate() {
         try {
             this.value = RequestParamValidator.getParam(request,getKey() ,  new ParamTest[]{new Present() , new ContainedIn(AVAILABLE_PORTAL_INSTANCES)});
             return true;

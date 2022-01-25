@@ -11,12 +11,12 @@ import fr.lirmm.fairness.assessment.utils.requestparams.tests.ValidUrl;
 import javax.servlet.http.HttpServletRequest;
 
 public class PortalUrlParam extends RequestParam {
-    public PortalUrlParam() {
-        super("url");
+    public PortalUrlParam(HttpServletRequest request) {
+        super("url", request);
     }
 
     @Override
-    public boolean validate(HttpServletRequest request) {
+    protected boolean validate() {
         try {
             this.value = RequestParamValidator.getParam(request,getKey() ,  new ParamTest[]{new Present(),new ValidUrl()});
             return true;

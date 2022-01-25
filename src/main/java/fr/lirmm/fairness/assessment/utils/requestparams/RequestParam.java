@@ -1,6 +1,5 @@
 package fr.lirmm.fairness.assessment.utils.requestparams;
 
-
 import javax.servlet.http.HttpServletRequest;
 
 public abstract class RequestParam {
@@ -8,12 +7,14 @@ public abstract class RequestParam {
     protected String value;
     protected String errorMessage;
 
+    protected HttpServletRequest request;
 
-    public RequestParam(String key) {
+    public RequestParam(String key , HttpServletRequest request) {
         this.key = key;
+        this.request = request;
+        this.value = valueRequest(request);
     }
 
-    public abstract boolean validate(HttpServletRequest request);
 
     public String getValue() {
         return value;
@@ -27,9 +28,14 @@ public abstract class RequestParam {
         return errorMessage;
     }
 
+    protected abstract boolean validate();
 
-    public  String get(HttpServletRequest req) throws Exception {
-        if (this.validate(req)) {
+    public boolean isValid(){
+        return this.validate();
+    }
+
+    public  String get() throws Exception {
+        if (this.isValid()) {
             return  getValue();
         } else {
             throw new Exception(getErrorMessage());
