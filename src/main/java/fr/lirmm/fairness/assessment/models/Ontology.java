@@ -1,11 +1,11 @@
-package fr.lirmm.fairness.assessment.model;
+package fr.lirmm.fairness.assessment.models;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.*;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import fr.lirmm.fairness.assessment.Configuration;
 import org.json.JSONException;
 
 import fr.lirmm.fairness.assessment.utils.OntologyRestApi;
@@ -23,18 +23,16 @@ public class Ontology {
 	private final Map<String,Property> properties = new HashMap<>();
 	private String acronym;
 
-	public Ontology(String acronym, PortalInstance portalInstance) throws IOException, JSONException {
+	public Ontology(String acronym, PortalInstance portalInstance) throws Exception {
 		super();
 		this.acronym = acronym;
 		this.portalInstance = portalInstance;
 		this.fillOntology();
 	}
 
-	private void fillOntology() throws IOException, JSONException {
+	private void fillOntology() throws Exception {
 		String ontologyMetadata = this.getJsonMetadata();
 		this.restApi = new OntologyRestApi(ontologyMetadata);
-		//TODO rename properties to the mod nomination https://docs.google.com/spreadsheets/d/16GPvfkUTPZaMc7I7_3qZ5H7xse915kPMS3z00tptV6g/edit#gid=1638855124
-		// Colonne F pour agroportal et Colonne H MOD1.4 a utiliser
 		List<Map<?,?>> properties = Configuration.getInstance().getPropertiesConfig();
 
 		properties.forEach(propertyMap -> {
@@ -70,7 +68,7 @@ public class Ontology {
 						}else {
 							this.addOntologyLinkPropertyValue(property);
 						}
-					} catch (JSONException | IOException e) {
+					} catch (Exception e) {
 						e.printStackTrace();
 					}
 			}
@@ -130,37 +128,43 @@ public class Ontology {
 	}
 
 
-	private void addOntologyLinkArrayPropertyValue(Property property) throws JSONException, IOException {
+	private void addOntologyLinkArrayPropertyValue(Property property) throws Exception {
 		Gson gson = new GsonBuilder().create();
+
 		property.setValue((gson.fromJson(
-				OntologyRestApi.get(this.restApi.getOntologyLinksJsonObject(property.getLabel()) , portalInstance.getApikey() ,"application/json"),
-				List.class)));
+					OntologyRestApi.get(this.restApi.getOntologyLinksJsonObject(property.getLabel()) , portalInstance.getApikey() ,"application/json"),
+					List.class)));
 		this.addPropertyValue(property);
 	}
 
 
 	public String getMetaDataURL(){
-		return String.join("/", new String[] { this.portalInstance.getUrl(), "ontologies", this.acronym,
+		return String.join("/", new String[] { this.portalInstance.getUrl().toString(), "ontologies", this.acronym,
 				"latest_submission?display=all" });
 	}
 
-	private String getMetadata(String format) throws IOException {
-		return OntologyRestApi.get(getMetaDataURL(), this.portalInstance.getApikey(), format);
+	private String getMetadata(String format) throws Exception {
+		try{
+			return OntologyRestApi.get(getMetaDataURL(), this.portalInstance.getApikey(), format);
+		}
+		catch (Exception e){
+			throw new Exception("Portal " +getPortalInstance().getUrl() + " is not accessible : " + getMetaDataURL() +" "+ e.getMessage());
+		}
 	}
 
-	public String getHtmlMetadata() throws IOException {
+	public String getHtmlMetadata() throws Exception {
 		return this.getMetadata(FORMAT_TEXT_HTML);
 	}
 
-	public String getJsonMetadata() throws IOException {
+	public String getJsonMetadata() throws Exception {
 		return this.getMetadata(FORMAT_APPLICATION_JSON);
 	}
 
-	public String getTextMetadata() throws IOException {
+	public String getTextMetadata() throws Exception {
 		return this.getMetadata(FORMAT_TEXT_PLAIN);
 	}
 
-	public String getXmlMetadata() throws IOException {
+	public String getXmlMetadata() throws Exception {
 		return this.getMetadata(FORMAT_APPLICATION_XML);
 	}
 
