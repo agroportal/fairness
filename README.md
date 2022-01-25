@@ -65,10 +65,7 @@ Parameter | Possible Values | Description | Mandatory
 
 ### Web Service request response
 In result, it returns a JSON with the following skeleton :  
-```yaml
 
-
-```
  ```yaml
 {
   "ontologies": { 
