@@ -1,6 +1,5 @@
 package fr.lirmm.fairness.assessment;
 
-import java.io.IOException;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -14,8 +13,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import fr.lirmm.fairness.assessment.model.Ontology;
-import fr.lirmm.fairness.assessment.model.PortalInstance;
+import fr.lirmm.fairness.assessment.controllers.RequestController;
+import fr.lirmm.fairness.assessment.controllers.ResponseController;
 import fr.lirmm.fairness.assessment.models.Ontology;
 import fr.lirmm.fairness.assessment.models.PortalInstance;
 import fr.lirmm.fairness.assessment.utils.ResultCache;
@@ -39,10 +38,11 @@ public class FairServlet extends HttpServlet {
 
         ResponseController responseController = new ResponseController(resp); ;
         RequestController requestController = new RequestController(req);
-
+        PortalInstance portalInstance = null;
         try {
             JsonObject ontologies = null;
-            PortalInstance portalInstance = requestController.getPortalInstance();
+            portalInstance = requestController.getPortalInstance();
+
             Logger.getAnonymousLogger().info("USE THE PORTAL : " + portalInstance.getName() + "; url= " + portalInstance.getUrl() + "; apikey= " + portalInstance.getApikey());
             List<String> ontologyAcronymsToEvaluate = requestController.getOntologies();
 
@@ -61,7 +61,7 @@ public class FairServlet extends HttpServlet {
                 }
             } else {
                 JsonObject allResponses = resultCache.read(portalInstance);
-                if (ontologyAcronymsToEvaluate.size() == requestController.getAllOntologyAcronyms().size()) {
+                if (ontologyAcronymsToEvaluate.size() == requestController.getPortalInstance().getAllOntologiesAcronyms().size()) {
                     ontologies = allResponses.getAsJsonObject("ontologies");
                 } else if (ontologyAcronymsToEvaluate.size() > 0) {
                     Iterator<String> it = ontologyAcronymsToEvaluate.iterator();
@@ -81,13 +81,16 @@ public class FairServlet extends HttpServlet {
 
 
 
-            responseController.respond(true, requestController.getRequestURI(req) , startTime ,"");
-            Logger.getAnonymousLogger().info("EVALUATION  ENDED WITH STATUS : " + responseController.getResponse().get("status"));
+            responseController.respond(true, requestController.getRequestURI(req) , startTime ,""  , requestController);
+            Logger.getAnonymousLogger().info("EVALUATION  ENDED WITH STATUS : " + responseController.getResponse().get("status") );
 
         } catch (Exception e) {
             e.printStackTrace();
-
-            responseController.respond(false, requestController.getRequestURI(req) , startTime ,e.getMessage());
+            try {
+                responseController.respond(false, requestController.getRequestURI(req) , startTime ,e.getMessage() ,requestController);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
 
 
@@ -106,9 +109,10 @@ public class FairServlet extends HttpServlet {
     }
 
 
-    private JsonElement evaluateOntology(String acronym, PortalInstance portalInstance) throws JSONException, IOException {
+    private JsonElement evaluateOntology(String acronym, PortalInstance portalInstance) throws Exception {
         Fair fair = new Fair();
         fair.evaluate(new Ontology(acronym, portalInstance));
+
         return new FairJsonConverter(fair).toJson().get(acronym);
     }
 
