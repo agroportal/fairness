@@ -19,7 +19,7 @@
 </p>
 
 <p align="center">
-  <a href="http://services.stageportal.lirmm.fr/fairness/v2/"><strong>www.services.stageportal.lirmm.fr/fairness/v2/</strong></a>
+  <a href="http://services.agroportal.lirmm.fr/ofaire/"><strong>http://services.agroportal.lirmm.fr/ofaire/</strong></a>
   <br>
 </p>
 
@@ -30,25 +30,44 @@
 </p>
 
 ## Main Features
-*   Compute the FAIR score of a list of ontologies. 
-*   Compute the average FAIR score of a list of ontologies.
-*   A cache system to store the FAIR score result  of all ontologies in a portal
+*   Compute the _FAIR score_ of a list of ontologies. 
+*   Compute the _average, min, median and max FAIR score_ of a list of ontologies.
 
 ## General Usage 
-The Web service is callable with an http request using programming languages (like java ) , command line (like curl ) or directly with a web browser (like Firefox) at [http://services.stageportal.lirmm.fr/fairness/v2/](http://services.stageportal.lirmm.fr/fairness/v2/).
+The Web service is callable with an http request using a programming languages (like java ) , command line (like curl ) or directly with a web browser (like Firefox) at [http://services.agroportal.lirmm.fr/ofaire](http://services.agroportal.lirmm.fr/ofaire).
 ### Web Service request full syntax
+This web service can be used in three disctinct ways:
+* Using URL/APIKEY parameters
 ``` java
- www.services.stageportal.lirmm.fr/fairness/v2/?portal={stageportal|agroportal|bioportal}&ontologies={comma-separated list of acronyms|all}[&combined][&sync]
+ http://services.agroportal.lirmm.fr/ofaire/?url={an url to the endpoint where to get the jsonld}&ontologies={comma-separated list of acronyms|all}[&combined][&sync]
 ```
+
+* Using Portal name paramters
+``` java
+ http://services.agroportal.lirmm.fr/ofaire/?portal={stageportal|agroportal|bioportal}&ontologies={comma-separated list of acronyms|all}[&combined][&sync]
+```
+* Using the defautl portal 
+``` java
+ http://services.agroportal.lirmm.fr/ofaire/?ontologies={comma-separated list of acronyms|all}[&combined][&sync]
+```
+> In this last case, the default portal will be **"agroportal"** if http://services.agroportal.lirmm.fr is used. And **"bioportal"** in case of http://services.bioportal.lirmm.fr/ofaire.
+
+
 ### Web Service request parameters
 Parameter | Possible Values | Description | Mandatory
 ------------ | -------------  | ------------- | -------------
-*portal* | agroportal , bioportal ( or stageportal in test environnement ) | Specifies the repository  where the semantic resource is stored | yes
+*url* | a valid URL | Specifies the repository API url where the semantic resource is stored | no
+*portal* | agroportal , bioportal ( or stageportal in test environnement ) | Specifies the repository  where the semantic resource is stored | no
+*apikey* | the apikey to use with the URL or portal | Specifies the repository  where the semantic resource is stored | mandatory with URL parameter and no with the portal parameter
 *ontologies* | all or comma-separated list of acronyms (EX: EPHY,FCU) | Specifies the semantic resources for the fair assessment | yes
 *combined* |  no value | If is present,in addition of the listed ontologies FAIR scores, it adds the average FAIR scores of the set  | no
 *sync* | no value | If present , forces to not use the cache and recompute the FAIR scores| no
+
 ### Web Service request response
 In result, it returns a JSON with the following skeleton :  
+```yaml
+
+```
  ```yaml
 {
   "ontologies": { 
@@ -152,16 +171,15 @@ To do a local installation of this web service, you will nill
 ```
 ### 3- Configuration
 * **Portals configuration**
-  Currently are preconfigured with 3 portals *agroportal* , *sifr-bioportal* and *stageportal* , each of them have a folder with it's *config.properties.example* containing the following
+   Portal configuration will be selected from the "portal" parameter and it will be placed in *config/portals/{portal_name}/config.properties* containing the following
    ``` properties 
     name=BioPortal #The name of the portal
     url=http://data.bioportal.lirmm.fr #The rest api uri of the portal
     apikey=<your_api_key> #The api key of an user in the portal
     cacheFilePath=<your_path> #The path where to save the cache 
-    cacheEnabled=true # enabble or disable the cache globaly
+    cacheEnabled=true # enable or disable the cache globaly
   ```
-  Fill up the **apikey** and **cacheFilePath** *config.properties.example* with the corresponding infos , finally rename it to **config.properties**
-  > **To note** : Other portals can be added simply  by adding a folder with their names  and put on it the  **config.properties** file, but are supported only portals with MOD meta-data implemented
+  Fill up the **apikey** and **cacheFilePath** in *config.properties.example* with the corresponding infos , and finally rename it to **config.properties**
 
 
 ### 4- Build the project
@@ -169,8 +187,9 @@ To do a local installation of this web service, you will nill
 ### 5- Deploy the built war in the Tomcat server
 Deploy it by simply dropping the war file into the *$CATALINA_HOME\webapps* directory of any Tomcat instance. If the instance is running, the deployment will start instantly as Tomcat unpacks the archive and configures its context path.
 If the instance is not running, then the server will deploy the project the next time it is started.
-
-### 6- (Optional) Create a cron job to do a daily update of the cache files
+### 6- Create the SERVER_DEFAULT_PORTAL env variable
+add the SERVER_DEFAULT_PORTAL env variable, by adding this line  export SERVER_DEFAULT_PORTAL='{portal_name}’  to this file /usr/share/tomcat/conf/conf.d/java_opts.conf
+### 7- (Optional) Create a cron job to do a daily update of the cache files
 The following command program  update the cache every day at midnight
 ``` shell
   0 0 * * * /home/ontoportal/cache_rest.sh /usr/share/tomacat/webapps/fairness-assessment
