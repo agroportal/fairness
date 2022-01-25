@@ -67,6 +67,7 @@ Parameter | Possible Values | Description | Mandatory
 In result, it returns a JSON with the following skeleton :  
 ```yaml
 
+
 ```
  ```yaml
 {
@@ -128,9 +129,11 @@ In result, it returns a JSON with the following skeleton :
     }
   },
   "status": { // operation meta-data
-    "request": "http://service.stageportal.lirmm.fr?portal=stageportal&ontologies=FCU", // original request
-    "success": true, //status of the operation success or failure
-    "executionTime": 202 / execution time in millisecond
+    "request": "http://service.agroportal.lirmm.fr?portal=stageportal&ontologies=FCU", // original request
+    "success": true,
+    "executionTime": 959,
+    "endpoint": "http://data.agroportal.lirmm.fr",
+    "useCache": true
   }
 }
  ```
