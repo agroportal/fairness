@@ -57,7 +57,6 @@ public class I3 extends AbstractPrincipleCriterion {
 							Collections.singletonList(ontology.getHasOntoSyntax()),
 							Collections.singletonList(ontology.getHasDomain()),
 							ontology.getNaturalLanguage(),
-							Collections.singletonList(ontology.getHasOntoLang()),
 							Collections.singletonList(ontology.getPrefLabelProperty()),
 							Collections.singletonList(ontology.getDefinitionProperty()),
 							Collections.singletonList(ontology.getSynonymProperty()),
