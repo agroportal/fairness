@@ -1,6 +1,6 @@
 package fr.lirmm.fairness.assessment.principles.criterion.question;
 
-import fr.lirmm.fairness.assessment.model.Ontology;
+import fr.lirmm.fairness.assessment.models.Ontology;
 import fr.lirmm.fairness.assessment.principles.criterion.question.tests.MetaDataExistTest;
 import fr.lirmm.fairness.assessment.utils.QuestionResult;
 

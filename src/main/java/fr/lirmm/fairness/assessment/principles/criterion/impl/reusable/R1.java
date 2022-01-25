@@ -8,10 +8,9 @@ import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriter
 import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Tester;
 import fr.lirmm.fairness.assessment.principles.criterion.question.tests.MetaDataExistTest;
-import fr.lirmm.fairness.assessment.utils.Result;
 import org.json.JSONException;
 
-import fr.lirmm.fairness.assessment.model.Ontology;
+import fr.lirmm.fairness.assessment.models.Ontology;
 import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriterion;
 
 public class R1 extends AbstractPrincipleCriterion {

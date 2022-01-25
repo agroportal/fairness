@@ -9,10 +9,9 @@ import fr.lirmm.fairness.assessment.principles.criterion.question.tests.MetaData
 import fr.lirmm.fairness.assessment.principles.criterion.question.tests.ResolvableURLTest;
 import fr.lirmm.fairness.assessment.principles.criterion.question.tests.URLValidTest;
 import fr.lirmm.fairness.assessment.principles.criterion.question.tests.ValidDOITest;
-import fr.lirmm.fairness.assessment.utils.QuestionResult;
 import org.json.JSONException;
 
-import fr.lirmm.fairness.assessment.model.Ontology;
+import fr.lirmm.fairness.assessment.models.Ontology;
 import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriterion;
 
 public class F1 extends AbstractPrincipleCriterion {

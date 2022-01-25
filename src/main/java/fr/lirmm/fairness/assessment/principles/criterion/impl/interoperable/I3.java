@@ -10,7 +10,7 @@ import fr.lirmm.fairness.assessment.principles.criterion.question.Tester;
 import fr.lirmm.fairness.assessment.principles.criterion.question.tests.URLValidTest;
 import org.json.JSONException;
 
-import fr.lirmm.fairness.assessment.model.Ontology;
+import fr.lirmm.fairness.assessment.models.Ontology;
 import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriterion;
 
 public class I3 extends AbstractPrincipleCriterion {

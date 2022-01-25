@@ -7,10 +7,9 @@ import java.net.SocketTimeoutException;
 import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Tester;
-import fr.lirmm.fairness.assessment.utils.QuestionResult;
 import org.json.JSONException;
 
-import fr.lirmm.fairness.assessment.model.Ontology;
+import fr.lirmm.fairness.assessment.models.Ontology;
 import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriterion;
 
 public class F3 extends AbstractPrincipleCriterion {

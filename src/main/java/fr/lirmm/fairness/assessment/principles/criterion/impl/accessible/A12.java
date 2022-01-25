@@ -1,12 +1,10 @@
 package fr.lirmm.fairness.assessment.principles.criterion.impl.accessible;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
 
 import org.json.JSONException;
 
-import fr.lirmm.fairness.assessment.model.Ontology;
+import fr.lirmm.fairness.assessment.models.Ontology;
 import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriterion;
 
 public class A12 extends AbstractPrincipleCriterion {

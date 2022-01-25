@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.google.gson.internal.LinkedTreeMap;
-import fr.lirmm.fairness.assessment.Configuration;
+import fr.lirmm.fairness.assessment.models.Configuration;
 import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Tester;
 import fr.lirmm.fairness.assessment.principles.criterion.question.tests.MetaDataExistTest;
 import org.json.JSONException;
 
-import fr.lirmm.fairness.assessment.model.Ontology;
+import fr.lirmm.fairness.assessment.models.Ontology;
 import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriterion;
 
 public class F4 extends AbstractPrincipleCriterion {

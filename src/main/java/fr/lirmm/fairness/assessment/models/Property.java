@@ -1,9 +1,8 @@
-package fr.lirmm.fairness.assessment.model;
+package fr.lirmm.fairness.assessment.models;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;

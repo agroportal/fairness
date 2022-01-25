@@ -1,12 +1,10 @@
 package fr.lirmm.fairness.assessment.principles;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
 
 import org.json.JSONException;
 
-import fr.lirmm.fairness.assessment.model.Ontology;
+import fr.lirmm.fairness.assessment.models.Ontology;
 
 public interface Evaluable {
 	

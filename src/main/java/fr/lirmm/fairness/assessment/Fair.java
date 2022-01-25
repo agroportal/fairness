@@ -3,7 +3,7 @@ package fr.lirmm.fairness.assessment;
 import java.util.*;
 import fr.lirmm.fairness.assessment.principles.AbstractScoredEntity;
 
-import fr.lirmm.fairness.assessment.model.Ontology;
+import fr.lirmm.fairness.assessment.models.Ontology;
 import fr.lirmm.fairness.assessment.principles.AbstractPrinciple;
 import fr.lirmm.fairness.assessment.principles.Evaluable;
 import fr.lirmm.fairness.assessment.principles.impl.Accessible;

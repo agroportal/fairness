@@ -9,14 +9,14 @@ import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import fr.lirmm.fairness.assessment.Configuration;
+import fr.lirmm.fairness.assessment.models.Configuration;
 import fr.lirmm.fairness.assessment.utils.QuestionResult;
 import fr.lirmm.fairness.assessment.utils.Result;
 import fr.lirmm.fairness.assessment.principles.AbstractScoredEntity;
 import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
 import org.json.JSONException;
 
-import fr.lirmm.fairness.assessment.model.Ontology;
+import fr.lirmm.fairness.assessment.models.Ontology;
 import fr.lirmm.fairness.assessment.principles.Evaluable;
 
 public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity implements Evaluable, Serializable {

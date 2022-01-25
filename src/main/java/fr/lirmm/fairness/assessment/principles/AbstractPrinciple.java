@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import fr.lirmm.fairness.assessment.utils.QuestionResult;
 import org.reflections.Reflections;
 
-import fr.lirmm.fairness.assessment.model.Ontology;
+import fr.lirmm.fairness.assessment.models.Ontology;
 import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriterion;
 
 

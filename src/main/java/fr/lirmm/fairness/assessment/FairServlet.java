@@ -16,6 +16,8 @@ import com.google.gson.JsonObject;
 
 import fr.lirmm.fairness.assessment.model.Ontology;
 import fr.lirmm.fairness.assessment.model.PortalInstance;
+import fr.lirmm.fairness.assessment.models.Ontology;
+import fr.lirmm.fairness.assessment.models.PortalInstance;
 import fr.lirmm.fairness.assessment.utils.ResultCache;
 import fr.lirmm.fairness.assessment.utils.converters.CombinedFairJsonConverter;
 import fr.lirmm.fairness.assessment.utils.converters.FairJsonConverter;
