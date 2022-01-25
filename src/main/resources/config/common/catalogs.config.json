@@ -1,16 +1,22 @@
 {
   "repositories" : [
     {
-      "label" : "bioportal",
+      "label" : "NCBO BioPortal",
       "url": "bioportal.bioontology.org",
       "authentification": true
     },
     {
-      "label" : "agroportal",
-      "url": "agroportal.lirmm.fr"
+      "label" : "AgroPortal",
+      "url": "agroportal.lirmm.fr",
+      "authentification": true
     },
     {
-      "label" : "OLS",
+      "label" : "SIFR BioPortal",
+      "url": "bioportal.lirmm.fr",
+      "authentification": true
+    },
+    {
+      "label" : "EBI OLS",
       "url": "ebi.ac.uk/ols"
     },
     {
@@ -18,17 +24,84 @@
       "url": "ontobee.org"
     },
     {
-      "label" : "Ontohub",
+      "label" : "OntoHub",
       "url": "ontohub.org"
     },
     {
       "label" : "AberOWL",
       "url": "aber-owl.net"
+    },
+    {
+      "label" : "LOV",
+      "url": "lov.linkeddata.es/dataset/lov"
+    },
+    {
+      "label" : "ONKI Ontology Library Service",
+      "url": "onki.fi"
+    },
+    {
+      "label" : "MMI ORR",
+      "url": "mmisw.org"
+    },
+    {
+      "label" : "ESIP COR",
+      "url": "cor.esipfed.org"
+    },
+    {
+      "label" : "LifeWatch EcoPortal",
+      "url": "ecoportal.lifewatchitaly.eu",
+      "authentification": true
+    },
+    {
+      "label" : "MatPortal",
+      "url": "matportal.org",
+      "authentification": true
+    },
+    {
+      "label" : "MedPortal",
+      "url": "medportal.bmicc.cn"
+    },
+    {
+      "label" : "CISMeF HeTOP",
+      "url": "hetop.eu",
+      "authentification": true
+    },
+    {
+      "label" : "FINTO",
+      "url": "finto.fi"
+    },
+    {
+      "label" : "ANDC RVA",
+      "url": "vocabs.ardc.edu.au"
+    },
+    {
+      "label" : "NVS",
+      "url": "vocab.nerc.ac.uk"
+    },
+    {
+      "label" : "GFBIO TS",
+      "url": "terminologies.gfbio.org"
+    },
+    {
+      "label" : "Loterre",
+      "url": "loterre.fr"
+    },
+    {
+      "label" : "Caliper",
+      "url": "datalab.review.fao.org/datalab/caliper"
+    },
+    {
+      "label" : "Crop Ontology Curation Tool",
+      "url": "cropontology.org"
+    },
+    {
+      "label" : "Planteome",
+      "url": "planteome.org"
     }
   ],
   "libraries" : [
     {
-      "label" : "Obo Foundry",
+      "label" : "OBO Foundry",
       "url": "obofoundry.org"
     },
     {
@@ -36,8 +109,48 @@
       "url": "vest.agrisemantics.org"
     },
     {
-      "label" : "Fair Sharing",
+      "label" : "FAIRsharing",
       "url": "fairsharing.org"
+    },
+    {
+      "label" : "ROMULUS",
+      "url": "thezfiles.co.za/ROMULUS"
+    },
+    {
+      "label" : "DAML Ontology Library",
+      "url": "daml.org/ontologies"
+    },
+    {
+      "label" : "Colore",
+      "url": "stl.mie.utoronto.ca/colore"
+    },
+    {
+      "label" : "BARTOC",
+      "url": "bartoc.org"
+    },
+    {
+      "label" : "TaxoBank",
+      "url": "taxobank.org"
+    },
+    {
+      "label" : "LusTRE",
+      "url": "linkeddata.ge.imati.cnr.it"
+    },
+    {
+      "label" : "LOV4IoT",
+      "url": "lov4iot.appspot.com"
+    },
+    {
+      "label" : "VOCAB OEG",
+      "url": "vocab.linkeddata.es"
+    },
+    {
+      "label" : "LiveSchema",
+      "url": "liveschema.eu"
+    },
+    {
+      "label" : "Protege Ontology Library",
+      "url": "protegewiki.stanford.edu/wiki/Protege_Ontology_Library"
     }
   ]
 }
