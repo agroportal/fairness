@@ -115,32 +115,28 @@ public class OntologyRestApi {
 		return root;
 	}
 
-	public static String get(String urlToGet, String api_key, String format) throws IOException {
+	public static String get(String urlToGet, String api_key, String format) throws Exception {
 		URL url;
 		HttpURLConnection conn;
 		String line;
 		StringBuilder result = new StringBuilder();
-		try {
-			BufferedReader rd = null;
-			url = new URL(urlToGet);
-			conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("GET");
-			conn.setRequestProperty("Authorization", "apikey token=" + api_key);
-			conn.setRequestProperty("Accept", format);
-			int response = conn.getResponseCode();
-			if (response != 200) {
-				System.out.println("Response Message= " + conn.getResponseMessage() + "  " + urlToGet);
-			}
-			if (response == 200) {
-				rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-				while ((line = rd.readLine()) != null) {
-					result.append(line);
-				}
-				rd.close();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		BufferedReader rd = null;
+		url = new URL(urlToGet);
+		conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.setRequestProperty("Authorization", "apikey token=" + api_key);
+		conn.setRequestProperty("Accept", format);
+		int response = conn.getResponseCode();
+
+		if (response != 200) {
+			throw new Exception(conn.getResponseMessage());
 		}
+
+		rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		while ((line = rd.readLine()) != null) {
+			result.append(line);
+		}
+		rd.close();
 		return result.toString();
 	}
 

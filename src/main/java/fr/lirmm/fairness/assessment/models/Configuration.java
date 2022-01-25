@@ -1,13 +1,9 @@
-package fr.lirmm.fairness.assessment;
+package fr.lirmm.fairness.assessment.models;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import fr.lirmm.fairness.assessment.utils.Environments;
 
 import java.io.*;
 import java.util.*;
-import java.util.logging.Logger;
 
 public class Configuration {
 
