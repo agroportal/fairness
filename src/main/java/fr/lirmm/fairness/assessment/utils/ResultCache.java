@@ -1,12 +1,11 @@
 package fr.lirmm.fairness.assessment.utils;
 
 import com.google.gson.*;
-import fr.lirmm.fairness.assessment.Configuration;
+import fr.lirmm.fairness.assessment.models.Configuration;
 import fr.lirmm.fairness.assessment.Fair;
-import fr.lirmm.fairness.assessment.model.Ontology;
-import fr.lirmm.fairness.assessment.model.PortalInstance;
+import fr.lirmm.fairness.assessment.models.Ontology;
+import fr.lirmm.fairness.assessment.models.PortalInstance;
 import fr.lirmm.fairness.assessment.utils.converters.FairJsonConverter;
-import org.json.JSONException;
 
 import java.io.*;
 import java.util.Iterator;
@@ -88,7 +87,7 @@ public class ResultCache {
 
             getFileSaveName(portal);
             resultCache.store(output.toString() , FILE_SAVE_NAME);
-        } catch (IOException | JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
