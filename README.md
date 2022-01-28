@@ -5,8 +5,9 @@
    O'FAIRe is a open source FAIRness assessment methodology and tool for ontologies, vocabularies and semantic resources developped within <a href="http://www.d2kab.org/">D2KAB</a> and <a href="http://foosin.fr/">FooSIN</a> projects. 
    O'FAIRe comes as web service (implemented in Java) which executes tests automatically evaluating how a semantic resource stored within an ontology repositry responds to a set of FAIRness assessment questions. 
   <br>
+  <br>
    We implemented O’FAIRe as a Web service working with any <a href="https://ontoportal.org/">OntoPortal</a> installations respecting the Metadata for Ontology Description and Publication Ontology (MOD1.4) metadata profile to harmonize metadata (https://github.com/sifrproject/MOD-Ontology). 
-   We deployed it in <a href="http://agroportal.lirmm.fr/">AgroPortal</a> and the <a href="http://bioportal.lirmm.fr/">SIFR BioPortal</a> and designed specific user interfaces to experience its performance on ontologies or groups of ontologies. 
+   We deployed it in <a href="http://agroportal.lirmm.fr/">AgroPortal</a> and the <a href="http://bioportal.lirmm.fr/">SIFR BioPortal</a> and designed specific user interfaces. 
    <br>
 </p>
 
@@ -17,18 +18,13 @@
   The service can be deployed anywhere on Tomcat.
 </p>
 
-<p align="center">
-  <a href="https://circleci.com/gh/angular/workflows/angular/tree/master">
-    <img src="https://img.shields.io/github/license/agroportal/fairness" alt="license" />
- </a>
-</p>
-
 ## Main Features
 *   Compute the _FAIR score_ of a list of ontologies. 
 *   Compute the _average, min, median and max FAIR score_ of a list of ontologies.
 
 ## General Usage 
 The Web service is callable with an http request using a programming languages (like java ) , command line (like curl ) or directly with a web browser (like Firefox) at [http://services.agroportal.lirmm.fr/ofaire](http://services.agroportal.lirmm.fr/ofaire).
+
 ### Web Service request full syntax
 This web service can be used in three disctinct ways:
 * Using URL/APIKEY parameters
