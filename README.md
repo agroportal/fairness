@@ -1,26 +1,20 @@
-<h1 align="center"> O'FAIRe- an Ontology FAIRness evaluator</h1>
+<h1 align="center"> O'FAIRe: Ontology FAIRness evaluator</h1>
 
 <p align="center">
- <i>
-  <img src="https://avatars.githubusercontent.com/u/16088111?s=200&v=4" alt="fair-logo" width="120px" height="120px"/>
- </i>
   <br>
-  <i>
-   This project is a FAIRness assessment tool for ontologies, vocabularies and semantic resources in general hosted in
-   <a href="http://agroportal.lirmm.fr/">argoportal</a> or <a href="http://bioportal.lirmm.fr/">bioportal-sifr</a>. 
-  </i>
+   O'FAIRe is a open source FAIRness assessment methodology and tool for ontologies, vocabularies and semantic resources developped within <a href="http://www.d2kab.org/">D2KAB</a> and <a href="http://foosin.fr/">FooSIN</a> projects. 
+   O'FAIRe comes as web service (implemented in Java) which executes tests automatically evaluating how a semantic resource stored within an ontology repositry responds to a set of FAIRness assessment questions. 
   <br>
-   <i>
-    It's an implementation in a Java Web service of the framework 
-    <a href="https://hal.archives-ouvertes.fr/lirmm-03208544/">"FAIR or FAIRer? An integrated quantitative FAIRness assessment grid for semantic resources and ontologies"</a>
-    ,a list of defined FAIR questions related to a metadata of <a href="https://github.com/sifrproject/MOD-Ontology/">the MOD ontology metadata model 1.4</a>.
-  </i>
-  <br>
+   We implemented O’FAIRe as a Web service working with any <a href="https://ontoportal.org/">OntoPortal</a> installations respecting the Metadata for Ontology Description and Publication Ontology (MOD1.4) metadata profile to harmonize metadata (https://github.com/sifrproject/MOD-Ontology). 
+   We deployed it in <a href="http://agroportal.lirmm.fr/">AgroPortal</a> and the <a href="http://bioportal.lirmm.fr/">SIFR BioPortal</a> and designed specific user interfaces to experience its performance on ontologies or groups of ontologies. 
+   <br>
 </p>
 
 <p align="center">
-  <a href="http://services.agroportal.lirmm.fr/ofaire/"><strong>http://services.agroportal.lirmm.fr/ofaire/</strong></a>
+ The documentation illustrates the web service with examples from AgroPortal. 
+ <a href="http://services.agroportal.lirmm.fr/ofaire/"><strong>http://services.agroportal.lirmm.fr/ofaire/</strong></a>
   <br>
+  The service can be deployed anywhere on Tomcat.
 </p>
 
 <p align="center">
