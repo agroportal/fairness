@@ -903,31 +903,31 @@
       "portalMaxCredits": 5,
       "questions": {
         "R1Q1": {
-          "question": "Does the ontology provide information about how classes or concept are defined?",
+          "question": "Does the ontology provide information about how classes or concepts are defined?",
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology provides 0 information about its classes or concept."
+              "explanation": "The ontology provides 0 information about how classes or concepts are defined."
             },
             {
               "score": 1,
-              "explanation": "The ontology provides 1 information about its classes or concept."
+              "explanation": "The ontology provides 1 information about how classes or concepts are defined."
             },
             {
               "score": 2,
-              "explanation": "The ontology provides 2 informations about its classes or concept."
+              "explanation": "The ontology provides 2 informations about how classes or concepts are defined."
             },
             {
               "score": 3,
-              "explanation": "The ontology provides 3 informations about its classes or concept."
+              "explanation": "The ontology provides 3 informations about how classes or concepts are defined."
             },
             {
               "score": 4,
-              "explanation": "The ontology provides 4 informations about its classes or concept."
+              "explanation": "The ontology provides 4 informations about how classes or concepts are defined."
             },
             {
               "score": 5,
-              "explanation": "The ontology provides 5 or more informations about its classes or concept."
+              "explanation": "The ontology provides 5 informations about how classes or concepts are defined."
             }
           ],
           "properties": [
@@ -951,7 +951,7 @@
             },
             {
               "score": 3,
-              "explanation": "The ontology provides 2 or more informations about its hierarchy."
+              "explanation": "The ontology provides 3 informations about its hierarchy."
             }
           ],
           "properties": [
@@ -993,32 +993,32 @@
       }
     },
     "R1.1": {
-      "label": "Ontologies and ontology metadata are released with a clear and accessible  usage license.",
+      "label": "Ontologies and ontology metadata are released with a clear and accessible usage license.",
       "maxCredits": 37,
       "portalMaxCredits": 37,
       "questions": {
         "R1.1Q1": {
-          "question": "Is the ontology license clearly specified, with a URI that is resolvable ans supports content negotiation?",
+          "question": "Is the ontology license clearly specified, with an URI that is resolvable and supports content negotiation?",
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology license is not specified."
+              "explanation": "Ontology license absent."
             },
             {
               "score": 4,
-              "explanation": "The ontology license is specified but not valid URI."
+              "explanation": "Ontology license present but not a valid URI."
             },
             {
               "score": 8,
-              "explanation": "The ontology license is valid but not resolvable."
+              "explanation": "Ontology license present and valid but not resolvable."
             },
             {
               "score": 12,
-              "explanation": "The ontology license is resolvable but not content negotiable."
+              "explanation": "Ontology license present, valid, resolvable but with no content negotiation."
             },
             {
               "score": 15,
-              "explanation": "The ontology license is clearly specified."
+              "explanation": "Ontology license is clearly specified with a valid and resolvable URI that supports content negotiation."
             }
           ],
           "properties": [
@@ -1030,15 +1030,15 @@
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology access rights and permissions are not specified."
+              "explanation": "Ontology access rights and permissions absent."
             },
             {
               "score": 4,
-              "explanation": "The ontology access rights are clearly specified."
+              "explanation": "Ontology access rights are clearly specified."
             },
             {
               "score": 7,
-              "explanation": "The ontology access rights are clearly specified and permissions are documented."
+              "explanation": "Ontology access rights are clearly specified and permissions are documented."
             }
           ],
           "properties": [
@@ -1050,15 +1050,15 @@
           "points": [
             {
               "score": 15,
-              "explanation": "The ontology documents 2 properties about usage guidelines and copyright holder."
+              "explanation": "Ontology usage guidelines and copyright holder are present."
             },
             {
               "score": 7,
-              "explanation": "The ontology documents 1 property about usage guidelines and copyright holder."
+              "explanation": "Ontology usage guidelines or copyright holder is absent."
             },
             {
               "score": 0,
-              "explanation": "Neither ontology usage guidelines nor copyright holder are documented."
+              "explanation": "Ontology usage guidelines and copyright holder are absent."
             }
           ],
           "properties": [
@@ -1077,23 +1077,23 @@
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology provide 0 information about the actors involved in its development."
+              "explanation": "The ontology provides 0 information about the actors involved in its development."
             },
             {
               "score": 3,
-              "explanation": "The ontology provide 1 information about the actors involved in its development."
+              "explanation": "The ontology provides 1 information about the actors involved in its development."
             },
             {
               "score": 5,
-              "explanation": "The ontology provide 2 informations about the actors involved in its development."
+              "explanation": "The ontology provides 2 informations about the actors involved in its development."
             },
             {
               "score": 7,
-              "explanation": "The ontology provide 3 informations about the actors involved in its development."
+              "explanation": "The ontology provides 3 informations about the actors involved in its development."
             },
             {
               "score": 8,
-              "explanation": "The ontology provide 4 or more informations about the actors involved in its development. "
+              "explanation": "The ontology provides 4 informations about the actors involved in its development. "
             }
           ],
           "properties": [
@@ -1105,19 +1105,19 @@
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology provide O information on its general provenance."
+              "explanation": "The ontology provides O information on its general provenance."
             },
             {
               "score": 2,
-              "explanation": "The ontology provide 1 information on its general provenance."
+              "explanation": "The ontology provides 1 information on its general provenance."
             },
             {
               "score": 4,
-              "explanation": "The ontology provide 2 informations on its general provenance."
+              "explanation": "The ontology provides 2 informations on its general provenance."
             },
             {
               "score": 6,
-              "explanation": "The ontology provide 3 or more informations on its general provenance."
+              "explanation": "The ontology provides 3 informations on its general provenance."
             }
           ],
           "properties": [
@@ -1129,19 +1129,19 @@
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology provide 0 accrual information."
+              "explanation": "The ontology provides 0 accrual information."
             },
             {
               "score": 2,
-              "explanation": "The ontology provide 1 accrual information."
+              "explanation": "The ontology provides 1 accrual information."
             },
             {
               "score": 4,
-              "explanation": "The ontology provide 2 accrual informations."
+              "explanation": "The ontology provides 2 accrual informations."
             },
             {
               "score": 6,
-              "explanation": "The ontology provide 3 or more accrual informations."
+              "explanation": "The ontology provides 3 accrual informations."
             }
           ],
           "properties": [
@@ -1153,15 +1153,15 @@
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology provide O information about versioning."
+              "explanation": "The ontology provides O information about versioning."
             },
             {
               "score": 2,
-              "explanation": "The ontology provide 1 information about versioning."
+              "explanation": "The ontology provides 1 information about versioning."
             },
             {
               "score": 4,
-              "explanation": "The ontology provide 2 informations about versioning."
+              "explanation": "The ontology provides 2 or more informations about versioning."
             }
           ],
           "properties": [
@@ -1169,7 +1169,7 @@
           ]
         },
         "R1.2Q5": {
-          "question": "Are the ontology latest change documented?",
+          "question": "Are the ontology latest changes documented?",
           "points": [
             {
               "score": 2
@@ -1181,19 +1181,19 @@
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology provides 0 information about methodology and tools used to build it."
+              "explanation": "The ontology provides 0 information about methodology and tools used."
             },
             {
               "score": 2,
-              "explanation": "The ontology provides 2 informations about methodology and tools used to build it."
+              "explanation": "The ontology provides 1 information about methodology and tools used."
             },
             {
               "score": 4,
-              "explanation": "The ontology provides 4 informations about methodology and tools used to build it."
+              "explanation": "The ontology provides 2 informations about methodology and tools used."
             },
             {
               "score": 6,
-              "explanation": "The ontology provides 6 informations about methodology and tools used to build it."
+              "explanation": "The ontology provides 3 informations about methodology and tools used."
             }
           ],
           "properties": [
@@ -1211,7 +1211,7 @@
             },
             {
               "score": 2,
-              "explanation": "The ontology provides 1 informations about rationale documentation."
+              "explanation": "The ontology provides 1 information about rationale documentation."
             },
             {
               "score": 4,
@@ -1246,11 +1246,11 @@
       "portalMaxCredits": 36,
       "questions": {
         "R1.3Q1": {
-          "question": "Does an ontology provide information about projects using or organization endorsing?",
+          "question": "Does an ontology provide information about projects using or organizations endorsing?",
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology does not provide information about projects and endorsing organizations."
+              "explanation": "The ontology does not provide information about projects or endorsing organizations."
             },
             {
               "score": 5,
@@ -1258,7 +1258,7 @@
             },
             {
               "score": 10,
-              "explanation": "The ontology provide information about projects and endorsing organizations"
+              "explanation": "The ontology provide informations about projects and endorsing organizations."
             }
           ],
           "properties": [
@@ -1283,7 +1283,7 @@
             },
             {
               "score": 20,
-              "explanation": "The ontology is included in the OBO library and is part of the OBO foundry."
+              "explanation": "The ontology is included in the OBO library and is part of the OBO Foundry."
             }
           ],
           "properties": [
