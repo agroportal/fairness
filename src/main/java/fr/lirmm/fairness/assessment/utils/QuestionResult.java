@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class QuestionResult  extends  Result{
 
-    public  static final  String DEFAULT_NOT_RESOLVABLE = "This question cannot be evaluated in the repository.";
+    public  static final  String DEFAULT_NOT_RESOLVABLE = "This question cannot be evaluated in the repository at this time.";
 
     @Expose
     private String explanation;
