@@ -6,8 +6,7 @@
    O'FAIRe comes as web service (implemented in Java) which executes tests automatically evaluating how a semantic resource stored within an ontology repositry responds to a set of FAIRness assessment questions. 
   <br>
   <br>
-   We implemented O’FAIRe as a Web service working with any <a href="https://ontoportal.org/">OntoPortal</a> installations respecting the Metadata for Ontology Description and Publication Ontology (MOD1.4) metadata profile to harmonize metadata (https://github.com/sifrproject/MOD-Ontology). 
-   We deployed it in <a href="http://agroportal.lirmm.fr/">AgroPortal</a> and the <a href="http://bioportal.lirmm.fr/">SIFR BioPortal</a> and designed specific user interfaces. 
+   We implemented O’FAIRe as a Web service working with any <a href="https://ontoportal.org/">OntoPortal</a> installations respecting the <a href="https://github.com/sifrproject/MOD-Ontology">Metadata for Ontology Description and Publication Ontology (MOD1.4)</a> metadata profile to harmonize metadata. We deployed it in <a href="http://agroportal.lirmm.fr/">AgroPortal</a> and the <a href="http://bioportal.lirmm.fr/">SIFR BioPortal</a> and designed specific user interfaces. 
    <br>
 </p>
 
@@ -15,35 +14,36 @@
  The documentation illustrates the web service with examples from AgroPortal. 
  <a href="http://services.agroportal.lirmm.fr/ofaire/"><strong>http://services.agroportal.lirmm.fr/ofaire/</strong></a>
   <br>
-  The service can be deployed anywhere on Tomcat.
+  The service can be deployed anywhere on Tomcat and can request any ontology repository based on the OntoPortal technology (however the scores will be function of the amount of metadata fields available).
 </p>
 
-## Main Features
-*   Compute the _FAIR score_ of a list of ontologies. 
+## Main features
+*   Assess each aspects of the 15 FAIR principles with 62 questions specific for ontologies and semantic reosurces.
+*   Compute the _FAIR score_ of one ontology or a list of ontologies. 
 *   Compute the _average, min, median and max FAIR score_ of a list of ontologies.
 
 ## General Usage 
-The Web service is callable with an http request using a programming languages (like java ) , command line (like curl ) or directly with a web browser (like Firefox) at [http://services.agroportal.lirmm.fr/ofaire](http://services.agroportal.lirmm.fr/ofaire).
+The Web service is requested with a simple HTTP GET witht he following base URL: [http://services.agroportal.lirmm.fr/ofaire](http://services.agroportal.lirmm.fr/ofaire). For examples: 
 
-### Web Service request full syntax
-This web service can be used in three disctinct ways:
-* Using URL/APIKEY parameters
-``` java
- http://services.agroportal.lirmm.fr/ofaire/?url={an url to the endpoint where to get the jsonld}&ontologies={comma-separated list of acronyms|all}[&combined][&sync]
-```
+``` http://services.agroportal.lirmm.fr/ofaire?ontologies=AGRO ```
 
-* Using Portal name paramters
-``` java
- http://services.agroportal.lirmm.fr/ofaire/?portal={stageportal|agroportal|bioportal}&ontologies={comma-separated list of acronyms|all}[&combined][&sync]
-```
-* Using the defautl portal 
-``` java
- http://services.agroportal.lirmm.fr/ofaire/?ontologies={comma-separated list of acronyms|all}[&combined][&sync]
-```
-> In this last case, the default portal will be **"agroportal"** if http://services.agroportal.lirmm.fr is used. And **"bioportal"** in case of http://services.bioportal.lirmm.fr/ofaire.
+or
 
+``` http://services.agroportal.lirmm.fr/ofaire?ontologies=ATOL,EOL,AHOL&combined ```
 
-### Web Service request parameters
+### Web Service request mode
+This web service can be used in three disctinct mode:
+
+* Requestiong the by default ontology repository on which the service is deployed with no specific parameters (examples above).
+* Requesting an external ontology repositrory independant of where O'FAIRe is deployed using the *url* and *apikey* parameters. For instance, with the NCI Thesaurus in the <a href="https://bioportal.bioontology.org/">NCBO BioPortal</a>: 
+
+``` http://services.agroportal.lirmm.fr/ofaire?url=https://data.bioontology.org&ontologies=NCIT&apikey={your API-KEY on the NCBO BioPortal} ```
+
+* Requesting an ontology repository pre-registered in O'FAIRe and for which FAIRness scores will be precomputed and cached), using the *portal* parameter. For instance, with the MDRFRE ontlogy in the <a href="http://bioportal.lirmm.fr/">SIFR BioPortal</a>:
+
+``` http://services.agroportal.lirmm.fr/ofaire?portal=bioportal&ontologies=MDRFRE ```
+
+### Web Service parameters
 Parameter | Possible Values | Description | Mandatory
 ------------ | -------------  | ------------- | -------------
 *url* | a valid URL | Specifies the repository API url where the semantic resource is stored | no
