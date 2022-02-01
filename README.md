@@ -53,8 +53,8 @@ Parameter | Possible Values | Description | Mandatory
 *combined* |  no value | If present, in addition of the list of FAIR scores for each ontologies requested, O'FAIRe will also compute metrics for the group of ontologies requested (average, min, max and median | no
 *sync* | no value | If present, forces not to use the cache and recompute the FAIR scores. | no
 
-### Web Service request response
-In result, it returns a JSON with the following skeleton :  
+### Web Service response
+O'FAIRe returns a JSON with the following skeleton :  
 
  ```yaml
 {
@@ -124,30 +124,36 @@ In result, it returns a JSON with the following skeleton :
   }
 }
  ```
-Each **score** in the result comes with :
-
-* A **maxCredits**, the maximum that a score can go , defined in the original Framework
-* A **portalMaxCredits**, the maximum that a score can go in this implementation
+Each **score** in the result set comes with:
+* **maxCredits**, the maximum score for this principle or sub-principles as defined by O'FAIRe methodology;
+* **portalMaxCredits**, the maximum score that can be obtained in AgroPortal with urrent O'FAIRe implementation;
   ``` javascript
-  portalMaxCredits = maxCredits - not implemented questions
+  portalMaxCredits = maxCredits => Some FAIRness assessment questions have not been (or cannot be) fully implemented.
   ```
-* A **normalizedScore** which is
+* **normalizedScore**, the score normalized betweem 0 and 100.
   ``` javascript
-  normalizedScore = score / maxCredits
+  normalizedScore = (score / maxCredits) * 100
   ```
 
-## How it works
+## O'FAIRe methodology and configuration
 
-From the definition of the questions proposed in the Framework ["FAIR or FAIRer? An integrated quantitative FAIRness assessment grid for semantic resources and ontologies"](https://hal.archives-ouvertes.fr/lirmm-03208544/) ,we implemented a Java functions to each of them that test its validity using the resources MOD meta-data.
+* O'FAIRe is based on a FAIRness assessment grid defined in ["FAIR or FAIRer? An integrated quantitative FAIRness assessment grid for semantic resources and ontologies"](https://hal.archives-ouvertes.fr/lirmm-03208544/). 
 
-* The FAIR questions used by the tool to assess FAIRness is here : [FAIR-Questions](https://github.com/agroportal/fairness/blob/master/doc/results/FAIR-questions.md)
-* The obtained results over AgroPortal semantic resources is here : [FAIR-Results](https://github.com/agroportal/fairness/tree/master/doc/results/FAIR-results.xlsx)
+* O’FAIRe implementation relies on the ontology metadata description as returned by the ontology repository. For instance, the following call returns the description for the latest version of the Agronomy Ontology in JSON-LD: 
+``` http://data.agroportal.lirmm.fr/ontologies/AGRO/latest_submission?display=all ```
 
-To make the application reusable , me use a list on configuration files written in json for :
-* [questions.config.json](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/questions.config.json) defining the questions with there scores , properties used and possible explanation.
-* [properties.config.json](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/properties.config.json) defining the list of MOD properties with there equivalent in Agroportal, source (ontology ,summision or links) and type (String or Array).
-* [metadata.voc.config.json](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/metadata.voc.config.json) defining a list of standards metadata vocabularies (e.g OWL,DC,RDFS), used in I2Q7.
-* [catalogs.config.json](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/catalogs.config.json) defining a list of open ontology repositories and labries (e.g Fair Sharing , OLS), used in F4Q1 and F4Q2.
+* O'FAIRe (v1) implements 62 FAIRness assessment questions, that project the FAIR principles for semantic resources. The questions are defined here: [FAIR-Questions](https://github.com/agroportal/fairness/blob/master/doc/results/FAIR-questions.md). To implemement each questions, we developped a set of Java functions to test how a semantic resources respond to the quesitons. We use most of the time metadata property values but alos sometimes relies directly on the features of the ontology repository.
+
+Configuration files include:
+* [questions.config.json](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/questions.config.json) defining the FAIRness assement questions with their possible credits, metadata property used (if any) and possible explanations.
+* [properties.config.json](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/properties.config.json) defining the correspondences betweem MOD1.4 properties and AgroPortal's metadata model as well as the type (String or Array) and the object in AgroPortal where the proprety is available.
+* [metadata.voc.config.json](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/metadata.voc.config.json) defining a list of standards metadata vocabularies (e.g., OWL,DC,RDFS), used in I2Q7.
+* [catalogs.config.json](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/catalogs.config.json) defining a list of open ontology repositories and libraries, used in F4Q1 and F4Q2.
+
+## Latest results on AgroPortal ontology corpus 
+
+* The latest results obtained over AgroPortal semantic resources is here : [FAIR-Results](https://github.com/agroportal/fairness/tree/master/doc/results/FAIR-results.xlsx)
+
 ## Local installation 
 To do a local installation of this web service, you will nill 
 ### 1- Prerequisites
