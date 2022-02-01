@@ -17,6 +17,10 @@
   The service can be deployed anywhere on Tomcat and can request any ontology repository based on the OntoPortal technology (however the scores will be function of the amount of metadata fields available).
 </p>
 
+## Credits
+Emna Amdouni (@eamdouniGIT), Syphax Bouazzouni (@syphax-bouazzouni) and Clement Jonquet (@jonquet) from LIRMM (University of Montpellier) and MISTEA (INRAE Montpellier).
+Your suggestions and comments are welcome. Thank you!
+
 ## Main features
 *   Assess each aspects of the 15 FAIR principles with 62 questions specific for ontologies and semantic reosurces.
 *   Compute the _FAIR score_ of one ontology or a list of ontologies. 
@@ -152,49 +156,43 @@ Configuration files include:
 
 ## Latest results on AgroPortal ontology corpus 
 
-* The latest results obtained over AgroPortal semantic resources is here : [FAIR-Results](https://github.com/agroportal/fairness/tree/master/doc/results/FAIR-results.xlsx)
+The latest results obtained over AgroPortal semantic resources is here : [FAIR-Results](https://github.com/agroportal/fairness/tree/master/doc/results/FAIR-results.xlsx)
 
 ## Local installation 
-To do a local installation of this web service, you will nill 
+O'FAIRe is open source and can be modified and/or installed locally:  
 ### 1- Prerequisites
 
-- Have a Tomcat server >= 7 running
-- Have Java >= 8
+- Tomcat server >= 7 running
+- Java >= 8
 
 ### 2- Clone this projet
 ``` shell
       git clone git@github.com:agroportal/fairness.git
 ```
 ### 3- Configuration
-* **Portals configuration**
-   Portal configuration will be selected from the "portal" parameter and it will be placed in *config/portals/{portal_name}/config.properties* containing the following
-   ``` properties 
+Portal configuration is required by the *portal* parameter. File is available in *config/portals/{portal_name}/config.properties*:
+``` properties 
     name=BioPortal #The name of the portal
-    url=http://data.bioportal.lirmm.fr #The rest api uri of the portal
-    apikey=<your_api_key> #The api key of an user in the portal
+    url=http://data.bioportal.lirmm.fr #A valid endpoint URL
+    apikey=<your_api_key> #The API-KEY of an user on this repository 
     cacheFilePath=<your_path> #The path where to save the cache 
     cacheEnabled=true # enable or disable the cache globaly
   ```
-  Fill up the **apikey** and **cacheFilePath** in *config.properties.example* with the corresponding infos , and finally rename it to **config.properties**
-
+ Change the **apikey** and **cacheFilePath** in *config.properties.example* with the corresponding infos , and rename it to **config.properties**
 
 ### 4- Build the project
 
-### 5- Deploy the built war in the Tomcat server
-Deploy it by simply dropping the war file into the *$CATALINA_HOME\webapps* directory of any Tomcat instance. If the instance is running, the deployment will start instantly as Tomcat unpacks the archive and configures its context path.
-If the instance is not running, then the server will deploy the project the next time it is started.
+### 5- Deploy the war file in the Tomcat server
+Simply drop the war file into the *$CATALINA_HOME\webapps* directory of any Tomcat instance. If the instance is running, the deployment will start instantly as Tomcat unpacks the archive and configures its context path. If the instance is not running, then the server will deploy the project the next time it is started.
+
 ### 6- Create the SERVER_DEFAULT_PORTAL env variable
-add the SERVER_DEFAULT_PORTAL env variable, by adding this line  export SERVER_DEFAULT_PORTAL='{portal_name}’  to this file /usr/share/tomcat/conf/conf.d/java_opts.conf
-### 7- (Optional) Create a cron job to do a daily update of the cache files
-The following command program  update the cache every day at midnight
+Add the SERVER_DEFAULT_PORTAL env variable, by adding this line  export SERVER_DEFAULT_PORTAL='{portal_name}’ to this file /usr/share/tomcat/conf/conf.d/java_opts.conf
+
+### 7- (Optional) Create a cron job to daily update cache files
+The following command programs an update of the cache every day at midnight
 ``` shell
   0 0 * * * /srv/ontoportal/tomcat/fairness/current/cron/cache_rest.sh /usr/share/tomcat/webapps/fairness-assessment
  ```
 To add this job to the local system, execute the command **crontab -e** , it opens a text file, press "i" to go to insert mode, copy the above command.
-Then press "Esc" and type ":wq" to save and exit  
-
-## Contact us
-Emna Amdouni, University of Montpellier (emna.amdouni@lirmm.fr). Syphax Bouazzouni, University of Montpellier (syphax.bouazzouni@lirmm.fr) and Clement Jonquet, University of Montpellier (jonquet@lirmm.fr).
-
-Your suggestions and comments are welcome. Thank you!
+Then press "Esc" and type ":wq" to save and exit.  
 
