@@ -43,15 +43,15 @@ This web service can be used in three disctinct mode:
 
 ``` http://services.agroportal.lirmm.fr/ofaire?portal=bioportal&ontologies=MDRFRE ```
 
-### Web Service parameters
+### Web Service request parameters
 Parameter | Possible Values | Description | Mandatory
 ------------ | -------------  | ------------- | -------------
-*url* | a valid URL | Specifies the repository API url where the semantic resource is stored | no
-*portal* | agroportal , bioportal ( or stageportal in test environnement ) | Specifies the repository  where the semantic resource is stored | no
-*apikey* | the apikey to use with the URL or portal | Specifies the repository  where the semantic resource is stored | mandatory with URL parameter and no with the portal parameter
-*ontologies* | all or comma-separated list of acronyms (EX: EPHY,FCU) | Specifies the semantic resources for the fair assessment | yes
-*combined* |  no value | If is present,in addition of the listed ontologies FAIR scores, it adds the average FAIR scores of the set  | no
-*sync* | no value | If present , forces to not use the cache and recompute the FAIR scores| no
+*url* | a valid endpoint URL | Specifies the repository web service API endpoint URL where the semantic resource is hosted e.g., https://data.bioontology.org/ or http://ecoportal.lifewatch.eu:8080/  | no (but require apikey too if used)
+*apikey* | user apikey | Specifies the user API-KEY to query the ontology repository where the semantic resource is stored. | mandatory with *url* parameter and possible with the 2 other modes (it is preferred to provide a user API-KEY, but O'FAIRe will be default uses is own one)
+*portal* | agroportal , bioportal, stageportal (test environnement) | Specifies the ontology repository pre-registered in O'FAIRe where the semantic resource is stored | no
+*ontologies* | all or comma-separated list of acronyms (EX: EPHY,FCU) | Specifies one or several semantic resources to process. Acronyms must be the ones provided by the requested ontology repository. | yes
+*combined* |  no value | If present, in addition of the list of FAIR scores for each ontologies requested, O'FAIRe will also compute metrics for the group of ontologies requested (average, min, max and median | no
+*sync* | no value | If present, forces not to use the cache and recompute the FAIR scores. | no
 
 ### Web Service request response
 In result, it returns a JSON with the following skeleton :  
