@@ -609,7 +609,7 @@
   },
   "I": {
     "I1": {
-      "label": "Ontologies and ontology metadata use a formal, accessible, shared and broadly  applicable language for knowledge representation. ",
+      "label": "Ontologies and ontology metadata use a formal, accessible, shared and broadly applicable language for knowledge representation.",
       "maxCredits": 44,
       "portalMaxCredits": 44,
       "questions": {
@@ -618,7 +618,7 @@
           "points": [
             {
               "score": 0,
-              "explanation": "Ontology and ontology metadata are not in a formal, accessible, shared and broadly applicable language."
+              "explanation": "Ontology knowledge representation language absent."
             },
             {
               "score": 5,
@@ -662,11 +662,11 @@
           "points": [
             {
               "score": 0,
-              "explanation": "Ontology and ontology metadata are not represented in a W3C language."
+              "explanation": "Ontology and ontology metadata are not represented using a W3C Recommendation."
             },
             {
               "score": 10,
-              "explanation": "Ontology and ontology metadata are represented in a W3C language."
+              "explanation": "Ontology and ontology metadata are represented using a W3C Recommendatione."
             }
           ],
           "properties": [
@@ -678,11 +678,11 @@
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology syntax is not informed."
+              "explanation": "Ontology syntax is absent."
             },
             {
               "score": 5,
-              "explanation": "The ontology syntax is informed."
+              "explanation": "Ontology syntax is present."
             }
           ],
           "properties": [
@@ -694,11 +694,11 @@
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology formality level is not informed."
+              "explanation": "Ontology formality level absent."
             },
             {
               "score": 5,
-              "explanation": "The ontology formality level is informed."
+              "explanation": "Ontology formality level present."
             }
           ],
           "properties": [
@@ -737,7 +737,7 @@
             },
             {
               "score": 5,
-              "explanation": "The ontology imports other FAIR vocabularies."
+              "explanation": "The ontology imports other vocabularies (independently of their level of FAIRness)."
             }
           ],
           "properties": [
@@ -745,15 +745,15 @@
           ]
         },
         "I2Q2": {
-          "question": "Does the ontology reuse terms from other vocabularies (URIs)?",
+          "question": "Does the ontology reuse terms from other FAIR vocabularies (URIs)?",
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology does not reuse other vocabularies."
+              "explanation": "The ontology does not declare reusing other vocabularies."
             },
             {
               "score": 5,
-              "explanation": "The ontology reuses terms from other vocabularies."
+              "explanation": "The ontology declares reusing terms from other vocabularies (independently of their level of FAIRness)."
             }
           ],
           "properties": [
@@ -770,15 +770,15 @@
 
         },
         "I2Q4": {
-          "question": "Is the ontology aligned to other vocabularies?",
+          "question": "Is the ontology aligned to other FAIR vocabularies?",
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology is not aligned to other vocabularies."
+              "explanation": "The ontology does not declare being aligned to other vocabularies."
             },
             {
               "score": 5,
-              "explanation": "The ontology is aligned to other vocabularies."
+              "explanation": "The ontology declares being aligned to other vocabularies (independently of their level of FAIRness)."
             }
           ],
           "properties": [
@@ -786,7 +786,7 @@
           ]
         },
         "I2Q5": {
-          "question": "If yes, are those alignments well represented and to unambiguous entities? if yes, are those alignements curated?",
+          "question": "If yes, are those alignments well represented and to unambiguous entities? If yes, are those alignements curated?",
           "points": [
             {
               "score": 7
@@ -794,15 +794,15 @@
           ]
         },
         "I2Q6": {
-          "question": "Does the ontology provide metadata information about relation to or influence of other vocabularies?",
+          "question": "Does the ontology provide metadata information about relation to or influence of other FAIR vocabularies?",
           "points": [
             {
               "score": 0,
-              "explanation": "Ontology does not declare influential relations."
+              "explanation": "The ontology does not declare influential relations to other vocabularies."
             },
             {
               "score": 2,
-              "explanation": "Ontology declares influential relations."
+              "explanation": "The ontology declares influential relations to other vocabularies (independently of their level of FAIRness)."
             }
           ],
           "properties": [
@@ -810,15 +810,15 @@
           ]
         },
         "I2Q7": {
-          "question": "Does the ontology reuse standards & FAIR metadata vocabularies to describe its metadata?",
+          "question": "Does the ontology reuse standard and FAIR metadata vocabularies to describe its metadata?",
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology does not reuse standards metadata vocabularies to describe its metadata."
+              "explanation": "The ontology does not declare reusing standards metadata vocabularies to describe its metadata."
             },
             {
               "score": 5,
-              "explanation": "The ontology reuses standards metadata vocabularies to describe its metadata."
+              "explanation": "The ontology declares resuing standards metadata vocabularies (independently of their level of FAIRness) to describe its metadata."
             }
           ],
           "properties": [
@@ -853,31 +853,31 @@
           "points": [
             {
               "score": 7,
-              "explanation": "The ontology has at least 7 metadata values encoded as URIs"
+              "explanation": "The ontology provides at least 7 metadata values encoded as URIs."
             },
             {
               "score": 6,
-              "explanation": "The ontology has at least 6 metadata values encoded as URIs"
+              "explanation": "The ontology provides at least 6 metadata values encoded as URIs."
             },
             {
               "score": 5,
-              "explanation": "The ontology has at least 5 metadata values encoded as URIs"
+              "explanation": "The ontology provides at least 5 metadata values encoded as URIs."
             },
             {
               "score": 4,
-              "explanation": "The ontology has at least 4 metadata values encoded as URIs"
+              "explanation": "The ontology provides at least 4 metadata values encoded as URIs."
             },
             {
               "score": 3,
-              "explanation": "The ontology has at least 3 metadata values encoded as URIs"
+              "explanation": "The ontology provides at least 3 metadata values encoded as URIs."
             },
             {
               "score": 2,
-              "explanation": "The ontology has at least 2 metadata values encoded as URIs"
+              "explanation": "The ontology provides at least 2 metadata values encoded as URIs."
             },
             {
               "score": 1,
-              "explanation": "The ontology has at least 1 metadata value encoded as URI"
+              "explanation": "The ontology provides at least 1 metadata value encoded as URI."
             },
             {
               "score": 0,
