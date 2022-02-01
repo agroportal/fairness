@@ -6,19 +6,19 @@
       "portalMaxCredits": 41,
       "questions": {
         "F1Q1": {
-          "question": "Does the ontology have a \"local\" identifier, i.e., a globally unique and potentially identifier assigned by the developer (or developing organization)?",
+          "question": "Does the ontology have a \"local\" identifier, i.e., a globally unique and potentially permanent identifier assigned by the developer (or developing organization)?",
           "points": [
             {
               "score": 0,
-              "explanation": "The Ontology URI is not present."
+              "explanation": "Ontology URI is absent."
             },
             {
               "score": 3,
-              "explanation": "The ontology URI is present but invalid."
+              "explanation": "Ontology URI is present but invalid."
             },
             {
               "score": 9,
-              "explanation": "The ontology URI is present and valid."
+              "explanation": "Ontology URI is present and valid."
             }
           ],
           "properties": [
@@ -30,23 +30,23 @@
           "points": [
             {
               "score": 0,
-              "explanation": "The external identifier is not present and invalid."
+              "explanation": "External identifier is absent."
             },
             {
               "score": 3,
-              "explanation": "The external identifier is present but invalid."
+              "explanation": "External identifier is present but invalid."
             },
             {
               "score": 6,
-              "explanation": "The external identifier is valid but is not a DOI."
+              "explanation": "External identifier is present and valid."
             },
             {
               "score": 9,
-              "explanation": "The external DOI identifier is invalid."
+              "explanation": "External identifier is an invalid DOI."
             },
             {
               "score": 11,
-              "explanation": "The external DOI identifier is valid."
+              "explanation": "External identifier is a valid DOI."
             }
           ],
           "properties": [
@@ -58,7 +58,7 @@
           "points": [
             {
               "score": 12,
-              "explanation": "The repository makes explicit relation between metadata and ontology."
+              "explanation": "Ontology metadata clearly identified: the repository explicitly identifies its metadata."
             }
           ]
         },
@@ -67,19 +67,19 @@
           "points": [
             {
               "score": 0,
-              "explanation": "The version URI is not present."
+              "explanation": "Version URI is absent."
             },
             {
               "score": 2,
-              "explanation": "The version URI is present but invalid."
+              "explanation": "Version URI is present but invalid."
             },
             {
               "score": 4,
-              "explanation": "The version URI is present but not resolvable."
+              "explanation": "Version URI is present, valid but not resolvable."
             },
             {
               "score": 9,
-              "explanation": "The version URI is present, valid and resolvable."
+              "explanation": "Version URI is present, valid and resolvable."
             }
           ],
           "properties": [
@@ -98,39 +98,39 @@
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology describes 0 'MIRO must' properties."
+              "explanation": "The ontology is described with 0 'MIRO must' property."
             },
             {
               "score": 2,
-              "explanation": "The ontology describes 1 'MIRO must' properties."
+              "explanation": "The ontology is described with 1 'MIRO must' property."
             },
             {
               "score": 4,
-              "explanation": "The ontology describes 2 'MIRO must' properties."
+              "explanation": "The ontology is described with 2 'MIRO must' properties."
             },
             {
               "score": 6,
-              "explanation": "The ontology describes 3 'MIRO must' properties."
+              "explanation": "The ontology is described with 3 'MIRO must' properties."
             },
             {
               "score": 8,
-              "explanation": "The ontology describes 4 'MIRO must' properties."
+              "explanation": "The ontology is described with 4 'MIRO must' properties."
             },
             {
               "score": 10,
-              "explanation": "The ontology describes 5 'MIRO must' properties."
+              "explanation": "The ontology is described with 5 'MIRO must' properties."
             },
             {
               "score": 12,
-              "explanation": "The ontology describes 6 'MIRO must' properties."
+              "explanation": "The ontology is described with 6 'MIRO must' properties."
             },
             {
               "score": 14,
-              "explanation": "The ontology describes 7 'MIRO must' properties."
+              "explanation": "The ontology is described with 7 'MIRO must' properties."
             },
             {
               "score": 16,
-              "explanation": "The ontology describes 8 or more 'MIRO must' properties."
+              "explanation": "The ontology is described with 8 or more 'MIRO must' properties."
             }
           ],
           "properties": [
@@ -165,31 +165,31 @@
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology describes 0 'should or optional' properties."
+              "explanation": "The ontology is described with 0 'should or optional' property."
             },
             {
               "score": 1,
-              "explanation": "The ontology describes 1 'should or optional' properties."
+              "explanation": "The ontology is described with 1 'should or optional' property."
             },
             {
               "score": 2,
-              "explanation": "The ontology describes 2 'should or optional' properties."
+              "explanation": "The ontology is described with 2 'should or optional' properties."
             },
             {
               "score": 3,
-              "explanation": "The ontology describes 3 'should or optional' properties."
+              "explanation": "The ontology is described with 3 'should or optional' properties."
             },
             {
               "score": 3,
-              "explanation": "The ontology describes 4 'should or optional' properties."
+              "explanation": "The ontology is described with 4 'should or optional' properties."
             },
             {
               "score": 4,
-              "explanation": "The ontology describes 5 'should or optional' properties."
+              "explanation": "The ontology is described with 5 'should or optional' properties."
             },
             {
               "score": 4,
-              "explanation": "The ontology describes 6 or more 'should or optional' properties."
+              "explanation": "The ontology is described with 6 or more 'should or optional' properties."
             }
           ],
           "properties": [
@@ -206,35 +206,35 @@
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology describes 0 'no MIRO' properties."
+              "explanation": "The ontology is described with 0 additionnal property."
             },
             {
               "score": 1,
-              "explanation": "The ontology describes 1 'no MIRO' properties."
+              "explanation": "The ontology is described with 1 additionnal property."
             },
             {
               "score": 2,
-              "explanation": "The ontology describes 2 'no MIRO' properties."
+              "explanation": "The ontology is described with 2 additionnal properties."
             },
             {
               "score": 3,
-              "explanation": "The ontology describes 3 'no MIRO' properties."
+              "explanation": "The ontology is described with 3 additionnal properties."
             },
             {
               "score": 4,
-              "explanation": "The ontology describes 4 'no MIRO' properties."
+              "explanation": "The ontology is described with 4 additionnal properties."
             },
             {
               "score": 5,
-              "explanation": "The ontology describes 5 'no MIRO' properties."
+              "explanation": "The ontology is described with 5 additionnal properties."
             },
             {
               "score": 6,
-              "explanation": "The ontology describes 6 'no MIRO' properties."
+              "explanation": "The ontology is described with 6 additionnal properties."
             },
             {
               "score": 7,
-              "explanation": "The ontology describes 7 or more  'no MIRO' properties."
+              "explanation": "The ontology is described with 7 or more additionnal properties."
             }
 
           ],
@@ -307,15 +307,15 @@
           "points": [
             {
               "score": 0,
-              "explanation": " No explicit link from metadata to the ontology."
+              "explanation": "No explicit link between the ontology and its metadata and vice-versa."
             },
             {
               "score": 5,
-              "explanation": "It exist a link only from one direction (form ontology to metadata or the inverse)."
+              "explanation": "One explicit link between the ontology and its metadata (but no reciprocal)."
             },
             {
               "score": 10,
-              "explanation": "It exist a bidirectional link between the ontology and it's metadata."
+              "explanation": "Bidirectional links between the ontology and its metadata."
             }
           ]
         }
@@ -327,7 +327,7 @@
       "portalMaxCredits": 16,
       "questions": {
         "F4Q1": {
-          "question": "Is the ontology registered in multiple ontology 'libraries' ?",
+          "question": "Is the ontology registered in multiple ontology 'libraries'?",
           "points": [
             {
               "score": 0,
@@ -351,7 +351,7 @@
           ]
         },
         "F4Q2": {
-          "question": "Is the ontology registered in multiple open ontology 'repositories' ?",
+          "question": "Is the ontology registered in multiple open ontology 'repositories'?",
           "points": [
             {
               "score": 0,
@@ -367,11 +367,11 @@
             },
             {
               "score": 6,
-              "explanation": "The ontology is registered in 3  ontology repositories."
+              "explanation": "The ontology is registered in 3 ontology repositories."
             },
             {
               "score": 8,
-              "explanation": "The ontology is registered in 4  ontology repositories."
+              "explanation": "The ontology is registered in 4 ontology repositories."
             },
             {
               "score": 10,
