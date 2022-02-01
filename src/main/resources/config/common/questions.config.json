@@ -907,27 +907,27 @@
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology provides 0 information about how classes or concepts are defined."
+              "explanation": "The ontology provides 0 property to inform how classes or concepts are defined."
             },
             {
               "score": 1,
-              "explanation": "The ontology provides 1 information about how classes or concepts are defined."
+              "explanation": "The ontology provides 1 property to inform how classes or concepts are defined."
             },
             {
               "score": 2,
-              "explanation": "The ontology provides 2 informations about how classes or concepts are defined."
+              "explanation": "The ontology provides 2 properties to inform how classes or concepts are defined."
             },
             {
               "score": 3,
-              "explanation": "The ontology provides 3 informations about how classes or concepts are defined."
+              "explanation": "The ontology provides 3 properties to inform how classes or concepts are defined."
             },
             {
               "score": 4,
-              "explanation": "The ontology provides 4 informations about how classes or concepts are defined."
+              "explanation": "The ontology provides 4 properties to inform how classes or concepts are defined."
             },
             {
               "score": 5,
-              "explanation": "The ontology provides 5 informations about how classes or concepts are defined."
+              "explanation": "The ontology provides 5 properties to inform how classes or concepts are defined."
             }
           ],
           "properties": [
@@ -939,19 +939,19 @@
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology provides 0 information about its hierarchy."
+              "explanation": "The ontology provides 0 property to inform about its hierarchy."
             },
             {
               "score": 1,
-              "explanation": "The ontology provides 1 information about its hierarchy."
+              "explanation": "The ontology provides 1 property to inform about its hierarchy."
             },
             {
               "score": 2,
-              "explanation": "The ontology provides 2 informations about its hierarchy."
+              "explanation": "The ontology provides 2 properties to inform about its hierarchy."
             },
             {
               "score": 3,
-              "explanation": "The ontology provides 3 informations about its hierarchy."
+              "explanation": "The ontology provides 3 properties to inform about its hierarchy."
             }
           ],
           "properties": [
@@ -1077,23 +1077,23 @@
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology provides 0 information about the actors involved in its development."
+              "explanation": "The ontology provides 0 property to inform about the actors involved in its development."
             },
             {
               "score": 3,
-              "explanation": "The ontology provides 1 information about the actors involved in its development."
+              "explanation": "The ontology provides 1 property to inform about the actors involved in its development."
             },
             {
               "score": 5,
-              "explanation": "The ontology provides 2 informations about the actors involved in its development."
+              "explanation": "The ontology provides 2 properties to inform about the actors involved in its development."
             },
             {
               "score": 7,
-              "explanation": "The ontology provides 3 informations about the actors involved in its development."
+              "explanation": "The ontology provides 3 properties to inform about the actors involved in its development."
             },
             {
               "score": 8,
-              "explanation": "The ontology provides 4 informations about the actors involved in its development. "
+              "explanation": "The ontology provides 4 properties to inform about the actors involved in its development."
             }
           ],
           "properties": [
@@ -1105,19 +1105,19 @@
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology provides O information on its general provenance."
+              "explanation": "The ontology provides O property to inform on its general provenance."
             },
             {
               "score": 2,
-              "explanation": "The ontology provides 1 information on its general provenance."
+              "explanation": "The ontology provides 1 property to inform on its general provenance."
             },
             {
               "score": 4,
-              "explanation": "The ontology provides 2 informations on its general provenance."
+              "explanation": "The ontology provides 2 properties to inform on its general provenance."
             },
             {
               "score": 6,
-              "explanation": "The ontology provides 3 informations on its general provenance."
+              "explanation": "The ontology provides 3 properties to inform on its general provenance."
             }
           ],
           "properties": [
@@ -1129,19 +1129,19 @@
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology provides 0 accrual information."
+              "explanation": "The ontology provides 0 accrual property."
             },
             {
               "score": 2,
-              "explanation": "The ontology provides 1 accrual information."
+              "explanation": "The ontology provides 1 accrual property."
             },
             {
               "score": 4,
-              "explanation": "The ontology provides 2 accrual informations."
+              "explanation": "The ontology provides 2 accrual properties."
             },
             {
               "score": 6,
-              "explanation": "The ontology provides 3 accrual informations."
+              "explanation": "The ontology provides 3 accrual properties."
             }
           ],
           "properties": [
@@ -1153,15 +1153,15 @@
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology provides O information about versioning."
+              "explanation": "The ontology provides O property to inform about versioning."
             },
             {
               "score": 2,
-              "explanation": "The ontology provides 1 information about versioning."
+              "explanation": "The ontology provides 1 property to inform about versioning."
             },
             {
               "score": 4,
-              "explanation": "The ontology provides 2 or more informations about versioning."
+              "explanation": "The ontology provides 2 or more properties to inform about versioning."
             }
           ],
           "properties": [
@@ -1181,19 +1181,19 @@
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology provides 0 information about methodology and tools used."
+              "explanation": "The ontology provides 0 property to inform about methodology and tools used."
             },
             {
               "score": 2,
-              "explanation": "The ontology provides 1 information about methodology and tools used."
+              "explanation": "The ontology provides 1 property to inform about methodology and tools used."
             },
             {
               "score": 4,
-              "explanation": "The ontology provides 2 informations about methodology and tools used."
+              "explanation": "The ontology provides 2 properties to inform about methodology and tools used."
             },
             {
               "score": 6,
-              "explanation": "The ontology provides 3 informations about methodology and tools used."
+              "explanation": "The ontology provides 3 properties to inform about methodology and tools used."
             }
           ],
           "properties": [
@@ -1207,15 +1207,15 @@
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology provides 0 information about rationale documentation."
+              "explanation": "The ontology provides 0 property to inform about rationale documentation."
             },
             {
               "score": 2,
-              "explanation": "The ontology provides 1 information about rationale documentation."
+              "explanation": "The ontology provides 1 property to inform about rationale documentation."
             },
             {
               "score": 4,
-              "explanation": "The ontology provides 2 informations about rationale documentation."
+              "explanation": "The ontology provides 2 properties to inform about rationale documentation."
             }
           ],
           "properties": [
@@ -1258,7 +1258,7 @@
             },
             {
               "score": 10,
-              "explanation": "The ontology provide informations about projects and endorsing organizations."
+              "explanation": "The ontology provide information about projects and endorsing organizations."
             }
           ],
           "properties": [
