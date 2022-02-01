@@ -108,18 +108,19 @@ public class I2 extends AbstractPrincipleCriterion {
                     double total = 0.0;
                     int count = 0;
 
-                    List<String> metadataVoc = ontology.getMetadataVoc();
-                    if (MetaDataExistTest.isValid(metadataVoc.toString())) {
-                        for (LinkedTreeMap<?, ?> voc : vocs) {
-                            String pref = (String) voc.get("prefix");
-                            if (metadataVoc.contains(pref)) {
+                    List<String> metadataVocs = ontology.getMetadataVoc();
+                    if (MetaDataExistTest.isValid(metadataVocs.toString())) {
+                        for (String metaVoc : metadataVocs) {
+                            LinkedTreeMap<?,?> tmp = findVoc(metaVoc, vocs);
+                            if(tmp != null){
+                                System.out.println("found" + tmp);
                                 count++;
-                                total += (double) voc.get("score");
+                                total += (double) tmp.get("score");
                             }
                         }
                     }
 
-                    if(total == 0.0 && count>0){
+                    if(count>0){
                         setScore(question.getMaxPoint().getScore() * (total / count), question.getMaxPoint().getExplanation(), question);
                      } else {
                         setFailure(question);
@@ -129,8 +130,18 @@ public class I2 extends AbstractPrincipleCriterion {
                 }
 
             }
+
+
         }));
 
     }
 
+
+    private LinkedTreeMap<?,?> findVoc(String metaVocUrlToTest, ArrayList<LinkedTreeMap<?,?>> vocs) {
+        System.out.println("search " + metaVocUrlToTest + " in " + vocs.toString());
+        return  vocs.stream().filter(x ->  metaVocUrlToTest.equals(x.get("url"))).findFirst().orElse(null);
+    }
+
+
 }
+

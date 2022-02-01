@@ -2,138 +2,172 @@
   "vocabularies" : [
     {
       "prefix" : "rdfs",
+      "url":  "http://www.w3.org/2000/01/rdf-schema#",
       "score" : 0.75
     },
     {
       "prefix" : "owl",
+      "url": "http://www.w3.org/2002/07/owl#",
       "score" : 0.75
     },
     {
       "prefix" : "skos",
+      "url": "http://www.w3.org/2004/02/skos/core#",
       "score" : 0.75
     },
     {
       "prefix" : "dc",
+      "url": "http://purl.org/dc/elements/1.1/",
       "score" : 0.75
     },
     {
       "prefix" : "dcterms",
+      "url" : "http://purl.org/dc/terms/",
       "score" : 0.75
     },
     {
       "prefix" : "omv",
+      "url" : "http://omv.ontoware.org/2005/05/ontology#",
       "score" : 0.5
     },
     {
       "prefix" : "mod",
+      "url": "http://www.isibang.ac.in/ns/mod#",
       "score" : 0.5
     },
     {
       "prefix" : "door",
+      "url": "http://kannel.open.ac.uk/ontology#",
       "score" : 0.25
     },
     {
       "prefix" : "voaf",
+      "url": "http://purl.org/vocommons/voaf#",
       "score" : 0.5
     },
     {
       "prefix" : "void",
+      "url": "http://rdfs.org/ns/void#",
       "score" : 0.5
     },
     {
       "prefix" : "idot",
+      "url": "http://biomodels.net/vocab/idot.rdf#",
       "score" : 0.25
     },
     {
       "prefix" : "vann",
+      "url": "http://purl.org/vocab/vann/",
       "score" : 0.5
     },
     {
       "prefix" : "dcat",
+      "url": "http://www.w3.org/ns/dcat#",
       "score" : 0.75
     },
     {
       "prefix" : "adms",
+      "url": "http://www.w3.org/ns/adms#",
       "score" : 0.5
     },
     {
       "prefix" : "schema",
+      "url": "http://schema.org/",
       "score" : 0.75
     },
     {
       "prefix" : "foaf",
+      "url": "http://xmlns.com/foaf/0.1/",
       "score" : 0.75
     },
     {
       "prefix" : "doap",
+      "url": "http://usefulinc.com/ns/doap#",
       "score" : 0.5
     },
     {
       "prefix" : "cc",
+      "url": "http://creativecommons.org/ns#",
       "score" : 0.75
     },
     {
       "prefix" : "prov",
+      "url": "http://www.w3.org/ns/prov#",
       "score" : 0.75
     },
     {
       "prefix" : "pav",
+      "url": "http://purl.org/pav/",
       "score" : 0.75
     },
     {
       "prefix" : "oboInOwl",
+      "url": "http://www.geneontology.org/formats/oboInOwl#",
       "score" : 0.5
     },
     {
       "prefix" : "sd",
+      "url": "http://www.w3.org/ns/sparql-service-description#",
       "score" : 0.75
     },
     {
       "prefix" : "nkos",
+      "url": "http://w3id.org/nkos#",
       "score" : 0.25
     },
     {
       "prefix" : "cito",
+      "url": "http://purl.org/spar/cito/",
       "score" : 0.25
     },
     {
       "prefix" : "wdrs",
+      "url": "http://www.w3.org/2007/05/powder-s#",
       "score" : 0.5
     },
     {
       "prefix" : "bibo",
+      "url": "http://purl.org/ontology/bibo/",
       "score" : 0.5
     },
     {
       "prefix" : "disco",
+      "url": "http://rdf-vocabulary.ddialliance.org/discovery#",
       "score" : 0.5
     },
     {
       "prefix" : "oa",
+      "url": "http://www.w3.org/ns/oa#",
       "score" : 0.75
     },
     {
       "prefix" : "iao",
+      "url": "http://purl.obolibrary.org/obo/iao.owl#",
       "score" : 0.5
     },
     {
       "prefix" : "sio",
+      "url": "http://semanticscience.org/resource/",
       "score" : 0.5
     },
     {
       "prefix" : "void-ext",
+      "url": "http://ldf.fi/void-ext#",
       "score" : 0.25
     },
     {
       "prefix" : "ro",
+      "url": "https://w3id.org/ro#ro",
       "score" : 0.25
     },
     {
       "prefix" : "swoogle",
+      "url": "http://daml.umbc.edu/ontologies/webofbelief/1.4/swoogle.owl#",
       "score" : 0.5
     },
     {
       "prefix" : "edam",
+      "url": "http://edamontology.org/",
       "score" : 0.5
     }
   ]
