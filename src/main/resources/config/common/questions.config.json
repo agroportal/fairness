@@ -887,7 +887,7 @@
           "properties": [
             "owl:imports","owl:priorVersion", "owl:backwardCompatibleWith", "owl:incompatibleWith",
             "dct:isPartOf", "dct:hasPart", "dct:hasVersion", "dct:isFormatOf", "dct:hasFormat", "dct:relation",
-            "dct:relation", "schema:workTranslation", "schema:translationOfWork", "door:comesFromTheSameDomain",
+            "voaf:specializes","schema:workTranslation", "schema:translationOfWork", "door:comesFromTheSameDomain",
             "voaf:similar", "voaf:hasEquivalencesWith", "door:hasDisparateModelling", "voaf:usedBy", "voaf:generalizes", "voaf:hasDisjunctionsWith",
             "omv:hasFormalityLevel", "dct:license","omv:hasOntologySyntax", "dct:subject", "mod:prefLabelProperty", "mod:definitionProperty", "mod:synonymProperty", "mod:authorProperty",
             "mod:hierarchyProperty", "mod:obsoleteProperty"
