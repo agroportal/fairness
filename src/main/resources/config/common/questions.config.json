@@ -404,15 +404,15 @@
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology have 0 resolvable identifier."
+              "explanation": "The ontology provides 0 resolvable identifier."
             },
             {
               "score": 3,
-              "explanation": "The ontology have 1 resolvable identifier."
+              "explanation": "The ontology provides 1 resolvable identifier."
             },
             {
               "score": 6,
-              "explanation": "The ontology have 2 or more resolvable identifier."
+              "explanation": "The ontology provides 2 resolvable identifiers."
             }
           ],
           "properties": [
@@ -425,7 +425,7 @@
           "points": [
             {
               "score": 7,
-              "explanation": "The repository provides an external metadata URI which resolves to the metadata record"
+              "explanation": "The repository provides an external metadata URI which resolves to the metadata record."
             }
           ]
         },
@@ -434,39 +434,39 @@
           "points": [
             {
               "score": 0,
-              "explanation": "Ontology and its metadata does not support content negotiation."
+              "explanation": "Ontology and its metadata do not support content negotiation."
             },
             {
               "score": 3,
-              "explanation": "Ontology or its metadata support together 1  format."
+              "explanation": "Ontology or its metadata support 1 negotiation format."
             },
             {
               "score": 6,
-              "explanation": "Ontology and its metadata support together 2 formats."
+              "explanation": "Ontology or its metadata support 2 negotiation formats."
             },
             {
               "score": 9,
-              "explanation": "Ontology and its metadata support together 3 formats."
+              "explanation": "Ontology or its metadata support 3 negotiation formats."
             },
             {
               "score": 12,
-              "explanation": "Ontology and its metadata support together 4 formats."
+              "explanation": "Ontology or its metadata support 4 negotiation formats."
             },
             {
               "score": 15,
-              "explanation": "Ontology and its metadata support together 5 formats."
+              "explanation": "Ontology and its metadata support 5 negotiation formats."
             },
             {
               "score": 18,
-              "explanation": "Ontology and its metadata support together 6 formats."
+              "explanation": "Ontology and its metadata support 6 negotiation formats."
             },
             {
               "score": 21,
-              "explanation": "Ontology and its metadata support together 7 formats."
+              "explanation": "Ontology and its metadata support 7 negotiation formats."
             },
             {
               "score": 24,
-              "explanation": "Ontology and its metadata support together 8 or more formats."
+              "explanation": "Ontology and its metadata support 8 or more negotiation formats."
             }
           ],
           "properties": [
@@ -483,7 +483,7 @@
             },
             {
               "score": 6,
-              "explanation": "Ontology is not accessible through SPARQL endpoint."
+              "explanation": "The ontology declares being accessible through a SPARQL endpoint."
             }
           ],
           "properties": [
@@ -502,32 +502,32 @@
           "points": [
             {
               "score": 20,
-              "explanation": "The repository supports HTTP for access and URI for identification."
+              "explanation": "The repository uses HTTP/URIs for identification and access mechanisms."
             }
           ]
         },
         "A1.1Q2": {
-          "question": "If the ontology is accessible through another protocol, is that protocol open, free, and universally implementable?",
+          "question": "Is the ontology access protocol open, free, and universally implementable?",
           "points": [
             {
               "score": 4,
-              "explanation": "The repository is relying on protocols that are open, free and universally implementable."
+              "explanation": "The repository access protocols (HTTP/URIs) are open, free and universally implementable."
             }
           ]
         },
         "A1.1Q3": {
-          "question": " If the ontology metadata are accessible through another protocol, is that protocol open, free, and universally implementable?",
+          "question": "If the ontology and metadata are accessible through another protocol, is that protocol open, free, and universally implementable?",
           "points": [
             {
               "score": 4,
-              "explanation": "The repository is relying on protocols that are open, free and universally implementable."
+              "explanation": "The repository uses another protocol (SPARQL) that is open, free and universally implementable."
             }
           ]
         }
       }
     },
     "A1.2": {
-      "label": "The protocol to retrieve ontologies and ontology metadata support authentification and authorization when an ontology has access restriction.",
+      "label": "The protocol to retrieve ontologies and ontology metadata supports authentification and authorization when an ontology has access restriction.",
       "maxCredits": 22,
       "portalMaxCredits": 22,
       "questions": {
@@ -536,7 +536,7 @@
           "points": [
             {
               "score": 11,
-              "explanation": "The repository supports authentification and authorization."
+              "explanation": "The repository supports authentification and authorization when an ontology has access restriction."
             }
           ]
         },
@@ -545,7 +545,7 @@
           "points": [
             {
               "score": 11,
-              "explanation": "The repository supports authentification and authorization."
+              "explanation": "The repository supports authentification and authorization when an ontology has access restriction."
             }
           ]
         }
@@ -570,7 +570,7 @@
           "points": [
             {
               "score": 5,
-              "explanation": "The repository provides metadata for each version."
+              "explanation": "The repository provides metadata for each version of the ontology."
             }
           ]
         },
@@ -579,7 +579,7 @@
           "points": [
             {
               "score": 4,
-              "explanation": "The repository supports accessibility even if no more versions are available."
+              "explanation": "The repository provides metadata even if no more versions of the ontology are available."
             }
           ]
         },
@@ -588,15 +588,15 @@
           "points": [
             {
               "score": 0,
-              "explanation": "The ontology status is not specified."
+              "explanation": "Ontology status absent."
             },
             {
               "score": 2,
-              "explanation": "The ontology status is partially specified."
+              "explanation": "Ontology status partially specified."
             },
             {
               "score": 4,
-              "explanation": "The ontology status is fully specified."
+              "explanation": "Ontology status fully specified."
             }
           ],
           "properties": [
