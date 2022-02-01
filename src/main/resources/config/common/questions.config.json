@@ -281,7 +281,7 @@
       }
     },
     "F3": {
-      "label": "Ontology metadata clearly and explicitly include the identifier of the ontology they describe.",
+      "label": "Ontology metadata clearly and explicitly include the identifier of the ontologies they describe.",
       "maxCredits": 21,
       "portalMaxCredits": 21,
       "questions": {
