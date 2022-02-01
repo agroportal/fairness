@@ -152,12 +152,12 @@
     },
     {
       "prefix" : "void-ext",
-      "url": "http://ldf.fi/void-ext#",
+      "url": "http://ldf.fi/schema/void-ext/",
       "score" : 0.25
     },
     {
       "prefix" : "ro",
-      "url": "https://w3id.org/ro#ro",
+      "url": "http://purl.obolibrary.org/obo/ro.owl#",
       "score" : 0.25
     },
     {
@@ -167,7 +167,7 @@
     },
     {
       "prefix" : "edam",
-      "url": "http://edamontology.org/",
+      "url": "http://purl.obolibrary.org/obo/edam#",
       "score" : 0.5
     }
   ]
