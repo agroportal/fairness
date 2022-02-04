@@ -66,7 +66,7 @@ public class PortalInstanceController {
             apikey = paramController.getApiKeyParam().getValue();
         }catch (Exception ignored){}
 
-        return PortalInstance.getFromConfiguration(Configuration.getInstance(), portalName ,apikey);
+        return PortalInstance.getFromConfiguration(Configuration.getInstance(), portalName ,apikey, false);
     }
 
     private PortalInstance getPortalInstanceByNameParam() throws Exception {

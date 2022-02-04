@@ -16,7 +16,7 @@ public class CacheSaverCMD {
             System.out.println("Cache saver for : " + portal);
             System.out.println();
             resultCache.flush(portal);
-            resultCache.save(PortalInstance.getFromConfiguration(Configuration.getInstance() , portal));
+            resultCache.save(PortalInstance.getFromConfiguration(Configuration.getInstance() , portal, true));
         }
     }
 }
