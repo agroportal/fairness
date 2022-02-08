@@ -59,7 +59,8 @@
     },
     {
       "label" : "MedPortal",
-      "url": "medportal.bmicc.cn"
+      "url": "medportal.bmicc.cn",
+       "authentification": true
     },
     {
       "label" : "CISMeF HeTOP",
