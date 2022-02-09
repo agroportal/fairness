@@ -818,7 +818,7 @@
             },
             {
               "score": 5,
-              "explanation": "The ontology declares reusing standards metadata vocabularies (independently of their level of FAIRness) to describe its metadata."
+              "explanation": "The ontology declares reusing standards metadata vocabularies (more or less 'FAIR') to describe its metadata."
             }
           ],
           "properties": [
