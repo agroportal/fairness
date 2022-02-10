@@ -99,16 +99,16 @@ public class F1 extends AbstractPrincipleCriterion {
 
     private String isDOILink(String link){
         String doi = "";
-        if((link.contains("http") && link.contains("dx.doi"))){
+        if(link.contains("dx.doi.org")){
             doi = "dx.doi";
-        }else if( (link.contains("https") && link.contains("doi"))){
+        }else if(link.contains("doi.org")){
             doi = "doi";
         }
         if(!doi.isEmpty()){
             if (link.contains("https")) {
-                return  "https://dx.doi.org/api/handles/"+link.split("https://"+doi+".org/")[1];
+                return  "https://"+doi+".org/api/handles/"+link.split("https://"+doi+".org/")[1];
             } else {
-                return "https://doi.org/api/handles/"+link.split("http://"+doi+".org/")[1];
+                return "https://"+doi+".org/api/handles/"+link.split("http://"+doi+".org/")[1];
             }
         }else
             return "";

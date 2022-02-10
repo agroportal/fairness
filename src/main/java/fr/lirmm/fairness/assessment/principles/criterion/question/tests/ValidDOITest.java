@@ -18,7 +18,7 @@ public class ValidDOITest implements Test<String>{
         try {
             doiApiUrl = OntologyRestApi.get(element[0], element[1], "application/json");
             obj = new JSONObject(doiApiUrl);
-            int responseCode = Integer.valueOf(obj.getString("responseCode"));
+            int responseCode = Integer.parseInt(obj.getString("responseCode"));
             return  responseCode == 1;
         } catch (Exception e) {
             return false;
