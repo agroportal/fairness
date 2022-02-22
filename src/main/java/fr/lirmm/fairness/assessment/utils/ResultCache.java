@@ -5,7 +5,7 @@ import fr.lirmm.fairness.assessment.models.Configuration;
 import fr.lirmm.fairness.assessment.Fair;
 import fr.lirmm.fairness.assessment.models.Ontology;
 import fr.lirmm.fairness.assessment.models.PortalInstance;
-import fr.lirmm.fairness.assessment.utils.converters.FairJsonConverter;
+import fr.lirmm.fairness.assessment.views.FairJsonConverter;
 
 import java.io.*;
 import java.util.Iterator;
@@ -16,49 +16,6 @@ public class ResultCache {
 
     public static String FILE_SAVE_NAME = "save.json";
 
-    private void store(String json, String fileName) throws IOException {
-        FileWriter file = null;
-        try {
-
-            this.createDirIfNotExist(fileName);
-            file = new FileWriter(fileName);
-            file.write(json);
-
-        } finally {
-            try {
-                if(file != null){
-                    file.flush();
-                    file.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private boolean createDirIfNotExist(String filePath){
-        String dirPath = filePath.substring(0, filePath.lastIndexOf(File.separator));
-        File file = new File(dirPath);
-
-        return file.mkdir();
-    }
-
-    private String get(String filePath) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(filePath));
-        try {
-            StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
-
-            while (line != null) {
-                sb.append(line);
-                sb.append(System.lineSeparator());
-                line = br.readLine();
-            }
-            return  sb.toString();
-        } finally {
-            br.close();
-        }
-    }
 
     public  void save(PortalInstance portalInstance){
         try {
@@ -113,6 +70,50 @@ public class ResultCache {
         getFileSaveName(portal);
         File f = new File(FILE_SAVE_NAME);
         f.delete();
+    }
+
+    private void store(String json, String fileName) throws IOException {
+        FileWriter file = null;
+        try {
+
+            this.createDirIfNotExist(fileName);
+            file = new FileWriter(fileName);
+            file.write(json);
+
+        } finally {
+            try {
+                if(file != null){
+                    file.flush();
+                    file.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private boolean createDirIfNotExist(String filePath){
+        String dirPath = filePath.substring(0, filePath.lastIndexOf(File.separator));
+        File file = new File(dirPath);
+
+        return file.mkdir();
+    }
+
+    private String get(String filePath) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(filePath));
+        try {
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+
+            while (line != null) {
+                sb.append(line);
+                sb.append(System.lineSeparator());
+                line = br.readLine();
+            }
+            return  sb.toString();
+        } finally {
+            br.close();
+        }
     }
 
     private String getFileSaveName(String portal)  {

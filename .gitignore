@@ -10,3 +10,4 @@
 /bin
 /target
 /src/main/resources/config/portals/*/config*.properties
+src/main/resources/config/portals/testportal/
