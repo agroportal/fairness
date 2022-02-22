@@ -1,7 +1,7 @@
 package fr.lirmm.fairness.assessment.controllers;
 
-import fr.lirmm.fairness.assessment.utils.requestparams.RequestParam;
-import fr.lirmm.fairness.assessment.utils.requestparams.params.*;
+import fr.lirmm.fairness.assessment.models.requestparams.RequestParam;
+import fr.lirmm.fairness.assessment.models.requestparams.params.*;
 
 import javax.servlet.http.HttpServletRequest;
 

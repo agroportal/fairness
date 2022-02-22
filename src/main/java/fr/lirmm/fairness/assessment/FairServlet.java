@@ -18,8 +18,8 @@ import fr.lirmm.fairness.assessment.controllers.ResponseController;
 import fr.lirmm.fairness.assessment.models.Ontology;
 import fr.lirmm.fairness.assessment.models.PortalInstance;
 import fr.lirmm.fairness.assessment.utils.ResultCache;
-import fr.lirmm.fairness.assessment.utils.converters.CombinedFairJsonConverter;
-import fr.lirmm.fairness.assessment.utils.converters.FairJsonConverter;
+import fr.lirmm.fairness.assessment.views.CombinedFairJsonConverter;
+import fr.lirmm.fairness.assessment.views.FairJsonConverter;
 import org.json.JSONException;
 
 /**

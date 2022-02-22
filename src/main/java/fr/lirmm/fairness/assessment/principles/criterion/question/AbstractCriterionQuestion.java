@@ -2,7 +2,7 @@ package fr.lirmm.fairness.assessment.principles.criterion.question;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import fr.lirmm.fairness.assessment.utils.QuestionResult;
+import fr.lirmm.fairness.assessment.models.results.QuestionResult;
 import org.json.JSONException;
 
 import java.util.*;

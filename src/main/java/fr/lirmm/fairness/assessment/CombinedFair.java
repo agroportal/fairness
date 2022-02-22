@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import fr.lirmm.fairness.assessment.principles.AbstractPrinciple;
 import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriterion;
 import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
-import fr.lirmm.fairness.assessment.utils.CombinedResult;
+import fr.lirmm.fairness.assessment.models.results.CombinedResult;
 import org.json.JSONException;
 
 import java.util.*;

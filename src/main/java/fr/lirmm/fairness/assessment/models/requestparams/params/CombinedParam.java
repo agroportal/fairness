@@ -1,11 +1,10 @@
 
-package fr.lirmm.fairness.assessment.utils.requestparams.params;
+package fr.lirmm.fairness.assessment.models.requestparams.params;
 
-import fr.lirmm.fairness.assessment.utils.requestparams.ParamTest;
-import fr.lirmm.fairness.assessment.utils.requestparams.RequestParam;
-import fr.lirmm.fairness.assessment.utils.requestparams.RequestParamValidator;
-import fr.lirmm.fairness.assessment.utils.requestparams.tests.Present;
-import fr.lirmm.fairness.assessment.utils.requestparams.tests.ValidUrl;
+import fr.lirmm.fairness.assessment.models.requestparams.ParamTest;
+import fr.lirmm.fairness.assessment.models.requestparams.RequestParam;
+import fr.lirmm.fairness.assessment.models.requestparams.RequestParamValidator;
+import fr.lirmm.fairness.assessment.models.requestparams.tests.Present;
 
 import javax.servlet.http.HttpServletRequest;
 

@@ -1,4 +1,4 @@
-package fr.lirmm.fairness.assessment.utils.converters;
+package fr.lirmm.fairness.assessment.views;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

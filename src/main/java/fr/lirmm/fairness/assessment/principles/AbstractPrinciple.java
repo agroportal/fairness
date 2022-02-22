@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import fr.lirmm.fairness.assessment.utils.QuestionResult;
+import fr.lirmm.fairness.assessment.models.results.QuestionResult;
 import org.reflections.Reflections;
 
 import fr.lirmm.fairness.assessment.models.Ontology;

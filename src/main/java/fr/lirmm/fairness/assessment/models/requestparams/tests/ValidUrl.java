@@ -1,6 +1,6 @@
-package fr.lirmm.fairness.assessment.utils.requestparams.tests;
+package fr.lirmm.fairness.assessment.models.requestparams.tests;
 
-import fr.lirmm.fairness.assessment.utils.requestparams.ParamTest;
+import fr.lirmm.fairness.assessment.models.requestparams.ParamTest;
 import org.apache.commons.validator.routines.UrlValidator;
 
 public class ValidUrl implements ParamTest {

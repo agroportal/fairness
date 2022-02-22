@@ -1,4 +1,4 @@
-package fr.lirmm.fairness.assessment.utils.requestparams;
+package fr.lirmm.fairness.assessment.models.requestparams;
 
 import javax.servlet.http.HttpServletRequest;
 

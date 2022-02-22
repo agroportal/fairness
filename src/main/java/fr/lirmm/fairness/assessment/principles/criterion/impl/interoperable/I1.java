@@ -9,7 +9,7 @@ import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriter
 import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Tester;
 import fr.lirmm.fairness.assessment.principles.criterion.question.tests.MetaDataExistTest;
-import fr.lirmm.fairness.assessment.utils.QuestionResult;
+import fr.lirmm.fairness.assessment.models.results.QuestionResult;
 import org.json.JSONException;
 
 import fr.lirmm.fairness.assessment.models.Ontology;

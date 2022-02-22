@@ -1,12 +1,10 @@
 package fr.lirmm.fairness.assessment.controllers;
 
-import fr.lirmm.fairness.assessment.models.Configuration;
 import fr.lirmm.fairness.assessment.models.PortalInstance;
-import fr.lirmm.fairness.assessment.utils.requestparams.params.*;
+import fr.lirmm.fairness.assessment.models.requestparams.params.*;
 
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.*;
 
 public class RequestController {

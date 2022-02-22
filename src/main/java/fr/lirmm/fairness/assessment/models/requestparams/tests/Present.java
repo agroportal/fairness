@@ -1,6 +1,6 @@
-package fr.lirmm.fairness.assessment.utils.requestparams.tests;
+package fr.lirmm.fairness.assessment.models.requestparams.tests;
 
-import fr.lirmm.fairness.assessment.utils.requestparams.ParamTest;
+import fr.lirmm.fairness.assessment.models.requestparams.ParamTest;
 
 
 public class Present implements ParamTest {

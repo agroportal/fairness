@@ -2,10 +2,11 @@ package fr.lirmm.fairness.assessment.controllers;
 
 import fr.lirmm.fairness.assessment.models.Configuration;
 import fr.lirmm.fairness.assessment.models.PortalInstance;
-import fr.lirmm.fairness.assessment.utils.requestparams.exceptions.ApikeyException;
-import fr.lirmm.fairness.assessment.utils.requestparams.params.ApiParam;
-import fr.lirmm.fairness.assessment.utils.requestparams.params.PortalParam;
-import fr.lirmm.fairness.assessment.utils.requestparams.params.PortalUrlParam;
+import fr.lirmm.fairness.assessment.models.requestparams.exceptions.ApikeyException;
+import fr.lirmm.fairness.assessment.models.requestparams.exceptions.PortalNameException;
+import fr.lirmm.fairness.assessment.models.requestparams.params.ApiParam;
+import fr.lirmm.fairness.assessment.models.requestparams.params.PortalParam;
+import fr.lirmm.fairness.assessment.models.requestparams.params.PortalUrlParam;
 
 import java.io.IOException;
 

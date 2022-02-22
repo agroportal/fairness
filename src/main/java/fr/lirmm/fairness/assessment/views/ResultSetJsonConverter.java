@@ -1,12 +1,12 @@
-package fr.lirmm.fairness.assessment.utils.converters;
+package fr.lirmm.fairness.assessment.views;
 
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
-import fr.lirmm.fairness.assessment.utils.CombinedResult;
-import fr.lirmm.fairness.assessment.utils.QuestionResult;
-import fr.lirmm.fairness.assessment.utils.Result;
+import fr.lirmm.fairness.assessment.models.results.CombinedResult;
+import fr.lirmm.fairness.assessment.models.results.QuestionResult;
+import fr.lirmm.fairness.assessment.models.results.Result;
 
 import java.util.List;
 

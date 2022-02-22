@@ -1,6 +1,6 @@
-package fr.lirmm.fairness.assessment.utils.requestparams.tests;
+package fr.lirmm.fairness.assessment.models.requestparams.tests;
 
-import fr.lirmm.fairness.assessment.utils.requestparams.ParamTest;
+import fr.lirmm.fairness.assessment.models.requestparams.ParamTest;
 
 import java.util.Arrays;
 
@@ -18,6 +18,6 @@ public class ContainedIn implements ParamTest {
 
     @Override
     public String getErrorMessage(String paramKey) {
-        return paramKey + "most be contained in : " + Arrays.toString(listToBeIn);
+        return paramKey + " most be contained in : " + Arrays.toString(listToBeIn);
     }
 }

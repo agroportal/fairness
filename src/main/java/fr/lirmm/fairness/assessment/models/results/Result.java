@@ -1,4 +1,4 @@
-package fr.lirmm.fairness.assessment.utils;
+package fr.lirmm.fairness.assessment.models.results;
 
 import com.google.gson.annotations.Expose;
 import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;

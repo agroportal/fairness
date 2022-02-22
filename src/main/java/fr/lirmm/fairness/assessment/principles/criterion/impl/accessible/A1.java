@@ -8,7 +8,7 @@ import fr.lirmm.fairness.assessment.principles.criterion.question.tests.ContentN
 import fr.lirmm.fairness.assessment.principles.criterion.question.tests.MetaDataExistTest;
 import fr.lirmm.fairness.assessment.principles.criterion.question.tests.ResolvableURLTest;
 import fr.lirmm.fairness.assessment.principles.criterion.question.tests.URLValidTest;
-import fr.lirmm.fairness.assessment.utils.QuestionResult;
+import fr.lirmm.fairness.assessment.models.results.QuestionResult;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Tester;
 import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
