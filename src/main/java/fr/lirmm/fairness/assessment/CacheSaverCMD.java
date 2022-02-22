@@ -9,10 +9,11 @@ import java.io.IOException;
 public class CacheSaverCMD {
     public static void main(String[] args) throws IOException {
         ResultCache resultCache = new ResultCache();
+        if(args.length == 0){
+            args = Configuration.getInstance().getConfiguredPortalAvailable();
+        }
 
-        String[] portals = {"stageportal" , "agroportal" , "bioportal"};
-
-        for (String portal : portals) {
+        for (String portal : args) {
             System.out.println("Cache saver for : " + portal);
             System.out.println();
             resultCache.flush(portal);
