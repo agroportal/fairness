@@ -104,7 +104,8 @@ public class I2 extends AbstractPrincipleCriterion {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 try {
-                    ArrayList<LinkedTreeMap<?,?>> vocs = (ArrayList<LinkedTreeMap<?,?>>) Configuration.getInstance().getMetadataVocConfig().get("vocabularies");
+                    ArrayList<LinkedTreeMap<?,?>> vocs = (ArrayList<LinkedTreeMap<?,?>>) Configuration.getInstance().
+                            getMetadataVocConfig().get("vocabularies");
                     double total = 0.0;
                     int count = 0;
 
@@ -113,7 +114,6 @@ public class I2 extends AbstractPrincipleCriterion {
                         for (String metaVoc : metadataVocs) {
                             LinkedTreeMap<?,?> tmp = findVoc(metaVoc, vocs);
                             if(tmp != null){
-                                System.out.println("found" + tmp);
                                 count++;
                                 total += (double) tmp.get("score");
                             }
