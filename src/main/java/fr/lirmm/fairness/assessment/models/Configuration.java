@@ -12,6 +12,7 @@ public class Configuration {
 	public static final String REPOS_CONFIG_FILE_PATH = "config/common/catalogs.config.json";
 	public static final String METADATA_VOC_CONFIG_FILE_PATH = "config/common/metadata.voc.config.json";
 	private final static String defaultPropFileName = "config";
+	public static final String CONFIG_PORTALS_PATH = "config/portals";
 	private static Configuration instance = null;
 	private final Map<String, Properties> portalsConfigsMap = new HashMap<String, Properties>();
 	private Map<?, ?> FairConfigMap = new HashMap<>();
@@ -39,6 +40,11 @@ public class Configuration {
 		return this.getProperties("portals/"+name);
 	}
 
+	public String[] getConfiguredPortalAvailable(){
+		File directoryPath = new File(this.getClass().getClassLoader().getResource(CONFIG_PORTALS_PATH).getFile());
+		//List of all files and directories
+		return  directoryPath.list();
+	}
 	public Properties getProperties(String configScope) throws IOException {
 		
 		Properties properties = this.portalsConfigsMap.get(configScope);

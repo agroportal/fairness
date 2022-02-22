@@ -39,6 +39,8 @@ public class PortalInstanceController {
         } catch (Exception e) {
             try {
                 return this.getPortalInstanceByNameParam();
+            }catch( PortalNameException pnException){
+                throw pnException;
             }catch (Exception e1){
                 try{
                     return this.getPortalInstanceByNameEnv();
@@ -71,9 +73,16 @@ public class PortalInstanceController {
     }
 
     private PortalInstance getPortalInstanceByNameParam() throws Exception {
-        PortalParam portalParam = paramController.getPortalNameParam();
+        try{
+            PortalParam portalParam = paramController.getPortalNameParam();
+            return  getPortalInstanceByConfiguration(portalParam.getValue());
+        }catch (Exception e){
+            if(this.paramController.portalName.getValue().isEmpty()){
+                throw e;
+            }else
+                throw  new PortalNameException(e.getMessage());
+        }
 
-        return  getPortalInstanceByConfiguration(portalParam.getValue());
     }
     private PortalInstance getPortalInstanceByNameEnv() throws Exception {
         return getPortalInstanceByConfiguration(System.getenv(PortalInstance.SERVER_DEFAULT_PORTAL));
