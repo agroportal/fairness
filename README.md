@@ -175,10 +175,11 @@ Portal configuration is required by the *portal* parameter. File is available in
     name=BioPortal #The name of the portal
     url=http://data.bioportal.lirmm.fr #A valid endpoint URL
     apikey=<your_api_key> #The API-KEY of an user on this repository 
+    adminApikey= <your_admin_apikey> #The API-KEY of an admin user on this repository used for creating the cache
     cacheFilePath=<your_path> #The path where to save the cache 
     cacheEnabled=true # enable or disable the cache globaly
   ```
- Change the **apikey** and **cacheFilePath** in *config.properties.example* with the corresponding infos , and rename it to **config.properties**
+ Change the **apikey**, **adminApikey** and **cacheFilePath** in *config.properties.example* with the corresponding infos , and rename it to **config.properties**
 
 ### 4- Build the project
 
