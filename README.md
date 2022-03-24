@@ -10,6 +10,9 @@
    <br>
 </p>
 
+<img width="1128" alt="image" src="https://user-images.githubusercontent.com/7379183/159973558-3ef49b10-f363-4172-9565-c3cc8a347881.png">
+
+
 <p align="center">
  The documentation illustrates the web service with examples from AgroPortal. 
  <a href="http://services.agroportal.lirmm.fr/ofaire/"><strong>http://services.agroportal.lirmm.fr/ofaire/</strong></a>
