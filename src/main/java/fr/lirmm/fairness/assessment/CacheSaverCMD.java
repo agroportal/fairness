@@ -10,7 +10,7 @@ public class CacheSaverCMD {
     public static void main(String[] args) throws IOException {
         ResultCache resultCache = new ResultCache();
 
-        String[] portals = {"stageportal" , "agroportal" , "bioportal"};
+        String[] portals = {"stageportal" , "agroportal" , "bioportal","industryportal"};
 
         for (String portal : portals) {
             System.out.println("Cache saver for : " + portal);
