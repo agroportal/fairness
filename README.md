@@ -24,6 +24,9 @@
 Emna Amdouni (@eamdouniGIT), Syphax Bouazzouni (@syphax-bouazzouni) and Clement Jonquet (@jonquet) from LIRMM (University of Montpellier) and MISTEA (INRAE Montpellier).
 Your suggestions and comments are welcome. Thank you!
 
+## Cite us 
+E. Amdouni, S. Bouazzouni, C. Jonquet. O'FAIRe: Ontology FAIRness Evaluator in the AgroPortal semantic resource repository. International conference ESWC 2022. available on HAL (https://hal.archives-ouvertes.fr/lirmm-03630543/).  
+
 ## Main features
 *   Assess each aspects of the 15 FAIR principles with 62 questions specific for ontologies and semantic reosurces.
 *   Compute the _FAIR score_ of one ontology or a list of ontologies. 
