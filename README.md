@@ -7,6 +7,7 @@
   <br>
   <br>
    We implemented O’FAIRe as a Web service working with any <a href="https://ontoportal.org/">OntoPortal</a> installations respecting the <a href="https://github.com/sifrproject/MOD-Ontology">Metadata for Ontology Description and Publication Ontology (MOD1.4)</a> metadata profile to harmonize metadata. We deployed it in <a href="http://agroportal.lirmm.fr/">AgroPortal</a> and the <a href="http://bioportal.lirmm.fr/">SIFR BioPortal</a> and designed specific user interfaces. 
+   Our collaborator at ENIT have also deployed O'FAIRe within <a href="http://industryportal.enit.fr/">IndustryPortal</a>.
    <br>
 </p>
 
@@ -25,15 +26,20 @@ Emna Amdouni (@eamdouniGIT), Syphax Bouazzouni (@syphax-bouazzouni) and Clement 
 Your suggestions and comments are welcome. Thank you!
 
 ## Cite us 
-E. Amdouni, S. Bouazzouni, C. Jonquet. O'FAIRe: Ontology FAIRness Evaluator in the AgroPortal semantic resource repository. International conference ESWC 2022. available on HAL (https://hal.archives-ouvertes.fr/lirmm-03630543/).  
+
+*   E. Amdouni, S. Bouazzouni, C. Jonquet, O'FAIRe makes you an offer: Metadata-based Automatic FAIRness Assessment for Ontologies and Semantic Resources, Int. J. of Metadata, Semantics and Ontologies, Inderscience, 2022, TO BE PUBLISHED https://hal.archives-ouvertes.fr/lirmm-03630233
+
+*   E. Amdouni, S. Bouazzouni, C. Jonquet. O'FAIRe: Ontology FAIRness Evaluator in the AgroPortal semantic resource repository. ESWC 2022 - 19th Extended Semantic Web Conference, Poster and demonstration., May 2022, Hersonissos, Greece. https://dx.doi.org/10.1007/978-3-031-11609-4_17
+
+*   E. Amdouni, C. Jonquet. FAIR or FAIRer? An integrated quantitative FAIRness assessment grid for semantic resources and ontologies. MTSR 2021 - 15th International Conference on Metadata and Semantics Research, Nov 2021, Madrid, Spain. pp.67-80. https://dx.doi.org/10.1007/978-3-030-98876-0_6
 
 ## Main features
-*   Assess each aspects of the 15 FAIR principles with 62 questions specific for ontologies and semantic reosurces.
+*   Assess each aspects of the 15 FAIR principles with 61 questions specific for ontologies and semantic reosurces.
 *   Compute the _FAIR score_ of one ontology or a list of ontologies. 
 *   Compute the _average, min, median and max FAIR score_ of a list of ontologies.
 
 ## General Usage 
-The Web service is requested with a simple HTTP GET witht he following base URL: [http://services.agroportal.lirmm.fr/ofaire](http://services.agroportal.lirmm.fr/ofaire). For examples: 
+The Web service can be called with a simple HTTP GET with the following base URL: [http://services.agroportal.lirmm.fr/ofaire](http://services.agroportal.lirmm.fr/ofaire). For examples: 
 
 ``` http://services.agroportal.lirmm.fr/ofaire?ontologies=AGRO ```
 
@@ -44,7 +50,7 @@ or
 ### Web Service request mode
 This web service can be used in three disctinct mode:
 
-* Requestiong the by default ontology repository on which the service is deployed with no specific parameters (examples above).
+* Requesting the default ontology repository on which the service is deployed with no specific parameters (examples above).
 * Requesting an external ontology repositrory independant of where O'FAIRe is deployed using the *url* and *apikey* parameters. For instance, with the NCI Thesaurus in the <a href="https://bioportal.bioontology.org/">NCBO BioPortal</a>: 
 
 ``` http://services.agroportal.lirmm.fr/ofaire?url=https://data.bioontology.org&ontologies=NCIT&apikey={your API-KEY on the NCBO BioPortal} ```
@@ -54,12 +60,13 @@ This web service can be used in three disctinct mode:
 ``` http://services.agroportal.lirmm.fr/ofaire?portal=bioportal&ontologies=MDRFRE ```
 
 ### Web Service request parameters
+
 Parameter | Possible Values | Description | Mandatory
 ------------ | -------------  | ------------- | -------------
 *url* | a valid endpoint URL | Specifies the repository web service API endpoint URL where the semantic resource is hosted e.g., https://data.bioontology.org/ or http://ecoportal.lifewatch.eu:8080/  | no (but require apikey too if used)
 *apikey* | user apikey | Specifies the user API-KEY to query the ontology repository where the semantic resource is stored. | mandatory with *url* parameter and possible with the 2 other modes (it is preferred to provide a user API-KEY, but O'FAIRe will be default uses is own one)
-*portal* | agroportal , bioportal, stageportal (test environnement) | Specifies the ontology repository pre-registered in O'FAIRe where the semantic resource is stored | no
-*ontologies* | all or comma-separated list of acronyms (EX: EPHY,FCU) | Specifies one or several semantic resources to process. Acronyms must be the ones provided by the requested ontology repository. | yes
+*portal* | agroportal, bioportal | Specifies the ontology repository pre-registered in O'FAIRe where the semantic resource is stored | no
+*ontologies* | all or comma-separated list of acronyms (e.g.,: EPHY, FCU) | Specifies one or several semantic resources to process. Acronyms must be the ones provided by the requested ontology repository. | yes
 *combined* |  no value | If present, in addition of the list of FAIR scores for each ontologies requested, O'FAIRe will also compute metrics for the group of ontologies requested (average, min, max and median | no
 *sync* | no value | If present, forces not to use the cache and recompute the FAIR scores. | no
 
@@ -138,7 +145,7 @@ Each **score** in the result set comes with:
 * **maxCredits**, the maximum score for this principle or sub-principles as defined by O'FAIRe methodology;
 * **portalMaxCredits**, the maximum score that can be obtained in AgroPortal with urrent O'FAIRe implementation;
   ``` javascript
-  portalMaxCredits = maxCredits => Some FAIRness assessment questions have not been (or cannot be) fully implemented.
+  portalMaxCredits = maxCredits => Some FAIRness assessment questions have not been (or cannot be) implemented yet.
   ```
 * **normalizedScore**, the score normalized betweem 0 and 100.
   ``` javascript
@@ -147,27 +154,27 @@ Each **score** in the result set comes with:
 
 ## O'FAIRe methodology and configuration
 
-* O'FAIRe is based on a FAIRness assessment grid defined in ["FAIR or FAIRer? An integrated quantitative FAIRness assessment grid for semantic resources and ontologies"](https://hal.archives-ouvertes.fr/lirmm-03208544/). 
+* O'FAIRe is based on a FAIRness assessment grid defined in https://hal.archives-ouvertes.fr/lirmm-03208544. 
 
 * O’FAIRe implementation relies on the ontology metadata description as returned by the ontology repository. For instance, the following call returns the description for the latest version of the Agronomy Ontology in JSON-LD: 
 ``` http://data.agroportal.lirmm.fr/ontologies/AGRO/latest_submission?display=all ```
 
-* O'FAIRe (v1) implements 62 FAIRness assessment questions, that project the FAIR principles for semantic resources. The questions are defined here: [FAIR-Questions](https://github.com/agroportal/fairness/blob/master/doc/results/FAIR-questions.md). To implemement each questions, we developped a set of Java functions to test how a semantic resources respond to the quesitons. We use most of the time metadata property values but alos sometimes relies directly on the features of the ontology repository.
+* O'FAIRe (v1) implements 61 FAIRness assessment questions 'projecting' the FAIR principles for semantic resources. The 61 question of the O'FAIRe methodology can be found here: https://hal.archives-ouvertes.fr/lirmm-03630233 or here: [FAIR-Questions](https://github.com/agroportal/fairness/blob/master/doc/results/FAIR-questions.md). To implemement each questions, we developped a set of Java functions to test how a semantic resources respond to the quesitons. O'FAIRe most of the time uses metadata property values but also sometimes relies directly on the features provided by the the ontology repository itself.
 
 Configuration files include:
-* [questions.config.json](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/questions.config.json) defining the FAIRness assement questions with their possible credits, metadata property used (if any) and possible explanations.
-* [properties.config.json](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/properties.config.json) defining the correspondences betweem MOD1.4 properties and AgroPortal's metadata model as well as the type (String or Array) and the object in AgroPortal where the proprety is available.
-* [metadata.voc.config.json](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/metadata.voc.config.json) defining a list of standards metadata vocabularies (e.g., OWL,DC,RDFS), used in I2Q7.
-* [catalogs.config.json](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/catalogs.config.json) defining a list of open ontology repositories and libraries, used in F4Q1 and F4Q2.
+* [questions.config.json](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/questions.config.json) defines the FAIRness assement questions with their possible credits, metadata property used (if any) and possible explanations.
+* [properties.config.json](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/properties.config.json) defines the correspondences betweem MOD1.4 properties and AgroPortal's metadata model as well as the type (String or Array) and the object in AgroPortal where the proprety is available.
+* [metadata.voc.config.json](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/metadata.voc.config.json) defines a list of standards metadata vocabularies (e.g., OWL,DC,RDFS), used in I2Q7.
+* [catalogs.config.json](https://github.com/agroportal/fairness/blob/master/src/main/resources/config/common/catalogs.config.json) defines a list of open ontology repositories and libraries, used in F4Q1 and F4Q2.
 
-## Latest results on AgroPortal ontology corpus 
+## Latest result set of FAIRness scores on AgroPortal ontology corpus 
 
-The latest results obtained over AgroPortal semantic resources is here : [FAIR-Results](https://github.com/agroportal/fairness/tree/master/doc/results/FAIR-results.xlsx)
+The latest (October 2021) results obtained over AgroPortal semantic resources is here : https://doi.org/10.57745/DEUATN
 
 ## Local installation 
 O'FAIRe is open source and can be modified and/or installed locally:  
-### 1- Prerequisites
 
+### 1- Prerequisites
 - Tomcat server >= 7 running
 - Java >= 8
 
@@ -185,7 +192,7 @@ Portal configuration is required by the *portal* parameter. File is available in
     cacheFilePath=<your_path> #The path where to save the cache 
     cacheEnabled=true # enable or disable the cache globaly
   ```
- Change the **apikey**, **adminApikey** and **cacheFilePath** in *config.properties.example* with the corresponding infos , and rename it to **config.properties**
+ Change the **apikey**, **adminApikey** and **cacheFilePath** in *config.properties.example* with the corresponding infos, and rename it to **config.properties**.
 
 ### 4- Build the project
 
