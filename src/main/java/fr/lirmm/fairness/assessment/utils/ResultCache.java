@@ -17,7 +17,7 @@ public class ResultCache {
     public static String FILE_SAVE_NAME = "save.json";
 
 
-    public  void save(PortalInstance portalInstance){
+    public void save(PortalInstance portalInstance) {
         try {
             ResultCache resultCache = new ResultCache();
             String portal = portalInstance.getName();
@@ -43,7 +43,7 @@ public class ResultCache {
             output.add("ontologies", gson.toJsonTree(jsonObjects));
 
             getFileSaveName(portal);
-            resultCache.store(output.toString() , FILE_SAVE_NAME);
+            resultCache.store(output.toString(), FILE_SAVE_NAME);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -51,21 +51,22 @@ public class ResultCache {
 
     public JsonObject read(PortalInstance portalInstance) throws IOException {
         String portal = portalInstance.getName();
-        if (!this.isSaved(portal)){
-            System.out.println(portal+" save files not exist ");
+        if (!this.isSaved(portal)) {
+            System.out.println(portal + " save files not exist ");
             this.save(portalInstance);
         }
         Gson gson = new GsonBuilder().create();
 
-        return gson.fromJson(this.get(FILE_SAVE_NAME) , JsonObject.class);
+        return gson.fromJson(this.get(FILE_SAVE_NAME), JsonObject.class);
 
     }
 
-    public boolean isSaved(String portal){
+    public boolean isSaved(String portal) {
         getFileSaveName(portal);
         File f = new File(FILE_SAVE_NAME);
         return (f.exists() && !f.isDirectory());
     }
+
     public void flush(String portal) {
         getFileSaveName(portal);
         File f = new File(FILE_SAVE_NAME);
@@ -82,7 +83,7 @@ public class ResultCache {
 
         } finally {
             try {
-                if(file != null){
+                if (file != null) {
                     file.flush();
                     file.close();
                 }
@@ -92,8 +93,10 @@ public class ResultCache {
         }
     }
 
-    private boolean createDirIfNotExist(String filePath){
-        String dirPath = filePath.substring(0, filePath.lastIndexOf(File.separator));
+    private boolean createDirIfNotExist(String filePath) {
+        System.out.println("rasmi: " + filePath);
+        String fileSeparator = filePath.contains("/") ? "/" : File.separator;
+        String dirPath = filePath.substring(0, filePath.lastIndexOf(fileSeparator));
         File file = new File(dirPath);
 
         return file.mkdir();
@@ -110,18 +113,31 @@ public class ResultCache {
                 sb.append(System.lineSeparator());
                 line = br.readLine();
             }
-            return  sb.toString();
+            return sb.toString();
         } finally {
             br.close();
         }
     }
 
-    private String getFileSaveName(String portal)  {
+    private String getFileSaveName(String portal) {
         try {
             FILE_SAVE_NAME = Configuration.getInstance().getPortalProperties(portal.toLowerCase(Locale.ROOT)).getProperty("cacheFilePath");
         } catch (IOException e) {
             e.printStackTrace();
         }
         return FILE_SAVE_NAME;
+    }
+
+    public void deleteCacheFile(PortalInstance portalInstance) {
+
+        if (isSaved(portalInstance.getName())) {
+            try {
+                new File(getFileSaveName(portalInstance.getName())).delete();
+            } catch (Exception e) {
+                // in case we don't have the right to delete
+                e.printStackTrace();
+                System.out.println("Couldn't delete file (maybe you should check your permissions)");
+            }
+        }
     }
 }

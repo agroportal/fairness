@@ -15,6 +15,7 @@ import com.google.gson.JsonObject;
 
 import fr.lirmm.fairness.assessment.controllers.RequestController;
 import fr.lirmm.fairness.assessment.controllers.ResponseController;
+import fr.lirmm.fairness.assessment.models.Configuration;
 import fr.lirmm.fairness.assessment.models.Ontology;
 import fr.lirmm.fairness.assessment.models.PortalInstance;
 import fr.lirmm.fairness.assessment.utils.ResultCache;
@@ -26,6 +27,9 @@ import org.json.JSONException;
  *
  */
 public class FairServlet extends HttpServlet {
+    public static long lastUpdate = -1;
+    public static long UPDATE_RATE = (1000 * 60 * 60) * 12;// 12 hours
+
 
     private static final long serialVersionUID = -2749023988723161904L;
     private final ResultCache resultCache = new ResultCache();
@@ -33,15 +37,17 @@ public class FairServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
 
-
+        //
         long startTime = System.currentTimeMillis();
 
-        ResponseController responseController = new ResponseController(resp); ;
+        ResponseController responseController = new ResponseController(resp);
+        ;
         RequestController requestController = new RequestController(req);
         PortalInstance portalInstance = null;
         try {
             JsonObject ontologies = null;
             portalInstance = requestController.getPortalInstance();
+
 
             Logger.getAnonymousLogger().info("USE THE PORTAL : " + portalInstance.getName() + "; url= " + portalInstance.getUrl() + "; apikey= " + portalInstance.getApikey());
             List<String> ontologyAcronymsToEvaluate = requestController.getOntologies();
@@ -60,6 +66,18 @@ public class FairServlet extends HttpServlet {
                     }
                 }
             } else {
+
+                /**
+                 * checking last time we updated fair cache file
+                 */
+                long now = System.currentTimeMillis();
+                System.out.println("API_KEY" + portalInstance.getApikey());
+
+                if ((now - lastUpdate) >= UPDATE_RATE) {
+                    lastUpdate = now;
+                    resultCache.deleteCacheFile(portalInstance);
+                }
+
                 JsonObject allResponses = resultCache.read(portalInstance);
                 if (ontologyAcronymsToEvaluate.size() == requestController.getPortalInstance().getAllOntologiesAcronyms().size()) {
                     ontologies = allResponses.getAsJsonObject("ontologies");
@@ -80,14 +98,13 @@ public class FairServlet extends HttpServlet {
             }
 
 
-
-            responseController.respond(true, requestController.getRequestURI(req) , startTime ,""  , requestController);
-            Logger.getAnonymousLogger().info("EVALUATION  ENDED WITH STATUS : " + responseController.getResponse().get("status") );
+            responseController.respond(true, requestController.getRequestURI(req), startTime, "", requestController);
+            Logger.getAnonymousLogger().info("EVALUATION  ENDED WITH STATUS : " + responseController.getResponse().get("status"));
 
         } catch (Exception e) {
             e.printStackTrace();
             try {
-                responseController.respond(false, requestController.getRequestURI(req) , startTime ,e.getMessage() ,requestController);
+                responseController.respond(false, requestController.getRequestURI(req), startTime, e.getMessage(), requestController);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -95,8 +112,6 @@ public class FairServlet extends HttpServlet {
 
 
     }
-
-
 
 
     private JsonElement getCombinedScore(JsonObject ontologies) throws JSONException {
@@ -115,7 +130,6 @@ public class FairServlet extends HttpServlet {
 
         return new FairJsonConverter(fair).toJson().get(acronym);
     }
-
 
 
 }
