@@ -39,7 +39,7 @@
     {
       "portal": "dct:identifier",
       "mod": "dct:identifier",
-      "type": "string",
+      "type": "array",
       "source": "submission"
     },
     {

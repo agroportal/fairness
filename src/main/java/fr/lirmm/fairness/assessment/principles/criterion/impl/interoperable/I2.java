@@ -138,7 +138,6 @@ public class I2 extends AbstractPrincipleCriterion {
 
 
     private LinkedTreeMap<?,?> findVoc(String metaVocUrlToTest, ArrayList<LinkedTreeMap<?,?>> vocs) {
-        System.out.println("search " + metaVocUrlToTest + " in " + vocs.toString());
         return  vocs.stream().filter(x ->  metaVocUrlToTest.equals(x.get("url"))).findFirst().orElse(null);
     }
 
