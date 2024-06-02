@@ -194,8 +194,8 @@ public class Ontology {
 
 
 
-	public String getIdentifier() {
-		return this.getPropertyValue("identifier");
+	public List<String> getIdentifiers() {
+		return this.getPropertyValues("identifier");
 	}
 
 	public String getGeneralizes() {

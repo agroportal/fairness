@@ -1,6 +1,7 @@
 package fr.lirmm.fairness.assessment.principles.criterion.impl.findable;
 
 import java.io.IOException;
+import java.util.List;
 
 import fr.lirmm.fairness.assessment.principles.criterion.question.AbstractCriterionQuestion;
 import fr.lirmm.fairness.assessment.principles.criterion.question.Testable;
@@ -46,22 +47,30 @@ public class F1 extends AbstractPrincipleCriterion {
         this.addResult(Tester.doEvaluation(ontology, questions.get(1), new Testable() {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
-                if (MetaDataExistTest.isValid(ontology.getIdentifier())) {
-                    if (URLValidTest.isValid(ontology.getIdentifier())) {
-                        String handle = isDOILink(ontology.getIdentifier());
-                        if(!handle.isEmpty()){
-                            if(ValidDOITest.isValid(handle, apiKey)){
-                                setSuccess(question);
+
+                List<String> identifiers = ontology.getIdentifiers();
+                for (String identifier : identifiers) {
+                    if (MetaDataExistTest.isValid(identifier)) {
+                        if (URLValidTest.isValid(identifier)) {
+                            String handle = isDOILink(identifier);
+                            if(!handle.isEmpty()){
+                                if(ValidDOITest.isValid(handle, apiKey)){
+                                    setSuccess(question);
+                                }else {
+                                    setScoreLevel(3 , question);
+                                }
                             }else {
-                                setScoreLevel(3 , question);
+                                setScoreLevel(2, question);
                             }
-                        }else {
-                            setScoreLevel(2, question);
+                        } else {
+                            setScoreLevel(1, question);
                         }
                     } else {
-                        setScoreLevel(1, question);
+                        setFailure(question);
                     }
-                } else {
+                }
+                
+                if (identifiers.isEmpty()){
                     setFailure(question);
                 }
 
