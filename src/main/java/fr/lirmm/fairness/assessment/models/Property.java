@@ -32,9 +32,13 @@ public class Property {
         List<String> out = this.value;
         Gson g = new Gson();
         if(this.key != null){
-            out = this.value.stream()
-                    .map(x -> g.fromJson(x, JsonObject.class).get(this.key).getAsString())
-                    .collect(Collectors.toList());
+            try {
+                out = this.value.stream()
+                        .map(x -> g.fromJson(x, JsonObject.class).get(this.key).getAsString())
+                        .collect(Collectors.toList());
+            } catch (Exception e) {
+                out = this.value;
+            }
         }
         return out;
     }
