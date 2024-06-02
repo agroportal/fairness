@@ -74,6 +74,20 @@ public class OntologyRestApi {
 		return (metadataValue);
 	}
 
+	public String getMetricsJsonObject(String metadataname) throws JSONException, IOException {
+		JsonNode mappings = this.jsonToNode(ontologyMetadata);
+		JSONObject objMappings = new JSONObject(mappings.toString());
+		String metadataValue="";
+
+		try{
+			metadataValue = objMappings.getJSONObject("metrics").getString(metadataname);
+		}catch (Exception e){
+			Logger.getAnonymousLogger().info(metadataname + " " + e.getMessage());
+		}
+
+		return (metadataValue);
+	}
+
 	public String getSubmissionJsonObject(String metadataname) throws JSONException, IOException {
 		JsonNode mappings = this.jsonToNode(ontologyMetadata);
 		JSONObject objMappings = new JSONObject(mappings.toString());

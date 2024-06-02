@@ -634,62 +634,65 @@
     {
       "portal": "omv:numberOfClasses",
       "mod": "omv:numberOfClasses",
+      "key": "classes",
       "type": "string",
-      "source": "submission"
+      "source": "metrics"
     },
     {
       "portal": "omv:numberOfIndividuals",
       "mod": "omv:numberOfIndividuals",
+      "key": "individuals",
       "type": "string",
-      "source": "submission"
+      "source": "metrics"
     },
     {
       "portal": "omv:numberOfProperties",
       "mod": "omv:numberOfProperties",
+      "key": "properties",
       "type": "string",
-      "source": "submission"
+      "source": "metrics"
     },
     {
       "portal": "omv:numberOfAxioms",
       "mod": "omv:numberOfAxioms",
       "type": "string",
-      "source": "submission"
+      "source": "metrics"
     },
     {
       "portal": "bpm:maxDepth",
       "mod": "mod:maxDepth",
       "type": "string",
-      "source": "submission"
+      "source": "metrics"
     },
     {
       "portal": "bpm:maxChildCount",
       "mod": "mod:maxChildCount",
       "type": "string",
-      "source": "submission"
+      "source": "metrics"
     },
     {
       "portal": "bpm:averageChildCount",
       "mod": "mod:averageChildCount",
       "type": "string",
-      "source": "submission"
+      "source": "metrics"
     },
     {
       "portal": "bpm:classesWithOneChild",
       "mod": "mod:classesWithOneChild",
       "type": "string",
-      "source": "submission"
+      "source": "metrics"
     },
     {
       "portal": "bpm:classesWithMoreThan25Children",
       "mod": "mod:classesWithMoreThan25Children",
       "type": "string",
-      "source": "submission"
+      "source": "metrics"
     },
     {
       "portal": "bpm:classesWithNoDefinition",
       "mod": "mod:classesWithNoDefinition",
       "type": "string",
-      "source": "submission"
+      "source": "metrics"
     },
     {
       "portal": "dct:source",

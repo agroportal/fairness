@@ -61,6 +61,13 @@ public class Ontology {
 						e.printStackTrace();
 					}
 					break;
+				case "metrics":
+					try {
+						this.addMetricsPropertyValue(property);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					break;
 				case "link":
 					try {
 						if(property.getType().equals("array")) {
@@ -118,6 +125,11 @@ public class Ontology {
 	private void addOntologyArrayPropertyValue(Property property) throws JSONException, IOException {
 		Gson gson = new GsonBuilder().create();
 		property.setValue(gson.fromJson(this.restApi.getOntologyJsonObject(property.getLabel()), List.class));
+		this.addPropertyValue(property);
+	}
+
+	private void addMetricsPropertyValue(Property property) throws JSONException, IOException {
+		property.setValue(List.of(this.restApi.getMetricsJsonObject(property.getKey() == null || property.getKey().isEmpty() ? property.getLabel() : property.getKey())));
 		this.addPropertyValue(property);
 	}
 
