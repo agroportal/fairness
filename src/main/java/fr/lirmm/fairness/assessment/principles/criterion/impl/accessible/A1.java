@@ -1,6 +1,7 @@
 package fr.lirmm.fairness.assessment.principles.criterion.impl.accessible;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.*;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class A1 extends AbstractPrincipleCriterion {
             @Override
             public void doTest(Ontology ontology, AbstractCriterionQuestion question) {
                 String uri = ontology.getOntologyIRI();
-                String id = ontology.getIdentifier();
+                List<String> identifiers = ontology.getIdentifiers();
                 int count = 0;
                 String uriErrorMessage = "";
                 String idErrorMessage = "";
@@ -49,21 +50,25 @@ public class A1 extends AbstractPrincipleCriterion {
                     uriErrorMessage = "Ontology URI not present";
                 }
 
-                if (MetaDataExistTest.isValid(id)) {
-                    if (URLValidTest.isValid(id)) {
-                        if (ResolvableURLTest.isValid(id)) {
-                            count ++;
+
+                for (String id : identifiers) {
+                    if (MetaDataExistTest.isValid(id)) {
+                        if (URLValidTest.isValid(id)) {
+                            if (ResolvableURLTest.isValid(id)) {
+                                count ++;
+                            } else {
+                                idErrorMessage = "Not resolvable ontology ID";
+                            }
                         } else {
-                            idErrorMessage = "Not resolvable ontology ID";
+                            idErrorMessage = "Not valid ontology ID";
                         }
                     } else {
-                        idErrorMessage = "Not valid ontology ID";
+                        idErrorMessage = "Ontology ID not present";
                     }
-                } else {
-                    idErrorMessage = "Ontology ID not present";
                 }
 
-                if (count == 1.0) {
+
+                if (count >= 1.0) {
                     setSuccess(question);
                 } else if (count > 0) {
                     QuestionResult result = question.getMaxPoint(count);
