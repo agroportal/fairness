@@ -195,7 +195,9 @@ Portal configuration is required by the *portal* parameter. File is available in
  Change the **apikey**, **adminApikey** and **cacheFilePath** in *config.properties.example* with the corresponding infos, and rename it to **config.properties**.
 
 ### 4- Build the project
-
+```bash
+mvn clean package
+```
 ### 5- Deploy the war file in the Tomcat server
 Simply drop the war file into the *$CATALINA_HOME\webapps* directory of any Tomcat instance. If the instance is running, the deployment will start instantly as Tomcat unpacks the archive and configures its context path. If the instance is not running, then the server will deploy the project the next time it is started.
 
