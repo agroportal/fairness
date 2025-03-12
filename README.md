@@ -207,7 +207,7 @@ Add the SERVER_DEFAULT_PORTAL env variable, by adding this line  export SERVER_D
 ### 7- (Optional) Create a cron job to daily update cache files
 The following command programs an update of the cache every day at midnight
 ``` shell
-  0 0 * * * /srv/ontoportal/tomcat/fairness/current/cron/cache_rest.sh /usr/share/tomcat/webapps/fairness-assessment
+  0 0 * * * /srv/ontoportal/tomcat/fairness/current/cron/cache_reset.sh /usr/share/tomcat/webapps/fairness-assessment
  ```
 To add this job to the local system, execute the command **crontab -e** , it opens a text file, press "i" to go to insert mode, copy the above command.
 Then press "Esc" and type ":wq" to save and exit.  
