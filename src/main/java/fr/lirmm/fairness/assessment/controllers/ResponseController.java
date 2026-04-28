@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 public class ResponseController {
 
+    private static final Logger LOGGER = Logger.getLogger(ResponseController.class.getName());
 
     private final HttpServletResponse servletResponse;
     private final JsonObject response;
@@ -62,7 +63,7 @@ public class ResponseController {
             out.print(this.response.toString());
             out.flush();
         } catch (IOException e) {
-            Logger.getAnonymousLogger().severe("JSON RESPONSE ERROR : " + e.getMessage());
+            LOGGER.severe("JSON RESPONSE ERROR : " + e.getMessage());
         }
 
     }

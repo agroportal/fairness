@@ -11,8 +11,12 @@ import java.io.*;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ResultCache {
+
+    private static final Logger LOGGER = Logger.getLogger(ResultCache.class.getName());
 
     public static String FILE_SAVE_NAME = "save.json";
 
@@ -45,14 +49,14 @@ public class ResultCache {
             getFileSaveName(portal);
             resultCache.store(output.toString() , FILE_SAVE_NAME);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Failed to save cache for " + portalInstance.getName(), e);
         }
     }
 
     public JsonObject read(PortalInstance portalInstance) throws IOException {
         String portal = portalInstance.getName();
         if (!this.isSaved(portal)){
-            System.out.println(portal+" save files not exist ");
+            LOGGER.info(portal + " save files not exist");
             this.save(portalInstance);
         }
         Gson gson = new GsonBuilder().create();
@@ -87,7 +91,7 @@ public class ResultCache {
                     file.close();
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.log(Level.SEVERE, "Failed to close cache writer", e);
             }
         }
     }
@@ -120,7 +124,7 @@ public class ResultCache {
         try {
             FILE_SAVE_NAME = Configuration.getInstance().getPortalProperties(portal.toLowerCase(Locale.ROOT)).getProperty("cacheFilePath");
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Failed to read cacheFilePath for portal " + portal, e);
         }
         return FILE_SAVE_NAME;
     }

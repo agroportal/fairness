@@ -5,8 +5,12 @@ import fr.lirmm.fairness.assessment.models.PortalInstance;
 import fr.lirmm.fairness.assessment.utils.ResultCache;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 public class CacheSaverCMD {
+
+    private static final Logger LOGGER = Logger.getLogger(CacheSaverCMD.class.getName());
+
     public static void main(String[] args) throws IOException {
         ResultCache resultCache = new ResultCache();
         if(args.length == 0){
@@ -14,8 +18,7 @@ public class CacheSaverCMD {
         }
 
         for (String portal : args) {
-            System.out.println("Cache saver for : " + portal);
-            System.out.println();
+            LOGGER.info("Cache saver for : " + portal);
             resultCache.flush(portal);
             resultCache.save(PortalInstance.getFromConfiguration(Configuration.getInstance() , portal, true));
         }

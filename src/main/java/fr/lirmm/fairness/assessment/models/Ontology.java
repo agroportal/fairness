@@ -3,6 +3,8 @@ package fr.lirmm.fairness.assessment.models;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -11,6 +13,8 @@ import org.json.JSONException;
 import fr.lirmm.fairness.assessment.utils.OntologyRestApi;
 
 public class Ontology {
+
+	private static final Logger LOGGER = Logger.getLogger(Ontology.class.getName());
 
 	private final static String FORMAT_APPLICATION_JSON = "application/json";
 	private final static String FORMAT_APPLICATION_XML = "application/xml"; 
@@ -46,7 +50,7 @@ public class Ontology {
 								this.addSubmissionPropertyValue(property);
 							}
 						} catch (JSONException | IOException e) {
-							e.printStackTrace();
+							LOGGER.log(Level.SEVERE, "Failed to load submission property " + property.getLabel(), e);
 						}
 
 					break;
@@ -58,14 +62,14 @@ public class Ontology {
 							this.addOntologyPropertyValue(property);
 						}
 					} catch (JSONException | IOException e) {
-						e.printStackTrace();
+						LOGGER.log(Level.SEVERE, "Failed to load ontology property " + property.getLabel(), e);
 					}
 					break;
 				case "metrics":
 					try {
 						this.addMetricsPropertyValue(property);
 					} catch (Exception e) {
-						e.printStackTrace();
+						LOGGER.log(Level.SEVERE, "Failed to load metrics property " + property.getLabel(), e);
 					}
 					break;
 				case "link":
@@ -76,7 +80,7 @@ public class Ontology {
 							this.addOntologyLinkPropertyValue(property);
 						}
 					} catch (Exception e) {
-						e.printStackTrace();
+						LOGGER.log(Level.SEVERE, "Failed to load link property " + property.getLabel(), e);
 					}
 			}
 		});

@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.json.JSONArray;
@@ -23,6 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class OntologyRestApi {
 
+	private static final Logger LOGGER = Logger.getLogger(OntologyRestApi.class.getName());
 
 	private String ontologyMetadata = null;
 	private ObjectMapper mapper = null;
@@ -52,7 +54,7 @@ public class OntologyRestApi {
 				}
 			}
 		} catch (Exception e){
-			Logger.getAnonymousLogger().info(e.getMessage());
+			LOGGER.fine(e.getMessage());
 		}
 
 
@@ -68,7 +70,7 @@ public class OntologyRestApi {
 		try{
 			metadataValue = objMappings.getJSONObject("ontology").getString(metadataname);
 		}catch (Exception e){
-			Logger.getAnonymousLogger().info(e.getMessage());
+			LOGGER.fine(e.getMessage());
 		}
 
 		return (metadataValue);
@@ -82,7 +84,7 @@ public class OntologyRestApi {
 		try{
 			metadataValue = objMappings.getJSONObject("metrics").getString(metadataname);
 		}catch (Exception e){
-			Logger.getAnonymousLogger().info(metadataname + " " + e.getMessage());
+			LOGGER.fine(metadataname + " " + e.getMessage());
 		}
 
 		return (metadataValue);
@@ -96,7 +98,7 @@ public class OntologyRestApi {
 		try{
 			metadataValue = objMappings.getString(metadataname);
 		} catch (Exception e){
-			Logger.getAnonymousLogger().info(e.getMessage());
+			LOGGER.fine(e.getMessage());
 		}
 
 		return (metadataValue);
@@ -124,7 +126,7 @@ public class OntologyRestApi {
 		try {
 			root = mapper.readTree(json);
 		} catch (JsonProcessingException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Failed to parse JSON metadata", e);
 		}
 		return root;
 	}

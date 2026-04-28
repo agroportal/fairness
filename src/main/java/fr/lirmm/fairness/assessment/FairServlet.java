@@ -1,6 +1,7 @@
 package fr.lirmm.fairness.assessment;
 
 import java.util.*;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
@@ -27,6 +28,8 @@ import org.json.JSONException;
  */
 public class FairServlet extends HttpServlet {
 
+    private static final Logger LOGGER = Logger.getLogger(FairServlet.class.getName());
+
     private static final long serialVersionUID = -2749023988723161904L;
     private final ResultCache resultCache = new ResultCache();
 
@@ -43,10 +46,10 @@ public class FairServlet extends HttpServlet {
             JsonObject ontologies = null;
             portalInstance = requestController.getPortalInstance();
 
-            Logger.getAnonymousLogger().info("USE THE PORTAL : " + portalInstance.getName() + "; url= " + portalInstance.getUrl() + "; apikey= " + portalInstance.getApikey());
+            LOGGER.info("USE THE PORTAL : " + portalInstance.getName() + "; url= " + portalInstance.getUrl() + "; apikey= " + portalInstance.getApikey());
             List<String> ontologyAcronymsToEvaluate = requestController.getOntologies();
 
-            Logger.getAnonymousLogger().info("START EVALUATION OF : " + ontologyAcronymsToEvaluate.size() + " ONTOLOGIES FROM " + portalInstance.getName().toUpperCase(Locale.ROOT));
+            LOGGER.info("START EVALUATION OF : " + ontologyAcronymsToEvaluate.size() + " ONTOLOGIES FROM " + portalInstance.getName().toUpperCase(Locale.ROOT));
             if (requestController.isCacheDisabled()) {
                 if (ontologyAcronymsToEvaluate.size() > 0) {
                     Iterator<String> it = ontologyAcronymsToEvaluate.iterator();
@@ -56,7 +59,7 @@ public class FairServlet extends HttpServlet {
                         String acronym = it.next();
                         JsonElement fair = evaluateOntology(acronym, portalInstance);
                         ontologies.add(acronym, fair);
-                        Logger.getAnonymousLogger().info("(" + (i++) + "/" + ontologyAcronymsToEvaluate.size() + ") > Ontology " + acronym + " evaluated in " + fair.getAsJsonObject().get("executionTime").getAsString() + " s ");
+                        LOGGER.info("(" + (i++) + "/" + ontologyAcronymsToEvaluate.size() + ") > Ontology " + acronym + " evaluated in " + fair.getAsJsonObject().get("executionTime").getAsString() + " s ");
                     }
                 }
             } else {
@@ -82,14 +85,14 @@ public class FairServlet extends HttpServlet {
 
 
             responseController.respond(true, requestController.getRequestURI(req) , startTime ,""  , requestController);
-            Logger.getAnonymousLogger().info("EVALUATION  ENDED WITH STATUS : " + responseController.getResponse().get("status") );
+            LOGGER.info("EVALUATION  ENDED WITH STATUS : " + responseController.getResponse().get("status") );
 
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Evaluation request failed", e);
             try {
                 responseController.respond(false, requestController.getRequestURI(req) , startTime ,e.getMessage() ,requestController);
             } catch (Exception ex) {
-                ex.printStackTrace();
+                LOGGER.log(Level.SEVERE, "Failed to write error response", ex);
             }
         }
 
