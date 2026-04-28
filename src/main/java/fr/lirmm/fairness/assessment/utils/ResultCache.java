@@ -60,8 +60,7 @@ public class ResultCache {
     public JsonObject read(PortalInstance portalInstance) throws IOException {
         String portal = portalInstance.getName();
         if (!this.isSaved(portal)){
-            LOGGER.info(portal + " save files not exist");
-            this.save(portalInstance);
+            throw new IOException("Cache not yet generated for portal '" + portal + "'. Run cache_reset.sh or wait for the next cron run.");
         }
         Gson gson = new GsonBuilder().create();
 
