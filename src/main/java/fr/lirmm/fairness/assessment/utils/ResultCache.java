@@ -33,15 +33,19 @@ public class ResultCache {
 
 
             Iterator<String> it = allOntologyAcronyms.iterator();
-
+            int total = allOntologyAcronyms.size();
+            int i = 1;
             while (it.hasNext()) {
+                String acronym = it.next();
+                long start = System.currentTimeMillis();
 
                 Fair fair = new Fair();
-                fair.evaluate(new Ontology(it.next(), portalInstance));
+                fair.evaluate(new Ontology(acronym, portalInstance));
 
                 JsonObject tmp = new FairJsonConverter(fair).toJson();
                 tmp.entrySet().forEach(x -> jsonObjects.add(x.getKey(), x.getValue()));
 
+                LOGGER.info("(" + (i++) + "/" + total + ") > Ontology " + acronym + " evaluated in " + ((System.currentTimeMillis() - start) / 1000.0) + " s");
             }
 
             output.add("ontologies", gson.toJsonTree(jsonObjects));
