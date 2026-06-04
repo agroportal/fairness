@@ -4,8 +4,12 @@ import com.google.gson.Gson;
 
 import java.io.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Configuration {
+
+	private static final Logger LOGGER = Logger.getLogger(Configuration.class.getName());
 
 	public static final String PROPERTIES_CONFIG_FILE_PATH = "config/common/properties.config.json";
 	public static final String FAIR_CONFIG_FILE_PATH = "config/common/questions.config.json";
@@ -65,7 +69,7 @@ public class Configuration {
 					throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
 				}
 			} catch (Exception e) {
-				System.out.println("Exception: " + e);
+				LOGGER.log(Level.SEVERE, "Failed to load properties for scope " + configScope, e);
 				properties = null;
 			} finally {
 				if(inputStream != null) {

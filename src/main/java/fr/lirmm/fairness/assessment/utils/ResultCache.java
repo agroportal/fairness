@@ -11,8 +11,12 @@ import java.io.*;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ResultCache {
+
+    private static final Logger LOGGER = Logger.getLogger(ResultCache.class.getName());
 
     public static String FILE_SAVE_NAME = "save.json";
 
@@ -29,15 +33,19 @@ public class ResultCache {
 
 
             Iterator<String> it = allOntologyAcronyms.iterator();
-
+            int total = allOntologyAcronyms.size();
+            int i = 1;
             while (it.hasNext()) {
+                String acronym = it.next();
+                long start = System.currentTimeMillis();
 
                 Fair fair = new Fair();
-                fair.evaluate(new Ontology(it.next(), portalInstance));
+                fair.evaluate(new Ontology(acronym, portalInstance));
 
                 JsonObject tmp = new FairJsonConverter(fair).toJson();
                 tmp.entrySet().forEach(x -> jsonObjects.add(x.getKey(), x.getValue()));
 
+                LOGGER.info("(" + (i++) + "/" + total + ") > Ontology " + acronym + " evaluated in " + ((System.currentTimeMillis() - start) / 1000.0) + " s");
             }
 
             output.add("ontologies", gson.toJsonTree(jsonObjects));
@@ -45,15 +53,14 @@ public class ResultCache {
             getFileSaveName(portal);
             resultCache.store(output.toString() , FILE_SAVE_NAME);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Failed to save cache for " + portalInstance.getName(), e);
         }
     }
 
     public JsonObject read(PortalInstance portalInstance) throws IOException {
         String portal = portalInstance.getName();
         if (!this.isSaved(portal)){
-            System.out.println(portal+" save files not exist ");
-            this.save(portalInstance);
+            throw new IOException("Cache not yet generated for portal '" + portal + "'. Run cache_reset.sh or wait for the next cron run.");
         }
         Gson gson = new GsonBuilder().create();
 
@@ -87,7 +94,7 @@ public class ResultCache {
                     file.close();
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.log(Level.SEVERE, "Failed to close cache writer", e);
             }
         }
     }
@@ -120,7 +127,7 @@ public class ResultCache {
         try {
             FILE_SAVE_NAME = Configuration.getInstance().getPortalProperties(portal.toLowerCase(Locale.ROOT)).getProperty("cacheFilePath");
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Failed to read cacheFilePath for portal " + portal, e);
         }
         return FILE_SAVE_NAME;
     }

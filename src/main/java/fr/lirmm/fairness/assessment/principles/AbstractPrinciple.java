@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import fr.lirmm.fairness.assessment.models.results.QuestionResult;
@@ -16,9 +18,11 @@ import fr.lirmm.fairness.assessment.principles.criterion.AbstractPrincipleCriter
 
 
 public abstract class AbstractPrinciple extends AbstractScoredEntity implements Evaluable,Serializable {
-	
+
+	private static final Logger LOGGER = Logger.getLogger(AbstractPrinciple.class.getName());
+
 	private static final long serialVersionUID = -4625119538425966086L;
-	
+
 	private List<AbstractPrincipleCriterion> principleCriteria = null;
 
 	protected AbstractPrinciple() {
@@ -36,18 +40,20 @@ public abstract class AbstractPrinciple extends AbstractScoredEntity implements 
 		this.weights = new ArrayList<>(this.principleCriteria.size());
 		while(iterator.hasNext()) {
 			try {
-				System.out.println("\n");
 				AbstractPrincipleCriterion criterion = iterator.next();
 				criterion.evaluate(ontology);
 				this.scores.add(criterion.getTotalScore());
 				this.weights.add(criterion.getTotalScoreWeight());
-				System.out.println("> " + criterion.getClass().getSimpleName() + " points : " + criterion.getScores());
-				System.out.println("> Total score for " + criterion.getClass().getSimpleName() + " : " + criterion.getTotalScore());
-				System.out.println("> Explanations : " + criterion.getResults().stream().map(x-> ((QuestionResult)x).getExplanation()).collect(Collectors.toList()));
-				System.out.println("> Normalized total score for " + criterion.getClass().getSimpleName() + " : " + criterion.getNormalizedTotalScore());
+				if (LOGGER.isLoggable(Level.FINE)) {
+					String name = criterion.getClass().getSimpleName();
+					LOGGER.fine("> " + name + " points : " + criterion.getScores());
+					LOGGER.fine("> Total score for " + name + " : " + criterion.getTotalScore());
+					LOGGER.fine("> Explanations : " + criterion.getResults().stream().map(x-> ((QuestionResult)x).getExplanation()).collect(Collectors.toList()));
+					LOGGER.fine("> Normalized total score for " + name + " : " + criterion.getNormalizedTotalScore());
+				}
 			}
 			catch(Exception iae) {
-				iae.printStackTrace();
+				LOGGER.log(Level.SEVERE, "Criterion evaluation failed", iae);
 			}
 		}
 	}
@@ -81,7 +87,7 @@ public abstract class AbstractPrinciple extends AbstractScoredEntity implements 
 				this.principleCriteria.add(subCriteriaClassesClass.getDeclaredConstructor().newInstance());
 			}
 			catch(Exception e) {
-				e.printStackTrace();
+				LOGGER.log(Level.SEVERE, "Failed to instantiate criterion " + subCriteriaClassesClass.getName(), e);
 			}
 		}
 	}

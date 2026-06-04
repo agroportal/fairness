@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
@@ -20,7 +22,9 @@ import fr.lirmm.fairness.assessment.models.Ontology;
 import fr.lirmm.fairness.assessment.principles.Evaluable;
 
 public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity implements Evaluable, Serializable {
-	
+
+	private static final Logger LOGGER = Logger.getLogger(AbstractPrincipleCriterion.class.getName());
+
 	private static final long serialVersionUID = -5519124612489307590L;
 	protected List<AbstractCriterionQuestion> questions = null;
 	private Double maxCredits = 0.0;
@@ -36,7 +40,9 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 	@Override
 	public final void evaluate(Ontology ontology) throws JSONException, IOException {
 		this.results = new ArrayList<>();
-		System.out.println("> Evaluating '" + this.getClass().getSimpleName() + "' of ontology '" + ontology.getAcronym() + "' on repository '" + ontology.getPortalInstance().getName() + "' (" + ontology.getPortalInstance().getUrl() + "?apikey=" + ontology.getPortalInstance().getApikey() + ").");
+		if (LOGGER.isLoggable(Level.FINE)) {
+			LOGGER.fine("> Evaluating '" + this.getClass().getSimpleName() + "' of ontology '" + ontology.getAcronym() + "' on repository '" + ontology.getPortalInstance().getName() + "' (" + ontology.getPortalInstance().getUrl() + "?apikey=" + ontology.getPortalInstance().getApikey() + ").");
+		}
 		this.doEvaluation(ontology);
 		this.scores = this.results.stream().map(x -> x.getScore()).collect(Collectors.toList());
 		this.weights = this.questions.stream().map(x -> x.getMaxPoint().getScore()).collect(Collectors.toList());;
@@ -87,7 +93,7 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 			fillQuestions(criterionList);
 
 		} catch(Exception ioe) {
-			ioe.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Failed to load criterion properties for " + this.getClass().getSimpleName(), ioe);
 		}
 	}
 
