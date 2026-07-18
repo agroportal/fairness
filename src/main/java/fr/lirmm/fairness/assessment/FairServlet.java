@@ -46,7 +46,7 @@ public class FairServlet extends HttpServlet {
             JsonObject ontologies = null;
             portalInstance = requestController.getPortalInstance();
 
-            LOGGER.info("USE THE PORTAL : " + portalInstance.getName() + "; url= " + portalInstance.getUrl() + "; apikey= " + portalInstance.getApikey());
+            LOGGER.info("USE THE PORTAL : " + portalInstance.getName() + "; url= " + portalInstance.getUrl().split("\\?", 2)[0]);
             List<String> ontologyAcronymsToEvaluate = requestController.getOntologies();
 
             LOGGER.info("START EVALUATION OF : " + ontologyAcronymsToEvaluate.size() + " ONTOLOGIES FROM " + portalInstance.getName().toUpperCase(Locale.ROOT));

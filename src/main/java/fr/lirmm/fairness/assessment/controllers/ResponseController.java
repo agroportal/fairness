@@ -35,19 +35,19 @@ public class ResponseController {
 
         if(requestController.getPortalInstanceController().getPortalInstanceValue()!=null){
             PortalInstance portalInstance = requestController.getPortalInstanceController().getPortalInstanceValue();
-            jsonObject.add("endpoint", gson.toJsonTree(portalInstance.getUrl()));
-
-            if(!portalInstance.isPrivateAPI()){
-                jsonObject.add("apikey", gson.toJsonTree(portalInstance.getApikey()));
-            }
+            jsonObject.add("endpoint", gson.toJsonTree(withoutQuery(portalInstance.getUrl())));
             try {
                 jsonObject.add("useCache", gson.toJsonTree(!requestController.isCacheDisabled()));
             } catch (Exception ignored) {}
         }else {
-            jsonObject.add("endpoint", gson.toJsonTree(requestController.getParamController().portalUrl.getValue()));
+            jsonObject.add("endpoint", gson.toJsonTree(withoutQuery(requestController.getParamController().portalUrl.getValue())));
         }
 
         return jsonObject;
+    }
+
+    private static String withoutQuery(String endpoint) {
+        return endpoint == null ? null : endpoint.split("\\?", 2)[0];
     }
 
     public void respond(boolean success , String requestURI , long startTime, String message , RequestController requestController) throws Exception {

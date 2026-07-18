@@ -39,7 +39,7 @@ public class RequestController {
         try{
             allOntologyAcronyms = getPortalInstance().getAllOntologiesAcronyms();
         } catch (Exception e){
-            throw new Exception("Portal " +getPortalInstance().getUrl() + " is not accessible : " + e.getMessage() +", You must provide a valid API Key");
+            throw new Exception("Portal " + getPortalInstance().getName() + " is not accessible; provide a valid API key");
         }
 
         if (pOntologies != null && pOntologies.equals("all")) {
@@ -71,12 +71,10 @@ public class RequestController {
 
     public String getRequestURI(HttpServletRequest request) {
 
-        return  request.getScheme() + "://" +
+        return request.getScheme() + "://" +
                 request.getServerName() +
                 ":" + request.getServerPort() +
-                request.getRequestURI() +
-                (request.getQueryString() != null ? "?" +
-                        request.getQueryString() : "");
+                request.getRequestURI();
     }
 
     public boolean isCombinedParamUsed() {
