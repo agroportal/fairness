@@ -200,7 +200,7 @@ mvn clean package
 ```
 ### Cache and HTTP safety
 
-Cache refreshes are generated completely before publication. A candidate is written and validated in the cache directory, then atomically replaces the current cache only when its non-empty ontology count exactly matches the source catalogue count. Evaluation, validation, write, or atomic-move failures preserve the previous cache. Filesystems that do not support atomic moves refuse the refresh rather than falling back to a non-atomic replacement.
+Cache refreshes are generated completely before publication. A candidate is written and validated in the cache directory, then atomically replaces the current cache only when its non-empty ontology count exactly matches the source catalogue count. Evaluation, validation, write, or atomic-move failures preserve the previous cache. Filesystems that do not support atomic moves refuse the refresh rather than falling back to a non-atomic replacement. On POSIX filesystems, replacement copies and verifies an existing cache's owner, group, and permissions before publication, refusing the refresh if any attribute cannot be preserved; a new cache starts with the prior `0666` readable default filtered by the process umask. Non-POSIX filesystems retain their provider's default permissions.
 
 Check a configured portal's cache with:
 

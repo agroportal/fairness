@@ -8,6 +8,12 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.attribute.GroupPrincipal;
+import java.nio.file.attribute.PosixFileAttributeView;
+import java.nio.file.attribute.PosixFileAttributes;
+import java.nio.file.attribute.PosixFilePermission;
+import java.nio.file.attribute.PosixFilePermissions;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import static org.junit.Assert.*;
@@ -41,6 +47,52 @@ public class ResultCachePublicationTest {
     }
 
     @Test
+    public void atomicReplacementPreservesGroupReadableOwnershipAndPermissions() throws Exception {
+        Path cache = cacheWith("{\"ontologies\":{\"old\":{}}}");
+        org.junit.Assume.assumeTrue(supportsPosix(cache));
+        GroupPrincipal secondaryGroup = secondaryGroup(cache);
+        org.junit.Assume.assumeNotNull(secondaryGroup);
+        Set<PosixFilePermission> permissions = PosixFilePermissions.fromString("rw-r-----");
+        PosixFileAttributeView view = Files.getFileAttributeView(cache, PosixFileAttributeView.class);
+        try {
+            view.setGroup(secondaryGroup);
+            view.setPermissions(permissions);
+        } catch (IOException | UnsupportedOperationException | SecurityException e) {
+            org.junit.Assume.assumeNoException(e);
+        }
+        PosixFileAttributes expected = view.readAttributes();
+
+        new ResultCache().store("{\"ontologies\":{\"new\":{}}}", cache, 1);
+
+        PosixFileAttributes actual = Files.readAttributes(cache, PosixFileAttributes.class);
+        assertEquals(expected.owner(), actual.owner());
+        assertEquals(secondaryGroup, actual.group());
+        assertEquals(permissions, actual.permissions());
+    }
+
+    @Test
+    public void deniedPublicationPreservesOldBytes() throws Exception {
+        Path cache = cacheWith("{\"ontologies\":{\"old\":{}}}");
+        org.junit.Assume.assumeTrue(supportsPosix(cache));
+        Path directory = cache.getParent();
+        byte[] old = Files.readAllBytes(cache);
+        Set<PosixFilePermission> directoryPermissions = Files.getPosixFilePermissions(directory);
+        try {
+            Files.setPosixFilePermissions(directory, PosixFilePermissions.fromString("r-x------"));
+            org.junit.Assume.assumeFalse(Files.isWritable(directory));
+            try {
+                new ResultCache().store("{\"ontologies\":{\"new\":{}}}", cache, 1);
+                fail("publication without directory write access succeeded");
+            } catch (IOException expected) {
+                assertArrayEquals(old, Files.readAllBytes(cache));
+                assertNoTemporaryFiles(cache);
+            }
+        } finally {
+            Files.setPosixFilePermissions(directory, directoryPermissions);
+        }
+    }
+
+    @Test
     public void legitimateCatalogueShrinkPublishesWhenCandidateMatchesSource() throws Exception {
         Path cache = cacheWith(ontologies(10));
         String candidate = ontologies(4);
@@ -58,13 +110,39 @@ public class ResultCachePublicationTest {
     }
 
     private void assertRejected(Path cache, String candidate, int sourceCount, byte[] expected) throws Exception {
+        Set<PosixFilePermission> permissions = supportsPosix(cache) ? Files.getPosixFilePermissions(cache) : null;
         try {
             new ResultCache().store(candidate, cache, sourceCount);
             fail("invalid candidate was published");
         } catch (IOException expectedFailure) {
             assertArrayEquals(expected, Files.readAllBytes(cache));
+            if (permissions != null) assertEquals(permissions, Files.getPosixFilePermissions(cache));
             assertNoTemporaryFiles(cache);
         }
+    }
+
+    private boolean supportsPosix(Path path) throws IOException {
+        return Files.getFileStore(path).supportsFileAttributeView(PosixFileAttributeView.class);
+    }
+
+    private GroupPrincipal secondaryGroup(Path path) {
+        try {
+            String primary = Files.readAttributes(path, PosixFileAttributes.class).group().getName();
+            Process process = new ProcessBuilder("id", "-Gn").start();
+            String groups = new String(process.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
+            if (process.waitFor() == 0) {
+                for (String group : groups.trim().split("\\s+")) {
+                    if (!group.equals(primary)) {
+                        return path.getFileSystem().getUserPrincipalLookupService().lookupPrincipalByGroupName(group);
+                    }
+                }
+            }
+        } catch (IOException | UnsupportedOperationException | SecurityException e) {
+            return null;
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        return null;
     }
 
     private void assertNoTemporaryFiles(Path cache) throws IOException {

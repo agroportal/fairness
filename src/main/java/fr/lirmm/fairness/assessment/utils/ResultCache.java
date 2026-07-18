@@ -12,9 +12,15 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
+import java.nio.file.attribute.FileAttribute;
+import java.nio.file.attribute.PosixFileAttributeView;
+import java.nio.file.attribute.PosixFileAttributes;
+import java.nio.file.attribute.PosixFilePermission;
+import java.nio.file.attribute.PosixFilePermissions;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -80,8 +86,9 @@ public class ResultCache {
 
     public boolean isValid(String portal) {
         try {
-            return isValid(Paths.get(getFileSaveName(portal)));
-        } catch (RuntimeException e) {
+            String path = Configuration.getInstance().getPortalProperties(portal.toLowerCase(Locale.ROOT)).getProperty("cacheFilePath");
+            return path != null && isValid(Paths.get(path));
+        } catch (IOException | RuntimeException e) {
             return false;
         }
     }
@@ -120,7 +127,9 @@ public class ResultCache {
         Path absoluteDestination = destination.toAbsolutePath();
         Path directory = absoluteDestination.getParent();
         Files.createDirectories(directory);
-        Path temp = Files.createTempFile(directory, absoluteDestination.getFileName() + ".", ".tmp");
+        boolean posix = Files.getFileStore(directory).supportsFileAttributeView(PosixFileAttributeView.class);
+        PosixFileAttributes destinationAttributes = posix ? readAttributesIfExists(absoluteDestination) : null;
+        Path temp = createCandidate(directory, absoluteDestination, posix && destinationAttributes == null);
         try {
             ByteBuffer bytes = StandardCharsets.UTF_8.encode(json);
             try (FileChannel channel = FileChannel.open(temp, WRITE)) {
@@ -132,10 +141,57 @@ public class ResultCache {
             if (!isValid(temp, sourceCount)) {
                 throw new IOException("Refusing to publish an incomplete or invalid cache");
             }
+            if (destinationAttributes != null) {
+                preserveAttributes(temp, destinationAttributes);
+            }
             Files.move(temp, absoluteDestination, ATOMIC_MOVE, REPLACE_EXISTING);
         } finally {
             Files.deleteIfExists(temp);
         }
+    }
+
+    private PosixFileAttributes readAttributesIfExists(Path destination) throws IOException {
+        try {
+            return Files.readAttributes(destination, PosixFileAttributes.class);
+        } catch (NoSuchFileException e) {
+            if (Files.exists(destination, LinkOption.NOFOLLOW_LINKS)) {
+                throw new IOException("Cannot read existing cache attributes", e);
+            }
+            return null;
+        } catch (UnsupportedOperationException | SecurityException e) {
+            throw new IOException("Cannot read existing cache attributes", e);
+        }
+    }
+
+    private void preserveAttributes(Path candidate, PosixFileAttributes expected) throws IOException {
+        try {
+            PosixFileAttributeView view = Files.getFileAttributeView(candidate, PosixFileAttributeView.class);
+            if (view == null) {
+                throw new IOException("Cannot preserve existing cache attributes");
+            }
+            view.setOwner(expected.owner());
+            view.setGroup(expected.group());
+            view.setPermissions(expected.permissions());
+            PosixFileAttributes actual = view.readAttributes();
+            if (!expected.owner().equals(actual.owner()) || !expected.group().equals(actual.group())
+                    || !expected.permissions().equals(actual.permissions())) {
+                throw new IOException("Cannot verify preserved cache attributes");
+            }
+        } catch (UnsupportedOperationException | SecurityException e) {
+            throw new IOException("Cannot preserve existing cache attributes", e);
+        }
+    }
+
+    private Path createCandidate(Path directory, Path destination, boolean readableDefault) throws IOException {
+        String prefix = destination.getFileName() + ".";
+        if (!readableDefault) {
+            return Files.createTempFile(directory, prefix, ".tmp");
+        }
+
+        // FileWriter previously created cache files as 0666 subject to the process umask.
+        FileAttribute<Set<PosixFilePermission>> permissions =
+                PosixFilePermissions.asFileAttribute(PosixFilePermissions.fromString("rw-rw-rw-"));
+        return Files.createTempFile(directory, prefix, ".tmp", permissions);
     }
 
     private String get(String filePath) throws IOException {
