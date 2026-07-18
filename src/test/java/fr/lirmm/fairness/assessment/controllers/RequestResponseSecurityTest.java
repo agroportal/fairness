@@ -2,6 +2,8 @@ package fr.lirmm.fairness.assessment.controllers;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.sun.net.httpserver.HttpServer;
+import fr.lirmm.fairness.assessment.FairServlet;
 import org.junit.Test;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,8 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.Proxy;
+import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
 import static org.junit.Assert.*;
 
@@ -48,11 +55,53 @@ public class RequestResponseSecurityTest {
         assertFalse(status.get("useCache").getAsBoolean());
     }
 
+    @Test
+    public void servletLogsAndResponseDoNotContainRequestCredentials() throws Exception {
+        String secret = "logged-secret-2ce";
+        HttpServer server = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
+        server.createContext("/ontologies", exchange -> {
+            byte[] body = "[]".getBytes(StandardCharsets.UTF_8);
+            exchange.sendResponseHeaders(200, body.length);
+            exchange.getResponseBody().write(body);
+            exchange.close();
+        });
+        server.start();
+
+        StringBuilder logs = new StringBuilder();
+        Handler handler = new Handler() {
+            @Override
+            public void publish(LogRecord record) {
+                logs.append(record.getMessage());
+                if (record.getThrown() != null) logs.append(record.getThrown());
+            }
+            @Override public void flush() {}
+            @Override public void close() {}
+        };
+        Logger logger = Logger.getLogger(FairServlet.class.getName());
+        logger.addHandler(handler);
+        StringWriter responseBody = new StringWriter();
+        try {
+            Map<String, String> parameters = new HashMap<>();
+            parameters.put("url", "http://127.0.0.1:" + server.getAddress().getPort());
+            parameters.put("apikey", secret);
+            parameters.put("ontologies", "all");
+            parameters.put("sync", "");
+            new FairServlet().service(request(parameters, secret), response(responseBody));
+        } finally {
+            logger.removeHandler(handler);
+            server.stop(0);
+        }
+
+        assertFalse(logs.toString().contains(secret));
+        assertFalse(responseBody.toString().contains(secret));
+    }
+
     private HttpServletRequest request(Map<String, String> parameters, String querySecret) {
         return (HttpServletRequest) Proxy.newProxyInstance(getClass().getClassLoader(),
                 new Class[]{HttpServletRequest.class}, (proxy, method, args) -> {
                     switch (method.getName()) {
                         case "getParameter": return parameters.get(args[0]);
+                        case "getMethod": return "GET";
                         case "getScheme": return "http";
                         case "getServerName": return "service.test";
                         case "getServerPort": return 8080;
