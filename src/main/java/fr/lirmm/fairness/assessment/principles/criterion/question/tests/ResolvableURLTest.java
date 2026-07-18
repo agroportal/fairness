@@ -21,7 +21,7 @@ public class ResolvableURLTest implements Test<String> {
         try {
             url = new URL(element[0]);
             urlConnection = (HttpURLConnection) url.openConnection();
-            HttpURLConnection.setFollowRedirects(false);
+            urlConnection.setInstanceFollowRedirects(false);
             urlConnection.setRequestMethod("HEAD");
 
             if(element.length == 3 && element[2]!= null && !element[2].isEmpty()){
@@ -34,7 +34,8 @@ public class ResolvableURLTest implements Test<String> {
             }
 
 
-            urlConnection.setConnectTimeout(1000); // 1 second
+            urlConnection.setConnectTimeout(positiveProperty("fairness.urlCheck.connectTimeoutMillis", 1000));
+            urlConnection.setReadTimeout(positiveProperty("fairness.urlCheck.readTimeoutMillis", 2000));
             int urlConnectionResponseCode = urlConnection.getResponseCode();
             boolean goodUrlContentType = urlConnection.getContentType() != null;
 
@@ -53,6 +54,11 @@ public class ResolvableURLTest implements Test<String> {
 
     }
 
+
+    private static int positiveProperty(String name, int defaultValue) {
+        Integer value = Integer.getInteger(name);
+        return value != null && value > 0 ? value : defaultValue;
+    }
 
     private static ResolvableURLTest getInstance() {
         if(instance == null){

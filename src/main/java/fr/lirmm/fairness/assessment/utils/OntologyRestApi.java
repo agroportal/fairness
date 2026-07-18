@@ -132,28 +132,33 @@ public class OntologyRestApi {
 	}
 
 	public static String get(String urlToGet, String api_key, String format) throws Exception {
-		URL url;
-		HttpURLConnection conn;
-		String line;
-		StringBuilder result = new StringBuilder();
-		BufferedReader rd = null;
-		url = new URL(urlToGet);
-		conn = (HttpURLConnection) url.openConnection();
-		conn.setRequestMethod("GET");
-		conn.setRequestProperty("Authorization", "apikey token=" + api_key);
-		conn.setRequestProperty("Accept", format);
-		int response = conn.getResponseCode();
+		HttpURLConnection conn = (HttpURLConnection) new URL(urlToGet).openConnection();
+		try {
+			conn.setRequestMethod("GET");
+			conn.setRequestProperty("Authorization", "apikey token=" + api_key);
+			conn.setRequestProperty("Accept", format);
+			conn.setConnectTimeout(positiveProperty("fairness.http.connectTimeoutMillis", 10000));
+			conn.setReadTimeout(positiveProperty("fairness.http.readTimeoutMillis", 30000));
+			if (conn.getResponseCode() != 200) {
+				throw new Exception(conn.getResponseMessage());
+			}
 
-		if (response != 200) {
-			throw new Exception(conn.getResponseMessage());
+			StringBuilder result = new StringBuilder();
+			try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+				String line;
+				while ((line = reader.readLine()) != null) {
+					result.append(line);
+				}
+			}
+			return result.toString();
+		} finally {
+			conn.disconnect();
 		}
+	}
 
-		rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-		while ((line = rd.readLine()) != null) {
-			result.append(line);
-		}
-		rd.close();
-		return result.toString();
+	private static int positiveProperty(String name, int defaultValue) {
+		Integer value = Integer.getInteger(name);
+		return value != null && value > 0 ? value : defaultValue;
 	}
 
 }
