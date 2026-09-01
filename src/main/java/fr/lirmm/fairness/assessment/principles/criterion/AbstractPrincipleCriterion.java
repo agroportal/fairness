@@ -41,7 +41,7 @@ public abstract class AbstractPrincipleCriterion extends AbstractScoredEntity im
 	public final void evaluate(Ontology ontology) throws JSONException, IOException {
 		this.results = new ArrayList<>();
 		if (LOGGER.isLoggable(Level.FINE)) {
-			LOGGER.fine("> Evaluating '" + this.getClass().getSimpleName() + "' of ontology '" + ontology.getAcronym() + "' on repository '" + ontology.getPortalInstance().getName() + "' (" + ontology.getPortalInstance().getUrl() + "?apikey=" + ontology.getPortalInstance().getApikey() + ").");
+			LOGGER.fine("> Evaluating '" + this.getClass().getSimpleName() + "' of ontology '" + ontology.getAcronym() + "' on repository '" + ontology.getPortalInstance().getName() + "'.");
 		}
 		this.doEvaluation(ontology);
 		this.scores = this.results.stream().map(x -> x.getScore()).collect(Collectors.toList());

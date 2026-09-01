@@ -164,7 +164,7 @@ public class Ontology {
 			return OntologyRestApi.get(getMetaDataURL(), this.portalInstance.getApikey(), format);
 		}
 		catch (Exception e){
-			throw new Exception("Portal " +getPortalInstance().getUrl() + " is not accessible : " + getMetaDataURL() +" "+ e.getMessage());
+			throw new Exception("Portal " + getPortalInstance().getName() + " ontology metadata is not accessible");
 		}
 	}
 

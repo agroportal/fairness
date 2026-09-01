@@ -19,7 +19,6 @@ public class CacheSaverCMD {
 
         for (String portal : args) {
             LOGGER.info("Cache saver for : " + portal);
-            resultCache.flush(portal);
             resultCache.save(PortalInstance.getFromConfiguration(Configuration.getInstance() , portal, true));
         }
     }

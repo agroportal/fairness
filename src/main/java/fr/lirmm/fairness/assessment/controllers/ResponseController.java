@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import fr.lirmm.fairness.assessment.models.PortalInstance;
+import fr.lirmm.fairness.assessment.utils.EndpointSanitizer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +27,7 @@ public class ResponseController {
         JsonObject jsonObject = new JsonObject();
         Gson gson = new GsonBuilder().create();
 
-        jsonObject.add("request", gson.toJsonTree(request));
+        jsonObject.add("request", gson.toJsonTree(EndpointSanitizer.sanitize(request)));
         jsonObject.add("success", gson.toJsonTree(success));
         if (message != null && !message.isEmpty()) {
             jsonObject.add("message", gson.toJsonTree(message));
@@ -35,16 +36,12 @@ public class ResponseController {
 
         if(requestController.getPortalInstanceController().getPortalInstanceValue()!=null){
             PortalInstance portalInstance = requestController.getPortalInstanceController().getPortalInstanceValue();
-            jsonObject.add("endpoint", gson.toJsonTree(portalInstance.getUrl()));
-
-            if(!portalInstance.isPrivateAPI()){
-                jsonObject.add("apikey", gson.toJsonTree(portalInstance.getApikey()));
-            }
+            jsonObject.add("endpoint", gson.toJsonTree(EndpointSanitizer.sanitize(portalInstance.getUrl())));
             try {
                 jsonObject.add("useCache", gson.toJsonTree(!requestController.isCacheDisabled()));
             } catch (Exception ignored) {}
         }else {
-            jsonObject.add("endpoint", gson.toJsonTree(requestController.getParamController().portalUrl.getValue()));
+            jsonObject.add("endpoint", gson.toJsonTree(EndpointSanitizer.sanitize(requestController.getParamController().portalUrl.getValue())));
         }
 
         return jsonObject;

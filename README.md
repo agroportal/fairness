@@ -133,7 +133,7 @@ O'FAIRe returns a JSON with the following skeleton :
     }
   },
   "status": { // operation meta-data
-    "request": "http://service.agroportal.lirmm.fr?portal=stageportal&ontologies=FCU", // original request
+    "request": "http://service.agroportal.lirmm.fr/ofaire", // query parameters are omitted
     "success": true,
     "executionTime": 959,
     "endpoint": "http://data.agroportal.lirmm.fr",
@@ -198,6 +198,31 @@ Portal configuration is required by the *portal* parameter. File is available in
 ```bash
 mvn clean package
 ```
+### Cache and HTTP safety
+
+Cache refreshes are generated completely before publication. A candidate is written and validated in the cache directory, then atomically replaces the current cache only when its non-empty ontology count exactly matches the source catalogue count. Evaluation, validation, write, or atomic-move failures preserve the previous cache. Filesystems that do not support atomic moves refuse the refresh rather than falling back to a non-atomic replacement. On POSIX filesystems, replacement copies and verifies an existing cache's owner, group, and permissions before publication, refusing the refresh if any attribute cannot be preserved; a new cache starts with the prior `0666` readable default filtered by the process umask. Non-POSIX filesystems retain their provider's default permissions.
+
+Check a configured portal's cache with:
+
+```bash
+CacheHealthCMD <portal>
+```
+
+Invoke the command class `fr.lirmm.fairness.assessment.CacheHealthCMD` with the application's normal runtime classpath.
+
+`CacheHealthCMD` exits `0` only when exactly one configured portal is supplied and its cache contains a non-empty `ontologies` JSON object. It exits `1` for bad arguments, unknown portals, missing files, malformed JSON, wrong shapes, and empty caches.
+
+Outbound requests use positive JVM timeout properties. Defaults are:
+
+Property | Default
+------------ | -------------
+`fairness.http.connectTimeoutMillis` | 10000
+`fairness.http.readTimeoutMillis` | 30000
+`fairness.urlCheck.connectTimeoutMillis` | 1000
+`fairness.urlCheck.readTimeoutMillis` | 2000
+
+Status responses retain endpoint, cache-use, success, and timing metadata but do not echo API keys or query strings. The documented `sync` parameter remains supported and continues to bypass the cache.
+
 ### 5- Deploy the war file in the Tomcat server
 Simply drop the war file into the *$CATALINA_HOME\webapps* directory of any Tomcat instance. If the instance is running, the deployment will start instantly as Tomcat unpacks the archive and configures its context path. If the instance is not running, then the server will deploy the project the next time it is started.
 
