@@ -18,6 +18,7 @@ import fr.lirmm.fairness.assessment.controllers.RequestController;
 import fr.lirmm.fairness.assessment.controllers.ResponseController;
 import fr.lirmm.fairness.assessment.models.Ontology;
 import fr.lirmm.fairness.assessment.models.PortalInstance;
+import fr.lirmm.fairness.assessment.utils.EndpointSanitizer;
 import fr.lirmm.fairness.assessment.utils.ResultCache;
 import fr.lirmm.fairness.assessment.views.CombinedFairJsonConverter;
 import fr.lirmm.fairness.assessment.views.FairJsonConverter;
@@ -46,7 +47,7 @@ public class FairServlet extends HttpServlet {
             JsonObject ontologies = null;
             portalInstance = requestController.getPortalInstance();
 
-            LOGGER.info("USE THE PORTAL : " + portalInstance.getName() + "; url= " + portalInstance.getUrl().split("\\?", 2)[0]);
+            LOGGER.info("USE THE PORTAL : " + portalInstance.getName() + "; url= " + EndpointSanitizer.sanitize(portalInstance.getUrl()));
             List<String> ontologyAcronymsToEvaluate = requestController.getOntologies();
 
             LOGGER.info("START EVALUATION OF : " + ontologyAcronymsToEvaluate.size() + " ONTOLOGIES FROM " + portalInstance.getName().toUpperCase(Locale.ROOT));

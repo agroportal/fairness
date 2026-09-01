@@ -28,8 +28,10 @@ public class RequestResponseSecurityTest {
         String apiSecret = "api-secret-7f3";
         String querySecret = "request-secret-91a";
         String endpointSecret = "endpoint-secret-55c";
+        String userInfoSecret = "endpoint-user-info-42d";
+        String fragmentSecret = "endpoint-fragment-18b";
         Map<String, String> parameters = new HashMap<>();
-        parameters.put("url", "http://example.org/api?token=" + endpointSecret);
+        parameters.put("url", "http://portal-user:" + userInfoSecret + "@example.org/api?token=" + endpointSecret + "#" + fragmentSecret);
         parameters.put("apikey", apiSecret);
         parameters.put("sync", "");
         HttpServletRequest request = request(parameters, querySecret);
@@ -47,10 +49,12 @@ public class RequestResponseSecurityTest {
         assertFalse(json.contains(apiSecret));
         assertFalse(json.contains(querySecret));
         assertFalse(json.contains(endpointSecret));
+        assertFalse(json.contains(userInfoSecret));
+        assertFalse(json.contains(fragmentSecret));
         JsonObject status = new JsonParser().parse(json).getAsJsonObject().getAsJsonObject("status");
         assertFalse(status.has("apikey"));
         assertFalse(status.get("request").getAsString().contains("?"));
-        assertFalse(status.get("endpoint").getAsString().contains("?"));
+        assertEquals("http://example.org/api", status.get("endpoint").getAsString());
         assertTrue(status.get("useCache").isJsonPrimitive());
         assertFalse(status.get("useCache").getAsBoolean());
     }
@@ -58,8 +62,10 @@ public class RequestResponseSecurityTest {
     @Test
     public void servletLogsAndResponseDoNotContainRequestCredentials() throws Exception {
         String secret = "logged-secret-2ce";
+        String userInfoSecret = "logged-user-info-7a1";
+        String fragmentSecret = "logged-fragment-4b8";
         HttpServer server = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
-        server.createContext("/ontologies", exchange -> {
+        server.createContext("/", exchange -> {
             byte[] body = "[]".getBytes(StandardCharsets.UTF_8);
             exchange.sendResponseHeaders(200, body.length);
             exchange.getResponseBody().write(body);
@@ -82,7 +88,7 @@ public class RequestResponseSecurityTest {
         StringWriter responseBody = new StringWriter();
         try {
             Map<String, String> parameters = new HashMap<>();
-            parameters.put("url", "http://127.0.0.1:" + server.getAddress().getPort());
+            parameters.put("url", "http://portal-user:" + userInfoSecret + "@127.0.0.1:" + server.getAddress().getPort() + "/api?token=" + secret + "#" + fragmentSecret);
             parameters.put("apikey", secret);
             parameters.put("ontologies", "all");
             parameters.put("sync", "");
@@ -93,7 +99,11 @@ public class RequestResponseSecurityTest {
         }
 
         assertFalse(logs.toString().contains(secret));
+        assertFalse(logs.toString().contains(userInfoSecret));
+        assertFalse(logs.toString().contains(fragmentSecret));
         assertFalse(responseBody.toString().contains(secret));
+        assertFalse(responseBody.toString().contains(userInfoSecret));
+        assertFalse(responseBody.toString().contains(fragmentSecret));
     }
 
     private HttpServletRequest request(Map<String, String> parameters, String querySecret) {

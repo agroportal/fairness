@@ -124,12 +124,13 @@ public class ResultCache {
     }
 
     void store(String json, Path destination, int sourceCount) throws IOException {
-        Path absoluteDestination = destination.toAbsolutePath();
-        Path directory = absoluteDestination.getParent();
+        Path configuredDestination = destination.toAbsolutePath().normalize();
+        Path publicationDestination = resolvePublicationTarget(configuredDestination);
+        Path directory = publicationDestination.getParent();
         Files.createDirectories(directory);
         boolean posix = Files.getFileStore(directory).supportsFileAttributeView(PosixFileAttributeView.class);
-        PosixFileAttributes destinationAttributes = posix ? readAttributesIfExists(absoluteDestination) : null;
-        Path temp = createCandidate(directory, absoluteDestination, posix && destinationAttributes == null);
+        PosixFileAttributes destinationAttributes = posix ? readAttributesIfExists(publicationDestination) : null;
+        Path temp = createCandidate(directory, publicationDestination, posix && destinationAttributes == null);
         try {
             ByteBuffer bytes = StandardCharsets.UTF_8.encode(json);
             try (FileChannel channel = FileChannel.open(temp, WRITE)) {
@@ -144,10 +145,22 @@ public class ResultCache {
             if (destinationAttributes != null) {
                 preserveAttributes(temp, destinationAttributes);
             }
-            Files.move(temp, absoluteDestination, ATOMIC_MOVE, REPLACE_EXISTING);
+            Files.move(temp, publicationDestination, ATOMIC_MOVE, REPLACE_EXISTING);
         } finally {
             Files.deleteIfExists(temp);
         }
+    }
+
+    private Path resolvePublicationTarget(Path destination) throws IOException {
+        if (!Files.isSymbolicLink(destination)) {
+            return destination;
+        }
+        Path linkTarget = Files.readSymbolicLink(destination);
+        Path resolvedTarget = (linkTarget.isAbsolute() ? linkTarget : destination.getParent().resolve(linkTarget)).normalize();
+        if (Files.isSymbolicLink(resolvedTarget)) {
+            throw new IOException("Refusing to replace symbolic-link cache target");
+        }
+        return resolvedTarget;
     }
 
     private PosixFileAttributes readAttributesIfExists(Path destination) throws IOException {

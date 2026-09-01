@@ -47,6 +47,38 @@ public class ResultCachePublicationTest {
     }
 
     @Test
+    public void relativeSymlinkPublishesTargetWithoutReplacingLink() throws Exception {
+        Path root = temporaryFolder.getRoot().toPath();
+        Path targetDirectory = root.resolve("targets");
+        Files.createDirectories(targetDirectory);
+        Path target = targetDirectory.resolve("cache.json");
+        Files.write(target, "{\"ontologies\":{\"old\":{}}}".getBytes(StandardCharsets.UTF_8));
+        Path link = root.resolve("cache.json");
+        Path relativeTarget = link.getParent().relativize(target);
+        try {
+            Files.createSymbolicLink(link, relativeTarget);
+        } catch (UnsupportedOperationException | SecurityException e) {
+            org.junit.Assume.assumeNoException(e);
+        }
+
+        String candidate = "{\"ontologies\":{\"new\":{}}}";
+        new ResultCache().store(candidate, link, 1);
+
+        assertTrue(Files.isSymbolicLink(link));
+        assertEquals(relativeTarget, Files.readSymbolicLink(link));
+        assertEquals(candidate, new String(Files.readAllBytes(target), StandardCharsets.UTF_8));
+
+        try {
+            new ResultCache().store("{\"ontologies\":{}}", link, 1);
+            fail("invalid candidate was published through symlink");
+        } catch (IOException expected) {
+            assertTrue(Files.isSymbolicLink(link));
+            assertEquals(relativeTarget, Files.readSymbolicLink(link));
+            assertEquals(candidate, new String(Files.readAllBytes(target), StandardCharsets.UTF_8));
+        }
+    }
+
+    @Test
     public void atomicReplacementPreservesGroupReadableOwnershipAndPermissions() throws Exception {
         Path cache = cacheWith("{\"ontologies\":{\"old\":{}}}");
         org.junit.Assume.assumeTrue(supportsPosix(cache));
